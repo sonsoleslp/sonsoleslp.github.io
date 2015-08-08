@@ -1,0 +1,47 @@
+*{
+	font-family: arial;
+}
+
+.whole{
+
+}
+.whole{
+
+  	margin-left:-10px;
+  	margin-right:-10px;
+  	margin-top:-10px;
+  	margin-bottom: 10px;
+  	text-align: center;
+  	vertical-align: middle;
+  	  margin-right: auto;
+  margin-left: auto;
+  padding-left: 15px;
+  padding-right: 15px;
+    padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
+  height:100%;
+ 	
+}
+#start{
+	font-size: 40px;
+		
+	background-color:blue;
+	background: url(bg.jpg) no-repeat center center scroll;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    background-size: cover;
+    -o-background-size: cover;
+ }
+.entrada{
+	padding-top: 150px;
+	padding-bottom: 150px;
+	background-color: rgba(255,255,255,0.2);
+	color:#000000;
+	margin-left: 0px; margin-right: 0px;
+	padding-left: 0px; padding-right: 0px;
+}
+
+#about{background-color:pink;
+}
