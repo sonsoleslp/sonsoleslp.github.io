@@ -1,451 +1,161 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
-
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Sonsoles López Pernas">
-    <meta name="author" content="sonsoleslp">
-
-    <title>sonsoleslp</title>
-
-    <!-- Bootstrap Core CSS - Uses Bootswatch Flatly Theme: http://bootswatch.com/flatly/ -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Custom CSS -->
-    <link href="css/freelancer.css" rel="stylesheet">
-
-    <!-- Custom Fonts -->
-    <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-    <link href="http://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
-    <link href="http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css">
-
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
-
+<meta charset="UTF-8">
+<link href="style.css" rel="stylesheet">
+<script src="jquery.js"></script>
+<script src="smoothscroll.js"></script>
+<title>@sonsoleslp</title>
+<link rel="icon" href="img/favicon.png"> 
 </head>
-
-<body id="page-top" class="index">
-
-    <!-- Navigation -->
-    <nav class="navbar navbar-default navbar-fixed-top">
-        <div class="container">
-            <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header page-scroll">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="#page-top">Sonsoles López Pernas</a>
-            </div>
-
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav navbar-right">
-                    <li class="hidden">
-                        <a href="#page-top"></a>
-                    </li>
-                    <li class="page-scroll">
-                        <a href="#about">About</a>
-                    </li>
-                    <li class="page-scroll">
-                        <a href="#portfolio">Portfolio</a>
-                    </li>
+<body>
 
 
-                </ul>
-            </div>
-            <!-- /.navbar-collapse -->
-        </div>
-        <!-- /.container-fluid -->
-    </nav>
 
-    <!-- Header -->
-    <header>
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <img class="img-responsive" src="img/profile.png" alt="">
-                    <div class="intro-text">
-                        <span class="name" >@sonsoleslp</span>
-<!--                         <hr class="star-light">
- -->                        <span class="skills">Telecommunications Engineer</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </header>
-    <!-- About Section -->
-    <section id="about">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12 text-center">
-                    <h2>About</h2>
-                     <hr class="star-primary"> <!---->
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-8 col-lg-offset-2">
-                <p>I was born in <strong>Vigo</strong>, in 1994. I am currently on my last year of a <strong>Telecommunications</strong> Engineering Degree at <strong>Madrid Technical University</strong>.</p>  
+	<button id="menu"><img id="iconomenu" src="img/menu.png"></button>
+	<nav id="lista">
+		<ul><br><br><br><br><br><br>
+			<li> </li>
+			<li><a href="#home" class="elemento" >Home</a></li>
+			<li><a href="#about" class="elemento">About</a></li>
+			<li><a href="#portfolio" class="elemento">Portfolio</a></li>
+      <li><a href="#contact" class="elemento">Contact</a></li>
+
+		</ul>
+	</nav>
+
+<div id="home" class="seccion">
+  <div id="centrado">
+    <h1>@sonsoleslp</h1>
+
+    <a href="#about"><img id="flecha" src="img/arrowdown.png"></a>
+  </div>
+</div>
+<div id="about" class="seccion">
+<div class="contenido" id="about2">
+<h1 id="grande">ABOUT</h1>
+
+  <p class="justi">My name is <strong>Sonsoles López Pernas</strong> I was born in Vigo, Spain in 1994. I am currently on my last year of a <strong>Telecommunications</strong> Engineering Degree at <strong>Madrid Technical University</strong>.</p>  
                 
-                <p>I am interested in Web Development and Software Design in general. Specifically, I enjoy developing physics and telecommunications oriented tools.</p>
+  <p class="justi">I am interested in Web Development and Software Design in general. Specifically, I enjoy developing physics and telecommunications oriented tools.</p>
 
-                <p>I also like playing classical guitar, reading, travelling, and listening to 80s rock songs.</p>
-                    
-               
-                </div>
-            </div>
-        </div>
-    </section>
+  <p class="justi">I also like playing classical guitar, reading, travelling, and listening to 80s rock songs.</p>
+  <br><br>
+   <p align="center" ><img src="img/me.png"></p>
 
-    <!-- Portfolio Grid Section -->
-    <section id="portfolio">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12 text-center">
-                    <h2>Portfolio</h2>
-                     <hr class="star-primary"> <!---->
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-sm-4 portfolio-item">
-                    <a href="#portfolioModal1" class="portfolio-link" data-toggle="modal">
-                        <div class="caption">
-                            <div class="caption-content">
-                                <i class="fa fa-search-plus fa-3x"></i>
-                            </div>
-                        </div>
-                        <img src="img/portfolio/p1.png" class="img-responsive" alt="">
-                    </a>
-                </div>
-                <div class="col-sm-4 portfolio-item">
-                    <a href="#portfolioModal2" class="portfolio-link" data-toggle="modal">
-                        <div class="caption">
-                            <div class="caption-content">
-                                <i class="fa fa-search-plus fa-3x"></i>
-                            </div>
-                        </div>
-                        <img src="img/portfolio/p2.png" class="img-responsive" alt="">
-                    </a>
-                </div>
-                <div class="col-sm-4 portfolio-item">
-                    <a href="#portfolioModal3" class="portfolio-link" data-toggle="modal">
-                        <div class="caption">
-                            <div class="caption-content">
-                                <i class="fa fa-search-plus fa-3x"></i>
-                            </div>
-                        </div>
-                        <img src="img/portfolio/p3.png" class="img-responsive" alt="">
-                    </a>
-                </div>
-                <!-- <div class="col-sm-4 portfolio-item">
-                    <a href="#portfolioModal4" class="portfolio-link" data-toggle="modal">
-                        <div class="caption">
-                            <div class="caption-content">
-                                <i class="fa fa-search-plus fa-3x"></i>
-                            </div>
-                        </div>
-                        <img src="img/portfolio/game.png" class="img-responsive" alt="">
-                    </a>
-                </div>
-                <div class="col-sm-4 portfolio-item">
-                    <a href="#portfolioModal5" class="portfolio-link" data-toggle="modal">
-                        <div class="caption">
-                            <div class="caption-content">
-                                <i class="fa fa-search-plus fa-3x"></i>
-                            </div>
-                        </div>
-                        <img src="img/portfolio/safe.png" class="img-responsive" alt="">
-                    </a>
-                </div>
-                <div class="col-sm-4 portfolio-item">
-                    <a href="#portfolioModal6" class="portfolio-link" data-toggle="modal">
-                        <div class="caption">
-                            <div class="caption-content">
-                                <i class="fa fa-search-plus fa-3x"></i>
-                            </div>
-                        </div>
-                        <img src="img/portfolio/submarine.png" class="img-responsive" alt="">
-                    </a>
-                </div> -->
-            </div>
-        </div>
-    </section>
+</div>
+
+</div>
+<div id="portfolio" class="seccion">
+  <div class="contenido">
+    <h1  id="grande">PORTFOLIO</h1>
+
+    <box>
+    <img class="port" src="img/p1.jpg" titulo="DOE/SWD" descr="This app is the ultimate tool in order to study the behavior of Plane Monochromatic Homogenous Waves when traveling through different mediums. In this first version of the application, only mediums with no loss are contemplated, but it is capable of calculating complex impedances, which appear when there are mediums with a thickness that is not a multiple of the wavelength. For any imaginable case, this application draws the Standing Wave Diagram and specifies the impedances and reflection coefficients for every discontinuity. It has a simple interface and is really easy to work" enlace="http://poynting.herokuapp.com"><br>
+    </box>
+    <box>
+    <img class="port" src="img/p2.jpg" titulo="Sofía Pernas & Micaela Neira" descr="Website of the interior designers from Vigo, Sofía Pernas and Micaela Neira. Simple webpage designed using Start BootStrap Templates"enlace="http://sofiapernasmicaelaneira.neocities.org"><br>
+    </box>
+    <box>
+    <img class="port" src="img/p3.jpg" titulo="Wikifísica ETSIT UPM" descr="Platform for the development of Physics articles written by the students at ETSIT UPM."enlace="http://wikifisica.etsit.upm.es"><br>
+    </box>
 
 
 
+  </div>
+</div>
+<div id="contact" class="seccion">
+  <div id="contenido" class="textocentrado">
+    <h1 id="grande">CONTACT</h1>
+    <div id="caja">
+   <!-- <div id="cont"><img class="info" src="img/phone.png"><box class="info">  666 00 00 00</box><br></div> -->
+   <br><br>
+   <div id="cont"><img class="info" src="img/mail.png"><box class="info">poynting.slp@gmail.com</box></div>
+   <br><br>
+   <social>
+     <!-- <a target="_blanck" href="https://www.facebook.com/"><img class="socialicon" src="icons/fb.png"></a> -->
+     <a target="_blanck" href="https://twitter.com/sonsoleslp"><img class="socialicon" src="icons/tw.png"></a>
+     <!-- <a target="_blanck" href="https://plus.google.com/111208164174583470275/posts"><img class="socialicon" src="icons/gplus.png"></a> -->
+     <!-- <a target="_blanck" href="https://instagram.com/"><img class="socialicon" src="icons/ig.png"></a>      -->
+     <a target="_blanck" href="https://github.com/sonsoleslp"><img class="socialicon" src="icons/gh.png"></a>
+     <a target="_blanck" href="https://es.linkedin.com/in/sonsoleslopezpernas"><img class="socialicon" src="icons/in.png"></a>          
+   </social>
+   </div>
+  </div>
+</div>
 
-    <!-- Footer -->
-    <footer class="text-center">
-        <div class="footer-above">
-            <div class="container">
-                <div class="row">
-                    
-                  
-                        <h3>Around the Web</h3>
-                        <ul class="list-inline">
+<script>
+
+
+$( document ).ready(function() {
+  
+    console.log( 'ready!' );
+    $( '#lista' ).css('display', 'none');
+    var ima = 'close.png';
+    var mostrar = function(){
+    	// $( '#lista' ).css('display', 'inline');
+    	$("#lista").animate({width:'toggle'},350);
+    	var aux = ima +'';
+    	console.log(ima);
+    	ima = $('#iconomenu').html.src+'';
+    	console.log(ima);
+  	$('#iconomenu').src = aux;
+    	
+    };
+
+  $( '#menu' ).click(mostrar);
+  $('.elemento').click(mostrar); 
+  $('.seccion').css('min-height',screen.availHeight);
+  $('.seccion').css('min-height',window.innerHeight);
+     //  $( "h1" ).click(function() { $( "p" ).animate({"margin-left": '+=200'},2000); });
+});
+
+
+
+// Wholescreen view of portfolio
+$('.port').click(function(){
+  var imagen = $(this).attr('src');
+  var titul = $(this).attr('titulo');
+  var descc = $(this).attr('descr');
+  var enl = $(this).attr('enlace');
+  var customDiv = $('<div id="vista"><button id="menu"><img id="iconomenu" class="salirr" src="img/close.png"></button><div id="cemt"><div id="cemtin">'
+    +'<h2>'+titul+'</h2>'
+    +'<img id="mues" src="'
+    +imagen+'"><br>'
+    +'<p class="descrip">'+descc+'</p>'
+    + '<strong><a href="'+enl+'">Visit the project</a></strong><br><br>'
+    // +'<br><button id="cerrar">Close</button>'
+    +'</div></div></div>');
+
+
+   $('body').append(customDiv);
+   $('#vista').animate({height:'toggle'},350);
+   $('.salirr').click(function(){customDiv.slideUp(function(){$('#vista').remove()});});
     
-                            <li>
-                                <a href="http://github.com/sonsoleslp" class="btn-social btn-outline"><i class="fa fa-fw fa-github"></i></a>
-                            </li>
-                            <li>
-                                <a href="https://twitter.com/sonsoleslp" class="btn-social btn-outline"><i class="fa fa-fw fa-twitter"></i></a>
-                            </li>
-                            <li>
-                                <a href="https://es.linkedin.com/in/sonsoleslopezpernas" class="btn-social btn-outline"><i class="fa fa-fw fa-linkedin"></i></a>
-                            </li>
-<!--                             <li>
-                                <a href="#" class="btn-social btn-outline"><i class="fa fa-fw fa-dribbble"></i></a>
-                            </li> -->
-                        </ul>
-                    
-                </div>
-            </div>
-        </div>
-        <div class="footer-below">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-12">
-                        Copyright &copy; <a href="http://startbootstrap.com">Start Bootstrap</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </footer>
 
-    <!-- Scroll to Top Button (Only visible on small and extra-small screen sizes) -->
-    <div class="scroll-top page-scroll visible-xs visible-sm">
-        <a class="btn btn-primary" href="#page-top">
-            <i class="fa fa-chevron-up"></i>
-        </a>
-    </div>
+});
+  
+    
+//Checking existing sections
+var lista = [];
+var elementos = $('.elemento');
+var ind = 0;
 
-    <!-- Portfolio Modals -->
-    <div class="portfolio-modal modal fade" id="portfolioModal1" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-content">
-            <div class="close-modal" data-dismiss="modal">
-                <div class="lr">
-                    <div class="rl">
-                    </div>
-                </div>
-            </div>
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-8 col-lg-offset-2">
-                        <div class="modal-body">
-                            <h2>DOE - SWD</h2>
-                            <hr class="star-primary">
-                            <img src="img/portfolio/p1.png" class="img-responsive img-centered" alt="">
-                            <p>This app is the ultimate tool in order to study the behavior of Plane Monochromatic Homogenous Waves when traveling through different mediums. In this first version of the application, only mediums with no loss are contemplated, but it is capable of calculating complex impedances, which appear when there are mediums with a thickness that is not a multiple of the wavelength. For any imaginable case, this application draws the Standing Wave Diagram and specifies the impedances and reflection coefficients for every discontinuity. It has a simple interface and is really easy to work</p>
+for(ind; ind<elementos.length;ind++){
+   var lin =  ''+ elementos[ind].href;
+   var posi = lin.indexOf('#');
+   var nuevo = lin.slice(posi+1,lin.length);
+   lista.push(nuevo);
 
-                              <strong><a href="http://poynting.herokuapp.com">Visit the project</a></strong><br><br>
-                            <!-- <ul class="list-inline item-details">
-                                <li>Client:
-                                    <strong><a href="http://startbootstrap.com">Start Bootstrap</a>
-                                    </strong>
-                                </li>
-                                <li>Date:
-                                    <strong><a href="http://startbootstrap.com">April 2014</a>
-                                    </strong>
-                                </li>
-                                <li>Service:
-                                    <strong><a href="http://startbootstrap.com">Web Development</a>
-                                    </strong>
-                                </li>
-                            </ul> -->
-                            <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="portfolio-modal modal fade" id="portfolioModal2" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-content">
-            <div class="close-modal" data-dismiss="modal">
-                <div class="lr">
-                    <div class="rl">
-                    </div>
-                </div>
-            </div>
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-8 col-lg-offset-2">
-                        <div class="modal-body">
-                            <h2>Sofía Pernas & Micaela Neira</h2>
-                            <hr class="star-primary">
-                            <img src="img/portfolio/p2.png" class="img-responsive img-centered" alt="">
-                            <p>Website of the interior designers from Vigo, Sofía Pernas and Micaela Neira. Simple webpage designed using Start BootStrap Templates.</p>
-                            <strong><a href="https://sofiapernasmicaelaneira.neocities.org">Visit the project</a></strong><br><br>
-                            <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="portfolio-modal modal fade" id="portfolioModal3" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-content">
-            <div class="close-modal" data-dismiss="modal">
-                <div class="lr">
-                    <div class="rl">
-                    </div>
-                </div>
-            </div>
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-8 col-lg-offset-2">
-                        <div class="modal-body">
-                            <h2>Wikifísica ETSIT UPM</h2>
-                            <hr class="star-primary">
-                            <img src="img/portfolio/p3.png" class="img-responsive img-centered" alt="">
-                            <p>Platform for the development of Physics articles written by the students at ETSIT UPM.</p>
-                            <strong><a href="http://wikifisica.etsit.upm.es">Visit the project</a></strong><br><br>
-                            <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="portfolio-modal modal fade" id="portfolioModal4" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-content">
-            <div class="close-modal" data-dismiss="modal">
-                <div class="lr">
-                    <div class="rl">
-                    </div>
-                </div>
-            </div>
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-8 col-lg-offset-2">
-                        <div class="modal-body">
-                            <h2>Project Title</h2>
-                            <hr class="star-primary">
-                            <img src="img/portfolio/game.png" class="img-responsive img-centered" alt="">
-                            <p>Use this area of the page to describe your project. The icon above is part of a free icon set by <a href="https://sellfy.com/p/8Q9P/jV3VZ/">Flat Icons</a>. On their website, you can download their free set with 16 icons, or you can purchase the entire set with 146 icons for only $12!</p>
-                            <ul class="list-inline item-details">
-                                <li>Client:
-                                    <strong><a href="http://startbootstrap.com">Start Bootstrap</a>
-                                    </strong>
-                                </li>
-                                <li>Date:
-                                    <strong><a href="http://startbootstrap.com">April 2014</a>
-                                    </strong>
-                                </li>
-                                <li>Service:
-                                    <strong><a href="http://startbootstrap.com">Web Development</a>
-                                    </strong>
-                                </li>
-                            </ul>
-                            <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="portfolio-modal modal fade" id="portfolioModal5" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-content">
-            <div class="close-modal" data-dismiss="modal">
-                <div class="lr">
-                    <div class="rl">
-                    </div>
-                </div>
-            </div>
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-8 col-lg-offset-2">
-                        <div class="modal-body">
-                            <h2>Project Title</h2>
-                            <hr class="star-primary">
-                            <img src="img/portfolio/safe.png" class="img-responsive img-centered" alt="">
-                            <p>Use this area of the page to describe your project. The icon above is part of a free icon set by <a href="https://sellfy.com/p/8Q9P/jV3VZ/">Flat Icons</a>. On their website, you can download their free set with 16 icons, or you can purchase the entire set with 146 icons for only $12!</p>
-                            <ul class="list-inline item-details">
-                                <li>Client:
-                                    <strong><a href="http://startbootstrap.com">Start Bootstrap</a>
-                                    </strong>
-                                </li>
-                                <li>Date:
-                                    <strong><a href="http://startbootstrap.com">April 2014</a>
-                                    </strong>
-                                </li>
-                                <li>Service:
-                                    <strong><a href="http://startbootstrap.com">Web Development</a>
-                                    </strong>
-                                </li>
-                            </ul>
-                            <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="portfolio-modal modal fade" id="portfolioModal6" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-content">
-            <div class="close-modal" data-dismiss="modal">
-                <div class="lr">
-                    <div class="rl">
-                    </div>
-                </div>
-            </div>
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-8 col-lg-offset-2">
-                        <div class="modal-body">
-                            <h2>Project Title</h2>
-                            <hr class="star-primary">
-                            <img src="img/portfolio/submarine.png" class="img-responsive img-centered" alt="">
-                            <p>Use this area of the page to describe your project. The icon above is part of a free icon set by <a href="https://sellfy.com/p/8Q9P/jV3VZ/">Flat Icons</a>. On their website, you can download their free set with 16 icons, or you can purchase the entire set with 146 icons for only $12!</p>
-                            <ul class="list-inline item-details">
-                                <li>Client:
-                                    <strong><a href="http://startbootstrap.com">Start Bootstrap</a>
-                                    </strong>
-                                </li>
-                                <li>Date:
-                                    <strong><a href="http://startbootstrap.com">April 2014</a>
-                                    </strong>
-                                </li>
-                                <li>Service:
-                                    <strong><a href="http://startbootstrap.com">Web Development</a>
-                                    </strong>
-                                </li>
-                            </ul>
-                            <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+}
 
-    <!-- jQuery -->
-    <script src="js/jquery.js"></script>
+var thelist = lista;
 
-    <!-- Bootstrap Core JavaScript -->
-    <script src="js/bootstrap.min.js"></script>
+</script>
 
-    <!-- Plugin JavaScript -->
-    <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
-    <script src="js/classie.js"></script>
-    <script src="js/cbpAnimatedHeader.js"></script>
+<script src="sonso.js"></script>
 
-    <!-- Contact Form JavaScript -->
-    <script src="js/jqBootstrapValidation.js"></script>
-    <script src="js/contact_me.js"></script>
-
-    <!-- Custom Theme JavaScript -->
-    <script src="js/freelancer.js"></script>
 
 </body>
-
 </html>
