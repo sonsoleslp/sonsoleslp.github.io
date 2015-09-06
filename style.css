@@ -331,7 +331,7 @@ ul li:hover{
 
 #flecha{
 	font-size: 40px !important;
-	font-size: ;
+	max-width: 5vw;
 }
 
 #flecha:hover{
