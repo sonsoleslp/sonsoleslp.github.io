@@ -8,6 +8,7 @@
 <script src="smoothscroll.js"></script>
 <title>@sonsoleslp</title>
 <link rel="icon" href="img/favicon.png"> 
+<meta name="viewport" content="width=device-width, user-scalable=no">
 </head>
 <body>
 
@@ -15,7 +16,7 @@
 
 	<button id="menu"><img id="iconomenu" src="img/menu.png"></button>
 	<nav id="lista">
-		<ul><br><br><br><br><br><br>
+		<ul><br><br>
 			<li> </li>
 			<li><a href="#home" class="elemento" >Home</a></li>
 			<li><a href="#about" class="elemento">About</a></li>
@@ -27,9 +28,9 @@
 
 <div id="home" class="seccion">
   <div id="centrado">
-    <h1>@sonsoleslp</h1>
+    <h1>@sonsoleslp</h1> 
+    <h1 id="flechas"><a href="#about"><img id="flecha" src="img/arrowdown.png"></a></h1>
 
-    <a href="#about"><img id="flecha" src="img/arrowdown.png"></a>
   </div>
 </div>
 <div id="about" class="seccion">
@@ -42,7 +43,7 @@
 
   <p class="justi">I also like playing classical guitar, reading, travelling, and listening to 80s rock songs.</p>
   <br><br>
-   <p align="center" ><img src="img/me.png"></p>
+
 
 </div>
 
@@ -58,7 +59,7 @@
     <img class="port" src="img/p2.jpg" titulo="Sofía Pernas & Micaela Neira" descr="Website of the interior designers from Vigo, Sofía Pernas and Micaela Neira. Simple webpage designed using Start BootStrap Templates"enlace="http://sofiapernasmicaelaneira.neocities.org"><br>
     </box>
     <box>
-    <img class="port" src="img/p3.jpg" titulo="Wikifísica ETSIT UPM" descr="Platform for the development of Physics articles written by the students at ETSIT UPM."enlace="http://wikifisica.etsit.upm.es"><br>
+    <img class="port" src="img/p3.jpg" titulo="Wikifísica ETSIT UPM" descr="Project manager at the platform for the development of Physics articles written by the students at ETSIT UPM."enlace="http://wikifisica.etsit.upm.es"><br>
     </box>
 
 
@@ -114,27 +115,33 @@ $( document ).ready(function() {
 
 
 // Wholescreen view of portfolio
-$('.port').click(function(){
-  var imagen = $(this).attr('src');
-  var titul = $(this).attr('titulo');
-  var descc = $(this).attr('descr');
-  var enl = $(this).attr('enlace');
-  var customDiv = $('<div id="vista"><button id="menu"><img id="iconomenu" class="salirr" src="img/close.png"></button><div id="cemt"><div id="cemtin">'
-    +'<h2>'+titul+'</h2>'
-    +'<img id="mues" src="'
-    +imagen+'"><br>'
-    +'<p class="descrip">'+descc+'</p>'
-    + '<strong><a href="'+enl+'">Visit the project</a></strong><br><br>'
-    // +'<br><button id="cerrar">Close</button>'
-    +'</div></div></div>');
+  $('.port').click(function(){
+    var imagen = $(this).attr('src');
+    var titul = $(this).attr('titulo');
+    var descc = $(this).attr('descr');
+    var enl = $(this).attr('enlace');
+    var llami = "$(\'#vista\').slideUp(function(){$(\'#vista\').remove();});";
+    var customDiv = $('<div id="vista"><button id="menu" class="cur" onClick="'+llami+'"><img id="iconosalir" '
+      +'class="salirr" src="img/close.png"></button><div id="cemt"><div id="cemtin">'
+      +'<h2>'+titul+'</h2>'
+      +'<img id="mues" src="'
+      +imagen+'"><br>'
+      +'<p class="descrip">'+descc+'</p>'
+      + '<strong><a href="'+enl+'">Visit the project</a></strong><br><br>'
+      // +'<br><button id="cerrar">Close</button>'
+      +'</div></div></div>');
+
+     $('body').append(customDiv);
+     $('#vista').animate({height:'toggle'},350);
+      
+           var dentro = function(){$('#vista').remove()};
+           var llamada = function(){customDiv.slideUp(dentro);};
+
+          // $('#iconosalir').click(llamada);
+           
 
 
-   $('body').append(customDiv);
-   $('#vista').animate({height:'toggle'},350);
-   $('.salirr').click(function(){customDiv.slideUp(function(){$('#vista').remove()});});
-    
-
-});
+  });
   
     
 //Checking existing sections
