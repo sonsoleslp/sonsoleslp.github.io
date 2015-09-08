@@ -108,7 +108,7 @@ h2{
 #lista{
 	background-color: #444444;
 	color:white;margin:0;
-	height:100%;
+	height:120%;
 	width:auto;
 	padding: 20px;
 	padding-top: 50px;
@@ -324,10 +324,6 @@ p strong {
     transform: scale(1.1);	
 }
 
-ul li:hover{
-	font-weight: bold;
-
-}
 
 #flecha{
 	font-size: 40px !important;
@@ -350,7 +346,7 @@ social{
 }
 
 body::-webkit-scrollbar {
-    width: 1vw;
+    width: 10px;
 }
  
 body::-webkit-scrollbar-track {
