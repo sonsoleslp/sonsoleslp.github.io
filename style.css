@@ -102,7 +102,7 @@ button{line-height: normal;}
 }
 
 h2{
-	font-size: 2.5vh;
+	font-size: 2em;
 }
 
 #lista{
@@ -136,7 +136,7 @@ h1 {
 	width:100%;
 	padding-top: 20px;
 	padding-bottom: 20px;
-	background-color: rgba(255,255,255,0.6);
+	/*background-color: rgba(255,255,255,0.6);*/
 
 }
 
@@ -171,23 +171,27 @@ body{
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background:url('img/bg.jpg')no-repeat center center scroll;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    background-size: cover;
-    -o-background-size: cover;
+    background-image:url("img/asanoha-400px.png");
+   
 }
 
 
 #about {
-	background-color: white;
-	background:url('img/bgsec.png')no-repeat center center scroll;
+	background-color: #595959;
+	/*background:url('img/bgsec.png')no-repeat center center scroll;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     background-size: cover;
-    -o-background-size: cover;
+    -o-background-size: cover;*/
   }
 
+.aboutcontent{
+	margin:auto;
+}
+
+.squares{
+	text-align: center;
+}
 #contact {
 	background-color: white;
 	background:url('img/bgcon.png')no-repeat center center scroll;
@@ -214,11 +218,12 @@ body{
 	top:0;
 	bottom:0;
 	left: 0;
-	right:0;}
+	right:0;
+	overflow:auto;}
 
 
 box{
-
+	
 	display: inline-block;
 	margin: auto;
 /*	background-color: #333333;
@@ -229,13 +234,19 @@ box{
 	max-width: 200px;*/
 }
 
+
+
 .port{
 	margin:20px;
 	max-width: 70vw;
+	transition: all 0.7s ease-in-out;
 }
 
 .port:hover{
 	cursor: pointer;
+	transform: scale(0.75, 0.75);
+-ms-transform: scale(0.75, 0.75);
+-webkit-transform: scale(0.75, 0.75);
 }
 
 #cemtin{
@@ -248,7 +259,8 @@ box{
 
 }
 #cemt{
-	height: 100%;
+	height: auto;
+	min-height: 100%;
 	display: flex;
     flex-direction: column;
     justify-content: center;
@@ -278,7 +290,7 @@ box{
 	display:inline-block;
 	vertical-align: middle;
 	border-radius: 1vw;
-	max-height: 40vh;
+	max-height: 40em;
 
 }
 
@@ -311,7 +323,7 @@ p strong {
 	font-size: 8vw;	
 }
 .descrip{
-	font-size: 2vh;	
+	font-size: 1em;	
 }
 
 .socialicon{
@@ -374,4 +386,36 @@ ul li:hover{
 	font-size: 40px !important;
 	padding:0;
 	margin: 0;
+}
+
+.column{
+	position:relative;
+	margin:0;
+	padding:0;
+	width:33.33333%;
+	height:auto;
+	display:inline-block;
+}
+
+.square{
+	color:#262626;
+	background-color: #ddd;/*#FCCA1D;*/
+	text-align: center;
+	vertical-align: middle;
+	padding: 20px;
+ 	margin:auto;
+ 	display: inline-block;
+ 	margin: 10px;
+}
+
+.square i {
+ 	vertical-align: middle;
+	font-size: 2.7em;
+}
+
+.separator {
+	/*font-size: 0.2em;
+	vertical-align: bottom;*/
+	color:white;
+	width:1.9em;
 }

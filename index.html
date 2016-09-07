@@ -8,7 +8,9 @@
 <script src="smoothscroll.js"></script>
 <title>@sonsoleslp</title>
 <link rel="icon" href="img/favicon.png"> 
-<meta name="viewport" content="width=device-width, user-scalable=no">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
+<meta name=viewport content="width=device-width, initial-scale=1">
 </head>
 <body>
 
@@ -20,7 +22,7 @@
 			<li> </li>
 			<li><a href="#home" class="elemento" >Home</a></li>
 			<li><a href="#about" class="elemento">About</a></li>
-			<li><a href="#portfolio" class="elemento">Portfolio</a></li>
+			<li><a href="#portfolio" class="elemento">Work</a></li>
       <li><a href="#contact" class="elemento">Contact</a></li>
 
 		</ul>
@@ -36,12 +38,43 @@
 <div id="about" class="seccion">
 <div class="contenido" id="about2">
 <h1 id="grande">ABOUT</h1>
+<div class="aboutcontent">  
+  <div class="squares">
+    <div class="square">
+     <i class="material-icons">my_location</i>
+     Born in Spain in 1994
+    </div>
+    <div class="square">
+     <i class="material-icons">school</i>
+     Student and Researcher at Technical University of Madrid - UPM
+    </div>
+    <div class="square">
+     <i class="material-icons">memory</i>
+     Telecom Engineer
+    </div>
+    <div class="square">
+     <i class="material-icons">code</i>
+     Web developer
+    </div>
+    <div class="square">
+     <i class="material-icons">g_translate</i>
+     Fluent in Spanish, English & Galician.
+    </div>
+    <div class="square">
+      <i class="material-icons">wifi_tethering</i>
+      Into Maths & Physics  
+    </div>  
+    <div class="square">
+      <i class="material-icons">wallpaper</i>
+      Into UX & UI
+    </div>
+  
+  </div>
+  <h4>SKILLS</h4>
 
-  <p class="justi">My name is <strong>Sonsoles López Pernas</strong> I was born in Vigo, Spain in 1994. I am currently on my last year of a <strong>Telecommunications</strong> Engineering Degree at <strong>Madrid Technical University</strong>.</p>  
-                
-  <p class="justi">I am interested in Web Development and Software Design in general. Specifically, I enjoy developing physics and telecommunications oriented tools.</p>
+  JAVA  <i class="separator"><i class="separator">  ·  </i></i>    C  <i class="separator"><i class="separator">  ·  </i></i>   C++  <i class="separator"><i class="separator">  ·  </i></i>  MATLAB <i class="separator"><i class="separator">  ·  </i></i>  PYTHON <i class="separator">  ·  </i>  GIT <i class="separator">  ·  </i>  HTML <i class="separator">  ·  </i>  CSS <i class="separator">  ·  </i>  JS <i class="separator">  ·  </i>  NODE.JS <i class="separator">  ·  </i>  JQUERY <i class="separator">  ·  </i>  REACT <i class="separator">  ·  </i>  REDUX <i class="separator">  ·  </i>  BOOTSTRAP <i class="separator">  ·  </i>  VHDL  <i class="separator">  ·  </i>   WIRESHARK <i class="separator">  ·  </i>  SWIFT <i class="separator">  ·  </i>  ANDROID <i class="separator">  ·  </i>  UNIX <i class="separator">  ·  </i>   SCRUM
+</div>
 
-  <p class="justi">I also like playing classical guitar, reading, travelling, and listening to 80s rock songs.</p>
   <br><br>
 
 
@@ -50,7 +83,7 @@
 </div>
 <div id="portfolio" class="seccion">
   <div class="contenido">
-    <h1  id="grande">PORTFOLIO</h1>
+    <h1  id="grande">WORK</h1>
 
     <box>
     <img class="port" src="img/p1.jpg" titulo="DOE/SWD" descr="This app is the ultimate tool in order to study the behavior of Plane Monochromatic Homogenous Waves when traveling through different mediums. In this first version of the application, only mediums with no loss are contemplated, but it is capable of calculating complex impedances, which appear when there are mediums with a thickness that is not a multiple of the wavelength. For any imaginable case, this application draws the Standing Wave Diagram and specifies the impedances and reflection coefficients for every discontinuity. It has a simple interface and is really easy to work" enlace="http://poynting.herokuapp.com"><br>
@@ -61,7 +94,11 @@
     <box>
     <img class="port" src="img/p3.jpg" titulo="Wikifísica ETSIT UPM" descr="Project manager at the platform for the development of Physics articles written by the students at ETSIT UPM."enlace="http://wikifisica.etsit.upm.es"><br>
     </box>
-
+    <box>
+    <img class="port" src="img/p7.jpg" titulo="PEDRO LÓPEZ RUIPÉREZ" descr="Architecture studio based in Vigo, Spain. Webpage."enlace="http://www.pedrolopezruiperez.tk"><br>
+    </box>
+    <img class="port" src="img/p5.jpg" titulo="ABA-WIFI" descr="The characteristics of Wi-Fi in combination with the TCP protocol cause a decrease in the resulting throughput, originated by the design of TCP itself.   The main goal of the  ABA-WIFI project was to elaborate a solution that amends the anomalous behaviour of the TCP Protocol that remarkably affects WiFi networks. In order to do that, several improvements based on TCP splitting and spoofing techniques were applied to Wi-Fi access points, solving the identified problem in a noticeable way. This work provides a tool to test and measure quantitatively and  in real-time the effect of said improvements upon the network in different conditions of the latter: position of the client with respect to the access point, profile of traffic coursed, network load or geographic location." enlace="http://oa.upm.es/41462/1/PFC_SONSOLES_LOPEZ_PERNAS.pdf"><br>
+    </box>
 
 
   </div>
@@ -114,8 +151,23 @@ $( document ).ready(function() {
 
 
 
+//Checking existing sections
+var lista = [];
+var elementos = $('.elemento');
+var ind = 0;
+
+for(ind; ind<elementos.length;ind++){
+   var lin =  ''+ elementos[ind].href;
+   var posi = lin.indexOf('#');
+   var nuevo = lin.slice(posi+1,lin.length);
+   lista.push(nuevo);
+
+}
+
+var thelist = lista;
+
 // Wholescreen view of portfolio
-  $('.port').click(function(){
+$('.port').click(function(){
     var imagen = $(this).attr('src');
     var titul = $(this).attr('titulo');
     var descc = $(this).attr('descr');
@@ -144,20 +196,7 @@ $( document ).ready(function() {
   });
   
     
-//Checking existing sections
-var lista = [];
-var elementos = $('.elemento');
-var ind = 0;
 
-for(ind; ind<elementos.length;ind++){
-   var lin =  ''+ elementos[ind].href;
-   var posi = lin.indexOf('#');
-   var nuevo = lin.slice(posi+1,lin.length);
-   lista.push(nuevo);
-
-}
-
-var thelist = lista;
 
 </script>
 
