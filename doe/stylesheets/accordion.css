@@ -1,0 +1,198 @@
+/*custom font for text*/
+@import url(http://fonts.googleapis.com/css?family=Nunito);
+/*CSS file for fontawesome - an iconfont we will be using. This CSS file imported contains the font-face declaration. More info: http://fortawesome.github.io/Font-Awesome/ */
+@import url(font-awesome.min.css);
+
+.info{
+  color:#999;
+}
+.info:hover{
+  color:#05E28E;
+}
+#accordian {
+  background: transparent;
+  width: 297px;
+  /*margin: 100px auto 0 auto;*/
+  color: #777;
+  /*Some cool shadow and glow effect*/
+
+}
+#accordian label {
+  font-size: 1.2em;
+}
+/*heading styles*/
+#accordian h3 {
+  font-size: 1.5em;
+  line-height: 44px;
+  padding: 0 10px;
+  cursor: pointer;
+  /*fallback for browsers not supporting gradients*/
+  background-color: #ccc; 
+  transition: all 0.15s;
+}
+/*heading hover effect*/
+#accordian h3:hover {
+  background: #ddd;
+  border-left: 9px solid #05E28E;
+}
+/*iconfont styles*/
+#accordian h3 span {
+  font-size: 1.2em;
+  margin-right: 10px;
+}
+/*list items*/
+#accordian li {
+  list-style-type: none;
+}
+/*links*/
+#accordian ul ul li a {
+
+  color: #666;
+  text-decoration: none;
+  font-size: 1.2em;
+  line-height: 32px;
+  display: block;
+  padding: 0 15px;
+
+  /*transition for smooth hover animation*/
+  transition: all 0.15s;
+}
+
+#accordian ul ul li a span {
+   font-size: 1.2em;
+  font-weight: normal;
+  color: #888;
+}
+
+/*hover effect on links*/
+#accordian ul ul li a:hover {
+cursor: default;
+}
+#accordian ul h3{
+  width:100%;
+  margin:3px;
+  
+}
+/*Lets hide the non active LIs by default*/
+#accordian ul ul {
+  display: none;
+  margin-top:10px;
+}
+#accordian li.active ul {
+  display: block;
+}
+
+#accordian ul {
+  padding: 0;
+  padding-start: 0px;
+  -webkit-padding-start: 0px;
+  height:100%;
+overflow-y:auto;
+overflow-x:hidden;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*menu icon*/
+* {
+  margin: 0;
+  padding: 0; 
+}
+
+/* Icon 1 */
+
+#nav-icon1, #nav-icon2, #nav-icon3, #nav-icon4 {
+  width: 50px;
+  height: 40px;
+  position: relative;
+  margin: 5px;
+  -webkit-transform: rotate(0deg);
+  -moz-transform: rotate(0deg);
+  -o-transform: rotate(0deg);
+  transform: rotate(0deg);
+  -webkit-transition: .5s ease-in-out;
+  -moz-transition: .5s ease-in-out;
+  -o-transition: .5s ease-in-out;
+  transition: .5s ease-in-out;
+  cursor: pointer;
+  z-index: 999;
+}
+
+#nav-icon1 span, #nav-icon3 span, #nav-icon4 span {
+  display: block;
+  position: absolute;
+  height: 9px;
+  width: 100%;
+  background: #05E28E;
+  border-radius: 9px;
+  opacity: 1;
+  left: 0;
+  margin:3px;
+  -webkit-transform: rotate(0deg);
+  -moz-transform: rotate(0deg);
+  -o-transform: rotate(0deg);
+  transform: rotate(0deg);
+  -webkit-transition: .25s ease-in-out;
+  -moz-transition: .25s ease-in-out;
+  -o-transition: .25s ease-in-out;
+  transition: .25s ease-in-out;
+}
+
+
+/*Parenting problem*/
+#nav-icon1 span{
+
+}
+
+#nav-icon1:hover span{
+background-color: #999;
+}   
+
+#nav-icon1 span:hover{
+background-color: #999;
+} 
+
+
+#nav-icon1 span:nth-child(1) {
+  top: 0px;
+}
+
+#nav-icon1 span:nth-child(2) {
+  top: 15px;
+}
+
+#nav-icon1 span:nth-child(3) {
+  top: 30px;
+}
+
+#nav-icon1.open span:nth-child(1) {
+  top: 15px;
+  -webkit-transform: rotate(135deg);
+  -moz-transform: rotate(135deg);
+  -o-transform: rotate(135deg);
+  transform: rotate(135deg);
+}
+
+#nav-icon1.open span:nth-child(2) {
+  opacity: 0;
+  left: -50px;
+}
+
+#nav-icon1.open span:nth-child(3) {
+  top: 15px;
+  -webkit-transform: rotate(-135deg);
+  -moz-transform: rotate(-135deg);
+  -o-transform: rotate(-135deg);
+  transform: rotate(-135deg);
+}
+

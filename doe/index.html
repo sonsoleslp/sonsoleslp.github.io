@@ -1,0 +1,241 @@
+
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>DOE</title>
+  
+    <meta name="viewport" content="width=device-width, user-scalable=yes">
+
+    <meta name="keywords" content="diagrama de onda estacionaria, standing wave diagram, intrinsec impedance, impedancia intrínseca, coeficiente de reflexión, VSWR, SWR, DOE, lmbda cuartos, quarter-wavelength, adaptación de impedancias, impedance adaptation" />
+    <meta name="author" content="Sonsoles López Pernas">
+    <meta name="robots" content="index, follow">
+    <meta name="revisit-after" content="3 days">
+    <title>DOE</title>
+    <!-- doe, standing wave, adaptacion de impedancias -->
+    <meta charset="UTF-8">
+    <meta name="description" lang="en" content="Standing Wave Diagram. Sonsoles López Pernas">
+    <meta name="description" lang="es" content="Diagrama de onda estacionaria. Sonsoles López Pernas">
+    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro' rel='stylesheet' type='text/css'>
+    <link rel='stylesheet' href='stylesheets/style.css' />
+    <link rel="icon" href="images/favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="images/favicon.ico" type="image/vnd.microsoft.icon"><!--The 2010 IANA standard but not supported in IE-->
+        <!-- Facebook-->
+    <meta property="og:title" content="Standing Wave Diagram"/>
+    <meta property="og:type" content="website"/>
+    <meta property="og:image" content="images/spli.png"/>
+    <meta property="og:description" content="This app provides a basic tool in order to study the behavior of Monochromatic Homogenous Plane Waves when traveling through different media. In this first version, only media without loss are studied, but it is indeed capable of calculating complex impedances, which appear when there are media with a thickness that is not a multiple of a quarter-wavelength. For any imaginable case, this application will draw the Standing Wave Diagram and specify the input impedances, the SWR, and the reflection coefficients for each discontinuity."/>
+
+    <!-- Twitter-->
+    <meta property="twitter:title" content="Standing Wave Diagram"/>
+
+    <meta property="twitter:image" content="images/spli.png"/>
+    <meta property="twitter:description" content="This app provides a basic tool in order to study the behavior of Monochromatic Homogenous Plane Waves when traveling through different media. In this first version, only media without loss are studied, but it is indeed capable of calculating complex impedances, which appear when there are media with a thickness that is not a multiple of a quarter-wavelength. For any imaginable case, this application will draw the Standing Wave Diagram and specify the input impedances, the SWR, and the reflection coefficients for each discontinuity."/>
+    <script type="application/ld+json">
+      {
+        "@context": "http://schema.org/",
+        "@type": "SoftwareApplication",
+        "name": "DOE",
+        "applicationCategory": "http://schema.org/WebApplication",
+        "releaseNotes": "Application for drawing the Standing Wave Diagram. Aplicacion para el trazado de diagramas de onda estacionaria",
+        "author": "Sonsoles López Pernas"
+
+      }
+  </script>
+      <link rel='stylesheet' href='stylesheets/accordion.css' />
+      <script src="//load.sumome.com/" data-sumo-site-id="94901c357e2a6c12ce96c34b91908eeebf51017a7997c376a12fcc3b52a69a41" async="async"></script>
+<!-- Begin Cookie Consent plugin by Silktide - http://silktide.com/cookieconsent -->
+<script type="text/javascript">
+    window.cookieconsent_options = {"message":"This website uses cookies to ensure you get the best experience on our website","dismiss":"Got it!","learnMore":"More info","link":null,"theme":"light-bottom"};
+</script>
+
+<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/cookieconsent2/1.0.10/cookieconsent.min.js"></script>
+<!-- End Cookie Consent plugin -->
+  </head>
+<body>
+<div onClick="togglebar()" id="nav-icon1">
+  <span></span>
+  <span></span>
+  <span></span>
+</div>
+
+
+  
+   <div id="modal" >
+   <br>
+<div class="abcont">
+<block class="ab" id="cuadro" style="">
+ <h1><img style="width:100px" src="images/favicon.png"><BR>DOE</h1>
+  Esta aplicación proporciona una herramienta sencilla para estudiar el comportamiento de Ondas Planas Homogéneas y Monocromáticas al atravesar discontinuidades en el medio en el que se propagan. En esta primera versión, sólo se contemplarán medios sin pérdidas, pero la aplicación es capaz de calcular impedancias complejas cuando se colocan láminas de un grosor que no es múltiplo de un cuarto de la longitud de onda. Para cualquier caso imaginable, la aplicación trazará el Diagrama de Onda Estacionaria (DOE) y especificará las impedancias y los coeficientes de reflexión para cada discontinuidad en una interfaz sencilla y fácil de utilizar.
+  <br><br><br>
+  This app provides a basic tool in order to study the behavior of Monochromatic Homogenous Plane Waves when traveling through different media. In this first version, only media without loss are studied, but it is indeed capable of calculating complex impedances, which appear when there are media with a thickness that is not a multiple of a quarter-wavelength. For any imaginable case, this application will draw the Standing Wave Diagram and specify the input impedances, the SWR, and the reflection coefficients for each discontinuity.
+  
+</block>
+<br><br><br>
+<block class="ab">
+  <nobr><table align="center">
+  <tr>
+  <img class="about" src="images/pc.png">
+  </tr><tr>
+  <td><a href="http://www.mediafire.com/download/b8d791deadbcdwe/doe_en.exe"><img class="lang" src="images/uk.png"></a></td>
+  <td><a href="http://www.mediafire.com/download/cacs8ubixqdu3ih/doe.exe"><img class="lang" src="images/es.png"></a></td>
+  </tr>
+  </table>
+
+</block>
+<block class="ab">
+  <a href="https://play.google.com/store/apps/details?id=poynting.doe"><img class="about" src="images/android.png"></a></nobr>
+</block><br>
+
+<!----><a href="https://github.com/sonsoleslp/DOE-Frontend"><img style="width:50px;" class="about" src="images/git.png"></a>
+</div>    
+    <div class="info" style="background-color:transparent; color:#555;"><i id="close" class="fa fa-times fa-3x"></i></div>
+
+   </div>
+
+
+    <br><br><br>
+ <div id="lateral" class="lateral">
+ <div class="dentro"><br><br><br>
+  <div id="accordian"><br>
+  <div style="text-align:center;" id="freqdiv"><label for="freq"><i class="fa fa-feed"></i> Frequency<br> <input id="frecuencia" type="number" min="0" max="1000" step"any" value ="3.00"> GHz</label></div><br>
+  <ul id="thelist">
+   
+  
+  </ul>
+  <div style="text-align:center;"><i id="addmedio" class="fa fa-plus fa-2x"></i> </div>
+
+</div>
+
+     </div>
+     <div class="info"><i id="iconinfo" class="fa fa-info fa-2x"></i></div>
+
+    </div>
+    <div id="sep"></div> 
+  <section>
+ <div id="main" class="m-scene">
+      <div class="scene_element scene_element--fadein">
+  
+  <br><br>
+
+<script src="javascripts/canvas.min.js"></script>
+<div  class="all" id="rre">
+<block id="medios">
+</block>
+<block id="pruebas">Test:</block>
+<style>
+  #medios, #pruebas {
+    display:none;
+  }
+</style>
+<script>
+var mediums = [{"grosor":50,"mur":1,"er":1,"lambda":50,"eta":376.99111843077515,"COE":1.00,"moduloro":0.00,"fasei":0},{"grosor":12.5,"mur":1,"er":4,"lambda":25,"eta":188.49555921538757,"COE":2.00,"moduloro":0.33,"fasei":0},{"grosor":50,"er":1,"mur":1,"lambda":50,"eta":376.99111843077515,"moduloro":0.00,"fasei":0,"COE":1.00}]
+var freq = 3;
+var first = 0;
+</script>
+<canvas   id="myCanvas" ></canvas>
+
+<script src="javascripts/jquery.js"></script>
+<script src="javascripts/complejo.js"></script>
+<script src="javascripts/diagrama.js"></script>
+
+
+</div>
+<script>
+  $(window).bind("load", doe);
+  
+  window.addEventListener("resize", doe);
+  //doe();
+</script>
+
+      
+ </div>
+    </div>
+    </section>
+
+<script src="javascripts/prefixfree-1.0.7.js" type="text/javascript" type="text/javascript"></script>
+ 
+<script src="javascripts/jquery.smoothState.js"></script>
+<!--<script src="http://code.jquery.com/mobile/1.1.0/jquery.mobile-1.1.0.min.js"></script>!-->
+<script src="javascripts/sidebar.js"></script>
+
+<script>
+
+
+$(document).ready(function(){
+
+   acc()
+  $( "input" ).change(function() {
+    if(this.id == "frecuencia"){
+       freq = this.value
+   
+    } else {
+    
+    var idd= this.id.match(/[0-9]+/)[0];
+    mediums[idd][this.id.match(/([A-Z])+/i)[0]] = parseInt(this.value)
+
+    }
+
+    refill(idd)
+
+  });
+
+  refill(0)
+
+  $('#nav-icon1').click(function(){
+      $(this).toggleClass('open');
+  });
+});
+
+</script>
+  <script>
+  var togglebar = function() {
+      console.log(document.getElementById("lateral").style.width);
+    if( document.getElementById("lateral").style.width == "0px" || document.getElementById("lateral").style.width == ""){
+      document.getElementById("lateral").style.width = "300px"
+
+    }else{
+      document.getElementById("lateral").style.width = "0px"
+         
+    }
+
+  }
+  $('#myCanvas').click(function(){
+    if( document.getElementById("lateral").style.width == "0px" || document.getElementById("lateral").style.width == ""){
+    }else{
+      document.getElementById("lateral").style.width = "0px"
+       $('#nav-icon1').toggleClass('open');   
+    }
+     
+   
+  });
+  </script>
+  <script>
+  $('#iconinfo').click(function(){
+    
+      $('#modal').fadeToggle();
+
+  });
+    $('#close').click(function(){
+    
+      $('#modal').fadeToggle();
+
+  });
+
+
+  </script>
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  
+    ga('create', 'UA-56260844-2', 'auto');
+    ga('send', 'pageview');
+  
+  </script>
+ 
+
+  </body>
+</html>
