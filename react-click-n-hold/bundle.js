@@ -83,9 +83,10 @@
 			var _this = _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this, props));
 
 			_this.state = {
-				events: []
+				events: [],
+				time: 2,
+				page: 1
 			};
-
 			return _this;
 		}
 
@@ -98,31 +99,66 @@
 					'div',
 					{ className: 'container' },
 					_react2.default.createElement(
+						'span',
+						{ className: this.state.page == 2 ? 'dot dotselected left' : 'dot left', onClick: function onClick(e) {
+								_this2.setState({ page: 2 });
+							} },
+						'2'
+					),
+					_react2.default.createElement(
+						'span',
+						{ className: this.state.page == 1 ? 'dot dotselected' : 'dot', onClick: function onClick(e) {
+								return _this2.setState({ page: 1 });
+							} },
+						'1'
+					),
+					_react2.default.createElement(
 						'div',
-						{ className: 'row' },
+						{ className: 'row', style: { display: this.state.page == 1 ? 'block' : 'none' } },
 						_react2.default.createElement(
 							'div',
 							{ className: 'col-md-6 col-xs-12 middle' },
 							_react2.default.createElement(
-								_ClickNHold2.default,
-								{
-									time: 2,
-									onStart: function onStart(e) {
-										return _this2.setState({ events: [].concat(_toConsumableArray(_this2.state.events), [{ color: 'rgba(194, 207, 178, 1)', event: 'START' }]) });
-									},
-									onTimeOut: function onTimeOut(e) {
-										return _this2.setState({ events: [].concat(_toConsumableArray(_this2.state.events), [{ color: 'rgba(141, 181, 128, 1)', event: 'TIMEOUT' }]) });
-									},
-									onClickNHold: function onClickNHold(e, from) {
-										return _this2.setState({ events: [].concat(_toConsumableArray(_this2.state.events), [{ color: 'rgba(250, 175, 190, 1)', event: 'CLICK AND HOLD' + from }]) });
-									},
-									onEnd: function onEnd(e) {
-										return _this2.setState({ events: [].concat(_toConsumableArray(_this2.state.events), [{ color: 'rgba(126, 137, 135, 1)', event: 'END' }]) });
-									} },
+								'div',
+								{ className: 'middleAligned' },
 								_react2.default.createElement(
-									'button',
+									_ClickNHold2.default,
+									{
+										time: this.state.time,
+										onStart: function onStart(e) {
+											return _this2.setState({ events: [].concat(_toConsumableArray(_this2.state.events), [{ color: 'rgba(194, 207, 178, 1)', event: 'START' }]) });
+										},
+										onClickNHold: function onClickNHold(e) {
+											_this2.setState({ events: [].concat(_toConsumableArray(_this2.state.events), [{ color: 'rgba(250, 175, 190, 1)', event: 'CLICK AND HOLD' }]) });
+										},
+										onEnd: function onEnd(e) {
+											return _this2.setState({ events: [].concat(_toConsumableArray(_this2.state.events), [{ color: 'rgba(126, 137, 135, 1)', event: 'END' }]) });
+										} },
+									_react2.default.createElement(
+										'button',
+										{ id: 'but' },
+										'Click and hold'
+									)
+								),
+								_react2.default.createElement(
+									'div',
 									null,
-									'Click and hold'
+									_react2.default.createElement('br', null),
+									_react2.default.createElement(
+										'span',
+										{ id: 'timelabel' },
+										'Time'
+									),
+									_react2.default.createElement('input', { type: 'number', id: 'timeinput', step: 1, value: this.state.time, onChange: function onChange(e) {
+											_this2.setState({ time: e.target.value });
+											var sheet = document.getElementsByTagName("style")[0];
+											sheet.innerHTML = ".cnh_holding button { -webkit-animation: fill " + e.target.value + "s forwards infinite;  animation: fill " + e.target.value + "s forward infinite;}";
+										} }),
+									_react2.default.createElement(
+										'span',
+										{ id: 'timeunits' },
+										' s'
+									)
 								)
 							)
 						),
@@ -133,6 +169,7 @@
 								'ul',
 								{ id: 'eventList' },
 								this.state.events.map(function (ev, index) {
+
 									return _react2.default.createElement(
 										'li',
 										{ key: index, style: { color: ev.color } },
@@ -141,6 +178,62 @@
 								})
 							)
 						)
+					),
+					_react2.default.createElement(
+						'div',
+						{ className: 'row', style: { display: this.state.page == 2 ? 'block' : 'none' } },
+						_react2.default.createElement(
+							'div',
+							{ className: 'col-md-6 col-xs-12 middle' },
+							_react2.default.createElement(
+								'div',
+								{ className: 'middleAligned alignLeft' },
+								_react2.default.createElement(
+									'code',
+									{ id: 'code' },
+									"<ClickNHold\n" + "   time={",
+									' ',
+									_react2.default.createElement(
+										'span',
+										{ className: 'b' },
+										'2'
+									),
+									' ',
+									"}\n" + "   onStart={",
+									' ',
+									_react2.default.createElement(
+										'span',
+										{ className: 'b' },
+										'this.start'
+									),
+									' ',
+									"}\n" + "   onClickNHold={",
+									' ',
+									_react2.default.createElement(
+										'span',
+										{ className: 'b' },
+										'this.clickNHold'
+									),
+									' ',
+									"}\n" + "   onEnd={",
+									' ',
+									_react2.default.createElement(
+										'span',
+										{ className: 'b' },
+										'this.end'
+									),
+									' ',
+									"}>\n\n",
+									_react2.default.createElement(
+										'span',
+										{ className: 'g' },
+										"   	<button>Click and hold</button>\n\n"
+									),
+									"</ClickNHold>\n"
+								)
+							)
+						),
+						_react2.default.createElement('div', { className: 'col-md-6 col-xs-12' })
 					)
 				);
 			}
@@ -149,6 +242,13 @@
 			value: function componentDidUpdate() {
 				var list = document.getElementById('eventList');
 				list.scrollTop = list.scrollHeight;
+			}
+		}, {
+			key: 'componentDidMount',
+			value: function componentDidMount() {
+				var sheet = document.createElement('style');
+				sheet.innerHTML = ".cnh_holding button { -webkit-animation: fill 3s forwards infinite;  animation: fill 3s forward infinite;}";
+				document.body.appendChild(sheet);
 			}
 		}]);
 
@@ -19909,9 +20009,12 @@
 	        key: 'start',
 	        value: function start(e) {
 	            var ended = this.state.ended;
-	            this.setState({ start: Date.now(), holding: true, ended: false });
+	            var start = Date.now();
+	            this.setState({ start: start, holding: true, ended: false });
 	            if (ended) {
-	                setTimeout(this.timeout, this.props.time * 1000 + 1);
+	                setTimeout(function () {
+	                    this.timeout(start);
+	                }.bind(this), this.props.time * 1000 + 1);
 	            }
 	            if (this.props.onStart) {
 	                this.props.onStart(e);
@@ -19928,35 +20031,22 @@
 	            var startTime = this.state.start; // Start time
 	            var diff = endTime - startTime; // Time difference
 	            var isEnough = diff >= minDiff; // It has been held for enough time
+	            this.setState({ holding: false, ended: true });
 
-	            // Two options: trigger click and hold event when enough time has passed (false, default), or trigger it on mouse up if enough time has passed  (true)
-	            if (this.props.forceEnd && isEnough) {
-	                // If we need to trigger on mouseup, and enough time has passed
-	                if (this.props.onClickNHold) {
-	                    this.props.onClickNHold(e, ' when mouse up'); // Throw onClickNHold passed event if exists
-	                }
-	                this.setState({ ended: true, holding: false, editing: true });
-	            } else {
-	                this.setState({ holding: false, ended: true });
-	            }
 	            if (this.props.onEnd) {
 	                this.props.onEnd(e);
 	            }
-	            // e.stopPropagation()
 	        }
 
 	        /*Timeout callback*/
 
 	    }, {
 	        key: 'timeout',
-	        value: function timeout(e) {
-	            if (this.props.onTimeOut) {
-	                this.props.onTimeOut(e);
-	            }
-	            if (!this.state.ended && !this.props.forceEnd) {
+	        value: function timeout(start) {
+	            if (!this.state.ended && start === this.state.start) {
 	                if (this.props.onClickNHold) {
-	                    this.props.onClickNHold(e, ' when timeout');
-	                    this.setState({ holding: false, editing: true });
+	                    this.props.onClickNHold(start);
+	                    this.setState({ holding: false });
 	                    return;
 	                }
 	            }
@@ -19964,13 +20054,13 @@
 	    }, {
 	        key: 'render',
 	        value: function render() {
-	            var classList = ' ';
+	            var classList = this.props.className ? this.props.className + ' ' : ' ';
 	            classList += this.state.holding ? 'cnh_holding ' : '';
 	            classList += this.state.ended ? 'cnh_ended ' : '';
 	            return _react2.default.createElement(
 	                'div',
 	                { style: this.props.style,
-	                    className: this.props.className + classList,
+	                    className: classList,
 	                    onMouseDown: this.start,
 	                    onTouchStart: this.start,
 	                    onMouseUp: this.end,
