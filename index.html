@@ -1,220 +1,197 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>@sonsoleslp</title>
 
-<head>
-<meta charset="UTF-8">
-<link href="style.css" rel="stylesheet">
-<script src="jquery.js"></script>
-<script src="smoothscroll.js"></script>
-<title>@sonsoleslp</title>
-<link rel="icon" href="img/favicon.png"> 
-<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css?family=Pacifico" rel="stylesheet">
-<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
       rel="stylesheet">
-<meta name=viewport content="width=device-width, initial-scale=1">
-</head>
-<body>
 
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="navbar navbar-default navbar-fixed-top">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <a href="../" class="navbar-brand">@sonsoleslp</a>
+          <button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-main">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+        </div>
+        <!-- <div class="navbar-collapse collapse" id="navbar-main">
+          <ul class="nav navbar-nav">
+            <li class="dropdown">
+              <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="themes">Themes <span class="caret"></span></a>
+              <ul class="dropdown-menu" aria-labelledby="themes">
+                <li><a href="../default/">Default</a></li>
+                <li class="divider"></li>
+                <li><a href="../cerulean/">Cerulean</a></li>
+                <li><a href="../cosmo/">Cosmo</a></li>
+                <li><a href="../cyborg/">Cyborg</a></li>
+                <li><a href="../darkly/">Darkly</a></li>
+                <li><a href="../flatly/">Flatly</a></li>
+                <li><a href="../journal/">Journal</a></li>
+                <li><a href="../lumen/">Lumen</a></li>
+                <li><a href="../paper/">Paper</a></li>
+                <li><a href="../readable/">Readable</a></li>
+                <li><a href="../sandstone/">Sandstone</a></li>
+                <li><a href="../simplex/">Simplex</a></li>
+                <li><a href="../slate/">Slate</a></li>
+                <li><a href="../solar/">Solar</a></li>
+                <li><a href="../spacelab/">Spacelab</a></li>
+                <li><a href="../superhero/">Superhero</a></li>
+                <li><a href="../united/">United</a></li>
+                <li><a href="../yeti/">Yeti</a></li>
+              </ul>
+            </li>
+            <li>
+              <a href="../help/">Help</a>
+            </li>
+            <li>
+              <a href="http://news.bootswatch.com">Blog</a>
+            </li>
+            <li class="dropdown">
+              <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="download">Cosmo <span class="caret"></span></a>
+              <ul class="dropdown-menu" aria-labelledby="download">
+                <li><a href="http://jsfiddle.net/bootswatch/h3fgn55j/">Open Sandbox</a></li>
+                <li class="divider"></li>
+                <li><a href="./bootstrap.min.css">bootstrap.min.css</a></li>
+                <li><a href="./bootstrap.css">bootstrap.css</a></li>
+                <li class="divider"></li>
+                <li><a href="./variables.less">variables.less</a></li>
+                <li><a href="./bootswatch.less">bootswatch.less</a></li>
+                <li class="divider"></li>
+                <li><a href="./_variables.scss">_variables.scss</a></li>
+                <li><a href="./_bootswatch.scss">_bootswatch.scss</a></li>
+              </ul>
+            </li>
+          </ul>
 
-
-	<button id="menu"><img id="iconomenu" src="img/menu.png"></button>
-	<nav id="lista">
-		<ul><br><br>
-			<li> </li>
-			<li><a href="#home" class="elemento" >Home</a></li>
-			<li><a href="#about" class="elemento">About</a></li>
-			<li><a href="#portfolio" class="elemento">Work</a></li>
-      <li><a href="#contact" class="elemento">Contact</a></li>
-
-		</ul>
-	</nav>
-
-<div id="home" class="seccion">
-  <div id="centrado">
-    <h1>@sonsoleslp</h1> 
-    <h1 id="flechas"><a href="#about"><img id="flecha" src="img/arrowdown.png"></a></h1>
-
-  </div>
-</div>
-<div id="about" class="seccion">
-<div class="contenido" id="about2">
-<h1 id="grande">ABOUT</h1>
-<div class="aboutcontent">  
-  <div class="squares">
-    <div class="square">
-     <i class="mi material-icons">my_location</i>
-     Born in Spain in 1994
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="http://builtwithbootstrap.com/" target="_blank">Built With Bootstrap</a></li>
+            <li><a href="https://wrapbootstrap.com/?ref=bsw" target="_blank">WrapBootstrap</a></li>
+          </ul>
+          </div>
+ -->
+         <ul class="nav navbar-nav navbar-right">
+            <li>
+              <a class="iconlink" href="http://github.com/sonsoleslp" target="_blank">
+                <img class="icon" src="img/github-logo.png" alt="">
+              </a>
+            </li> 
+            <li>
+              <a class="iconlink" href="https://www.linkedin.com/in/sonsoleslopezpernas/" target="_blank">
+                <img class="icon" src="img/linkedin-logo.png" alt="">
+              </a>
+            </li>  
+            <li>
+              <a class="iconlink" href="http://twitter.com/sonsoleslp" target="_blank">
+                <img class="icon" src="img/twitter-logo.png" alt="">
+              </a>
+            </li>
+          </ul>
+        
+      </div>
     </div>
-    <div class="square">
-     <i class="mi material-icons">school</i>
-     Student and Researcher at Technical University of Madrid - UPM
+    <div class="container-fluid">
+      <div class="row ">
+        <div id="left" class="col-xs-12 col-md-4">
+          <br/><br/>
+          <h1>About me</h1>
+            <br/>
+          <p class="par"><i class="material-icons">location_on</i>  <span>Madrid, Spain</span></p>
+          <p class="par"><i class="material-icons">school</i>  <span>Student and researcher @ UPM</span></p>
+          <p class="par"><i class="material-icons">wifi</i>  <span>Telecom Engineer</span></p>
+          <p class="par"><i class="material-icons">code</i>  <span>Web developer</span></p>
+          <p class="par"><i class="material-icons">assessment</i>  <span>Into Data Science</span></p>
+          <p class="par"><i class="material-icons">pan_tool</i>  <span>Skills</span></p>
+          <ul>
+            <li>HTML</li>
+            <li>CSS</li>
+            <li>JS</li>
+            <li>REACT</li>
+            <li>REDUX</li>
+            <li>NODE.JS</li>
+            <li>R</li>
+            <li>PYTHON</li>
+            <li>MATLAB</li>
+            <li>JAVA</li>
+            <li>VHDL</li>
+            <li>SCRUM</li>
+          </ul>
+
+          
+        </div>
+        <div id="right" class="col-xs-12 col-md-8">
+         <br/><br/>
+          <h1>Work</h1>
+            <br/>
+          <div class="grid">
+            <figure class="effect-goliath">
+              <figcaption>
+                <h2><span>WIKIPEDIA</span></h2>
+                <p>Physics articles for Wikipedia Spain</p>
+                <a href="https://es.wikipedia.org/wiki/Wikiproyecto:Colaboraci%C3%B3n_con_la_UPM_sobre_art%C3%ADculos_de_F%C3%ADsica">View more</a>
+              </figcaption>     
+            </figure>
+            <figure class="effect-goliath">
+              <figcaption>
+                <h2><span>DOE/SWD</span></h2>
+                <p>Draw Standing Wave Diagrams</p>
+                <a href="https://poynting.neocities.org/">View more</a>
+              </figcaption>     
+            </figure>
+            <figure class="effect-goliath">
+              <figcaption>
+                <h2><span>DALÍ</span></h2>
+                <p>Open source e-Learning authoring tool</p>
+                <a href="https://github.com/ging/DALI_EDITOR">View more</a>
+              </figcaption>     
+            </figure>
+            <figure class="effect-goliath">
+              <figcaption>
+                <h2><span>React Click-n-hold</span></h2>
+                <p>Long press event for react</p>
+                <a href="http://sonsoleslp.github.io/react-click-n-hold/">View more</a>
+              </figcaption>     
+            </figure>
+            <figure class="effect-goliath">
+              <figcaption>
+                <h2><span>PLR</span></h2>
+                <p>Architecture studio</p>
+                <a href="http://www.pedrolopezruiperez.tk">View more</a>
+              </figcaption>     
+            </figure>
+            <figure class="effect-goliath">
+              <figcaption>
+                <h2><span>ABAWIFI</span></h2>
+                <p>Web network quality measurement</p>
+                <a href="http://oa.upm.es/41462/1/PFC_SONSOLES_LOPEZ_PERNAS.pdf">View more</a>
+              </figcaption>     
+            </figure>
+          </div>
+        </div>
+      </div>
     </div>
-    <div class="square">
-     <i class="mi material-icons">memory</i>
-     Telecom Engineer
-    </div>
-    <div class="square">
-     <i class="mi material-icons">code</i>
-     Web developer
-    </div>
-    <div class="square">
-     <i class="mi material-icons">g_translate</i>
-     Fluent in Spanish, English & Galician.
-    </div>
-    <div class="square">
-      <i class="mi material-icons">insert_chart</i>
-      Into Data Science
-    </div>  
-    <div class="square">
-      <i class="mi material-icons">wallpaper</i>
-      Into UX & UI
-    </div>
-    <div class="square">
-      <i class="mi material-icons">pan_tool</i>
-      Skills:  &nbsp;
-      <div class="skilllist">
-       JAVA  <i class="separator"><i class="separator">  ·  </i></i>    C  <i class="separator"><i class="separator">  ·  </i></i>   C++  <i class="separator"><i class="separator">  ·  </i></i>  MATLAB <i class="separator"><i class="separator">  ·  </i></i>  PYTHON <i class="separator">  ·  </i>  GIT <i class="separator">  ·  </i>  HTML <i class="separator">  ·  </i>  CSS <i class="separator">  ·  </i>  JS <i class="separator">  ·  </i>  NODE.JS <i class="separator">  ·  </i>  JQUERY <i class="separator">  ·  </i>  REACT <i class="separator">  ·  </i>  REDUX <i class="separator">  ·  </i>  BOOTSTRAP <i class="separator">  ·  </i>  VHDL  <i class="separator">  ·  </i>   WIRESHARK <i class="separator">  ·  </i>  ANDROID <i class="separator">  ·  </i>  UNIX <i class="separator">  ·  </i>   SCRUM </div>
-    </div>
 
-  </div>
- 
- 
-</div>
-
-  <br><br>
-
-
-</div>
-
-</div>
-<div id="portfolio" class="seccion">
-  <div class="contenido">
-    <h1  id="grande">WORK</h1>
-
-    <box>
-    <img class="port" src="img/p1.jpg" titulo="DOE/SWD" descr="This app is the ultimate tool in order to study the behavior of Plane Monochromatic Homogenous Waves when traveling through different mediums. In this first version of the application, only mediums with no loss are contemplated, but it is capable of calculating complex impedances, which appear when there are mediums with a thickness that is not a multiple of the wavelength. For any imaginable case, this application draws the Standing Wave Diagram and specifies the impedances and reflection coefficients for every discontinuity. It has a simple interface and is really easy to work" enlace="http://poynting.herokuapp.com"><br>
-    </box>
-    <box>
-    <img class="port" src="img/p2.jpg" titulo="Sofía Pernas & Micaela Neira" descr="Website of the interior designers from Vigo, Sofía Pernas and Micaela Neira. Simple webpage designed using Start BootStrap Templates"enlace="http://sofiapernasmicaelaneira.neocities.org"><br>
-    </box>
-    <box>
-    <img class="port" src="img/p3.jpg" titulo="Wikifísica ETSIT UPM" descr="Project manager at the platform for the development of Physics articles written by the students at ETSIT UPM."enlace="http://wikifisica.etsit.upm.es"><br>
-    </box>
-    <box>
-    <img class="port" src="img/p7.jpg" titulo="PEDRO LÓPEZ RUIPÉREZ" descr="Architecture studio based in Vigo, Spain. Webpage."enlace="http://www.pedrolopezruiperez.tk"><br>
-    </box>
-    <box>
-    <img class="port" src="img/p8.jpg" titulo="Dali" descr="Web application for dynamically creating online courses in HTML for users that do not know how to code. It is built with React and Redux, and it is based in plugins for every piece of content." enlace="http://github.com/pichoneto/dali"><br>
-    </box>
-    <box>
-    <img class="port" src="img/p5.jpg" titulo="ABA-WIFI" descr="The characteristics of Wi-Fi in combination with the TCP protocol cause a decrease in the resulting throughput, originated by the design of TCP itself.   The main goal of the  ABA-WIFI project was to elaborate a solution that amends the anomalous behaviour of the TCP Protocol that remarkably affects WiFi networks. In order to do that, several improvements based on TCP splitting and spoofing techniques were applied to Wi-Fi access points, solving the identified problem in a noticeable way. This work provides a tool to test and measure quantitatively and  in real-time the effect of said improvements upon the network in different conditions of the latter: position of the client with respect to the access point, profile of traffic coursed, network load or geographic location." enlace="http://oa.upm.es/41462/1/PFC_SONSOLES_LOPEZ_PERNAS.pdf"><br>
-    </box>
-    <box>
-    <img class="port" src="img/p9.jpg" titulo="React Click and Hold" descr="Long press event for react. Click and hold wrapper component. " enlace="http://sonsoleslp.github.io/react-click-n-hold/"><br>
-    </box>
-
-
-  </div>
-</div>
-<div id="contact" class="seccion">
-  <div id="contenido" class="textocentrado">
-    <h1 id="grande">CONTACT</h1>
-    <div id="caja">
-   <!-- <div id="cont"><img class="info" src="img/phone.png"><box class="info">  666 00 00 00</box><br></div> -->
-   <br><br>
-   <!-- <div id="cont"><img class="info" src="img/mail.png"><box class="info">poynting.slp@gmail.com</box></div> -->
-   <br><br>
-   <social>
-     <a class="socialink" target="_blank" href="mailto:poynting.slp@gmail.com"><img class="socialicon" src="icons/mail.svg">poynting.slp@gmail.com</a><br/>
-    <a class="socialink" target="_blank" href="https://twitter.com/sonsoleslp"><img class="socialicon" src="icons/twitter.svg">@sonsoleslp</a><br/>
-     <a class="socialink" target="_blank" href="https://github.com/sonsoleslp"><img class="socialicon" src="icons/git.svg">@sonsoleslp</a><br/>
-     <a class="socialink" target="_blank" href="https://es.linkedin.com/in/sonsoleslopezpernas"><img class="socialicon" src="icons/in.svg">sonsoleslopezpernas</a>          
-   </social>
-   
-   </div>
-  </div>
-</div>
-
-<script>
-
-
-$( document ).ready(function() {
-  
-    console.log( 'ready!' );
-    $( '#lista' ).css('display', 'none');
-    var ima = 'close.png';
-    var mostrar = function(){
-    	// $( '#lista' ).css('display', 'inline');
-    	$("#lista").animate({width:'toggle'},350);
-    	var aux = ima +'';
-    	console.log(ima);
-    	ima = $('#iconomenu').html.src+'';
-    	console.log(ima);
-  	$('#iconomenu').src = aux;
-    	
-    };
-
-  $( '#menu' ).click(mostrar);
-  $('.elemento').click(mostrar); 
-  $('.seccion').css('min-height',screen.availHeight);
-  $('.seccion').css('min-height',window.innerHeight);
-     //  $( "h1" ).click(function() { $( "p" ).animate({"margin-left": '+=200'},2000); });
-});
-
-
-
-//Checking existing sections
-var lista = [];
-var elementos = $('.elemento');
-var ind = 0;
-
-for(ind; ind<elementos.length;ind++){
-   var lin =  ''+ elementos[ind].href;
-   var posi = lin.indexOf('#');
-   var nuevo = lin.slice(posi+1,lin.length);
-   lista.push(nuevo);
-
-}
-
-var thelist = lista;
-
-// Wholescreen view of portfolio
-$('.port').click(function(){
-    var imagen = $(this).attr('src');
-    var titul = $(this).attr('titulo');
-    var descc = $(this).attr('descr');
-    var enl = $(this).attr('enlace');
-    var llami = "$(\'#vista\').slideUp(function(){$(\'#vista\').remove();});";
-    var customDiv = $('<div id="vista"><button id="menu" class="cur" onClick="'+llami+'"><img id="iconosalir" '
-      +'class="salirr" src="img/close.png"></button><div id="cemt"><div id="cemtin">'
-      +'<h2>'+titul+'</h2>'
-      +'<img id="mues" src="'
-      +imagen+'"><br>'
-      +'<p class="descrip">'+descc+'</p>'
-      + '<strong><a href="'+enl+'">Visit the project</a></strong><br><br>'
-      // +'<br><button id="cerrar">Close</button>'
-      +'</div></div></div>');
-
-     $('body').append(customDiv);
-     $('#vista').animate({height:'toggle'},350);
-      
-           var dentro = function(){$('#vista').remove()};
-           var llamada = function(){customDiv.slideUp(dentro);};
-
-          // $('#iconosalir').click(llamada);
-           
-
-
-  });
-  
     
 
-
-</script>
-
-<script src="sonso.js"></script>
-
-
-</body>
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="js/bootstrap.min.js"></script>
+  </body>
 </html>
