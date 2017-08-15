@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<!-- saved from url=(0079)file:///C:/Users/Sonsoles/WebstormProjects/react-datatable-bs/dist/example.html -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link rel="stylesheet" href="./../css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.min.css"><link rel="stylesheet" href="./../css/table-twbs.css">
+<style>
+  body {
+    font-family: 'PT Sans', sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+  input[type="search"] {
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin-left: 10px;
+  }
+  .page-header {
+    padding-bottom: 9px;
+    margin: 40px 0 20px;
+    border-bottom: 1px solid #eee;
+  }
+</style>
+<title>React Data Components</title>
+</head>
+<body cz-shortcut-listen="true">
+<div id="root"></div>
+<script src="https://npmcdn.com/react@15.2.1/dist/react.min.js"></script>
+<script src="https://npmcdn.com/react-dom@15.2.1/dist/react-dom.min.js"></script>
+<script src="./../js/react-datatable-bs.min.js">
+    
+</script><script src="./../js/data.js"></script>
+<script>
+
+    function buildTable(data) {
+        var renderMapUrl = function(val, row) {
+            return React.createElement('a', {
+                    href: ('https://www.google.com/maps?q=' + row['lat'] + ',' + row['long'])
+                },
+                'Google Maps'
+            );
+        };
+
+        var tableColumns = [
+            { title: 'Name', prop: 'name' },
+            { title: 'City', prop: 'city' },
+            { title: 'Street address', prop: 'street' },
+            { title: 'Phone', prop: 'phone', defaultContent: '<no phone>' },
+            { title: 'Map', render: renderMapUrl, className: 'text-center' }
+        ];
+
+        return (
+            React.createElement(ReactDatatableBs.Config, {
+                columns: tableColumns,
+                initialData: data,
+            })
+        );
+    }
+
+    ReactDOM.render(buildTable(data), document.getElementById('root'));
+
+</script>
+
+
+</body></html>
