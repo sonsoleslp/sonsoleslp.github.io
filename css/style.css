@@ -4,11 +4,21 @@ html,body,.container-fluid{
 
 .row {
 	height:100%;
+	padding-top: 52px;
 }
 
 #left {
 	background-color: #999;
 	min-height: 100%;
+	height: 100%;
+	overflow: auto;
+}
+
+
+#right {
+	min-height: 100%;
+	height: 100%;
+	overflow: auto;
 }
 
 .navbar-brand {
@@ -81,6 +91,8 @@ figure.effect-goliath img,
 figure.effect-goliath h2 {
 	-webkit-transition: -webkit-transform 0.35s;
 	transition: transform 0.35s;
+	text-align: left;
+	font-size: 28px;
 }
 
 figure.effect-goliath img {
@@ -212,9 +224,13 @@ figure.effect-goliath:hover p {
 	text-align: center;
 }
 
-@media (max-width: 500px) { 
+@media (max-width: 768px) { 
 	.grid figure {
 		width: 96%;
+	}
+	#left,#right {
+		height: auto;
+
 	}
 	
  }
