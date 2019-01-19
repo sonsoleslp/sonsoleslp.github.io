@@ -6,7 +6,7 @@
     <lom xmlns="http://ltsc.ieee.org/xsd/LOM" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://ltsc.ieee.org/xsd/LOM lom.xsd">
       <general>
         <title>
-          <string language="es">RescormBoilerplate</string>
+          <string language="es">Quiz</string>
         </title>
         <language>es</language>
       </general>
