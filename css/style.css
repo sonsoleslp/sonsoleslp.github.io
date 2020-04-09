@@ -8,7 +8,7 @@ html,body,.container-fluid{
 }
 
 #left {
-	background-color: #999;
+	background-color: #eee;
 	min-height: 100%;
 	height: 100%;
 	overflow: auto;
@@ -145,9 +145,9 @@ figure.effect-goliath:hover p {
 	margin: 10px 1%;
 	min-width: 200px;
 	/*max-width: 480px;*/
-	max-height: 360px;
+	max-height: 180px;
 	width: 31%;
-	height:220px;
+	height:200px;
 	background: #E5446D;
 	text-align: center;
 	cursor: pointer;
