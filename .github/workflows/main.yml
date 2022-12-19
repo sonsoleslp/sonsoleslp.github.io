@@ -6,7 +6,7 @@ on:
   # to be able to trigger a manual build
   workflow_dispatch:
 
-name: Render and deploy website to Netlify
+name: Render and deploy website 
 
 jobs:
   build-deploy:
@@ -31,8 +31,18 @@ jobs:
       - name: Render website
         # Add any command line argument needed
         run: |
+          R -e 'install.packages("rmarkdown")'
           sh curl.sh
           quarto render
           rm -rf docs
           cp -r _site docs
-       
+      - name: Commit files
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git commit -m "Add changes" -a
+      - name: Push changes
+        uses: ad-m/github-push-action@main
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+         
