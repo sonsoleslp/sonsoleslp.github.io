@@ -3,16 +3,16 @@ project:
   output-dir: _site
 
 website:
-  title: "Drew Dimmery"
-  description: "Personal website of Drew Dimmery"
-  site-url: https://ddimmery.com
+  title: "sonsoleslp"
+  description: "Personal website of Sonsoles López Pernas"
+  site-url: https://sonsoleslp.github.io
   repo-url: https://github.com/ddimmery/quarto-website
   google-analytics: "G-Y7YLFF5F90"
   open-graph: true
   favicon: favicon.png
   twitter-card: 
-    creator: "@drewdim"
-    site: "@drewdim"
+    creator: "@sonsoleslp"
+    site: "@sonsoleslp"
     card-style: "summary_large_image"
   navbar:
     background: dark
@@ -21,13 +21,13 @@ website:
       - href: index.qmd
         text: Home
       - href: about.qmd
-      - href: research.qmd
-      - href: software.qmd
-      - href: blog.qmd
+      - href: publications.qmd
+      - href: softwares.qmd
+      # - href: blog.qmd
 
 format:
   html:
-    theme: journal
+    theme: lumen
     css: styles.css
     toc: true
     toc-depth: 4

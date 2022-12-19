@@ -2,162 +2,224 @@
 title: "About"
 ---
 
-I am currently the Scientific Coordinator at the Research Network Data Science at the University of Vienna.
+```{r,echo=F}
+Intro = dplyr::filter(rio::import("cv.xlsx", sheet = "Intro"),!is.na(Short_summary))$Short_summary
 
-### Research Interests
+Intro_tags = htmltools::tagList()
 
-- Causal Inference
-- Machine Learning
-- Data Science
-- Experimental Design
+for (i in 1:length(Intro)) {
+  Intro_tags[[i]] <- htmltools::tags$p(Intro[i])
+}
 
-### Education
+Intro_tags
+```
 
-::: {.d-flex .justify-content-between}
-::: {}
-**New York University**  
-PhD in Political Methodology  
-Advisors: Cyrus Samii, Neal Beck, Josh Tucker
-:::
-::: {.text-end}
-New York, NY  
-Granted May 2016
-:::
-:::
-- Dissertation: *Essays on Causal Inference and Machine Learning with Application to Nonprofits*
-- Winner of 2015 Williams Award for Best Dissertation Proposal in Political Methodology from the Society of Political Methodology
 
-::: {.d-flex .justify-content-between}
-::: {}
-**UNC Chapel Hill**  
-B.A. in International and Area Studies with distinction
-:::
-::: {.text-end}
-Chapel Hill, NC  
-Granted June 2010
-:::
-:::
 
-### Experience
+## Research Interests
 
-::: {.d-flex .justify-content-between}
-::: {}
-**University of Vienna**  
-:::
-::: {.text-end}
-April 2021 - present
-:::
-:::
-*Scientific Coordinator*
+ 
+```{r,echo=F}
+Research_interests = rio::import("cv.xlsx", sheet = "Research_interests")
+Research_interests_tags = htmltools::tagList()
 
-- Supervisor: Philipp Grohs
+for (i in 1:nrow(Research_interests)) {
+  inte = Research_interests[i,]
+  if (!is.na(inte)){
+     Research_interests_tags[[i]] <- htmltools::tags$li(inte)
+  }
+}
+htmltools::tags$ul(
+Research_interests_tags
+)
+```
 
-::: {.d-flex .justify-content-between}
-::: {}
-**Facebook Core Data Science**  
-:::
-::: {.text-end}
-Sept 2016 - March 2021
-:::
-:::
-*Research Scientist*
 
-- Part of Eytan Bakshy's Adaptive Experimentation team
-- Developed statistical, machine learning and experimental methodology
-- Ran adaptive and contextual field experiments with a variety of product teams
-- Integrated advanced methodologies into a toolkit for scalable and automatic experimentation intended for optimization ([Ax](https://ax.dev/)) - [released at F8 2019](https://developers.facebook.com/videos/2019/product-optimization-with-adaptive-experimentation/))
-- Developed scalable methods for robust observational causal inference as the technical lead of our "CausalML" initiative
+## Education
 
-::: {.d-flex .justify-content-between}
-::: {}
-**Princeton University**  
-:::
-::: {.text-end}
-September 2015 - May 2016
-:::
-:::
-*Pre-doctoral fellow*
+ 
 
-- Supervised by Kosuke Imai
+```{r,echo=F}
+education = rio::import("cv.xlsx", sheet = "Education")
+eductags = htmltools::tagList()
 
-::: {.d-flex .justify-content-between}
-::: {}
-**Facebook Core Data Science**  
-:::
-::: {.text-end}
-Summer 2015
-:::
-:::
-*Summer Intern*
+for (i in 1:nrow(education)) {
+  edu = education[i,]
+  eductags[[i]] <- htmltools::tags$li(
+    htmltools::tagList(
+      htmltools::tags$span(paste0("(",edu$Year,") ")),
+      htmltools::tags$strong(edu$Program), 
+      htmltools::tags$span(paste0(" - ", edu$Institution)),
+      htmltools::tags$span(paste0(ifelse(!is.na(edu$Extra),paste0("", edu$Extra),"")))
+    )
+  )
+}
+htmltools::tags$ul(
+eductags
+)
+```
 
-- Statistical and Decision Science Team
-- Supervised by Eytan Bakshy
 
-### Teaching
 
-#### Facebook
-::: {.d-flex .justify-content-between}
-::: {}
-Internal datacamp class on designing and analyzing experiments 
-:::
-::: {.text-end}
-2017-2019
-:::
-:::
+ 
+## Work Experience
 
-#### NYU Undergraduate
-::: {.d-flex .justify-content-between}
-::: {}
-TA for Power and Politics in America (under Jonathan Nagler)
-:::
-::: {.text-end}
-Fall 2014
-:::
-:::
 
-::: {.d-flex .justify-content-between}
-::: {}
-TA for Games, Strategy and Politics (under Steven Brams)
-:::
-::: {.text-end}
-Fall 2013
-:::
-:::
+```{r,echo=F}
+experience = rio::import("cv.xlsx", sheet = "Experience")
+exptags = htmltools::tagList()
 
-#### NYU Graduate
+for (i in 1:nrow(experience)) {
+  exp = experience[i,]
+  exptags[[i]] <- htmltools::tags$li(
+    htmltools::tagList(
+      htmltools::tags$span(paste0("(",exp$Year,") ")),
+      htmltools::tags$strong(exp$Position), 
+      htmltools::tags$span(paste0(" - ", exp$Institution)) 
+    )
+  )
+}
+htmltools::tags$ul(
+exptags
+)
+```
 
-::: {.d-flex .justify-content-between}
-::: {}
-TA for Quantitative Methods II (under Nathaniel Beck)
-:::
-::: {.text-end}
-Spring 2015
-:::
-:::
+## Teaching
 
-::: {.d-flex .justify-content-between}
-::: {}
-TA for Quantitative Methods II (under Cyrus Samii)
-:::
-::: {.text-end}
-Spring 2014
-:::
-:::
+```{r,echo=F}
+teaching = rio::import("cv.xlsx", sheet = "Teaching")
+teatags = htmltools::tagList()
 
-::: {.d-flex .justify-content-between}
-::: {}
-High Performance Computing Talk for NYU Datalab
-:::
-::: {.text-end}
-February 2014
-:::
-:::
+for (i in 1:nrow(teaching)) {
+  tea = teaching[i,]
+  teatags[[i]] <- htmltools::tags$li(
+    htmltools::tagList(
+      htmltools::tags$span(paste0("(",tea$Year,") ")),
+      htmltools::tags$strong(tea$Course), 
+      htmltools::tags$span(paste0(" - ", tea$Institution)) 
+    )
+  )
+}
+htmltools::tags$ul(
+teatags
+)
+```
 
-::: {.d-flex .justify-content-between}
-::: {}
-Introduction to R for NYU Datalab
-:::
-::: {.text-end}
-January 2013
-:::
-:::
+## Supervision
+
+
+```{r,echo=F}
+supervision = rio::import("cv.xlsx", sheet = "Supervision")
+supervisiontags = htmltools::tagList()
+
+for (i in 1:nrow(supervision)) {
+  superv = supervision[i,]
+  supervisiontags[[i]] <- htmltools::tags$li(
+    htmltools::tagList(
+      htmltools::tags$span(superv), 
+    )
+  )
+}
+htmltools::tags$ul(
+supervisiontags
+)
+```
+
+## Research Projects
+
+```{r,echo=F}
+projects = rio::import("cv.xlsx", sheet = "Projects")
+projtags = htmltools::tagList()
+
+for (i in 1:nrow(teaching)) {
+  proj = projects[i,]
+  projtags[[i]] <- htmltools::tags$li(
+    htmltools::tagList(
+      htmltools::tags$span(paste0("(",proj$Year,") ")),
+      htmltools::tags$strong(proj$Name), 
+      htmltools::tags$span(paste0(" - Funded by: ", proj$Funding)), 
+      htmltools::tags$br(),
+      htmltools::tags$small(ifelse(!is.na(proj$Description),proj$Description,""),
+      htmltools::tags$br(),htmltools::tags$br()
+      )
+    )
+  )
+}
+htmltools::tags$ul(
+projtags
+)
+```
+
+## Research Visits
+```{r,echo=F}
+visits = rio::import("cv.xlsx", sheet = "Research_visits")
+visitstags = htmltools::tagList()
+
+for (i in 1:nrow(visits)) {
+  visit = visits[i,]
+  visitstags[[i]] <- htmltools::tags$li(htmltools::tagList(
+   htmltools::tags$span( paste0("(",visit$Year,") ")),
+   htmltools::tags$strong(  visit$Institution), 
+   htmltools::tags$span( paste0(" - ", visit$Country, " (",visit$Duration,")"))
+  ))
+}
+htmltools::tags$ul(
+visitstags
+)
+```
+
+## Awards
+
+```{r,echo=F}
+awards = rio::import("cv.xlsx", sheet = "Awards")
+awardstags = htmltools::tagList()
+
+for (i in 1:nrow(awards)) {
+  awa = awards[i,]
+  awardstags[[i]] <- htmltools::tags$li(
+    paste0("(",awa$Year,") ",awa$Description)
+  )
+}
+htmltools::tags$ul(
+awardstags
+)
+```
+
+## Editorial work
+```{r,echo=F}
+editorial = rio::import("cv.xlsx", sheet = "Editorial_work")
+editorialtags = htmltools::tagList()
+
+for (i in 1:nrow(editorial)) {
+  edi = editorial[i,]
+  editorialtags[[i]] <- htmltools::tags$li(htmltools::tagList(
+   htmltools::tags$span( paste0("(",edi$Year,") ")),
+   htmltools::tags$span(  edi$Description)
+  ))
+}
+htmltools::tags$ul(
+editorialtags
+)
+```
+
+## Other merits
+
+```{r,echo=F}
+other = rio::import("cv.xlsx", sheet = "Other_merits")
+othertags = htmltools::tagList()
+
+for (i in 1:nrow(other)) {
+  oth = other[i,]
+  othertags[[i]] <- htmltools::tags$li(
+    paste0("(",oth$Year,") ",oth$Description)
+  )
+}
+htmltools::tags$ul(
+othertags
+)
+```
+ 
+
+ 
+ 
+

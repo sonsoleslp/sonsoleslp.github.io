@@ -1,6 +1,5 @@
 ---
-title: "Drew Dimmery"
-description: "Methods in Causal Inference, Data Science and Social Science"
+title: "Sonsoles López-Pernas"
 page-layout: full
 image: /social-card.jpg
 resources:
@@ -9,13 +8,21 @@ resources:
 
 ::: {.column-page-inset}
 ::: {.column-page-inset-left}
-I am the scientific coordinator at the Data Science Research Network at the University of Vienna.
+```{r,echo=F}
+Welcome = rio::import("cv.xlsx", sheet = "Intro")$Welcome
 
-I previously worked on the Adaptive Experimentation team at Facebook Core Data Science in New York.
+Welcome_tags = htmltools::tagList()
 
-My research focuses on the intersection of machine learning and causal inference. I work a lot on experimental design and I think hard about how experimentation can be better and more efficient. I’m also interested in better applying the machinery of machine learning to observational causal inference.
+for (i in 1:length(Welcome)) {
+  if (!is.na(Welcome[i])){
+    Welcome_tags[[i]] <- htmltools::tags$p(Welcome[i])
+  }
+}
 
-I’m most interested in methodological research useful for the study of social phenomena.
+Welcome_tags
+```
+
+
 :::
 
 <div class="column-margin column-container">
@@ -27,28 +34,28 @@ I’m most interested in methodological research useful for the study of social 
 
 ::: {.column-page-inset .text-center}
 ```{=html}
-<a class="btn btn-outline-dark", href="https://twitter.com/DrewDim" target="_blank" rel="noopener noreferrer">
+<a class="btn btn-info", href="https://twitter.com/sonsoleslp" target="_blank" rel="noopener noreferrer">
     <i class="bi bi-twitter" role='img' aria-label='Twitter'></i>
 </a>
 
-<a class="btn btn-outline-dark", href="https://github.com/ddimmery" target="_blank" rel="noopener noreferrer">
+<a class="btn btn-dark", href="https://github.com/sonsoleslp" target="_blank" rel="noopener noreferrer">
     <i class="bi bi-github" role='img' aria-label='Github'></i>
 </a>
 
-<a class="btn btn-outline-dark", href="https://www.linkedin.com/in/drew-dimmery/" target="_blank" rel="noopener noreferrer">
+<a class="btn btn-warning", href="https://www.linkedin.com/in/drew-dimmery/" target="_blank" rel="noopener noreferrer">
     <i class="bi bi-linkedin" role='img' aria-label='LinkedIn'></i>
 </a>
 
-<a class="btn btn-outline-dark", href="https://scholar.google.com/citations?user=qMfnm48AAAAJ" target="_blank" rel="noopener noreferrer">
+<a class="btn btn-light", href="https://scholar.google.com/citations?user=67eUI4gAAAAJ" target="_blank" rel="noopener noreferrer">
     <i class="ai ai-google-scholar" role='img' aria-label='Google Scholar'></i>
 </a>
 
-<a class="btn btn-outline-dark", href="https://arxiv.org/a/dimmery_d_1.html" target="_blank" rel="noopener noreferrer">
-    <i class="ai ai-arxiv" role='img' aria-label='arXiv'></i>
+ <a class="btn btn-primary", href="https://www.researchgate.net/profile/Sonsoles-Lopez-Pernas" target="_blank" rel="noopener noreferrer">
+    <i class="ai ai-researchgate" role='img' aria-label='Research Gate'></i>
 </a>
-
-<a class="btn btn-outline-dark", href="mailto:pddimmery@gmail.com" target="_blank" rel="noopener noreferrer">
-    <i class="ai bi-envelope" role='img' aria-label='email'></i>
+ 
+  <a class="btn btn-success", href="https://orcid.org/0000-0002-9621-1392" target="_blank" rel="noopener noreferrer">
+    <i class="ai ai-orcid" role='img' aria-label='Research Gate'></i>
 </a>
 ```
 :::

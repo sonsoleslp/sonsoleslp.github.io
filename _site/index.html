@@ -2,39 +2,44 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-0.9.377">
+<meta name="generator" content="quarto-1.1.189">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="description" content="Methods in Causal Inference, Data Science and Social Science">
 
-<title>Drew Dimmery</title>
+<title>sonsoleslp - Sonsoles López-Pernas</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
-span.underline{text-decoration: underline;}
-div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
 div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
 </style>
+
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="site_libs/quarto-nav/headroom.min.js"></script>
 <script src="site_libs/clipboard/clipboard.min.js"></script>
-<meta name="quarto:offset" content="./">
 <script src="site_libs/quarto-search/autocomplete.umd.js"></script>
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
 <link href="./favicon.png" rel="icon" type="image/png">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link id="quarto-text-highlighting-styles" href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -67,14 +72,12 @@ gtag('config', 'G-Y7YLFF5F90', { 'anonymize_ip': true});
 
 
 <link rel="stylesheet" href="styles.css">
-<meta property="og:title" content="Drew Dimmery">
-<meta property="og:description" content="Methods in Causal Inference, Data Science and Social Science">
-<meta property="og:image" content="https://ddimmery.com/social-card.jpg">
-<meta property="og:site-name" content="Drew Dimmery">
-<meta name="twitter:title" content="Drew Dimmery">
-<meta name="twitter:description" content="Methods in Causal Inference, Data Science and Social Science">
-<meta name="twitter:image" content="https://ddimmery.com/social-card.jpg">
-<meta name="twitter:creator" content="@drewdim">
+<meta property="og:title" content="sonsoleslp - Sonsoles López-Pernas">
+<meta property="og:image" content="https://sonsoleslp.github.io/social-card.jpg">
+<meta property="og:site-name" content="sonsoleslp">
+<meta name="twitter:title" content="sonsoleslp - Sonsoles López-Pernas">
+<meta name="twitter:image" content="https://sonsoleslp.github.io/social-card.jpg">
+<meta name="twitter:creator" content="@sonsoleslp">
 <meta name="twitter:card" content="summary_large_image">
 </head>
 
@@ -84,9 +87,11 @@ gtag('config', 'G-Y7YLFF5F90', { 'anonymize_ip': true});
   <header id="quarto-header" class="headroom fixed-top">
     <nav class="navbar navbar-expand-lg navbar-dark ">
       <div class="navbar-container container-fluid">
-      <a class="navbar-brand" href="./index.html">
-    <span class="navbar-title">Drew Dimmery</span>
-  </a>
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="./index.html">
+    <span class="navbar-title">sonsoleslp</span>
+    </a>
+  </div>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
   <span class="navbar-toggler-icon"></span>
 </button>
@@ -99,13 +104,10 @@ gtag('config', 'G-Y7YLFF5F90', { 'anonymize_ip': true});
     <a class="nav-link" href="./about.html">About</a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./research.html">Research</a>
+    <a class="nav-link" href="./publications.html">Publications</a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./software.html">Software</a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="./blog.html">Blog</a>
+    <a class="nav-link" href="./softwares.html">Software</a>
   </li>  
 </ul>
               <div id="quarto-search" class="" title="Search"></div>
@@ -125,15 +127,8 @@ gtag('config', 'G-Y7YLFF5F90', { 'anonymize_ip': true});
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Drew Dimmery</h1>
+<h1 class="title">Sonsoles López-Pernas</h1>
 </div>
-
-<div>
-  <div class="description">
-    Methods in Causal Inference, Data Science and Social Science
-  </div>
-</div>
-
 
 
 
@@ -148,10 +143,13 @@ gtag('config', 'G-Y7YLFF5F90', { 'anonymize_ip': true});
 
 <div class="column-page-inset page-columns page-full">
 <div class="column-page-inset-left">
-<p>I am the scientific coordinator at the Data Science Research Network at the University of Vienna.</p>
-<p>I previously worked on the Adaptive Experimentation team at Facebook Core Data Science in New York.</p>
-<p>My research focuses on the intersection of machine learning and causal inference. I work a lot on experimental design and I think hard about how experimentation can be better and more efficient. I’m also interested in better applying the machinery of machine learning to observational causal inference.</p>
-<p>I’m most interested in methodological research useful for the study of social phenomena.</p>
+<div class="cell">
+<div class="cell-output-display">
+<p>TO-DO1</p>
+<p>to-do 2</p>
+<p>to-do 3</p>
+</div>
+</div>
 </div>
 <div class="column-margin column-container">
 <p><img src="headshot.jpg" class="rounded img-fluid"></p>
@@ -159,28 +157,28 @@ gtag('config', 'G-Y7YLFF5F90', { 'anonymize_ip': true});
 </div>
 <div style="page-break-after: always;"></div>
 <div class="column-page-inset text-center">
-<a class="btn btn-outline-dark" ,="" href="https://twitter.com/DrewDim" target="_blank" rel="noopener noreferrer">
+<a class="btn btn-info" ,="" href="https://twitter.com/sonsoleslp" target="_blank" rel="noopener noreferrer">
     <i class="bi bi-twitter" role="img" aria-label="Twitter"></i>
 </a>
 
-<a class="btn btn-outline-dark" ,="" href="https://github.com/ddimmery" target="_blank" rel="noopener noreferrer">
+<a class="btn btn-dark" ,="" href="https://github.com/sonsoleslp" target="_blank" rel="noopener noreferrer">
     <i class="bi bi-github" role="img" aria-label="Github"></i>
 </a>
 
-<a class="btn btn-outline-dark" ,="" href="https://www.linkedin.com/in/drew-dimmery/" target="_blank" rel="noopener noreferrer">
+<a class="btn btn-warning" ,="" href="https://www.linkedin.com/in/drew-dimmery/" target="_blank" rel="noopener noreferrer">
     <i class="bi bi-linkedin" role="img" aria-label="LinkedIn"></i>
 </a>
 
-<a class="btn btn-outline-dark" ,="" href="https://scholar.google.com/citations?user=qMfnm48AAAAJ" target="_blank" rel="noopener noreferrer">
+<a class="btn btn-light" ,="" href="https://scholar.google.com/citations?user=67eUI4gAAAAJ" target="_blank" rel="noopener noreferrer">
     <i class="ai ai-google-scholar" role="img" aria-label="Google Scholar"></i>
 </a>
 
-<a class="btn btn-outline-dark" ,="" href="https://arxiv.org/a/dimmery_d_1.html" target="_blank" rel="noopener noreferrer">
-    <i class="ai ai-arxiv" role="img" aria-label="arXiv"></i>
+ <a class="btn btn-primary" ,="" href="https://www.researchgate.net/profile/Sonsoles-Lopez-Pernas" target="_blank" rel="noopener noreferrer">
+    <i class="ai ai-researchgate" role="img" aria-label="Research Gate"></i>
 </a>
-
-<a class="btn btn-outline-dark" ,="" href="mailto:pddimmery@gmail.com" target="_blank" rel="noopener noreferrer">
-    <i class="ai bi-envelope" role="img" aria-label="email"></i>
+ 
+  <a class="btn btn-success" ,="" href="https://orcid.org/0000-0002-9621-1392" target="_blank" rel="noopener noreferrer">
+    <i class="ai ai-orcid" role="img" aria-label="Research Gate"></i>
 </a>
 </div>
 
@@ -189,6 +187,24 @@ gtag('config', 'G-Y7YLFF5F90', { 'anonymize_ip': true});
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
   const icon = "";
   const anchorJS = new window.AnchorJS();
   anchorJS.options = {
@@ -238,7 +254,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   for (var i=0; i<noterefs.length; i++) {
     const ref = noterefs[i];
     tippyHover(ref, function() {
-      let href = ref.getAttribute('href');
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
       try { href = new URL(href).hash; } catch {}
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);

@@ -2,8 +2,7 @@
   {
     "listing": "/blog.html",
     "items": [
-      "/posts/quarto-website/index.html",
-      "/posts/softblock-demo/index.html"
+      "/posts/first-post/index.html"
     ]
   }
 ]

@@ -1,6 +1,6 @@
 {{< include about.qmd >}}
 
-{{< include research.md >}}
+{{< include publications.qmd >}}
 
 ---
 title: "Curriculum Vitae"

@@ -1,35 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://ddimmery.com/research.html</loc>
-    <lastmod>2022-05-19T11:03:33.252Z</lastmod>
+    <loc>https://sonsoleslp.github.io/index.html</loc>
+    <lastmod>2022-12-19T23:13:32.794Z</lastmod>
   </url>
   <url>
-    <loc>https://ddimmery.com/posts/softblock-demo/index.html</loc>
-    <lastmod>2022-05-19T11:03:34.368Z</lastmod>
+    <loc>https://sonsoleslp.github.io/posts/first-post/index.html</loc>
+    <lastmod>2022-12-19T23:13:25.622Z</lastmod>
   </url>
   <url>
-    <loc>https://ddimmery.com/posts/quarto-website/index.html</loc>
-    <lastmod>2022-05-19T11:03:35.223Z</lastmod>
+    <loc>https://sonsoleslp.github.io/publications.html</loc>
+    <lastmod>2022-12-19T23:06:36.735Z</lastmod>
   </url>
   <url>
-    <loc>https://ddimmery.com/index.html</loc>
-    <lastmod>2022-05-19T11:03:35.902Z</lastmod>
+    <loc>https://sonsoleslp.github.io/about.html</loc>
+    <lastmod>2022-12-19T23:13:34.249Z</lastmod>
   </url>
   <url>
-    <loc>https://ddimmery.com/about.html</loc>
-    <lastmod>2022-05-19T11:03:36.171Z</lastmod>
+    <loc>https://sonsoleslp.github.io/softwares.html</loc>
+    <lastmod>2022-12-19T23:06:38.715Z</lastmod>
   </url>
   <url>
-    <loc>https://ddimmery.com/software.html</loc>
-    <lastmod>2022-05-19T11:03:38.158Z</lastmod>
+    <loc>https://sonsoleslp.github.io/cv.html</loc>
+    <lastmod>2022-12-19T23:06:45.779Z</lastmod>
   </url>
   <url>
-    <loc>https://ddimmery.com/cv.html</loc>
-    <lastmod>2022-05-19T11:03:38.415Z</lastmod>
-  </url>
-  <url>
-    <loc>https://ddimmery.com/blog.html</loc>
-    <lastmod>2022-05-19T11:03:38.703Z</lastmod>
+    <loc>https://sonsoleslp.github.io/blog.html</loc>
+    <lastmod>2022-12-19T23:13:25.952Z</lastmod>
   </url>
 </urlset>
