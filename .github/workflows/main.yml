@@ -30,6 +30,8 @@ jobs:
         # Add any command line argument needed
         run: |
           R -e 'install.packages("rmarkdown")'
+          R -e 'install.packages("dplyr")'
+          R -e 'install.packages("rio")'
           sh curl.sh
           quarto render
           rm -rf docs
