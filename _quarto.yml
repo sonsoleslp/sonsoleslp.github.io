@@ -6,8 +6,8 @@ website:
   title: "sonsoleslp"
   description: "Personal website of Sonsoles López Pernas"
   site-url: https://sonsoleslp.github.io
-  repo-url: https://github.com/ddimmery/quarto-website
-  google-analytics: "G-Y7YLFF5F90"
+  repo-url: https://github.com/sonsoleslp/sonsoleslp.github.io
+  google-analytics: "G-251HR7GW52"
   open-graph: true
   favicon: favicon.png
   twitter-card: 
