@@ -36,6 +36,7 @@ jobs:
           quarto render
           rm -rf docs
           mkdir docs
+          touch .gitkeep
           cp -r _site/* docs/
       - name: Commit files
         run: |
