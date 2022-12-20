@@ -28,5 +28,25 @@
   <guid>https://sonsoleslp.github.io/posts/first-post/index.html</guid>
   <pubDate>Sun, 11 Dec 2022 00:00:00 GMT</pubDate>
 </item>
+<item>
+  <title></title>
+  <dc:creator>Sonsoles López Pernas</dc:creator>
+  <link>https://sonsoleslp.github.io/posts/first-post/Readme.html</link>
+  <description><![CDATA[ 
+
+
+
+<section id="academic-cv-page" class="level1">
+<h1>Academic CV page</h1>
+<p>This repository contains my <img src="https://sonsoleslp.github.io/posts/first-post/sonsoleslp.github.io" class="img-fluid" alt="academic CV page">. The code is based on the repository by <img src="https://sonsoleslp.github.io/posts/first-post/https:/github.com/ddimmery/quarto-website.png" class="img-fluid" alt="ddimery">. For details on how it has been coded, visit: Drew Dimmery. 2022. “Quarto for an Academic Website.” May 11, 2022. <img src="https://sonsoleslp.github.io/posts/first-post/https:/ddimmery.com/posts/quarto-website.png" class="img-fluid" alt="https://ddimmery.com/posts/quarto-website"></p>
+
+
+</section>
+
+ ]]></description>
+  <guid>https://sonsoleslp.github.io/posts/first-post/Readme.html</guid>
+  <pubDate>Tue, 20 Dec 2022 21:25:39 GMT</pubDate>
+  <media:content url="https://sonsoleslp.github.io/posts/first-post/sonsoleslp.github.io" medium="image"/>
+</item>
 </channel>
 </rss>
