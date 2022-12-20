@@ -37,7 +37,7 @@ jobs:
           rm -rf docs
           mkdir docs
           touch .gitkeep
-          cp -r _site/* docs/
+          cp -r _site/* docs
       - name: Commit files
         run: |
           git config --local user.email "action@github.com"
