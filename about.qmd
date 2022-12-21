@@ -125,30 +125,6 @@ supervisiontags
 )
 ```
 
-## Research Projects
-
-```{r,echo=F}
-projects = rio::import("cv.xlsx", sheet = "Projects")
-projtags = htmltools::tagList()
-
-for (i in 1:nrow(teaching)) {
-  proj = projects[i,]
-  projtags[[i]] <- htmltools::tags$li(
-    htmltools::tagList(
-      htmltools::tags$span(paste0("(",proj$Year,") ")),
-      htmltools::tags$strong(proj$Name), 
-      htmltools::tags$span(paste0(" - Funded by: ", proj$Funding)), 
-      htmltools::tags$br(),
-      htmltools::tags$small(ifelse(!is.na(proj$Description),proj$Description,""),
-      htmltools::tags$br(),htmltools::tags$br()
-      )
-    )
-  )
-}
-htmltools::tags$ul(
-projtags
-)
-```
 
 ## Research Visits
 ```{r,echo=F}
@@ -199,6 +175,32 @@ for (i in 1:nrow(editorial)) {
 }
 htmltools::tags$ul(
 editorialtags
+)
+```
+
+
+## Research Projects
+
+```{r,echo=F}
+projects = rio::import("cv.xlsx", sheet = "Projects")
+projtags = htmltools::tagList()
+
+for (i in 1:nrow(projects)) {
+  proj = projects[i,]
+  projtags[[i]] <- htmltools::tags$li(
+    htmltools::tagList(
+      htmltools::tags$span(paste0("(",proj$Year,") ")),
+      htmltools::tags$strong(proj$Name), 
+      htmltools::tags$span(paste0(" - Funded by: ", proj$Funding)), 
+      htmltools::tags$br(),
+      htmltools::tags$small(ifelse(!is.na(proj$Description),proj$Description,""),
+      htmltools::tags$br(),htmltools::tags$br()
+      )
+    )
+  )
+}
+htmltools::tags$ul(
+projtags
 )
 ```
 
