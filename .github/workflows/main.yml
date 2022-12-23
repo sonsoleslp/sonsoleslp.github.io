@@ -29,6 +29,7 @@ jobs:
       - name: Render website
         # Add any command line argument needed
         run: |
+          git pull
           R -e 'install.packages("rmarkdown")'
           R -e 'install.packages("dplyr")'
           R -e 'install.packages("rio")'
