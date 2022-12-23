@@ -35,9 +35,6 @@ jobs:
           R -e 'install.packages("rio")'
           sh curl.sh
           quarto render
-          rm -rf docs
-          cp -r _site docs
-          touch docs/.gitkeep
       - name: Commit files
         run: |
           git config --local user.email "action@github.com"
