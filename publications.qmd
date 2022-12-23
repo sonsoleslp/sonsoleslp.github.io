@@ -17,6 +17,7 @@ generateAPARef <- function(df) {
     journal <- df$Source[i]
     volume <- df$Volume[i]
     issue <- df$Issue[i]
+    num <- df$ArtNo[i]
     abstract <- df$Abstract[i]
     page_start <- df$`Page start`[i]
     page_end <- df$`Page end`[i]
@@ -35,6 +36,7 @@ generateAPARef <- function(df) {
     if (is.na(issue)) { issue <- "" }
     if (is.na(abstract)) { abstract <- "" }
     if (is.na(jcr)) { jcr <- "" }
+    if (is.na(num)) { num <- "" }
     if (!is.na(page_start)) {
       if (!is.na(page_end)) {
         pages <- paste0(page_start,"-",page_end) 
@@ -64,7 +66,8 @@ generateAPARef <- function(df) {
     if (title != "") { entry <- paste(entry, ". ", title, sep = "") }
     if (journal != "") { entry <- paste(entry, ". <i>", journal,"</i>", sep = "") }
     if (volume != "") { entry <- paste(entry, ", vol. ", volume, sep = "") }
-    if (issue != "") { entry <- paste(entry, "(", issue, ")", sep = "") }
+    if (issue != "") { entry <- paste(entry,ifelse(volume != "",""," "), "(", issue, ")", sep = "") }
+    if (num != "") { entry <- paste(entry, ", art. no. " , num, sep = "") }
     if (pages != "") { entry <- paste(entry, ", pp. " , pages , sep = "") }
     if (url != "") { 
       if (!is.na(doi)) {
