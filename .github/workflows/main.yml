@@ -35,9 +35,8 @@ jobs:
           sh curl.sh
           quarto render
           rm -rf docs
-          mkdir docs
+          cp -r _site docs
           touch docs/.gitkeep
-          cp -r _site/* docs/
       - name: Commit files
         run: |
           git config --local user.email "action@github.com"
