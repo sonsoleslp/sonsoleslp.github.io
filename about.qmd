@@ -2,19 +2,6 @@
 title: "About"
 ---
 
-```{r,echo=F}
-Intro = dplyr::filter(rio::import("cv.xlsx", sheet = "Intro"),!is.na(Short_summary))$Short_summary
-
-Intro_tags = htmltools::tagList()
-
-for (i in 1:length(Intro)) {
-  Intro_tags[[i]] <- htmltools::tags$p(Intro[i])
-}
-
-Intro_tags
-```
-
-
 
 ## Research Interests
 
@@ -37,7 +24,7 @@ Research_interests_tags
 
 ## Education
 
- 
+
 
 ```{r,echo=F}
 education = rio::import("cv.xlsx", sheet = "Education")

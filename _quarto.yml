@@ -24,6 +24,9 @@ website:
       - href: publications.qmd
       - href: softwares.qmd
       # - href: blog.qmd
+  page-footer:
+    right: 
+      - text: "<span style='text-sm'>Based on <a target='_blank' href='https://github.com/ddimmery/quarto-website'>ddimmery</a></span>"
 
 format:
   html:

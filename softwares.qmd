@@ -1,6 +1,9 @@
 ---
 title: "Software"
 ---
+
+I am skilled in several programming languages such as R, Python, Scala, Java, Ruby, and Javascript (including node.js and React.js). I have developed several open-source libraries and projects related to my research or teaching, as well as industry collaborations.
+
 ```{r, include=F}
 library(dplyr)
 Software = rio::import("cv.xlsx", sheet = "Software")
