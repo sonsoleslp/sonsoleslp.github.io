@@ -26,11 +26,13 @@ website:
       # - href: blog.qmd
   page-footer:
     right: 
-      - text: "<span style='text-sm'>Based on <a target='_blank' href='https://github.com/ddimmery/quarto-website'>ddimmery</a></span>"
+      - text: '<span style="text-sm"><a target="_blank" href="https://github.com/sonsoleslp/sonsolelp.github.io">Source code</a>. Based on <a target="_blank" href="https://github.com/ddimmery/quarto-website">ddimmery</a></span>'
 
 format:
   html:
-    theme: lumen
+    theme: 
+      - lumen
+      - custom.scss
     css: styles.css
     toc: true
     toc-depth: 4

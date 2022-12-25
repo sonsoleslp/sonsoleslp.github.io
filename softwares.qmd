@@ -12,15 +12,16 @@ generateSW <- function(Title,	Description,	Repo,	Demo,	Web) {
   '<h2 id="',gsub(" ", "_", Title),'" class="anchored">',Title,
 '<a class="anchorjs-link " aria-label="Anchor" data-anchorjs-icon="" href="#',Title,'" style="font: 1em / 1 anchorjs-icons; padding-left: 0.375em;"></a></h2>
 <p>',Description,'</p>',
-ifelse(is.na(Web),'',paste0('<a class="btn btn-success btn-sm" ,="" href="',Web,'" target="_blank" rel="noopener noreferrer" style="margin-right:5px;">
-  <i class="bi bi-info" role="img" aria-label="Website"></i>
-  Website
-</a>')),
+
 ifelse(is.na(Repo),'',paste0('<a class="btn btn-dark btn-sm" ,="" href="',Repo,'" target="_blank" rel="noopener noreferrer" style="margin-right:5px;">
   <i class="bi bi-github" role="img" aria-label="Github"></i>
   Github
 </a>')),
-ifelse(is.na(Demo),'',paste0('<a class="btn btn-info btn-sm" ,="" href="',Demo,'" target="_blank" rel="noopener noreferrer" style="margin-right:5px;">
+ifelse(is.na(Web),'',paste0('<a class="btn btn-danger btn-sm" ,="" href="',Web,'" target="_blank" rel="noopener noreferrer" style="margin-right:5px;">
+  <i class="bi bi-info" role="img" aria-label="Website"></i>
+  Website
+</a>')),
+ifelse(is.na(Demo),'',paste0('<a class="btn btn-warning btn-sm" ,="" href="',Demo,'" target="_blank" rel="noopener noreferrer" style="margin-right:5px;">
   <i class="bi bi-play" role="img" aria-label="Demo"></i>
   Demo
 </a>')))

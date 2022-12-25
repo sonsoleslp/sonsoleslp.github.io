@@ -2,6 +2,8 @@
 title: "Publications"
 toc: false
 ---
+
+
 ```{r, include=F}
 
 library(dplyr)
@@ -82,10 +84,10 @@ generateAPARef <- function(df) {
     }  
     entry <- paste0(entry,".")
     if (abstract != "") { 
-      entry <- paste(entry, " <button style='position: absolute;left: -35px; top: 0;line-height: 1.2;border-width: 0px;' type='button' data-bs-toggle='collapse' data-bs-target='#ref-",number,"'   aria-expanded='false'  aria-controls='ref-",number,"' class='btn btn-sm btn-success'>+</button>", sep = "")
+      entry <- paste(entry, " <button style='position: absolute;left: -35px; top: 0;line-height: 1.2;border-width: 0px;' type='button' data-bs-toggle='collapse' data-bs-target='#ref-",number,"'   aria-expanded='false'  aria-controls='ref-",number,"' class='btn btn-sm btn-danger'>+</button>", sep = "")
       kws <-""
       for (kk in 1:length(keywords)) {
-        kws <- paste0(kws,"<span style='margin-right: 2px;' class='badge rounded-pill bg-info'>",keywords[kk],"</span>")
+        kws <- paste0(kws,"<span style='margin-right: 2px;' class='badge rounded-pill bg-warning'>",keywords[kk],"</span>")
       }
       entry <- paste(entry,"<div class='collapse' id='ref-",number,"'>
                      <p class=' small'><br/>" , 
@@ -101,6 +103,38 @@ generateAPARef <- function(df) {
 Publications %>%  rowwise %>% 
   dplyr::mutate(Ref = generateAPARef(Publications[seq,])) -> Publications
 ```
+
+```{r, echo=F}
+outcomes <- Publications %>%  janitor::tabyl(`Document Type`) %>% data.frame %>% pull(n,`Document.Type`) 
+outcomes_with_types <- Publications %>% dplyr::mutate(field = ifelse(is.na(JCR),`Document Type`,JCR)) %>% janitor::tabyl(field) %>% data.frame %>% pull(n,field) 
+only_types <- Publications %>% janitor::tabyl(JCR) %>% data.frame %>% filter(!is.na(JCR)) %>% arrange(JCR) %>% pull(n,JCR) 
+output = paste0("My ", nrow(Publications), " research publications include ")
+types_pub = rev(names(outcomes))
+for (i in 1:length(types_pub)) {
+  pubb <- types_pub[i]
+  numberr <- outcomes[[pubb]]
+  lastt <- i==length(types_pub)
+  jcrs <- ""
+  if (pubb == "Journal Article") {
+    if (outcomes_with_types[["Journal Article"]] != outcomes[["Journal Article"]] ){
+      jcrs <- paste0(jcrs," (")
+      for (j in 1:length(names(only_types))){
+        qq <- names(only_types)[j]
+        jcrs <- paste0(jcrs, only_types[[qq]], " JCR ",qq, ifelse(only_types[[qq]]>1,"s",""),ifelse( length(names(only_types)) == j,"",", "))
+      }
+      jcrs <- paste0(jcrs,")")
+    } 
+  }
+  
+  output = paste0( output, ifelse(lastt, "and ",""), 
+                   numberr, " ",  stringr::str_to_lower(pubb), 
+                   ifelse(numberr > 1,"s",""),
+                   jcrs,
+                   ifelse( lastt,".",", "))
+}
+htmltools::tags$p(output)
+```
+
 
 ```{r, echo= F}
 pub_types = (unique(Publications$`Document Type`))

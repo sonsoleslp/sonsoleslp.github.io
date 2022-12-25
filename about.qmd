@@ -103,7 +103,7 @@ for (i in 1:nrow(supervision)) {
   superv = supervision[i,]
   supervisiontags[[i]] <- htmltools::tags$li(
     htmltools::tagList(
-      htmltools::tags$span(superv), 
+      htmltools::HTML(superv), 
     )
   )
 }
