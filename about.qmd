@@ -13,12 +13,10 @@ Research_interests_tags = htmltools::tagList()
 for (i in 1:nrow(Research_interests)) {
   inte = Research_interests[i,]
   if (!is.na(inte)){
-     Research_interests_tags[[i]] <- htmltools::tags$li(inte)
+     Research_interests_tags[[i]] <- htmltools::HTML(paste0("<span style='margin-right: 2px;' class='badge rounded-pill bg-danger'>",inte,"</span>"))
   }
 }
-htmltools::tags$ul(
 Research_interests_tags
-)
 ```
 
 
