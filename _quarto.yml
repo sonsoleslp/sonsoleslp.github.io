@@ -41,3 +41,5 @@ format:
     include-in-header:
       - includes.html
     highlight-style: tango
+resources:
+  - CNAME
