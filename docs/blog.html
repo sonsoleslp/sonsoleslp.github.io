@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>sonsoleslp - Sonsoles López-Pernas</title>
+<title>sonsoleslp - Blog</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -31,6 +31,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
 <link href="./favicon.png" rel="icon" type="image/png">
+<script src="site_libs/quarto-listing/list.min.js"></script>
+<script src="site_libs/quarto-listing/quarto-listing.js"></script>
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -59,6 +61,35 @@ ul.task-list li input[type="checkbox"] {
     "search-submit-button-title": "Submit"
   }
 }</script>
+<script>
+
+  window.document.addEventListener("DOMContentLoaded", function (_event) {
+    const listingTargetEl = window.document.querySelector('#listing-listing .list');
+    if (!listingTargetEl) {
+      // No listing discovered, do not attach.
+      return; 
+    }
+
+    const options = {
+      valueNames: ['listing-date','listing-title','listing-author','listing-description','listing-categories',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
+      
+      searchColumns: ["listing-date","listing-title","listing-author","listing-description","listing-categories"],
+    };
+
+    window['quarto-listings'] = window['quarto-listings'] || {};
+    window['quarto-listings']['listing-listing'] = new List('listing-listing', options);
+
+    if (window['quarto-listing-loaded']) {
+      window['quarto-listing-loaded']();
+    }
+  });
+
+  window.addEventListener('hashchange',() => {
+    if (window['quarto-listing-loaded']) {
+      window['quarto-listing-loaded']();
+    }
+  })
+  </script>
 <script async="" src="https://www.googletagmanager.com/gtag/js?id=G-251HR7GW52"></script>
 
 <script type="text/javascript">
@@ -70,13 +101,27 @@ gtag('config', 'G-251HR7GW52', { 'anonymize_ip': true});
 </script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
 
+  <script>window.backupDefine = window.define; window.define = undefined;</script><script src="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+ var mathElements = document.getElementsByClassName("math");
+ var macros = [];
+ for (var i = 0; i < mathElements.length; i++) {
+  var texText = mathElements[i].firstChild;
+  if (mathElements[i].tagName == "SPAN") {
+   katex.render(texText.data, mathElements[i], {
+    displayMode: mathElements[i].classList.contains('display'),
+    throwOnError: false,
+    macros: macros,
+    fleqn: false
+   });
+}}});
+  </script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.css">
 
 <link rel="stylesheet" href="styles.css">
-<meta property="og:title" content="sonsoleslp - Sonsoles López-Pernas">
-<meta property="og:image" content="https://sonsoleslp.github.io/social-card.jpg">
+<link rel="alternate" type="application/rss+xml" title="sonsoleslp" href="blog.xml"><meta property="og:title" content="sonsoleslp - Blog">
 <meta property="og:site-name" content="sonsoleslp">
-<meta name="twitter:title" content="sonsoleslp - Sonsoles López-Pernas">
-<meta name="twitter:image" content="https://sonsoleslp.github.io/social-card.jpg">
+<meta name="twitter:title" content="sonsoleslp - Blog">
 <meta name="twitter:creator" content="@sonsoleslp">
 <meta name="twitter:card" content="summary_large_image">
 </head>
@@ -98,7 +143,7 @@ gtag('config', 'G-251HR7GW52', { 'anonymize_ip': true});
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link active" href="./index.html" aria-current="page">Home</a>
+    <a class="nav-link" href="./index.html">Home</a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="./about.html">About</a>
@@ -116,18 +161,18 @@ gtag('config', 'G-251HR7GW52', { 'anonymize_ip': true});
     </nav>
 </header>
 <!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         
-    </div>
+    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(1)</span></div><div class="category" data-category="website">website <span class="quarto-category-count">(1)</span></div></div></div>
 <!-- main -->
-<main class="content page-columns page-full column-page-left" id="quarto-document-content">
+<main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Sonsoles López-Pernas</h1>
+<h1 class="title">Blog</h1>
 </div>
 
 
@@ -141,49 +186,49 @@ gtag('config', 'G-251HR7GW52', { 'anonymize_ip': true});
 
 </header>
 
-<div class="column-page-inset page-columns page-full">
-<div class="column-page-inset-left">
-<div class="cell">
-<div class="cell-output-display">
-<p>My name is Sonsoles and I come from Vigo (Spain). I obtained a PhD in Telematics Systems Engineering from Universidad Politécnica de Madrid. 
- I am currently a Senior Researcher at University of Eastern Finland. My main research areas are game-based learning in engineering and computer science education, learning analytics, and data engineering, among others. I have developed several open-source <a href="softwares.html">software projects</a> related to educational technology and big data analysis. I am skilled in quantitative methods that include machine learning, process and sequence mining, network analysis, complex event processing, and data visualization, which are proven by <a href="publications.html">empirical publications</a> in the field of learning analytics and big data as well as <a href="about.html">workplace achievements</a>.</p>
+
+
+
+
+<div class="quarto-listing quarto-listing-container-default" id="listing-listing">
+<div class="list quarto-listing-default">
+<div class="quarto-post image-right" data-index="0" data-categories="website" data-listing-date-sort="1670713200000" data-listing-file-modified-sort="1671490551853" data-listing-reading-time-sort="0.01">
+<div class="body">
+<a href="./posts/first-post/index.html">
+<h3 class="no-anchor listing-title">
+First post
+</h3>
+<div class="listing-subtitle">
+
+</div>
+</a>
+<div class="listing-categories">
+<div class="listing-category" onclick="window.quartoListingCategory('website'); return false;">
+website
 </div>
 </div>
+<a href="./posts/first-post/index.html">
+<div class="listing-description">
+<p>First post</p>
 </div>
-<div class="column-margin column-container">
-<p><img src="headshot.jpg" class="rounded img-fluid"></p>
-</div>
-</div>
-<div style="page-break-after: always;"></div>
-<div class="column-page-inset text-center">
-<a class="btn btn-info" ,="" href="https://twitter.com/sonsoleslp" target="_blank" rel="noopener noreferrer">
-    <i class="bi bi-twitter" role="img" aria-label="Twitter"></i>
-</a>
-
-<a class="btn btn-dark" ,="" href="https://github.com/sonsoleslp" target="_blank" rel="noopener noreferrer">
-    <i class="bi bi-github" role="img" aria-label="Github"></i>
-</a>
-
-<a class="btn btn-warning" ,="" href="https://www.linkedin.com/in/drew-dimmery/" target="_blank" rel="noopener noreferrer">
-    <i class="bi bi-linkedin" role="img" aria-label="LinkedIn"></i>
-</a>
-
-<a class="btn btn-light" ,="" href="https://scholar.google.com/citations?user=67eUI4gAAAAJ" target="_blank" rel="noopener noreferrer">
-    <i class="ai ai-google-scholar" role="img" aria-label="Google Scholar"></i>
-</a>
-
- <a class="btn btn-primary" ,="" href="https://www.researchgate.net/profile/Sonsoles-Lopez-Pernas" target="_blank" rel="noopener noreferrer">
-    <i class="ai ai-researchgate" role="img" aria-label="Research Gate"></i>
-</a>
- 
-  <a class="btn btn-success" ,="" href="https://orcid.org/0000-0002-9621-1392" target="_blank" rel="noopener noreferrer">
-    <i class="ai ai-orcid" role="img" aria-label="Orcid"></i>
 </a>
 </div>
-
-
-
-</main> <!-- /main -->
+<div class="metadata">
+<a href="./posts/first-post/index.html">
+<div class="listing-date">
+Dec 11, 2022
+</div>
+<div class="listing-author">
+Sonsoles López Pernas
+</div>
+</a>
+</div>
+</div>
+</div>
+<div class="listing-no-matching d-none">
+No matching items
+</div>
+</div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
