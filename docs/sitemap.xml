@@ -1,31 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://sonsoleslp.github.io/blog.html</loc>
-    <lastmod>2023-03-29T16:52:44.632Z</lastmod>
-  </url>
-  <url>
-    <loc>https://sonsoleslp.github.io/softwares.html</loc>
-    <lastmod>2023-03-29T16:52:47.068Z</lastmod>
-  </url>
-  <url>
-    <loc>https://sonsoleslp.github.io/cv.html</loc>
-    <lastmod>2023-03-29T16:52:50.268Z</lastmod>
-  </url>
-  <url>
-    <loc>https://sonsoleslp.github.io/about.html</loc>
-    <lastmod>2023-03-29T16:52:52.452Z</lastmod>
-  </url>
-  <url>
     <loc>https://sonsoleslp.github.io/posts/first-post/index.html</loc>
-    <lastmod>2023-03-29T16:52:52.752Z</lastmod>
+    <lastmod>2023-04-16T16:19:03.558Z</lastmod>
   </url>
   <url>
     <loc>https://sonsoleslp.github.io/index.html</loc>
-    <lastmod>2023-03-29T16:52:54.216Z</lastmod>
+    <lastmod>2023-04-16T16:19:06.654Z</lastmod>
+  </url>
+  <url>
+    <loc>https://sonsoleslp.github.io/softwares.html</loc>
+    <lastmod>2023-04-16T16:19:08.374Z</lastmod>
   </url>
   <url>
     <loc>https://sonsoleslp.github.io/publications.html</loc>
-    <lastmod>2023-03-29T16:52:56.720Z</lastmod>
+    <lastmod>2023-04-16T16:19:10.894Z</lastmod>
+  </url>
+  <url>
+    <loc>https://sonsoleslp.github.io/cv.html</loc>
+    <lastmod>2023-04-16T16:19:13.958Z</lastmod>
+  </url>
+  <url>
+    <loc>https://sonsoleslp.github.io/blog.html</loc>
+    <lastmod>2023-04-16T16:19:14.278Z</lastmod>
+  </url>
+  <url>
+    <loc>https://sonsoleslp.github.io/about.html</loc>
+    <lastmod>2023-04-16T16:19:16.390Z</lastmod>
   </url>
 </urlset>
