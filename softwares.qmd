@@ -26,7 +26,6 @@ ifelse(is.na(Demo),'',paste0('<a class="btn btn-warning btn-sm" ,="" href="',Dem
   Demo
 </a>')))
   htmltools::HTML(result)
-
 }
 
 sww<-Software %>% rowwise %>% dplyr::mutate(Text = generateSW(Title,	Description,	Repo,	Demo,	Web) )

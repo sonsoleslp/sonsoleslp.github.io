@@ -15,10 +15,10 @@ smooth-scroll: true
 # Default author
 author:
   - name: Sonsoles López Pernas
-    url: https://sonsoleslp.github.io
+    url: https://sonsoles.me
     affiliation: University of Eastern Finland
 
 # citation
-citation: false
+citation: true
 
 # Enable CC licence appendix

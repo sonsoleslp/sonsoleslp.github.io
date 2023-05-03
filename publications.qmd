@@ -84,10 +84,10 @@ generateAPARef <- function(df) {
     }  
     entry <- paste0(entry,".")
     if (abstract != "") { 
-      entry <- paste(entry, " <button style='position: absolute;left: -35px; top: 0;line-height: 1.2;border-width: 0px;' type='button' data-bs-toggle='collapse' data-bs-target='#ref-",number,"'   aria-expanded='false'  aria-controls='ref-",number,"' class='btn btn-sm btn-danger'>+</button>", sep = "")
+      entry <- paste(entry, " <button type='button' data-bs-toggle='collapse' data-bs-target='#ref-",number,"'   aria-expanded='false'  aria-controls='ref-",number,"' class='btn btn-sm btn-danger btn-pub'><i class='bi bi-plus-lg'></i></button>", sep = "")
       kws <-""
       for (kk in 1:length(keywords)) {
-        kws <- paste0(kws,"<span style='margin-right: 2px;' class='badge rounded-pill bg-warning'>",keywords[kk],"</span>")
+        kws <- paste0(kws,"<span style='margin-right: 2px;margin-bottom: 5px;' class='badge rounded-pill bg-warning'>",keywords[kk],"</span>")
       }
       entry <- paste(entry,"<div class='collapse' id='ref-",number,"'>
                      <p class=' small'><br/>" , 
@@ -168,6 +168,5 @@ for (p in 1:length(pub_types)) {
     )
 }
 (pub_tags)
-
 ```
  

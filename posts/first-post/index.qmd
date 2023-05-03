@@ -1,11 +1,10 @@
 ---
 title: "First post"
 description: |
-    First post
+    Blog inauguration
 date: "2022-12-11"
 categories:
   - website
 engine: markdown
 code-fold: true
 ---
- 

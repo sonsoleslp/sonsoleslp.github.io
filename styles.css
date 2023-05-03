@@ -1,5 +1,28 @@
 /* css styles */
 p {
   text-align: justify;
+  font-family: inherit;
 }
 
+.btn-pub {
+  position: absolute;
+  left: -40px;
+  top: 0;
+  padding: 0.35rem 0.5rem;
+  border-width: 0px;
+  border-radius: 50%;
+}
+
+.btn-social {
+  margin-right: 5px;
+  color: white !important;
+  border-radius: 50%;
+}
+
+.primary-links a {
+  color: #f21a98;  
+}
+
+.primary-links a:hover {
+  color: #f21a98;  
+}
