@@ -1,6 +1,6 @@
 ---
 title: "Publications"
-toc: false
+toc: true
 ---
 
 
@@ -89,8 +89,8 @@ generateAPARef <- function(df) {
       for (kk in 1:length(keywords)) {
         kws <- paste0(kws,"<span style='margin-right: 2px;margin-bottom: 5px;' class='badge rounded-pill bg-warning'>",keywords[kk],"</span>")
       }
-      entry <- paste(entry,"<div class='collapse' id='ref-",number,"'>
-                     <p class=' small'><br/>" , 
+      entry <- paste(entry,"<div class='collapse' id='ref-",number,"'>",
+                     "<p class='small'><br/>" , 
                      abstract , 
                      "</p><p>",kws,"</p><br/>"," </div>", sep = "") 
     }
@@ -136,7 +136,7 @@ htmltools::tags$p(output)
 ```
 
 
-```{r, echo= F}
+```{r, echo= F, include=F}
 pub_types = (unique(Publications$`Document Type`))
 pub_tags <- htmltools::tagList()
 for (p in 1:length(pub_types)) {
@@ -168,5 +168,30 @@ for (p in 1:length(pub_types)) {
     )
 }
 (pub_tags)
+```
+ 
+```{r, echo= F, results='asis'}
+pub_types = (unique(Publications$`Document Type`))
+pub_tags <- htmltools::tagList()
+for (p in 1:length(pub_types)) {
+  year_tags = htmltools::tagList()
+  ds <- Publications %>% filter(`Document Type` == pub_types[p])
+  years <- unique(ds$Year)
+  for (y in 1:length(years)){
+    research_tags = htmltools::tagList()
+    dy <- ds %>% filter(Year == years[y])
+    for (i in 1:nrow(dy)) {
+      if (!is.na(dy[i,]$Ref)){
+        research_tags[[i]] <- htmltools::HTML(dy[i,]$Ref)
+      }
+    }
+    year_tags[[y]] <- htmltools::tagList(
+      htmltools::tags$h3(paste0(years[y])),
+      htmltools::tags$ul(research_tags, style="padding-left: 3rem")
+    )
+  }
+  cat(paste0("\n## ", pub_types[p],"s\n"))
+  print(year_tags)
+}
 ```
  
