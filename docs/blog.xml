@@ -9,8 +9,8 @@
 <link>https://sonsoleslp.github.io/blog.html</link>
 <atom:link href="https://sonsoleslp.github.io/blog.xml" rel="self" type="application/rss+xml"/>
 <description>Personal website of Sonsoles López Pernas</description>
-<generator>quarto-1.1.189</generator>
-<lastBuildDate>Sat, 10 Dec 2022 22:00:00 GMT</lastBuildDate>
+<generator>quarto-1.3.433</generator>
+<lastBuildDate>Sun, 11 Dec 2022 00:00:00 GMT</lastBuildDate>
 <item>
   <title>First post</title>
   <dc:creator>Sonsoles López Pernas</dc:creator>
@@ -23,21 +23,20 @@
 
 
 
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{lópezpernas2022,
-  author = {Sonsoles López Pernas},
-  editor = {},
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{lópez pernas2022,
+  author = {López Pernas, Sonsoles},
   title = {First Post},
   date = {2022-12-11},
   url = {https://sonsoleslp.github.io/posts/first-post},
   langid = {en}
 }
-</code></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-lópezpernas2022" class="csl-entry quarto-appendix-citeas">
-Sonsoles López Pernas. 2022. <span>“First Post.”</span> December 11,
+</code></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-lópez pernas2022" class="csl-entry quarto-appendix-citeas">
+López Pernas, Sonsoles. 2022. <span>“First Post.”</span> December 11,
 2022. <a href="https://sonsoleslp.github.io/posts/first-post">https://sonsoleslp.github.io/posts/first-post</a>.
 </div></div></section></div> ]]></description>
   <category>website</category>
   <guid>https://sonsoleslp.github.io/posts/first-post/index.html</guid>
-  <pubDate>Sat, 10 Dec 2022 22:00:00 GMT</pubDate>
+  <pubDate>Sun, 11 Dec 2022 00:00:00 GMT</pubDate>
 </item>
 </channel>
 </rss>
