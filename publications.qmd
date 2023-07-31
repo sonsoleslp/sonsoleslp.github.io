@@ -6,7 +6,7 @@ toc: true
 
 ```{r, include=F}
 
-library(dplyr)
+library(dplyr, warn.conflicts = FALSE)
 Publications = rio::import("cv.xlsx", sheet = "Publications") %>% arrange(JCR,desc(`Document Type`),desc(Year))
 
 generateAPARef <- function(df) {
@@ -104,7 +104,7 @@ Publications %>%  rowwise %>%
   dplyr::mutate(Ref = generateAPARef(Publications[seq,])) -> Publications
 ```
 
-```{r, echo=F}
+```{r, echo=F, warning = F}
 outcomes <- Publications %>%  janitor::tabyl(`Document Type`) %>% data.frame %>% pull(n,`Document.Type`) 
 outcomes_with_types <- Publications %>% dplyr::mutate(field = ifelse(is.na(JCR),`Document Type`,JCR)) %>% janitor::tabyl(field) %>% data.frame %>% pull(n,field) 
 only_types <- Publications %>% janitor::tabyl(JCR) %>% data.frame %>% filter(!is.na(JCR)) %>% arrange(JCR) %>% pull(n,JCR) 
@@ -136,7 +136,7 @@ htmltools::tags$p(output)
 ```
 
 
-```{r, echo= F, include=F}
+```{r, echo= F, include=F, warning = F}
 pub_types = (unique(Publications$`Document Type`))
 pub_tags <- htmltools::tagList()
 for (p in 1:length(pub_types)) {
@@ -170,12 +170,12 @@ for (p in 1:length(pub_types)) {
 (pub_tags)
 ```
  
-```{r, echo= F, results='asis'}
+```{r, echo= F, results='asis', warning = F}
 pub_types = (unique(Publications$`Document Type`))
 pub_tags <- htmltools::tagList()
 for (p in 1:length(pub_types)) {
   year_tags = htmltools::tagList()
-  ds <- Publications %>% filter(`Document Type` == pub_types[p])
+  ds <- Publications %>% filter(`Document Type` == pub_types[p])  %>% mutate(pos = which(strsplit(Authors,", ")[[1]] == "López-Pernas S.")) %>% arrange(desc(Year),pos)
   years <- unique(ds$Year)
   for (y in 1:length(years)){
     research_tags = htmltools::tagList()
@@ -193,5 +193,6 @@ for (p in 1:length(pub_types)) {
   cat(paste0("\n## ", pub_types[p],"s\n"))
   print(year_tags)
 }
+
 ```
  
