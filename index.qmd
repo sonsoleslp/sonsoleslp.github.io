@@ -28,6 +28,7 @@ Welcome_tags
 <div class="column-margin column-container">
 ![](headshot.jpg){.rounded}
 </div>
+
 :::
 
 
