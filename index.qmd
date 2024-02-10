@@ -7,8 +7,9 @@ resources:
     - "social-card.jpg"
 ---
 
-::: {.column-page-inset}
-::: {.column-page-inset-left}
+<div class="column-page-inset page-columns page-full">
+<div class="column-page-inset-left">
+
 ```{r,echo=F}
 Welcome = rio::import("cv.xlsx", sheet = "Intro")$Welcome
 
@@ -24,13 +25,14 @@ Welcome_tags
 ```
 
 
-:::
+</div>
 
 <div class="column-margin column-container">
 ![](headshot.jpg){.rounded}
+
+</div>
 </div>
 
-:::
 
 ## Selected publications
 ```{r, include=F}
@@ -49,7 +51,7 @@ for (i in 1:length(Publications$Ref)) {
 }
 selected_publ
 ```
+
 <a href="publications.html" class="btn btn-danger btn-sm">View all</a>
 
- 
 
