@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.549">
+<meta name="generator" content="quarto-1.3.450">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -46,13 +46,7 @@ ul.task-list li input[type="checkbox"] {
   "collapse-after": 3,
   "panel-placement": "end",
   "type": "overlay",
-  "limit": 50,
-  "keyboard-shortcut": [
-    "f",
-    "/",
-    "s"
-  ],
-  "show-item-context": false,
+  "limit": 20,
   "language": {
     "search-no-results-text": "No results",
     "search-matching-documents-text": "matching documents",
@@ -61,7 +55,6 @@ ul.task-list li input[type="checkbox"] {
     "search-more-match-text": "more match in this document",
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
-    "search-text-placeholder": "",
     "search-detached-cancel-button-title": "Cancel",
     "search-submit-button-title": "Submit",
     "search-label": "Search"
@@ -81,10 +74,8 @@ gtag('config', 'G-251HR7GW52', { 'anonymize_ip': true});
 
 <link rel="stylesheet" href="styles.css">
 <meta property="og:title" content="sonsoleslp - Publications">
-<meta property="og:description" content="Personal website of Sonsoles López Pernas">
-<meta property="og:site_name" content="sonsoleslp">
+<meta property="og:site-name" content="sonsoleslp">
 <meta name="twitter:title" content="sonsoleslp - Publications">
-<meta name="twitter:description" content="Personal website of Sonsoles López Pernas">
 <meta name="twitter:creator" content="@sonsoleslp">
 <meta name="twitter:site" content="@sonsoleslp">
 <meta name="twitter:card" content="summary_large_image">
@@ -94,9 +85,9 @@ gtag('config', 'G-251HR7GW52', { 'anonymize_ip': true});
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
-    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
       <div class="navbar-container container-fluid">
-      <div class="navbar-brand-container mx-auto">
+      <div class="navbar-brand-container">
     <a class="navbar-brand" href="./index.html">
     <span class="navbar-title">sonsoleslp</span>
     </a>
@@ -108,25 +99,25 @@ gtag('config', 'G-251HR7GW52', { 'anonymize_ip': true});
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="./index.html"> 
-<span class="menu-text">Home</span></a>
+    <a class="nav-link" href="./index.html" rel="" target="">
+ <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./about.html"> 
-<span class="menu-text">About</span></a>
+    <a class="nav-link" href="./about.html" rel="" target="">
+ <span class="menu-text">About</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link active" href="./publications.html" aria-current="page"> 
-<span class="menu-text">Publications</span></a>
+    <a class="nav-link active" href="./publications.html" rel="" target="" aria-current="page">
+ <span class="menu-text">Publications</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./softwares.html"> 
-<span class="menu-text">Software</span></a>
+    <a class="nav-link" href="./softwares.html" rel="" target="">
+ <span class="menu-text">Software</span></a>
   </li>  
 </ul>
-          </div> <!-- /navcollapse -->
-          <div class="quarto-navbar-tools">
+            <div class="quarto-navbar-tools ms-auto">
 </div>
+          </div> <!-- /navcollapse -->
       </div> <!-- /container-fluid -->
     </nav>
 </header>
@@ -148,6 +139,22 @@ gtag('config', 'G-251HR7GW52', { 'anonymize_ip': true});
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
+<script>
+var filterCat = function(name) {
+        var x = document.getElementById("badge-"+name);
+        x.classList.toggle("active");
+        var y = document.getElementsByClassName("is-"+name)
+        if (x.classList.contains === "active") {
+            for(var i = 0; i< y.length;i++) {
+              y[i].style.display = "block";
+            }
+        } else {
+           for(var i = 0; i< y.length;i++) {
+              y[i].style.display = "none";
+            }
+        }
+  }
+</script>
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
@@ -164,22 +171,30 @@ gtag('config', 'G-251HR7GW52', { 'anonymize_ip': true});
   </div>
   
 
-
 </header>
-
 
 <div class="cell">
 <div class="cell-output-display">
 <p>My 117 research publications include 46 journal articles (21 JCR Q1s, 19 JCR Q2s, 3 JCR Q3s), 4 editorials, 36 conference papers, and 31 book chapters.</p>
 </div>
 </div>
+<!--
+<button style='margin-right: 2px; margin-bottom: 2px;' class='btn badge rounded-pill bg-danger cat-badge active' id='badge-la' onclick="filterCat('la')">learning analytics</button>
+<button style='margin-right: 2px; margin-bottom: 2px;' class='btn badge rounded-pill bg-danger cat-badge active' id='badge-gbl' onclick="filterCat('gbl')">game-based learning</button>
+<button style='margin-right: 2px; margin-bottom: 2px;' class='btn badge rounded-pill bg-danger cat-badge active' id='badge-biblio' onclick="filterCat('biblio')">bibliometrics</button>
+
+<style>
+.cat-badge:not(.active) {
+  opacity:0.5;
+}
+</style>-->
 <section id="journal-articles" class="level2">
 <h2 class="anchored" data-anchor-id="journal-articles">Journal Articles</h2>
 <h3 class="anchored">
 2024
 </h3>
 <ul style="padding-left: 3rem">
-<li style="position:relative;margin-bottom:0.8rem;list-style:none;">
+<li style="position:relative;margin-bottom:0.8rem;list-style:none;" class="is-la">
 <b>López-Pernas S</b>., Saqr M. (2024). How the dynamics of engagement explain the momentum of achievement and the inertia of disengagement: A complex systems theory approach. <i>Computers in Human Behavior</i>, vol.&nbsp;153, art. no. 108126. doi: <a target="_blank" href="https://doi.org/10.1016/j.chb.2023.108126">10.1016/j.chb.2023.108126</a>. (JCR Q1). <button type="button" data-bs-toggle="collapse" data-bs-target="#ref-3" aria-expanded="false" aria-controls="ref-3" class="btn btn-sm btn-danger btn-pub"><i class="bi bi-plus-lg"></i></button>
 <div id="ref-3" class="collapse">
 <p class="small">
@@ -191,7 +206,7 @@ gtag('config', 'G-251HR7GW52', { 'anonymize_ip': true});
 <br>
 </div>
 </li>
-<li style="position:relative;margin-bottom:0.8rem;list-style:none;">
+<li style="position:relative;margin-bottom:0.8rem;list-style:none;" class="is-biblio">
 <b>López-Pernas S</b>., Saqr M., Conde M.Á., Apiola M., Tedre M. (2024). Mapping computer engineering education research: A topic analysis. <i>Computer</i> (in-press). doi: <a target="_blank" href="https://doi.org/10.1109/MC.2024.3349913">10.1109/MC.2024.3349913</a>. (JCR Q3). <button type="button" data-bs-toggle="collapse" data-bs-target="#ref-41" aria-expanded="false" aria-controls="ref-41" class="btn btn-sm btn-danger btn-pub"><i class="bi bi-plus-lg"></i></button>
 <div id="ref-41" class="collapse">
 <p class="small">
@@ -203,7 +218,7 @@ gtag('config', 'G-251HR7GW52', { 'anonymize_ip': true});
 <br>
 </div>
 </li>
-<li style="position:relative;margin-bottom:0.8rem;list-style:none;">
+<li style="position:relative;margin-bottom:0.8rem;list-style:none;" class="is-biblio">
 Mertala P., <b>López-Pernas S</b>., Vartiainen H., Saqr M., Tedre M. (2024). Digital natives in the scientific literature: A topic modeling approach. <i>Computers in Human Behavior</i>, vol.&nbsp;152, art. no. 108076. doi: <a target="_blank" href="https://doi.org/10.1016/j.chb.2023.108076">10.1016/j.chb.2023.108076</a>. (JCR Q1). <button type="button" data-bs-toggle="collapse" data-bs-target="#ref-1" aria-expanded="false" aria-controls="ref-1" class="btn btn-sm btn-danger btn-pub"><i class="bi bi-plus-lg"></i></button>
 <div id="ref-1" class="collapse">
 <p class="small">
@@ -215,7 +230,7 @@ Mertala P., <b>López-Pernas S</b>., Vartiainen H., Saqr M., Tedre M. (2024). Di
 <br>
 </div>
 </li>
-<li style="position:relative;margin-bottom:0.8rem;list-style:none;">
+<li style="position:relative;margin-bottom:0.8rem;list-style:none;" class="is-biblio">
 Bobrowicz K., <b>López-Pernas S</b>., Teuber Z., Saqr M., Greiff S. (2024). Prospects in the field of learning and individual differences: Examining the past to forecast the future using bibliometrics. <i>Learning and Individual Differences</i>, vol.&nbsp;109, art. no. 102399. doi: <a target="_blank" href="https://doi.org/10.1016/j.lindif.2023.102399">10.1016/j.lindif.2023.102399</a>. (JCR Q1). <button type="button" data-bs-toggle="collapse" data-bs-target="#ref-2" aria-expanded="false" aria-controls="ref-2" class="btn btn-sm btn-danger btn-pub"><i class="bi bi-plus-lg"></i></button>
 <div id="ref-2" class="collapse">
 <p class="small">
@@ -227,7 +242,7 @@ Bobrowicz K., <b>López-Pernas S</b>., Teuber Z., Saqr M., Greiff S. (2024). Pro
 <br>
 </div>
 </li>
-<li style="position:relative;margin-bottom:0.8rem;list-style:none;">
+<li style="position:relative;margin-bottom:0.8rem;list-style:none;" class="is-gbl">
 Barra E., <b>López-Pernas S</b>., Gordillo A., Pozo Huertas A., Munoz-Arcentales A., Conde J. (2024). Empowering Database Learning through Remote Educational Escape Rooms. <i>IEEE Internet Computing</i> (in-press). doi: <a target="_blank" href="https://doi.org/10.1109/MIC.2023.3333199">10.1109/MIC.2023.3333199</a>. (JCR Q2). <button type="button" data-bs-toggle="collapse" data-bs-target="#ref-22" aria-expanded="false" aria-controls="ref-22" class="btn btn-sm btn-danger btn-pub"><i class="bi bi-plus-lg"></i></button>
 <div id="ref-22" class="collapse">
 <p class="small">
@@ -239,7 +254,7 @@ Barra E., <b>López-Pernas S</b>., Gordillo A., Pozo Huertas A., Munoz-Arcentale
 <br>
 </div>
 </li>
-<li style="position:relative;margin-bottom:0.8rem;list-style:none;">
+<li style="position:relative;margin-bottom:0.8rem;list-style:none;" class="is-gbl">
 López-Fernández D., Gordillo A., <b>López-Pernas S</b>., Tovar E. (2024). Are remote educational escape rooms designed during the pandemic useful in a post-pandemic face-to-face setting?. <i>IEEE Internet Computing</i> (in-press). doi: <a target="_blank" href="https://doi.org/10.1109/MIC.2023.3336057">10.1109/MIC.2023.3336057</a>. (JCR Q2). <button type="button" data-bs-toggle="collapse" data-bs-target="#ref-23" aria-expanded="false" aria-controls="ref-23" class="btn btn-sm btn-danger btn-pub"><i class="bi bi-plus-lg"></i></button>
 <div id="ref-23" class="collapse">
 <p class="small">
@@ -251,8 +266,8 @@ López-Fernández D., Gordillo A., <b>López-Pernas S</b>., Tovar E. (2024). Are
 <br>
 </div>
 </li>
-<li style="position:relative;margin-bottom:0.8rem;list-style:none;">
-Barra E., Quemada J., <b>López-Pernas S</b>., Gordillo A., Alonso Á., Carril A. (2024). An Autonomous Low-Cost Studio to Record Production-Ready Instructional Videos. <i>Multimedia Tools and Applications</i> (in-press). (JCR Q2). <button type="button" data-bs-toggle="collapse" data-bs-target="#ref-24" aria-expanded="false" aria-controls="ref-24" class="btn btn-sm btn-danger btn-pub"><i class="bi bi-plus-lg"></i></button>
+<li style="position:relative;margin-bottom:0.8rem;list-style:none;" class="">
+Barra E., Quemada J., <b>López-Pernas S</b>., Gordillo A., Alonso Á., Carril A. (2024). An Autonomous Low-Cost Studio to Record Production-Ready Instructional Videos. <i>Multimedia Tools and Applications</i> (in-press). doi: <a target="_blank" href="https://doi.org/10.1007/s11042-024-18250-8">10.1007/s11042-024-18250-8</a>. (JCR Q2). <button type="button" data-bs-toggle="collapse" data-bs-target="#ref-24" aria-expanded="false" aria-controls="ref-24" class="btn btn-sm btn-danger btn-pub"><i class="bi bi-plus-lg"></i></button>
 <div id="ref-24" class="collapse">
 <p class="small">
 <br>Producing high-quality educational videos usually requires a large budget as it involves the use of expensive recording studios, the presence of a technician during the entire recording session and often post-production tasks. The high costs associated with video production represent a major hindrance for many educational institutions and, thus, many teachers regard high-quality video recording as inaccessible. As a remedy to this situation, this article presents SAGA (Autonomous Advanced Recording Studio in its Spanish acronym), a low-cost autonomous recording set that allows teachers to produce educational content in video format in an agile way and without the need for post-production. The article provides an overview of SAGA, including a description of its hardware and software so that anyone with basic technical knowledge can replicate and operate the system. SAGA has been used to record more than 1,500 videos including the contents of six MOOCs hosted on the MiriadaX platform, as well as four courses at UPM. SAGA has been evaluated in two ways: (1) from the video producers’ perspective, it was evaluated with a questionnaire based on the Technology Acceptance Model, and (2) from the video consumers’ perspective, a questionnaire was conducted among MOOC participants to assess the perceived technical quality of the videos recorded with SAGA. The results show a very positive general opinion of the SAGA system, the recorded videos and the technical features thereof. Thus, SAGA represents a good opportunity for all those educational institutions and teachers interested in producing high-quality educational videos at a low cost.
@@ -268,7 +283,7 @@ Barra E., Quemada J., <b>López-Pernas S</b>., Gordillo A., Alonso Á., Carril A
 2023
 </h3>
 <ul style="padding-left: 3rem">
-<li style="position:relative;margin-bottom:0.8rem;list-style:none;">
+<li style="position:relative;margin-bottom:0.8rem;list-style:none;" class="is-gbl">
 <b>López-Pernas S</b>. (2023). Educational Escape Rooms Are Effective Learning Activities Across Educational Levels and Contexts: A Meta-analysis. <i>IEEE Transactions on Learning Technologies</i>, vol.&nbsp;17, pp.&nbsp;711-724. doi: <a target="_blank" href="https://doi.org/10.1109/TLT.2023.3328913">10.1109/TLT.2023.3328913</a>. (JCR Q1). <button type="button" data-bs-toggle="collapse" data-bs-target="#ref-10" aria-expanded="false" aria-controls="ref-10" class="btn btn-sm btn-danger btn-pub"><i class="bi bi-plus-lg"></i></button>
 <div id="ref-10" class="collapse">
 <p class="small">
@@ -280,7 +295,7 @@ Barra E., Quemada J., <b>López-Pernas S</b>., Gordillo A., Alonso Á., Carril A
 <br>
 </div>
 </li>
-<li style="position:relative;margin-bottom:0.8rem;list-style:none;">
+<li style="position:relative;margin-bottom:0.8rem;list-style:none;" class="is-la">
 <b>López-Pernas S</b>., Barra E., Gordillo A., Alonso Á., Quemada J. (2023). Scaling student feedback in software engineering MOOCs. <i>IEEE Software</i>, vol.&nbsp;40(5), pp.&nbsp;50-57. doi: <a target="_blank" href="https://doi.org/10.1109/MS.2023.3275035">10.1109/MS.2023.3275035</a>. (JCR Q2). <button type="button" data-bs-toggle="collapse" data-bs-target="#ref-25" aria-expanded="false" aria-controls="ref-25" class="btn btn-sm btn-danger btn-pub"><i class="bi bi-plus-lg"></i></button>
 <div id="ref-25" class="collapse">
 <p class="small">
@@ -292,7 +307,7 @@ Barra E., Quemada J., <b>López-Pernas S</b>., Gordillo A., Alonso Á., Carril A
 <br>
 </div>
 </li>
-<li style="position:relative;margin-bottom:0.8rem;list-style:none;">
+<li style="position:relative;margin-bottom:0.8rem;list-style:none;" class="is-la">
 Saqr M., <b>López-Pernas S</b>., Helske S., Hrastinski S. (2023). The longitudinal association between engagement and achievement varies by time, students’ profiles, and achievement state: A full program study. <i>Computers and Education</i>, vol.&nbsp;199, art. no. 104787. doi: <a target="_blank" href="https://doi.org/10.1016/j.compedu.2023.104787">10.1016/j.compedu.2023.104787</a>. (JCR Q1). <button type="button" data-bs-toggle="collapse" data-bs-target="#ref-5" aria-expanded="false" aria-controls="ref-5" class="btn btn-sm btn-danger btn-pub"><i class="bi bi-plus-lg"></i></button>
 <div id="ref-5" class="collapse">
 <p class="small">
@@ -304,7 +319,7 @@ Saqr M., <b>López-Pernas S</b>., Helske S., Hrastinski S. (2023). The longitudi
 <br>
 </div>
 </li>
-<li style="position:relative;margin-bottom:0.8rem;list-style:none;">
+<li style="position:relative;margin-bottom:0.8rem;list-style:none;" class="is-la">
 Saqr M., <b>López-Pernas S</b>., Jovanovic J., Gasevic. G (2023). Intense, turbulent, or wallowing in the mire: A longitudinal study of cross-course online tactics, strategies, and trajectories. <i>The Internet and Higher Education</i>, vol.&nbsp;57, art. no. 100902. doi: <a target="_blank" href="https://doi.org/10.1016/j.iheduc.2022.100902">10.1016/j.iheduc.2022.100902</a>. (JCR Q1). <button type="button" data-bs-toggle="collapse" data-bs-target="#ref-6" aria-expanded="false" aria-controls="ref-6" class="btn btn-sm btn-danger btn-pub"><i class="bi bi-plus-lg"></i></button>
 <div id="ref-6" class="collapse">
 <p class="small">
@@ -316,7 +331,7 @@ Saqr M., <b>López-Pernas S</b>., Jovanovic J., Gasevic. G (2023). Intense, turb
 <br>
 </div>
 </li>
-<li style="position:relative;margin-bottom:0.8rem;list-style:none;">
+<li style="position:relative;margin-bottom:0.8rem;list-style:none;" class="is-la">
 Saqr M., <b>López-Pernas S</b>. (2023). The temporal dynamics of online problem-based learning: Why and when sequence matters. <i>International Journal of Computer-Supported Collaborative Learning</i>, vol.&nbsp;18, pp.&nbsp;11-37. doi: <a target="_blank" href="https://doi.org/10.1007/s11412-023-09385-1">10.1007/s11412-023-09385-1</a>. (JCR Q1). <button type="button" data-bs-toggle="collapse" data-bs-target="#ref-7" aria-expanded="false" aria-controls="ref-7" class="btn btn-sm btn-danger btn-pub"><i class="bi bi-plus-lg"></i></button>
 <div id="ref-7" class="collapse">
 <p class="small">
@@ -328,7 +343,7 @@ Saqr M., <b>López-Pernas S</b>. (2023). The temporal dynamics of online problem
 <br>
 </div>
 </li>
-<li style="position:relative;margin-bottom:0.8rem;list-style:none;">
+<li style="position:relative;margin-bottom:0.8rem;list-style:none;" class="is-la">
 Saqr M., <b>López-Pernas S</b>., Vogelsmeier L.V.D.E. (2023). When, how and for whom changes in engagement happen: A transition analysis of instructional variables. <i>Computers and Education</i>, vol.&nbsp;207, art. no. 104934. doi: <a target="_blank" href="https://doi.org/10.1016/j.compedu.2023.104934">10.1016/j.compedu.2023.104934</a>. (JCR Q1). <button type="button" data-bs-toggle="collapse" data-bs-target="#ref-9" aria-expanded="false" aria-controls="ref-9" class="btn btn-sm btn-danger btn-pub"><i class="bi bi-plus-lg"></i></button>
 <div id="ref-9" class="collapse">
 <p class="small">
@@ -340,7 +355,7 @@ Saqr M., <b>López-Pernas S</b>., Vogelsmeier L.V.D.E. (2023). When, how and for
 <br>
 </div>
 </li>
-<li style="position:relative;margin-bottom:0.8rem;list-style:none;">
+<li style="position:relative;margin-bottom:0.8rem;list-style:none;" class="is-la">
 Kleimola R., <b>López-Pernas S</b>., Väisänen S., Saqr M., Sointu E., Hirsto L. (2023). Learning Analytics to Explore the Motivational Profiles of Non-Traditional Practical Nurse Students: A Mixed-Methods Approach. <i>Empirical Research in Vocational Education and Training</i>, vol.&nbsp;15, art. no. 11. doi: <a target="_blank" href="https://doi.org/10.1186/s40461-023-00150-0">10.1186/s40461-023-00150-0</a>. <button type="button" data-bs-toggle="collapse" data-bs-target="#ref-44" aria-expanded="false" aria-controls="ref-44" class="btn btn-sm btn-danger btn-pub"><i class="bi bi-plus-lg"></i></button>
 <div id="ref-44" class="collapse">
 <p class="small">
@@ -352,7 +367,7 @@ Kleimola R., <b>López-Pernas S</b>., Väisänen S., Saqr M., Sointu E., Hirsto 
 <br>
 </div>
 </li>
-<li style="position:relative;margin-bottom:0.8rem;list-style:none;">
+<li style="position:relative;margin-bottom:0.8rem;list-style:none;" class="is-la">
 Kahila J., Valtonen T., <b>López-Pernas S</b>., Saqr M., Vartiainen H., Kahila S., Tedre M. (2023). A typology of metagamers: Identifying player types based on beyond the game activities. <i>Games &amp; Culture</i> (in-press). doi: <a target="_blank" href="https://doi.org/10.1177/15554120231187758">10.1177/15554120231187758</a>. (JCR Q1). <button type="button" data-bs-toggle="collapse" data-bs-target="#ref-8" aria-expanded="false" aria-controls="ref-8" class="btn btn-sm btn-danger btn-pub"><i class="bi bi-plus-lg"></i></button>
 <div id="ref-8" class="collapse">
 <p class="small">
@@ -364,7 +379,7 @@ Kahila J., Valtonen T., <b>López-Pernas S</b>., Saqr M., Vartiainen H., Kahila 
 <br>
 </div>
 </li>
-<li style="position:relative;margin-bottom:0.8rem;list-style:none;">
+<li style="position:relative;margin-bottom:0.8rem;list-style:none;" class="is-la">
 Saqr M., Matcha W., Ahmad Uzir N-A., Jovanovic J., Gasevic. G, <b>López-Pernas S</b>. (2023). Transferring effective learning strategies across learning contexts matters: A study in problem-based learning. <i>Australasian Journal of Educational Technology</i>, vol.&nbsp;39(3), pp.&nbsp;35-57. doi: <a target="_blank" href="https://doi.org/10.14742/ajet.8303">10.14742/ajet.8303</a>. (JCR Q1). <button type="button" data-bs-toggle="collapse" data-bs-target="#ref-4" aria-expanded="false" aria-controls="ref-4" class="btn btn-sm btn-danger btn-pub"><i class="bi bi-plus-lg"></i></button>
 <div id="ref-4" class="collapse">
 <p class="small">
@@ -381,7 +396,7 @@ Saqr M., Matcha W., Ahmad Uzir N-A., Jovanovic J., Gasevic. G, <b>López-Pernas 
 2022
 </h3>
 <ul style="padding-left: 3rem">
-<li style="position:relative;margin-bottom:0.8rem;list-style:none;">
+<li style="position:relative;margin-bottom:0.8rem;list-style:none;" class="is-lais-gbl">
 <b>López-Pernas S</b>., Saqr M., Gordillo A., Barra E. (2022). A learning analytics perspective on educational escape rooms. <i>Interactive Learning Environments</i>. doi: <a target="_blank" href="https://doi.org/10.1080/10494820.2022.2041045">10.1080/10494820.2022.2041045</a>. (JCR Q1). <button type="button" data-bs-toggle="collapse" data-bs-target="#ref-14" aria-expanded="false" aria-controls="ref-14" class="btn btn-sm btn-danger btn-pub"><i class="bi bi-plus-lg"></i></button>
 <div id="ref-14" class="collapse">
 <p class="small">
@@ -393,7 +408,7 @@ Saqr M., Matcha W., Ahmad Uzir N-A., Jovanovic J., Gasevic. G, <b>López-Pernas 
 <br>
 </div>
 </li>
-<li style="position:relative;margin-bottom:0.8rem;list-style:none;">
+<li style="position:relative;margin-bottom:0.8rem;list-style:none;" class="">
 <b>López-Pernas S</b>., Munoz-Arcentales A., Aparicio C., Barra E., Gordillo A., Salvachua J., Quemada J. (2022). Educational Data Virtual Lab: Connecting the Dots Between Data Visualization and Analysis. <i>IEEE Computer Graphics and Applications</i>, vol.&nbsp;42(5), pp.&nbsp;76-83. doi: <a target="_blank" href="https://doi.org/10.1109/MCG.2022.3189557">10.1109/MCG.2022.3189557</a>. (JCR Q3). <button type="button" data-bs-toggle="collapse" data-bs-target="#ref-42" aria-expanded="false" aria-controls="ref-42" class="btn btn-sm btn-danger btn-pub"><i class="bi bi-plus-lg"></i></button>
 <div id="ref-42" class="collapse">
 <p class="small">
@@ -405,7 +420,7 @@ Saqr M., Matcha W., Ahmad Uzir N-A., Jovanovic J., Gasevic. G, <b>López-Pernas 
 <br>
 </div>
 </li>
-<li style="position:relative;margin-bottom:0.8rem;list-style:none;">
+<li style="position:relative;margin-bottom:0.8rem;list-style:none;" class="is-la">
 Saqr M., <b>López-Pernas S</b>. (2022). How CSCL roles emerge, persist, transition, and evolve over time: A four-year longitudinal study. <i>Computers and Education</i>, vol.&nbsp;189, art. no. 104581. doi: <a target="_blank" href="https://doi.org/10.1016/j.compedu.2022.104581">10.1016/j.compedu.2022.104581</a>. (JCR Q1). <button type="button" data-bs-toggle="collapse" data-bs-target="#ref-11" aria-expanded="false" aria-controls="ref-11" class="btn btn-sm btn-danger btn-pub"><i class="bi bi-plus-lg"></i></button>
 <div id="ref-11" class="collapse">
 <p class="small">
@@ -417,7 +432,7 @@ Saqr M., <b>López-Pernas S</b>. (2022). How CSCL roles emerge, persist, transit
 <br>
 </div>
 </li>
-<li style="position:relative;margin-bottom:0.8rem;list-style:none;">
+<li style="position:relative;margin-bottom:0.8rem;list-style:none;" class="is-la">
 Valtonen T., <b>López-Pernas S</b>., Saqr M., Vartiainen H., Sointu E.T., Tedre M. (2022). The nature and building blocks of educational technology research. <i>Computers in Human Behavior</i>, vol.&nbsp;128, art. no. 107123. doi: <a target="_blank" href="https://doi.org/10.1016/j.chb.2021.107123">10.1016/j.chb.2021.107123</a>. (JCR Q1). <button type="button" data-bs-toggle="collapse" data-bs-target="#ref-12" aria-expanded="false" aria-controls="ref-12" class="btn btn-sm btn-danger btn-pub"><i class="bi bi-plus-lg"></i></button>
 <div id="ref-12" class="collapse">
 <p class="small">
@@ -429,7 +444,7 @@ Valtonen T., <b>López-Pernas S</b>., Saqr M., Vartiainen H., Sointu E.T., Tedre
 <br>
 </div>
 </li>
-<li style="position:relative;margin-bottom:0.8rem;list-style:none;">
+<li style="position:relative;margin-bottom:0.8rem;list-style:none;" class="is-biblio">
 Apiola M., <b>López-Pernas S</b>., Saqr M., Pears A., Daniels M., Malmi L., Tedre M. (2022). From a National Meeting to an International Conference: A Scientometric Case Study of a Finnish Computing Education Conference. <i>IEEE Access</i>, vol.&nbsp;10, pp.&nbsp;66576-66588. doi: <a target="_blank" href="https://doi.org/10.1109/ACCESS.2022.3184718">10.1109/ACCESS.2022.3184718</a>. (JCR Q2). <button type="button" data-bs-toggle="collapse" data-bs-target="#ref-26" aria-expanded="false" aria-controls="ref-26" class="btn btn-sm btn-danger btn-pub"><i class="bi bi-plus-lg"></i></button>
 <div id="ref-26" class="collapse">
 <p class="small">
@@ -441,7 +456,7 @@ Apiola M., <b>López-Pernas S</b>., Saqr M., Pears A., Daniels M., Malmi L., Ted
 <br>
 </div>
 </li>
-<li style="position:relative;margin-bottom:0.8rem;list-style:none;">
+<li style="position:relative;margin-bottom:0.8rem;list-style:none;" class="is-la">
 Saqr M., <b>López-Pernas S</b>. (2022). The Curious Case of Centrality Measures: A Large-Scale Empirical Investigation. <i>Journal of Learning Analytics</i>, vol.&nbsp;9(1), pp.&nbsp;13-31. doi: <a target="_blank" href="https://doi.org/10.18608/jla.2022.7415">10.18608/jla.2022.7415</a>. <button type="button" data-bs-toggle="collapse" data-bs-target="#ref-45" aria-expanded="false" aria-controls="ref-45" class="btn btn-sm btn-danger btn-pub"><i class="bi bi-plus-lg"></i></button>
 <div id="ref-45" class="collapse">
 <p class="small">
@@ -453,7 +468,7 @@ Saqr M., <b>López-Pernas S</b>. (2022). The Curious Case of Centrality Measures
 <br>
 </div>
 </li>
-<li style="position:relative;margin-bottom:0.8rem;list-style:none;">
+<li style="position:relative;margin-bottom:0.8rem;list-style:none;" class="is-biblio">
 Tyni J., Tarkiainen A., <b>López-Pernas S</b>., Saqr M., Kahila J., Bednarik R., Tedre M. (2022). Games and Rewards: A Scientometric Study of Rewards in Educational and Serious Games. <i>IEEE Access</i>, vol.&nbsp;10, pp.&nbsp;31578-31585. doi: <a target="_blank" href="https://doi.org/10.1109/ACCESS.2022.3160230">10.1109/ACCESS.2022.3160230</a>. (JCR Q2). <button type="button" data-bs-toggle="collapse" data-bs-target="#ref-27" aria-expanded="false" aria-controls="ref-27" class="btn btn-sm btn-danger btn-pub"><i class="bi bi-plus-lg"></i></button>
 <div id="ref-27" class="collapse">
 <p class="small">
@@ -465,7 +480,7 @@ Tyni J., Tarkiainen A., <b>López-Pernas S</b>., Saqr M., Kahila J., Bednarik R.
 <br>
 </div>
 </li>
-<li style="position:relative;margin-bottom:0.8rem;list-style:none;">
+<li style="position:relative;margin-bottom:0.8rem;list-style:none;" class="is-lais-biblio">
 Saqr M., Poquet O., <b>López-Pernas S</b>. (2022). Networks in Education: A Travelogue Through Five Decades. <i>IEEE Access</i>, vol.&nbsp;10, pp.&nbsp;32361-32380. doi: <a target="_blank" href="https://doi.org/10.1109/ACCESS.2022.3159674">10.1109/ACCESS.2022.3159674</a>. (JCR Q2). <button type="button" data-bs-toggle="collapse" data-bs-target="#ref-28" aria-expanded="false" aria-controls="ref-28" class="btn btn-sm btn-danger btn-pub"><i class="bi bi-plus-lg"></i></button>
 <div id="ref-28" class="collapse">
 <p class="small">
@@ -477,7 +492,7 @@ Saqr M., Poquet O., <b>López-Pernas S</b>. (2022). Networks in Education: A Tra
 <br>
 </div>
 </li>
-<li style="position:relative;margin-bottom:0.8rem;list-style:none;">
+<li style="position:relative;margin-bottom:0.8rem;list-style:none;" class="is-biblio">
 Apiola M., Saqr M., <b>López-Pernas S</b>., Tedre M. (2022). Computing Education Research Compiled: Keyword Trends, Building Blocks, Creators, and Dissemination. <i>IEEE Access</i>, vol.&nbsp;10, pp.&nbsp;27041-27068. doi: <a target="_blank" href="https://doi.org/10.1109/ACCESS.2022.3157609">10.1109/ACCESS.2022.3157609</a>. (JCR Q2). <button type="button" data-bs-toggle="collapse" data-bs-target="#ref-29" aria-expanded="false" aria-controls="ref-29" class="btn btn-sm btn-danger btn-pub"><i class="bi bi-plus-lg"></i></button>
 <div id="ref-29" class="collapse">
 <p class="small">
@@ -489,7 +504,7 @@ Apiola M., Saqr M., <b>López-Pernas S</b>., Tedre M. (2022). Computing Educatio
 <br>
 </div>
 </li>
-<li style="position:relative;margin-bottom:0.8rem;list-style:none;">
+<li style="position:relative;margin-bottom:0.8rem;list-style:none;" class="is-la">
 Saqr M., Elmoazen R., Tedre M., <b>López-Pernas S</b>., Hirsto L. (2022). How well centrality measures capture student achievement in computer-supported collaborative learning? – A systematic review and meta-analysis. <i>Educational Research Review</i>, vol.&nbsp;35, art. no. 100437. doi: <a target="_blank" href="https://doi.org/10.1016/j.edurev.2022.100437">10.1016/j.edurev.2022.100437</a>. (JCR Q1). <button type="button" data-bs-toggle="collapse" data-bs-target="#ref-13" aria-expanded="false" aria-controls="ref-13" class="btn btn-sm btn-danger btn-pub"><i class="bi bi-plus-lg"></i></button>
 <div id="ref-13" class="collapse">
 <p class="small">
@@ -501,7 +516,7 @@ Saqr M., Elmoazen R., Tedre M., <b>López-Pernas S</b>., Hirsto L. (2022). How w
 <br>
 </div>
 </li>
-<li style="position:relative;margin-bottom:0.8rem;list-style:none;">
+<li style="position:relative;margin-bottom:0.8rem;list-style:none;" class="">
 Conde J., Munoz-Arcentales A., Alonso A., <b>López-Pernas S</b>., Salvachua J. (2022). Modeling Digital Twin Data and Architecture: A Building Guide With FIWARE as Enabling Technology. <i>IEEE Internet Computing</i>, vol.&nbsp;26(3), pp.&nbsp;7-14. doi: <a target="_blank" href="https://doi.org/10.1109/MIC.2021.3056923">10.1109/MIC.2021.3056923</a>. (JCR Q2). <button type="button" data-bs-toggle="collapse" data-bs-target="#ref-30" aria-expanded="false" aria-controls="ref-30" class="btn btn-sm btn-danger btn-pub"><i class="bi bi-plus-lg"></i></button>
 <div id="ref-30" class="collapse">
 <p class="small">
@@ -518,7 +533,7 @@ Conde J., Munoz-Arcentales A., Alonso A., <b>López-Pernas S</b>., Salvachua J. 
 2021
 </h3>
 <ul style="padding-left: 3rem">
-<li style="position:relative;margin-bottom:0.8rem;list-style:none;">
+<li style="position:relative;margin-bottom:0.8rem;list-style:none;" class="is-gbl">
 <b>López-Pernas S</b>., Gordillo A., Barra E. (2021). Technology-Enhanced Educational Escape Rooms: A Road Map. <i>IT Professional</i>, vol.&nbsp;23(2), art. no. 9391739, pp.&nbsp;26-32. doi: <a target="_blank" href="https://doi.org/10.1109/MITP.2021.3062749">10.1109/MITP.2021.3062749</a>. (JCR Q2). <button type="button" data-bs-toggle="collapse" data-bs-target="#ref-33" aria-expanded="false" aria-controls="ref-33" class="btn btn-sm btn-danger btn-pub"><i class="bi bi-plus-lg"></i></button>
 <div id="ref-33" class="collapse">
 <p class="small">
@@ -530,7 +545,7 @@ Conde J., Munoz-Arcentales A., Alonso A., <b>López-Pernas S</b>., Salvachua J. 
 <br>
 </div>
 </li>
-<li style="position:relative;margin-bottom:0.8rem;list-style:none;">
+<li style="position:relative;margin-bottom:0.8rem;list-style:none;" class="is-la">
 <b>López-Pernas S</b>., Saqr M. (2021). Bringing Synchrony and Clarity to Complex Multi-Channel Data: A Learning Analytics Study in Programming Education. <i>IEEE Access</i>, vol.&nbsp;9, pp.&nbsp;166531-166541. doi: <a target="_blank" href="https://doi.org/10.1109/ACCESS.2021.3134844">10.1109/ACCESS.2021.3134844</a>. (JCR Q2). <button type="button" data-bs-toggle="collapse" data-bs-target="#ref-34" aria-expanded="false" aria-controls="ref-34" class="btn btn-sm btn-danger btn-pub"><i class="bi bi-plus-lg"></i></button>
 <div id="ref-34" class="collapse">
 <p class="small">
@@ -542,7 +557,7 @@ Conde J., Munoz-Arcentales A., Alonso A., <b>López-Pernas S</b>., Salvachua J. 
 <br>
 </div>
 </li>
-<li style="position:relative;margin-bottom:0.8rem;list-style:none;">
+<li style="position:relative;margin-bottom:0.8rem;list-style:none;" class="is-gbl">
 <b>López-Pernas S</b>., Gordillo A., Barra E., Quemada J. (2021). Comparing Face-to-Face and Remote Educational Escape Rooms for Learning Programming. <i>IEEE Access</i>, vol.&nbsp;9, art. no. 9405675, pp.&nbsp;59270-59285. doi: <a target="_blank" href="https://doi.org/10.1109/ACCESS.2021.3073601">10.1109/ACCESS.2021.3073601</a>. (JCR Q2). <button type="button" data-bs-toggle="collapse" data-bs-target="#ref-35" aria-expanded="false" aria-controls="ref-35" class="btn btn-sm btn-danger btn-pub"><i class="bi bi-plus-lg"></i></button>
 <div id="ref-35" class="collapse">
 <p class="small">
@@ -554,7 +569,7 @@ Conde J., Munoz-Arcentales A., Alonso A., <b>López-Pernas S</b>., Salvachua J. 
 <br>
 </div>
 </li>
-<li style="position:relative;margin-bottom:0.8rem;list-style:none;">
+<li style="position:relative;margin-bottom:0.8rem;list-style:none;" class="is-gbl">
 <b>López-Pernas S</b>., Gordillo A., Barra E., Quemada J. (2021). Escapp: A web platform for conducting educational escape rooms. <i>IEEE Access</i>, vol.&nbsp;9, pp.&nbsp;38062-38077. doi: <a target="_blank" href="https://doi.org/10.1109/ACCESS.2021.3063711">10.1109/ACCESS.2021.3063711</a>. (JCR Q2). <button type="button" data-bs-toggle="collapse" data-bs-target="#ref-36" aria-expanded="false" aria-controls="ref-36" class="btn btn-sm btn-danger btn-pub"><i class="bi bi-plus-lg"></i></button>
 <div id="ref-36" class="collapse">
 <p class="small">
@@ -566,7 +581,7 @@ Conde J., Munoz-Arcentales A., Alonso A., <b>López-Pernas S</b>., Salvachua J. 
 <br>
 </div>
 </li>
-<li style="position:relative;margin-bottom:0.8rem;list-style:none;">
+<li style="position:relative;margin-bottom:0.8rem;list-style:none;" class="is-la">
 <b>López-Pernas S</b>., Saqr M., Viberg O. (2021). Putting it all together: Combining learning analytics methods and data sources to understand students’ approaches to learning programming. <i>Sustainability</i>, vol.&nbsp;13(9), art. no. 4825. doi: <a target="_blank" href="https://doi.org/10.3390/su13094825">10.3390/su13094825</a>. (JCR Q3). <button type="button" data-bs-toggle="collapse" data-bs-target="#ref-43" aria-expanded="false" aria-controls="ref-43" class="btn btn-sm btn-danger btn-pub"><i class="bi bi-plus-lg"></i></button>
 <div id="ref-43" class="collapse">
 <p class="small">
@@ -578,7 +593,7 @@ Conde J., Munoz-Arcentales A., Alonso A., <b>López-Pernas S</b>., Salvachua J. 
 <br>
 </div>
 </li>
-<li style="position:relative;margin-bottom:0.8rem;list-style:none;">
+<li style="position:relative;margin-bottom:0.8rem;list-style:none;" class="is-la">
 Saqr M., <b>López-Pernas S</b>. (2021). Modelling diffusion in computer-supported collaborative learning: a large scale learning analytics study. <i>International Journal of Computer-Supported Collaborative Learning</i>, vol.&nbsp;16(4), pp.&nbsp;441-483. doi: <a target="_blank" href="https://doi.org/10.1007/s11412-021-09356-4">10.1007/s11412-021-09356-4</a>. (JCR Q1). <button type="button" data-bs-toggle="collapse" data-bs-target="#ref-15" aria-expanded="false" aria-controls="ref-15" class="btn btn-sm btn-danger btn-pub"><i class="bi bi-plus-lg"></i></button>
 <div id="ref-15" class="collapse">
 <p class="small">
@@ -590,7 +605,7 @@ Saqr M., <b>López-Pernas S</b>. (2021). Modelling diffusion in computer-support
 <br>
 </div>
 </li>
-<li style="position:relative;margin-bottom:0.8rem;list-style:none;">
+<li style="position:relative;margin-bottom:0.8rem;list-style:none;" class="is-la">
 Saqr M., <b>López-Pernas S</b>. (2021). The longitudinal trajectories of online engagement over a full program. <i>Computers and Education</i>, vol.&nbsp;175, art. no. 104325. doi: <a target="_blank" href="https://doi.org/10.1016/j.compedu.2021.104325">10.1016/j.compedu.2021.104325</a>. (JCR Q1). <button type="button" data-bs-toggle="collapse" data-bs-target="#ref-16" aria-expanded="false" aria-controls="ref-16" class="btn btn-sm btn-danger btn-pub"><i class="bi bi-plus-lg"></i></button>
 <div id="ref-16" class="collapse">
 <p class="small">
@@ -602,7 +617,7 @@ Saqr M., <b>López-Pernas S</b>. (2021). The longitudinal trajectories of online
 <br>
 </div>
 </li>
-<li style="position:relative;margin-bottom:0.8rem;list-style:none;">
+<li style="position:relative;margin-bottom:0.8rem;list-style:none;" class="">
 Munoz-Arcentales A., <b>López-Pernas S</b>., Conde J., Alonso Á., Salvachúa J., Hierro J.J. (2021). Enabling context-aware data analytics in smart environments: An open source reference implementation. <i>Sensors</i>, vol.&nbsp;21(21), art. no. 7095. doi: <a target="_blank" href="https://doi.org/10.3390/s21217095">10.3390/s21217095</a>. (JCR Q1). <button type="button" data-bs-toggle="collapse" data-bs-target="#ref-17" aria-expanded="false" aria-controls="ref-17" class="btn btn-sm btn-danger btn-pub"><i class="bi bi-plus-lg"></i></button>
 <div id="ref-17" class="collapse">
 <p class="small">
@@ -614,7 +629,7 @@ Munoz-Arcentales A., <b>López-Pernas S</b>., Conde J., Alonso Á., Salvachúa J
 <br>
 </div>
 </li>
-<li style="position:relative;margin-bottom:0.8rem;list-style:none;">
+<li style="position:relative;margin-bottom:0.8rem;list-style:none;" class="is-la">
 Conde J., <b>López-Pernas S</b>., Pozo A., Munoz-Arcentales A., Huecas G., Alonso Á. (2021). Bridging the gap between academia and industry through students’ contributions to the fiware european open-source initiative: A pilot study. <i>Electronics</i>, vol.&nbsp;10(13), art. no. 1523. doi: <a target="_blank" href="https://doi.org/10.3390/electronics10131523">10.3390/electronics10131523</a>. (JCR Q2). <button type="button" data-bs-toggle="collapse" data-bs-target="#ref-32" aria-expanded="false" aria-controls="ref-32" class="btn btn-sm btn-danger btn-pub"><i class="bi bi-plus-lg"></i></button>
 <div id="ref-32" class="collapse">
 <p class="small">
@@ -626,7 +641,7 @@ Conde J., <b>López-Pernas S</b>., Pozo A., Munoz-Arcentales A., Huecas G., Alon
 <br>
 </div>
 </li>
-<li style="position:relative;margin-bottom:0.8rem;list-style:none;">
+<li style="position:relative;margin-bottom:0.8rem;list-style:none;" class="is-gbl">
 Gordillo A., Barra E., <b>López-Pernas S</b>., Quemada J. (2021). Development of teacher digital competence in the area of e-safety through educational video games. <i>Sustainability</i>, vol.&nbsp;13(15), art. no. 8485. doi: <a target="_blank" href="https://doi.org/10.3390/su13158485">10.3390/su13158485</a>. (JCR Q2). <button type="button" data-bs-toggle="collapse" data-bs-target="#ref-31" aria-expanded="false" aria-controls="ref-31" class="btn btn-sm btn-danger btn-pub"><i class="bi bi-plus-lg"></i></button>
 <div id="ref-31" class="collapse">
 <p class="small">
@@ -638,7 +653,7 @@ Gordillo A., Barra E., <b>López-Pernas S</b>., Quemada J. (2021). Development o
 <br>
 </div>
 </li>
-<li style="position:relative;margin-bottom:0.8rem;list-style:none;">
+<li style="position:relative;margin-bottom:0.8rem;list-style:none;" class="is-gbl">
 Gordillo A., Barra E., Garaizar P., <b>López-Pernas S</b>. (2021). Use of a Simulated Social Network as an Educational Tool to Enhance Teacher Digital Competence. <i>Revista Iberoamericana de Tecnologias del Aprendizaje</i>, vol.&nbsp;16(1), art. no. 9328278, pp.&nbsp;107-114. doi: <a target="_blank" href="https://doi.org/10.1109/RITA.2021.3052686">10.1109/RITA.2021.3052686</a>. <button type="button" data-bs-toggle="collapse" data-bs-target="#ref-46" aria-expanded="false" aria-controls="ref-46" class="btn btn-sm btn-danger btn-pub"><i class="bi bi-plus-lg"></i></button>
 <div id="ref-46" class="collapse">
 <p class="small">
@@ -655,7 +670,7 @@ Gordillo A., Barra E., Garaizar P., <b>López-Pernas S</b>. (2021). Use of a Sim
 2020
 </h3>
 <ul style="padding-left: 3rem">
-<li style="position:relative;margin-bottom:0.8rem;list-style:none;">
+<li style="position:relative;margin-bottom:0.8rem;list-style:none;" class="">
 Barra E., <b>López-Pernas S</b>., Alonso A., Sánchez-Rada J.F., Gordillo A., Quemada J. (2020). Automated Assessment in Programming Courses: A Case Study during the COVID-19 Era. <i>Sustainability</i>, vol.&nbsp;12(18), art. no. 2428. doi: <a target="_blank" href="https://doi.org/10.3390/SU12187451">10.3390/SU12187451</a>. (JCR Q2). <button type="button" data-bs-toggle="collapse" data-bs-target="#ref-37" aria-expanded="false" aria-controls="ref-37" class="btn btn-sm btn-danger btn-pub"><i class="bi bi-plus-lg"></i></button>
 <div id="ref-37" class="collapse">
 <p class="small">
@@ -667,7 +682,7 @@ Barra E., <b>López-Pernas S</b>., Alonso A., Sánchez-Rada J.F., Gordillo A., Q
 <br>
 </div>
 </li>
-<li style="position:relative;margin-bottom:0.8rem;list-style:none;">
+<li style="position:relative;margin-bottom:0.8rem;list-style:none;" class="">
 Munoz-Arcentales A., <b>López-Pernas S</b>., Pozo A., Alonso A., Salvachúa J., Huecas G. (2020). Data usage and access control in industrial data spaces: Implementation using FIWARE. <i>Sustainability</i>, vol.&nbsp;12(9), art. no. 3885. doi: <a target="_blank" href="https://doi.org/10.3390/su12093885">10.3390/su12093885</a>. (JCR Q2). <button type="button" data-bs-toggle="collapse" data-bs-target="#ref-38" aria-expanded="false" aria-controls="ref-38" class="btn btn-sm btn-danger btn-pub"><i class="bi bi-plus-lg"></i></button>
 <div id="ref-38" class="collapse">
 <p class="small">
@@ -679,7 +694,7 @@ Munoz-Arcentales A., <b>López-Pernas S</b>., Pozo A., Alonso A., Salvachúa J.,
 <br>
 </div>
 </li>
-<li style="position:relative;margin-bottom:0.8rem;list-style:none;">
+<li style="position:relative;margin-bottom:0.8rem;list-style:none;" class="is-gbl">
 Gordillo A., Lopez-Fernandez D., <b>López-Pernas S</b>., Quemada J. (2020). Evaluating an Educational Escape Room Conducted Remotely for Teaching Software Engineering. <i>IEEE Access</i>, vol.&nbsp;8, art. no. 9292916, pp.&nbsp;225032-225051. doi: <a target="_blank" href="https://doi.org/10.1109/ACCESS.2020.3044380">10.1109/ACCESS.2020.3044380</a>. (JCR Q2). <button type="button" data-bs-toggle="collapse" data-bs-target="#ref-40" aria-expanded="false" aria-controls="ref-40" class="btn btn-sm btn-danger btn-pub"><i class="bi bi-plus-lg"></i></button>
 <div id="ref-40" class="collapse">
 <p class="small">
@@ -691,7 +706,7 @@ Gordillo A., Lopez-Fernandez D., <b>López-Pernas S</b>., Quemada J. (2020). Eva
 <br>
 </div>
 </li>
-<li style="position:relative;margin-bottom:0.8rem;list-style:none;">
+<li style="position:relative;margin-bottom:0.8rem;list-style:none;" class="">
 Velásquez W., Alvarez-Alvarado M.S., Munoz-Arcentales A., <b>López-Pernas S</b>., Salvachúa J. (2020). Body mass index in human gait for building risk assessment using graph theory. <i>Sensors</i>, vol.&nbsp;20(10), art. no. 2899. doi: <a target="_blank" href="https://doi.org/10.3390/s20102899">10.3390/s20102899</a>. (JCR Q1). <button type="button" data-bs-toggle="collapse" data-bs-target="#ref-18" aria-expanded="false" aria-controls="ref-18" class="btn btn-sm btn-danger btn-pub"><i class="bi bi-plus-lg"></i></button>
 <div id="ref-18" class="collapse">
 <p class="small">
@@ -703,7 +718,7 @@ Velásquez W., Alvarez-Alvarado M.S., Munoz-Arcentales A., <b>López-Pernas S</b
 <br>
 </div>
 </li>
-<li style="position:relative;margin-bottom:0.8rem;list-style:none;">
+<li style="position:relative;margin-bottom:0.8rem;list-style:none;" class="">
 Alonso A., Pozo A., Gordillo A., <b>López-Pernas S</b>., Munoz-Arcentales A., Marco L., Barra E. (2020). Enhancing university services by extending the eIDAS European specification with academic attributes. <i>Sustainability</i>, vol.&nbsp;12(3), art. no. 770. doi: <a target="_blank" href="https://doi.org/10.3390/su12030770">10.3390/su12030770</a>. (JCR Q2). <button type="button" data-bs-toggle="collapse" data-bs-target="#ref-39" aria-expanded="false" aria-controls="ref-39" class="btn btn-sm btn-danger btn-pub"><i class="bi bi-plus-lg"></i></button>
 <div id="ref-39" class="collapse">
 <p class="small">
@@ -720,7 +735,7 @@ Alonso A., Pozo A., Gordillo A., <b>López-Pernas S</b>., Munoz-Arcentales A., M
 2019
 </h3>
 <ul style="padding-left: 3rem">
-<li style="position:relative;margin-bottom:0.8rem;list-style:none;">
+<li style="position:relative;margin-bottom:0.8rem;list-style:none;" class="is-gbl">
 <b>López-Pernas S</b>., Gordillo A., Barra E., Quemada J. (2019). Analyzing Learning Effectiveness and Students’ Perceptions of an Educational Escape Room in a Programming Course in Higher Education. <i>IEEE Access</i>, vol.&nbsp;7, art. no. 8936344, pp.&nbsp;184221-184234. doi: <a target="_blank" href="https://doi.org/10.1109/ACCESS.2019.2960312">10.1109/ACCESS.2019.2960312</a>. (JCR Q1). <button type="button" data-bs-toggle="collapse" data-bs-target="#ref-19" aria-expanded="false" aria-controls="ref-19" class="btn btn-sm btn-danger btn-pub"><i class="bi bi-plus-lg"></i></button>
 <div id="ref-19" class="collapse">
 <p class="small">
@@ -732,7 +747,7 @@ Alonso A., Pozo A., Gordillo A., <b>López-Pernas S</b>., Munoz-Arcentales A., M
 <br>
 </div>
 </li>
-<li style="position:relative;margin-bottom:0.8rem;list-style:none;">
+<li style="position:relative;margin-bottom:0.8rem;list-style:none;" class="is-gbl">
 <b>López-Pernas S</b>., Gordillo A., Barra E., Quemada J. (2019). Examining the Use of an Educational Escape Room for Teaching Programming in a Higher Education Setting. <i>IEEE Access</i>, vol.&nbsp;7, art. no. 8658086, pp.&nbsp;31723-31737. doi: <a target="_blank" href="https://doi.org/10.1109/ACCESS.2019.2902976">10.1109/ACCESS.2019.2902976</a>. (JCR Q1). <button type="button" data-bs-toggle="collapse" data-bs-target="#ref-21" aria-expanded="false" aria-controls="ref-21" class="btn btn-sm btn-danger btn-pub"><i class="bi bi-plus-lg"></i></button>
 <div id="ref-21" class="collapse">
 <p class="small">
@@ -744,7 +759,7 @@ Alonso A., Pozo A., Gordillo A., <b>López-Pernas S</b>., Munoz-Arcentales A., M
 <br>
 </div>
 </li>
-<li style="position:relative;margin-bottom:0.8rem;list-style:none;">
+<li style="position:relative;margin-bottom:0.8rem;list-style:none;" class="">
 Gordillo A., <b>López-Pernas S</b>., Barra E. (2019). Effectiveness of MOOCs for teachers in safe ICT use training. <i>Comunicar</i>, vol.&nbsp;27(61), pp.&nbsp;98-107. doi: <a target="_blank" href="https://doi.org/10.3916/C61-2019-09">10.3916/C61-2019-09</a>. (JCR Q1). <button type="button" data-bs-toggle="collapse" data-bs-target="#ref-20" aria-expanded="false" aria-controls="ref-20" class="btn btn-sm btn-danger btn-pub"><i class="bi bi-plus-lg"></i></button>
 <div id="ref-20" class="collapse">
 <p class="small">
@@ -764,10 +779,10 @@ Gordillo A., <b>López-Pernas S</b>., Barra E. (2019). Effectiveness of MOOCs fo
 2023
 </h3>
 <ul style="padding-left: 3rem">
-<li style="position:relative;margin-bottom:0.8rem;list-style:none;">
+<li style="position:relative;margin-bottom:0.8rem;list-style:none;" class="is-la">
 Hirsto L., <b>López-Pernas S</b>., Saqr M., Valtonen T., Sointu E., Väisänen S. (2023). Preface. Bridging Education Learning Analytics and AI: Challenges of the Present and Thoughts for the Future. <i>Proceedings of the 1st Finnish Learning Analytics and Artificial Intelligence in Education Conference (FLAIEC 2022) (CEUR Workshop Proceedings)</i>, vol.&nbsp;3383, pp.&nbsp;1-6. <a target="_blank" href="https://ceur-ws.org/Vol-3383/FLAIEC22_preface.pdf">https://ceur-ws.org/Vol-3383/FLAIEC22_preface.pdf</a>.
 </li>
-<li style="position:relative;margin-bottom:0.8rem;list-style:none;">
+<li style="position:relative;margin-bottom:0.8rem;list-style:none;" class="is-la">
 Elmoazen R., <b>López-Pernas S</b>., Misiejuk K., Khalil M., Wasson B. and Saqr M. (2023). Reflections on Technology-enhanced Learning in Laboratories: Barriers and Opportunities. <i>Proceedings of the Technology-Enhanced Learning in Laboratories Workshop (TELL 2023) (CEUR Workshop Proceedings)</i>, vol.&nbsp;3393, pp.&nbsp;1-4. <a target="_blank" href="https://ceur-ws.org/Vol-3393/TELL23_preface.pdf">https://ceur-ws.org/Vol-3393/TELL23_preface.pdf</a>. <button type="button" data-bs-toggle="collapse" data-bs-target="#ref-48" aria-expanded="false" aria-controls="ref-48" class="btn btn-sm btn-danger btn-pub"><i class="bi bi-plus-lg"></i></button>
 <div id="ref-48" class="collapse">
 <p class="small">
@@ -779,7 +794,7 @@ Elmoazen R., <b>López-Pernas S</b>., Misiejuk K., Khalil M., Wasson B. and Saqr
 <br>
 </div>
 </li>
-<li style="position:relative;margin-bottom:0.8rem;list-style:none;">
+<li style="position:relative;margin-bottom:0.8rem;list-style:none;" class="is-la">
 Conde M.Á., <b>López-Pernas S</b>., Saqr M., Raspopovic-Milic M. (2023). Addressing the complexity of online education: A learning analytics and big data perspective. <i>Proceedings of the 13th International Conference on eLearning (eLearning-2022)</i>, vol.&nbsp;3454(in-press), pp.&nbsp;1-2. <a target="_blank" href="https://ceur-ws.org/Vol-3454/preface.pdf">https://ceur-ws.org/Vol-3454/preface.pdf</a>.
 </li>
 </ul>
@@ -787,7 +802,7 @@ Conde M.Á., <b>López-Pernas S</b>., Saqr M., Raspopovic-Milic M. (2023). Addre
 2021
 </h3>
 <ul style="padding-left: 3rem">
-<li style="position:relative;margin-bottom:0.8rem;list-style:none;">
+<li style="position:relative;margin-bottom:0.8rem;list-style:none;" class="is-la">
 Saqr M., <b>López-Pernas S</b>. (2021). Toward self big data. <i>International Journal of Health Sciences</i>, vol.&nbsp;15(5). <a target="_blank" href="https://pubmed.ncbi.nlm.nih.gov/34548857">https://pubmed.ncbi.nlm.nih.gov/34548857</a>.
 </li>
 </ul>
@@ -798,7 +813,7 @@ Saqr M., <b>López-Pernas S</b>. (2021). Toward self big data. <i>International 
 2024
 </h3>
 <ul style="padding-left: 3rem">
-<li style="position:relative;margin-bottom:0.8rem;list-style:none;">
+<li style="position:relative;margin-bottom:0.8rem;list-style:none;" class="is-la">
 Kaliisa R., Misiejuk K., <b>López-Pernas S</b>., Khalil M., Saqr M. (2024). Have Learning Analytics Dashboards Lived Up to the Hype? A Systematic Review of Impact on Students’ Achievement, Motivation, Participation and Attitude. <i>Proceedings of the Fourteenth International Conference on Learning Analytics &amp; Knowledge (LAK’24)</i> (in-press). <a target="_blank" href="https://arxiv.org/abs/2312.15042">https://arxiv.org/abs/2312.15042</a>. <button type="button" data-bs-toggle="collapse" data-bs-target="#ref-51" aria-expanded="false" aria-controls="ref-51" class="btn btn-sm btn-danger btn-pub"><i class="bi bi-plus-lg"></i></button>
 <div id="ref-51" class="collapse">
 <p class="small">
@@ -815,7 +830,7 @@ Kaliisa R., Misiejuk K., <b>López-Pernas S</b>., Khalil M., Saqr M. (2024). Hav
 2023
 </h3>
 <ul style="padding-left: 3rem">
-<li style="position:relative;margin-bottom:0.8rem;list-style:none;">
+<li style="position:relative;margin-bottom:0.8rem;list-style:none;" class="is-lais-gbl">
 <b>López-Pernas S</b>., Gordillo A., Barra E., Saqr M. (2023). Game learning analytics: The case of online educational escape rooms. <i>Proceedings of the 1st Finnish Learning Analytics and Artificial Intelligence in Education Conference (FLAIEC 2022) (CEUR Workshop Proceedings)</i>, vol.&nbsp;3383, pp.&nbsp;121-122. <a target="_blank" href="https://ceur-ws.org/Vol-3383/FLAIEC22_paper_7043.pdf">https://ceur-ws.org/Vol-3383/FLAIEC22_paper_7043.pdf</a>. <button type="button" data-bs-toggle="collapse" data-bs-target="#ref-53" aria-expanded="false" aria-controls="ref-53" class="btn btn-sm btn-danger btn-pub"><i class="bi bi-plus-lg"></i></button>
 <div id="ref-53" class="collapse">
 <p class="small">
@@ -827,7 +842,7 @@ Kaliisa R., Misiejuk K., <b>López-Pernas S</b>., Khalil M., Saqr M. (2024). Hav
 <br>
 </div>
 </li>
-<li style="position:relative;margin-bottom:0.8rem;list-style:none;">
+<li style="position:relative;margin-bottom:0.8rem;list-style:none;" class="is-la">
 <b>López-Pernas S</b>., Kleimola R., Väisänen S., Hirsto L. (2023). Early detection of dropout factors in vocational education: A large-scale case study from Finland. <i>Proceedings of the 1st Finnish Learning Analytics and Artificial Intelligence in Education Conference (FLAIEC 2022) (CEUR Workshop Proceedings)</i>, vol.&nbsp;3383, pp.&nbsp;44-50. <a target="_blank" href="https://ceur-ws.org/Vol-3383/FLAIEC22_paper_8117.pdf">https://ceur-ws.org/Vol-3383/FLAIEC22_paper_8117.pdf</a>. <button type="button" data-bs-toggle="collapse" data-bs-target="#ref-57" aria-expanded="false" aria-controls="ref-57" class="btn btn-sm btn-danger btn-pub"><i class="bi bi-plus-lg"></i></button>
 <div id="ref-57" class="collapse">
 <p class="small">
@@ -839,7 +854,7 @@ Kaliisa R., Misiejuk K., <b>López-Pernas S</b>., Khalil M., Saqr M. (2024). Hav
 <br>
 </div>
 </li>
-<li style="position:relative;margin-bottom:0.8rem;list-style:none;">
+<li style="position:relative;margin-bottom:0.8rem;list-style:none;" class="is-la">
 <b>López-Pernas S</b>., Saqr M. (2023). From Variables to States to Trajectories (VaSSTra): A Method for Modelling the Longitudinal Dynamics of Learning and Behaviour. <i>Proceedings TEEM 2022: Tenth International Conference on Technological Ecosystems for Enhancing Multiculturality. TEEM 2022. Lecture Notes in Computer Science.</i>, pp.&nbsp;1169-1178. doi: <a target="_blank" href="https://doi.org/10.1007/978-981-99-0942-1_123">10.1007/978-981-99-0942-1_123</a>. <button type="button" data-bs-toggle="collapse" data-bs-target="#ref-58" aria-expanded="false" aria-controls="ref-58" class="btn btn-sm btn-danger btn-pub"><i class="bi bi-plus-lg"></i></button>
 <div id="ref-58" class="collapse">
 <p class="small">
@@ -851,7 +866,7 @@ Kaliisa R., Misiejuk K., <b>López-Pernas S</b>., Khalil M., Saqr M. (2024). Hav
 <br>
 </div>
 </li>
-<li style="position:relative;margin-bottom:0.8rem;list-style:none;">
+<li style="position:relative;margin-bottom:0.8rem;list-style:none;" class="is-la">
 <b>López-Pernas S</b>., Gordillo A., Barra E., Saqr M. (2023). The dynamics of students’ playing profiles in a programming educational escape room. <i>Proceedings TEEM 2023: Eleventh International Conference on Technological Ecosystems for Enhancing Multiculturality. TEEM 2023. Lecture Notes in Computer Science.</i> (in-press). <button type="button" data-bs-toggle="collapse" data-bs-target="#ref-63" aria-expanded="false" aria-controls="ref-63" class="btn btn-sm btn-danger btn-pub"><i class="bi bi-plus-lg"></i></button>
 <div id="ref-63" class="collapse">
 <p class="small">
@@ -863,7 +878,7 @@ Kaliisa R., Misiejuk K., <b>López-Pernas S</b>., Khalil M., Saqr M. (2024). Hav
 <br>
 </div>
 </li>
-<li style="position:relative;margin-bottom:0.8rem;list-style:none;">
+<li style="position:relative;margin-bottom:0.8rem;list-style:none;" class="is-la">
 Saqr M., <b>López-Pernas S</b>. (2023). The idiographic paradigm shift needed: Bringing the person back into research and practice. <i>Proceedings of the 1st Finnish Learning Analytics and Artificial Intelligence in Education Conference (FLAIEC 2022) (CEUR Workshop Proceedings)</i>, vol.&nbsp;3383, pp.&nbsp;116. <a target="_blank" href="https://ceur-ws.org/Vol-3383/FLAIEC22_paper_6676.pdf">https://ceur-ws.org/Vol-3383/FLAIEC22_paper_6676.pdf</a>. <button type="button" data-bs-toggle="collapse" data-bs-target="#ref-52" aria-expanded="false" aria-controls="ref-52" class="btn btn-sm btn-danger btn-pub"><i class="bi bi-plus-lg"></i></button>
 <div id="ref-52" class="collapse">
 <p class="small">
@@ -875,7 +890,7 @@ Saqr M., <b>López-Pernas S</b>. (2023). The idiographic paradigm shift needed: 
 <br>
 </div>
 </li>
-<li style="position:relative;margin-bottom:0.8rem;list-style:none;">
+<li style="position:relative;margin-bottom:0.8rem;list-style:none;" class="is-lais-gbl">
 Vartiainen H., <b>López-Pernas S</b>., Saqr M., Kahila J., Parkki T., Tedre M., Valtonen T. (2023). Mapping students’ temporal pathways in a computational thinking escape room. <i>Proceedings of the 1st Finnish Learning Analytics and Artificial Intelligence in Education Conference (FLAIEC 2022) (CEUR Workshop Proceedings)</i>, vol.&nbsp;3383, pp.&nbsp;77-88. <a target="_blank" href="https://ceur-ws.org/Vol-3383/FLAIEC22_paper_9625.pdf">https://ceur-ws.org/Vol-3383/FLAIEC22_paper_9625.pdf</a>. <button type="button" data-bs-toggle="collapse" data-bs-target="#ref-54" aria-expanded="false" aria-controls="ref-54" class="btn btn-sm btn-danger btn-pub"><i class="bi bi-plus-lg"></i></button>
 <div id="ref-54" class="collapse">
 <p class="small">
@@ -887,7 +902,7 @@ Vartiainen H., <b>López-Pernas S</b>., Saqr M., Kahila J., Parkki T., Tedre M.,
 <br>
 </div>
 </li>
-<li style="position:relative;margin-bottom:0.8rem;list-style:none;">
+<li style="position:relative;margin-bottom:0.8rem;list-style:none;" class="is-la">
 Heikkinen S., <b>López-Pernas S</b>., Malmberg J., Tedre M., Saqr M. (2023). How do business students self-regulate their project management learning? A sequence mining study. <i>Proceedings of the 1st Finnish Learning Analytics and Artificial Intelligence in Education Conference (FLAIEC 2022) (CEUR Workshop Proceedings)</i>, vol.&nbsp;3383, pp.&nbsp;51-59. <a target="_blank" href="https://ceur-ws.org/Vol-3383/FLAIEC22_paper_2583.pdf">https://ceur-ws.org/Vol-3383/FLAIEC22_paper_2583.pdf</a>. <button type="button" data-bs-toggle="collapse" data-bs-target="#ref-56" aria-expanded="false" aria-controls="ref-56" class="btn btn-sm btn-danger btn-pub"><i class="bi bi-plus-lg"></i></button>
 <div id="ref-56" class="collapse">
 <p class="small">
@@ -899,7 +914,7 @@ Heikkinen S., <b>López-Pernas S</b>., Malmberg J., Tedre M., Saqr M. (2023). Ho
 <br>
 </div>
 </li>
-<li style="position:relative;margin-bottom:0.8rem;list-style:none;">
+<li style="position:relative;margin-bottom:0.8rem;list-style:none;" class="">
 Conde M.Á., <b>López-Pernas S</b>., Peltekova E., Pancheva K., Raspopovic Milic M., Saqr M. (2023). Multi-stakeholder Perspective on the Gap Between Existing Realities and New Requirements for Online and Blended Learning: An Exploratory Study. <i>Proceedings TEEM 2022: Tenth International Conference on Technological Ecosystems for Enhancing Multiculturality. TEEM 2022. Lecture Notes in Computer Science.</i>, pp.&nbsp;1109-1116. doi: <a target="_blank" href="https://doi.org/10.1007/978-981-99-0942-1_117">10.1007/978-981-99-0942-1_117</a>. <button type="button" data-bs-toggle="collapse" data-bs-target="#ref-59" aria-expanded="false" aria-controls="ref-59" class="btn btn-sm btn-danger btn-pub"><i class="bi bi-plus-lg"></i></button>
 <div id="ref-59" class="collapse">
 <p class="small">
@@ -911,7 +926,7 @@ Conde M.Á., <b>López-Pernas S</b>., Peltekova E., Pancheva K., Raspopovic Mili
 <br>
 </div>
 </li>
-<li style="position:relative;margin-bottom:0.8rem;list-style:none;">
+<li style="position:relative;margin-bottom:0.8rem;list-style:none;" class="is-la">
 Mairinoja L., <b>López-Pernas S</b>., Elmoazen R., Niskanen E.A., Kuningas T., Wärri A., Saqr M., Strauss L. (2023). International Online Team-Based Learning in Higher Education of Biomedicine - Evaluation by Learning Analytics. <i>Proceedings of the Technology-Enhanced Learning in Laboratories Workshop (TELL 2023) (CEUR Workshop Proceedings)</i>, vol.&nbsp;3393, pp.&nbsp;49-60. <a target="_blank" href="https://ceur-ws.org/Vol-3393/TELL23_paper_1668_5.pdf">https://ceur-ws.org/Vol-3393/TELL23_paper_1668_5.pdf</a>. <button type="button" data-bs-toggle="collapse" data-bs-target="#ref-60" aria-expanded="false" aria-controls="ref-60" class="btn btn-sm btn-danger btn-pub"><i class="bi bi-plus-lg"></i></button>
 <div id="ref-60" class="collapse">
 <p class="small">
@@ -923,7 +938,7 @@ Mairinoja L., <b>López-Pernas S</b>., Elmoazen R., Niskanen E.A., Kuningas T., 
 <br>
 </div>
 </li>
-<li style="position:relative;margin-bottom:0.8rem;list-style:none;">
+<li style="position:relative;margin-bottom:0.8rem;list-style:none;" class="is-biblio">
 Huhta K., <b>López-Pernas S</b>., Saqr M. (2023). Mapping the topics, trends, and themes of education technology in legal education with topic modeling and network analysis. <i>Proceedings TEEM 2023: Eleventh International Conference on Technological Ecosystems for Enhancing Multiculturality. TEEM 2023. Lecture Notes in Computer Science.</i> (in-press). <button type="button" data-bs-toggle="collapse" data-bs-target="#ref-62" aria-expanded="false" aria-controls="ref-62" class="btn btn-sm btn-danger btn-pub"><i class="bi bi-plus-lg"></i></button>
 <div id="ref-62" class="collapse">
 <p class="small">
@@ -935,7 +950,7 @@ Huhta K., <b>López-Pernas S</b>., Saqr M. (2023). Mapping the topics, trends, a
 <br>
 </div>
 </li>
-<li style="position:relative;margin-bottom:0.8rem;list-style:none;">
+<li style="position:relative;margin-bottom:0.8rem;list-style:none;" class="is-la">
 Saqr M., <b>López-Pernas S</b>. (2023). What learning analytics can tell about students’ approach in a learning analytics course. <i>Proceedings TEEM 2023: Eleventh International Conference on Technological Ecosystems for Enhancing Multiculturality. TEEM 2023. Lecture Notes in Computer Science.</i> (in-press). <button type="button" data-bs-toggle="collapse" data-bs-target="#ref-64" aria-expanded="false" aria-controls="ref-64" class="btn btn-sm btn-danger btn-pub"><i class="bi bi-plus-lg"></i></button>
 <div id="ref-64" class="collapse">
 <p class="small">
@@ -947,7 +962,7 @@ Saqr M., <b>López-Pernas S</b>. (2023). What learning analytics can tell about 
 <br>
 </div>
 </li>
-<li style="position:relative;margin-bottom:0.8rem;list-style:none;">
+<li style="position:relative;margin-bottom:0.8rem;list-style:none;" class="is-la">
 Akçapınar G., <b>López-Pernas S</b>., Er E., Saqr M. (2023). More data is not always better data: A learning analytics case study in early prediction. <i>Proceedings TEEM 2023: Eleventh International Conference on Technological Ecosystems for Enhancing Multiculturality. TEEM 2023. Lecture Notes in Computer Science.</i> (in-press). <button type="button" data-bs-toggle="collapse" data-bs-target="#ref-65" aria-expanded="false" aria-controls="ref-65" class="btn btn-sm btn-danger btn-pub"><i class="bi bi-plus-lg"></i></button>
 <div id="ref-65" class="collapse">
 <p class="small">
@@ -959,7 +974,7 @@ Akçapınar G., <b>López-Pernas S</b>., Er E., Saqr M. (2023). More data is not
 <br>
 </div>
 </li>
-<li style="position:relative;margin-bottom:0.8rem;list-style:none;">
+<li style="position:relative;margin-bottom:0.8rem;list-style:none;" class="is-la">
 Rai P., <b>López-Pernas S</b>., Saqr M. (2023). How a learning analytics dashboard intervention influences the dynamics of students’ learning behavior. <i>Proceedings TEEM 2023: Eleventh International Conference on Technological Ecosystems for Enhancing Multiculturality. TEEM 2023. Lecture Notes in Computer Science.</i> (in-press). <button type="button" data-bs-toggle="collapse" data-bs-target="#ref-66" aria-expanded="false" aria-controls="ref-66" class="btn btn-sm btn-danger btn-pub"><i class="bi bi-plus-lg"></i></button>
 <div id="ref-66" class="collapse">
 <p class="small">
@@ -971,7 +986,7 @@ Rai P., <b>López-Pernas S</b>., Saqr M. (2023). How a learning analytics dashbo
 <br>
 </div>
 </li>
-<li style="position:relative;margin-bottom:0.8rem;list-style:none;">
+<li style="position:relative;margin-bottom:0.8rem;list-style:none;" class="is-la">
 Hirsto L., Saqr M., <b>López-Pernas S</b>., Valtonen T. (2023). A systematic narrative review of learning analytics research in K-12 and schools. <i>Proceedings of the 1st Finnish Learning Analytics and Artificial Intelligence in Education Conference (FLAIEC 2022) (CEUR Workshop Proceedings)</i>, vol.&nbsp;3383, pp.&nbsp;60-67. <a target="_blank" href="https://ceur-ws.org/Vol-3383/FLAIEC22_paper_9536.pdf">https://ceur-ws.org/Vol-3383/FLAIEC22_paper_9536.pdf</a>. <button type="button" data-bs-toggle="collapse" data-bs-target="#ref-55" aria-expanded="false" aria-controls="ref-55" class="btn btn-sm btn-danger btn-pub"><i class="bi bi-plus-lg"></i></button>
 <div id="ref-55" class="collapse">
 <p class="small">
@@ -983,7 +998,7 @@ Hirsto L., Saqr M., <b>López-Pernas S</b>., Valtonen T. (2023). A systematic na
 <br>
 </div>
 </li>
-<li style="position:relative;margin-bottom:0.8rem;list-style:none;">
+<li style="position:relative;margin-bottom:0.8rem;list-style:none;" class="is-la">
 Conde M.Á., Georgiev A., <b>López-Pernas S</b>., Jovic J., Crespo-Martínez I., Raspopovic Milic M., Saqr M., Pancheva K. (2023). Definition of a Learning Analytics Ecosystem for the ILEDA Project Piloting. <i>Learning and Collaboration Technologies. HCII 2023. Lecture Notes in Computer Science.</i>, vol.&nbsp;14040, pp.&nbsp;444-453. doi: <a target="_blank" href="https://doi.org/10.1007/978-3-031-34411-4_30">10.1007/978-3-031-34411-4_30</a>. <button type="button" data-bs-toggle="collapse" data-bs-target="#ref-61" aria-expanded="false" aria-controls="ref-61" class="btn btn-sm btn-danger btn-pub"><i class="bi bi-plus-lg"></i></button>
 <div id="ref-61" class="collapse">
 <p class="small">
@@ -1000,7 +1015,7 @@ Conde M.Á., Georgiev A., <b>López-Pernas S</b>., Jovic J., Crespo-Martínez I.
 2022
 </h3>
 <ul style="padding-left: 3rem">
-<li style="position:relative;margin-bottom:0.8rem;list-style:none;">
+<li style="position:relative;margin-bottom:0.8rem;list-style:none;" class="is-la">
 Saqr M., <b>López-Pernas S</b>., García Á.H., Conde M.Á., Poquet O. (2022). Networks and Learning Analytics: Addressing Educational Challenges. <i>Proceedings of the NetSciLA22 workshop (CEUR Workshop Proceedings)</i>, vol.&nbsp;3258, pp.&nbsp;1-3. <a target="_blank" href="https://ceur-ws.org/Vol-3258/xpreface.pdf">https://ceur-ws.org/Vol-3258/xpreface.pdf</a>. <button type="button" data-bs-toggle="collapse" data-bs-target="#ref-67" aria-expanded="false" aria-controls="ref-67" class="btn btn-sm btn-danger btn-pub"><i class="bi bi-plus-lg"></i></button>
 <div id="ref-67" class="collapse">
 <p class="small">
@@ -1012,7 +1027,7 @@ Saqr M., <b>López-Pernas S</b>., García Á.H., Conde M.Á., Poquet O. (2022). 
 <br>
 </div>
 </li>
-<li style="position:relative;margin-bottom:0.8rem;list-style:none;">
+<li style="position:relative;margin-bottom:0.8rem;list-style:none;" class="is-la">
 Saqr M., <b>López-Pernas S</b>. (2022). The Why, the What and the How to Model a Dynamic Relational Learning Process with Temporal Networks. <i>Proceedings of the NetSciLA22 workshop (CEUR Workshop Proceedings)</i>, vol.&nbsp;3258, pp.&nbsp;33-40. <a target="_blank" href="https://ceur-ws.org/Vol-3258/article_4.pdf">https://ceur-ws.org/Vol-3258/article_4.pdf</a>. <button type="button" data-bs-toggle="collapse" data-bs-target="#ref-68" aria-expanded="false" aria-controls="ref-68" class="btn btn-sm btn-danger btn-pub"><i class="bi bi-plus-lg"></i></button>
 <div id="ref-68" class="collapse">
 <p class="small">
@@ -1024,7 +1039,7 @@ Saqr M., <b>López-Pernas S</b>. (2022). The Why, the What and the How to Model 
 <br>
 </div>
 </li>
-<li style="position:relative;margin-bottom:0.8rem;list-style:none;">
+<li style="position:relative;margin-bottom:0.8rem;list-style:none;" class="is-la">
 Saqr M., <b>López-Pernas S</b>., Hernández-García A., Conde M.A., Poquet O. (2022). Concluding remarks of the NetSciLA22 Workshop. <i>Proceedings of the NetSciLA22 workshop (CEUR Workshop Proceedings)</i>, vol.&nbsp;3258, pp.&nbsp;41-46. <a target="_blank" href="https://ceur-ws.org/Vol-3258/article_5.pdf">https://ceur-ws.org/Vol-3258/article_5.pdf</a>. <button type="button" data-bs-toggle="collapse" data-bs-target="#ref-69" aria-expanded="false" aria-controls="ref-69" class="btn btn-sm btn-danger btn-pub"><i class="bi bi-plus-lg"></i></button>
 <div id="ref-69" class="collapse">
 <p class="small">
@@ -1036,7 +1051,7 @@ Saqr M., <b>López-Pernas S</b>., Hernández-García A., Conde M.A., Poquet O. (
 <br>
 </div>
 </li>
-<li style="position:relative;margin-bottom:0.8rem;list-style:none;">
+<li style="position:relative;margin-bottom:0.8rem;list-style:none;" class="is-la">
 Saqr M., <b>López-Pernas S</b>. (2022). Instant or Distant: A Temporal Network Tale of Two Interaction Platforms and Their Influence on Collaboration. <i>Educating for a New Future: Making Sense of Technology-Enhanced Learning Adoption. EC-TEL 2022. Lecture Notes in Computer Science</i>, vol.&nbsp;13450, pp.&nbsp;594-600. doi: <a target="_blank" href="https://doi.org/10.1007/978-3-031-16290-9_55">10.1007/978-3-031-16290-9_55</a>. <button type="button" data-bs-toggle="collapse" data-bs-target="#ref-70" aria-expanded="false" aria-controls="ref-70" class="btn btn-sm btn-danger btn-pub"><i class="bi bi-plus-lg"></i></button>
 <div id="ref-70" class="collapse">
 <p class="small">
@@ -1053,7 +1068,7 @@ Saqr M., <b>López-Pernas S</b>. (2022). Instant or Distant: A Temporal Network 
 2021
 </h3>
 <ul style="padding-left: 3rem">
-<li style="position:relative;margin-bottom:0.8rem;list-style:none;">
+<li style="position:relative;margin-bottom:0.8rem;list-style:none;" class="is-la">
 <b>López-Pernas S</b>., Saqr M. (2021). Idiographic learning analytics: A within-person ethical perspective. <i>Companion Proceedings 11th International Conference on Learning Analytics &amp; Knowledge (LAK21)</i>, pp.&nbsp;369-374. <a target="_blank" href="https://www.solaresearch.org/core/lak21-companion-proceedings/">https://www.solaresearch.org/core/lak21-companion-proceedings/</a>. <button type="button" data-bs-toggle="collapse" data-bs-target="#ref-75" aria-expanded="false" aria-controls="ref-75" class="btn btn-sm btn-danger btn-pub"><i class="bi bi-plus-lg"></i></button>
 <div id="ref-75" class="collapse">
 <p class="small">
@@ -1065,7 +1080,7 @@ Saqr M., <b>López-Pernas S</b>. (2022). Instant or Distant: A Temporal Network 
 <br>
 </div>
 </li>
-<li style="position:relative;margin-bottom:0.8rem;list-style:none;">
+<li style="position:relative;margin-bottom:0.8rem;list-style:none;" class="is-la">
 Saqr M., <b>López-Pernas S</b>. (2021). Idiographic learning analytics: A definition and a case study. <i>Proceedings - IEEE 21st International Conference on Advanced Learning Technologies, ICALT 2021</i>, pp.&nbsp;163-165. doi: <a target="_blank" href="https://doi.org/10.1109/ICALT52272.2021.00056">10.1109/ICALT52272.2021.00056</a>. <button type="button" data-bs-toggle="collapse" data-bs-target="#ref-71" aria-expanded="false" aria-controls="ref-71" class="btn btn-sm btn-danger btn-pub"><i class="bi bi-plus-lg"></i></button>
 <div id="ref-71" class="collapse">
 <p class="small">
@@ -1077,7 +1092,7 @@ Saqr M., <b>López-Pernas S</b>. (2021). Idiographic learning analytics: A defin
 <br>
 </div>
 </li>
-<li style="position:relative;margin-bottom:0.8rem;list-style:none;">
+<li style="position:relative;margin-bottom:0.8rem;list-style:none;" class="is-la">
 Saqr M., <b>López-Pernas S</b>. (2021). The Dire Cost of Early Disengagement: A Four-Year Learning Analytics Study over a Full Program. <i>Technology-Enhanced Learning for a Free, Safe, and Sustainable World. EC-TEL 2021. Lecture Notes in Computer Science</i>, vol.&nbsp;12884, pp.&nbsp;122-136. doi: <a target="_blank" href="https://doi.org/10.1007/978-3-030-86436-1_10">10.1007/978-3-030-86436-1_10</a>. <button type="button" data-bs-toggle="collapse" data-bs-target="#ref-73" aria-expanded="false" aria-controls="ref-73" class="btn btn-sm btn-danger btn-pub"><i class="bi bi-plus-lg"></i></button>
 <div id="ref-73" class="collapse">
 <p class="small">
@@ -1089,7 +1104,7 @@ Saqr M., <b>López-Pernas S</b>. (2021). The Dire Cost of Early Disengagement: A
 <br>
 </div>
 </li>
-<li style="position:relative;margin-bottom:0.8rem;list-style:none;">
+<li style="position:relative;margin-bottom:0.8rem;list-style:none;" class="is-la">
 Saqr M., <b>López-Pernas S</b>. (2021). Idiographic learning analytics: A single student (N=1) approach using psychological networks. <i>Proceedings of the NetSciLA21 workshop (CEUR Workshop Proceedings)</i>, vol.&nbsp;2868, pp.&nbsp;16-22. <a target="_blank" href="https://ceur-ws.org/Vol-2868/article_4.pdf">https://ceur-ws.org/Vol-2868/article_4.pdf</a>. <button type="button" data-bs-toggle="collapse" data-bs-target="#ref-74" aria-expanded="false" aria-controls="ref-74" class="btn btn-sm btn-danger btn-pub"><i class="bi bi-plus-lg"></i></button>
 <div id="ref-74" class="collapse">
 <p class="small">
@@ -1101,7 +1116,7 @@ Saqr M., <b>López-Pernas S</b>. (2021). Idiographic learning analytics: A singl
 <br>
 </div>
 </li>
-<li style="position:relative;margin-bottom:0.8rem;list-style:none;">
+<li style="position:relative;margin-bottom:0.8rem;list-style:none;" class="is-la">
 Saqr M., <b>López-Pernas S</b>. (2021). Idiographic learning analytics: A single student (N=1) approach using psychological networks. <i>Proceedings of the NetSciLA21 workshop (CEUR Workshop Proceedings)</i>, vol.&nbsp;2868, pp.&nbsp;16-22. <a target="_blank" href="https://ceur-ws.org/Vol-2868/article_4.pdf">https://ceur-ws.org/Vol-2868/article_4.pdf</a>. <button type="button" data-bs-toggle="collapse" data-bs-target="#ref-76" aria-expanded="false" aria-controls="ref-76" class="btn btn-sm btn-danger btn-pub"><i class="bi bi-plus-lg"></i></button>
 <div id="ref-76" class="collapse">
 <p class="small">
@@ -1113,7 +1128,7 @@ Saqr M., <b>López-Pernas S</b>. (2021). Idiographic learning analytics: A singl
 <br>
 </div>
 </li>
-<li style="position:relative;margin-bottom:0.8rem;list-style:none;">
+<li style="position:relative;margin-bottom:0.8rem;list-style:none;" class="is-biblio">
 Apiola M., Tedre M., <b>López-Pernas S</b>., Saqr M., Daniels M., Pears A. (2021). A Scientometric Journey Through the FIE Bookshelf: 1982-2020. <i>Proceedings - Frontiers in Education Conference, FIE</i>. doi: <a target="_blank" href="https://doi.org/10.1109/FIE49875.2021.9637209">10.1109/FIE49875.2021.9637209</a>. <button type="button" data-bs-toggle="collapse" data-bs-target="#ref-72" aria-expanded="false" aria-controls="ref-72" class="btn btn-sm btn-danger btn-pub"><i class="bi bi-plus-lg"></i></button>
 <div id="ref-72" class="collapse">
 <p class="small">
@@ -1130,7 +1145,7 @@ Apiola M., Tedre M., <b>López-Pernas S</b>., Saqr M., Daniels M., Pears A. (202
 2020
 </h3>
 <ul style="padding-left: 3rem">
-<li style="position:relative;margin-bottom:0.8rem;list-style:none;">
+<li style="position:relative;margin-bottom:0.8rem;list-style:none;" class="">
 <b>López-Pernas S</b>., Jimenez A., Gordillo A., Barra E., Marco L., Quemada J. (2020). Ediphy: A modular and extensible open-source web authoring tool for the creation of interactive learning resources. <i>Proceedings of the 2020 16th International Conference on Intelligent Environments, IE 2020</i>, art. no. 9154949, pp.&nbsp;115-121. doi: <a target="_blank" href="https://doi.org/10.1109/IE49459.2020.9154949">10.1109/IE49459.2020.9154949</a>. <button type="button" data-bs-toggle="collapse" data-bs-target="#ref-77" aria-expanded="false" aria-controls="ref-77" class="btn btn-sm btn-danger btn-pub"><i class="bi bi-plus-lg"></i></button>
 <div id="ref-77" class="collapse">
 <p class="small">
@@ -1147,7 +1162,7 @@ Apiola M., Tedre M., <b>López-Pernas S</b>., Saqr M., Daniels M., Pears A. (202
 2019
 </h3>
 <ul style="padding-left: 3rem">
-<li style="position:relative;margin-bottom:0.8rem;list-style:none;">
+<li style="position:relative;margin-bottom:0.8rem;list-style:none;" class="is-gbl">
 <b>López-Pernas S</b>., Gordillo A., Barra R., Quemada J. (2019). Identification, analysis of requirements for a web platform for managing educational escape rooms. <i>Proceedings of the 12th annual International Conference of Education, Research and Innovation (ICERI 2019)</i>, pp.&nbsp;4874-4883. doi: <a target="_blank" href="https://doi.org/10.21125/iceri.2019.1191">10.21125/iceri.2019.1191</a>. <button type="button" data-bs-toggle="collapse" data-bs-target="#ref-81" aria-expanded="false" aria-controls="ref-81" class="btn btn-sm btn-danger btn-pub"><i class="bi bi-plus-lg"></i></button>
 <div id="ref-81" class="collapse">
 <p class="small">
@@ -1159,7 +1174,7 @@ Apiola M., Tedre M., <b>López-Pernas S</b>., Saqr M., Daniels M., Pears A. (202
 <br>
 </div>
 </li>
-<li style="position:relative;margin-bottom:0.8rem;list-style:none;">
+<li style="position:relative;margin-bottom:0.8rem;list-style:none;" class="">
 Mareca P., <b>López-Pernas S</b>. (2019). Learning 3.0: Animations and creativity on Wikipedia [Aprendizaje 3.0: Animaciones y creatividad en Wikipedia]. <i>Iberian Conference on Information Systems and Technologies, CISTI</i>, art. no. 8760974. doi: <a target="_blank" href="https://doi.org/10.23919/CISTI.2019.8760974">10.23919/CISTI.2019.8760974</a>. <button type="button" data-bs-toggle="collapse" data-bs-target="#ref-78" aria-expanded="false" aria-controls="ref-78" class="btn btn-sm btn-danger btn-pub"><i class="bi bi-plus-lg"></i></button>
 <div id="ref-78" class="collapse">
 <p class="small">
@@ -1171,7 +1186,7 @@ Mareca P., <b>López-Pernas S</b>. (2019). Learning 3.0: Animations and creativi
 <br>
 </div>
 </li>
-<li style="position:relative;margin-bottom:0.8rem;list-style:none;">
+<li style="position:relative;margin-bottom:0.8rem;list-style:none;" class="">
 Munoz-Arcentales A., <b>López-Pernas S</b>., Pozo A., Alonso A., Salvachua J., Huecas G. (2019). An architecture for providing data usage and access control in data sharing ecosystems. <i>Procedia Computer Science</i>, vol.&nbsp;160, pp.&nbsp;590-597. doi: <a target="_blank" href="https://doi.org/10.1016/j.procs.2019.11.042">10.1016/j.procs.2019.11.042</a>. <button type="button" data-bs-toggle="collapse" data-bs-target="#ref-79" aria-expanded="false" aria-controls="ref-79" class="btn btn-sm btn-danger btn-pub"><i class="bi bi-plus-lg"></i></button>
 <div id="ref-79" class="collapse">
 <p class="small">
@@ -1183,7 +1198,7 @@ Munoz-Arcentales A., <b>López-Pernas S</b>., Pozo A., Alonso A., Salvachua J., 
 <br>
 </div>
 </li>
-<li style="position:relative;margin-bottom:0.8rem;list-style:none;">
+<li style="position:relative;margin-bottom:0.8rem;list-style:none;" class="is-gbl">
 Gordillo A., <b>López-Pernas S</b>., Barra E. (2019). Students’ perceptions toward the use of teacher-created educational games in a secondary education setting. <i>Proceedings of the 12th annual International Conference of Education, Research and Innovation (ICERI 2019)</i>, pp.&nbsp;1986-1996. doi: <a target="_blank" href="https://doi.org/10.21125/iceri.2019.0557">10.21125/iceri.2019.0557</a>. <button type="button" data-bs-toggle="collapse" data-bs-target="#ref-82" aria-expanded="false" aria-controls="ref-82" class="btn btn-sm btn-danger btn-pub"><i class="bi bi-plus-lg"></i></button>
 <div id="ref-82" class="collapse">
 <p class="small">
@@ -1195,7 +1210,7 @@ Gordillo A., <b>López-Pernas S</b>., Barra E. (2019). Students’ perceptions t
 <br>
 </div>
 </li>
-<li style="position:relative;margin-bottom:0.8rem;list-style:none;">
+<li style="position:relative;margin-bottom:0.8rem;list-style:none;" class="">
 Alonso Á., Gordillo A., Pozo A., <b>López-Pernas S</b>., Marcos L., Barra E. (2019). Extending the EIDAS European Specification for Supporting Academic Attributes. <i>Proceedings of the 12th annual International Conference of Education, Research and Innovation (ICERI 2019)</i>, pp.&nbsp;2008-2014. doi: <a target="_blank" href="https://doi.org/10.21125/iceri.2019.0560">10.21125/iceri.2019.0560</a>. <button type="button" data-bs-toggle="collapse" data-bs-target="#ref-83" aria-expanded="false" aria-controls="ref-83" class="btn btn-sm btn-danger btn-pub"><i class="bi bi-plus-lg"></i></button>
 <div id="ref-83" class="collapse">
 <p class="small">
@@ -1207,7 +1222,7 @@ Alonso Á., Gordillo A., Pozo A., <b>López-Pernas S</b>., Marcos L., Barra E. (
 <br>
 </div>
 </li>
-<li style="position:relative;margin-bottom:0.8rem;list-style:none;">
+<li style="position:relative;margin-bottom:0.8rem;list-style:none;" class="">
 Quemada J., Barra E., Gordillo A., Pavón S., Salvachúa, J., Vazquez I., <b>López-Pernas S</b>. (2019). AMMIL: A methodology for developing video-based learning courses. <i>Proceedings of the 12th annual International Conference of Education, Research and Innovation (ICERI 2019)</i>, pp.&nbsp;4893-4901. doi: <a target="_blank" href="https://doi.org/10.21125/iceri.2019.1195">10.21125/iceri.2019.1195</a>. <button type="button" data-bs-toggle="collapse" data-bs-target="#ref-80" aria-expanded="false" aria-controls="ref-80" class="btn btn-sm btn-danger btn-pub"><i class="bi bi-plus-lg"></i></button>
 <div id="ref-80" class="collapse">
 <p class="small">
@@ -1224,7 +1239,7 @@ Quemada J., Barra E., Gordillo A., Pavón S., Salvachúa, J., Vazquez I., <b>Ló
 2018
 </h3>
 <ul style="padding-left: 3rem">
-<li style="position:relative;margin-bottom:0.8rem;list-style:none;">
+<li style="position:relative;margin-bottom:0.8rem;list-style:none;" class="">
 <b>López-Pernas S</b>., Benito A., Marco L., Gordillo A. (2018). Improval of an educational platform through the integration of an extensible e-learning authoring tool. <i>Proceedings of the 11th annual International Conference of Education, Research and Innovation (ICERI 2018)</i>, pp.&nbsp;10117-10124. doi: <a target="_blank" href="https://doi.org/10.21125/iceri.2018.0898">10.21125/iceri.2018.0898</a>. <button type="button" data-bs-toggle="collapse" data-bs-target="#ref-85" aria-expanded="false" aria-controls="ref-85" class="btn btn-sm btn-danger btn-pub"><i class="bi bi-plus-lg"></i></button>
 <div id="ref-85" class="collapse">
 <p class="small">
@@ -1236,7 +1251,7 @@ Quemada J., Barra E., Gordillo A., Pavón S., Salvachúa, J., Vazquez I., <b>Ló
 <br>
 </div>
 </li>
-<li style="position:relative;margin-bottom:0.8rem;list-style:none;">
+<li style="position:relative;margin-bottom:0.8rem;list-style:none;" class="">
 Gordillo A., <b>López-Pernas S</b>., Barra E. (2018). RESCORM: A boilerplate for creating SCORM-compliant React applications. <i>Proceedings of the 11th annual International Conference of Education, Research and Innovation (ICERI 2018)</i>, pp.&nbsp;8843-8853. doi: <a target="_blank" href="https://doi.org/10.21125/iceri.2018.0632">10.21125/iceri.2018.0632</a>. <button type="button" data-bs-toggle="collapse" data-bs-target="#ref-84" aria-expanded="false" aria-controls="ref-84" class="btn btn-sm btn-danger btn-pub"><i class="bi bi-plus-lg"></i></button>
 <div id="ref-84" class="collapse">
 <p class="small">
@@ -1248,7 +1263,7 @@ Gordillo A., <b>López-Pernas S</b>., Barra E. (2018). RESCORM: A boilerplate fo
 <br>
 </div>
 </li>
-<li style="position:relative;margin-bottom:0.8rem;list-style:none;">
+<li style="position:relative;margin-bottom:0.8rem;list-style:none;" class="">
 Marco L., <b>López-Pernas S</b>., Alonso A. (2018). Accessibility review for web-based learning tools and materials. <i>Proceedings of the 11th annual International Conference of Education, Research and Innovation (ICERI 2018)</i>, pp.&nbsp;2393-2402. doi: <a target="_blank" href="https://doi.org/10.21125/iceri.2018.1525">10.21125/iceri.2018.1525</a>. <button type="button" data-bs-toggle="collapse" data-bs-target="#ref-86" aria-expanded="false" aria-controls="ref-86" class="btn btn-sm btn-danger btn-pub"><i class="bi bi-plus-lg"></i></button>
 <div id="ref-86" class="collapse">
 <p class="small">
@@ -1268,7 +1283,7 @@ Marco L., <b>López-Pernas S</b>., Alonso A. (2018). Accessibility review for we
 2024
 </h3>
 <ul style="padding-left: 3rem">
-<li style="position:relative;margin-bottom:0.8rem;list-style:none;">
+<li style="position:relative;margin-bottom:0.8rem;list-style:none;" class="is-la">
 <b>López-Pernas S</b>., Misiejuk K., Kaliisa R., Conde M. Á., Saqr M. (2024). Capturing the Wealth and Diversity of Learning Processes with Learning Analytics Methods. <i>Learning analytics methods and tutorials: A practical guide using R</i> (in-press). <a target="_blank" href="https://lamethods.github.io/chapters/ch01-intro/intro.html">https://lamethods.github.io/chapters/ch01-intro/intro.html</a>. <button type="button" data-bs-toggle="collapse" data-bs-target="#ref-92" aria-expanded="false" aria-controls="ref-92" class="btn btn-sm btn-danger btn-pub"><i class="bi bi-plus-lg"></i></button>
 <div id="ref-92" class="collapse">
 <p class="small">
@@ -1280,7 +1295,7 @@ Marco L., <b>López-Pernas S</b>., Alonso A. (2018). Accessibility review for we
 <br>
 </div>
 </li>
-<li style="position:relative;margin-bottom:0.8rem;list-style:none;">
+<li style="position:relative;margin-bottom:0.8rem;list-style:none;" class="is-la">
 <b>López-Pernas S</b>., Misiejuk K., Tikka S., Saqr M., Kopra J., Heinäniemi M. (2024). Visualizing and Reporting Educational Data with R. <i>Learning analytics methods and tutorials: A practical guide using R</i> (in-press). <a target="_blank" href="https://lamethods.github.io/chapters/ch06-data-visualization/ch6-viz.html">https://lamethods.github.io/chapters/ch06-data-visualization/ch6-viz.html</a>. <button type="button" data-bs-toggle="collapse" data-bs-target="#ref-93" aria-expanded="false" aria-controls="ref-93" class="btn btn-sm btn-danger btn-pub"><i class="bi bi-plus-lg"></i></button>
 <div id="ref-93" class="collapse">
 <p class="small">
@@ -1292,7 +1307,7 @@ Marco L., <b>López-Pernas S</b>., Alonso A. (2018). Accessibility review for we
 <br>
 </div>
 </li>
-<li style="position:relative;margin-bottom:0.8rem;list-style:none;">
+<li style="position:relative;margin-bottom:0.8rem;list-style:none;" class="is-la">
 <b>López-Pernas S</b>., Saqr M. (2024). Modelling the Dynamics of Longitudinal Processes in Education: The VaSSTra Method. <i>Learning analytics methods and tutorials: A practical guide using R</i> (in-press). <a target="_blank" href="https://lamethods.github.io/chapters/ch11-vasstra/ch11-vasstra.html">https://lamethods.github.io/chapters/ch11-vasstra/ch11-vasstra.html</a>. <button type="button" data-bs-toggle="collapse" data-bs-target="#ref-94" aria-expanded="false" aria-controls="ref-94" class="btn btn-sm btn-danger btn-pub"><i class="bi bi-plus-lg"></i></button>
 <div id="ref-94" class="collapse">
 <p class="small">
@@ -1304,7 +1319,7 @@ Marco L., <b>López-Pernas S</b>., Alonso A. (2018). Accessibility review for we
 <br>
 </div>
 </li>
-<li style="position:relative;margin-bottom:0.8rem;list-style:none;">
+<li style="position:relative;margin-bottom:0.8rem;list-style:none;" class="is-la">
 <b>López-Pernas S</b>., Saqr M. (2024). The Why, the How, and the When of Educational Process Mining in R. <i>Learning analytics methods and tutorials: A practical guide using R</i> (in-press). <a target="_blank" href="https://lamethods.github.io/chapters/ch14-process-mining/ch14-process.html">https://lamethods.github.io/chapters/ch14-process-mining/ch14-process.html</a>. <button type="button" data-bs-toggle="collapse" data-bs-target="#ref-95" aria-expanded="false" aria-controls="ref-95" class="btn btn-sm btn-danger btn-pub"><i class="bi bi-plus-lg"></i></button>
 <div id="ref-95" class="collapse">
 <p class="small">
@@ -1316,7 +1331,7 @@ Marco L., <b>López-Pernas S</b>., Alonso A. (2018). Accessibility review for we
 <br>
 </div>
 </li>
-<li style="position:relative;margin-bottom:0.8rem;list-style:none;">
+<li style="position:relative;margin-bottom:0.8rem;list-style:none;" class="is-la">
 <b>López-Pernas S</b>., Saqr M., Conde J., Del-Río-Carazo L. (2024). A Broad Collection of Datasets for Educational Research Training and Application. <i>Learning analytics methods and tutorials: A practical guide using R</i> (in-press). <a target="_blank" href="https://lamethods.github.io/chapters/ch02-data/ch2-data.html">https://lamethods.github.io/chapters/ch02-data/ch2-data.html</a>. <button type="button" data-bs-toggle="collapse" data-bs-target="#ref-96" aria-expanded="false" aria-controls="ref-96" class="btn btn-sm btn-danger btn-pub"><i class="bi bi-plus-lg"></i></button>
 <div id="ref-96" class="collapse">
 <p class="small">
@@ -1328,7 +1343,7 @@ Marco L., <b>López-Pernas S</b>., Alonso A. (2018). Accessibility review for we
 <br>
 </div>
 </li>
-<li style="position:relative;margin-bottom:0.8rem;list-style:none;">
+<li style="position:relative;margin-bottom:0.8rem;list-style:none;" class="is-la">
 <b>López-Pernas S</b>., Saqr M., Helske S., Murphy K. (2024). Multichannel Sequence Analysis in Educational Research Using R. <i>Learning analytics methods and tutorials: A practical guide using R</i> (in-press). <a target="_blank" href="https://lamethods.github.io/chapters/ch13-multichannel/ch13-multi.html">https://lamethods.github.io/chapters/ch13-multichannel/ch13-multi.html</a>. <button type="button" data-bs-toggle="collapse" data-bs-target="#ref-97" aria-expanded="false" aria-controls="ref-97" class="btn btn-sm btn-danger btn-pub"><i class="bi bi-plus-lg"></i></button>
 <div id="ref-97" class="collapse">
 <p class="small">
@@ -1340,7 +1355,7 @@ Marco L., <b>López-Pernas S</b>., Alonso A. (2018). Accessibility review for we
 <br>
 </div>
 </li>
-<li style="position:relative;margin-bottom:0.8rem;list-style:none;">
+<li style="position:relative;margin-bottom:0.8rem;list-style:none;" class="is-la">
 Jongerling J., <b>López-Pernas S</b>., Saqr M., Vogelsmeier L. (2024). Structural Equation Modeling with R for Education Scientists. <i>Learning analytics methods and tutorials: A practical guide using R</i> (in-press). <a target="_blank" href="https://lamethods.github.io/chapters/ch21-sem/ch21-sem.html">https://lamethods.github.io/chapters/ch21-sem/ch21-sem.html</a>. <button type="button" data-bs-toggle="collapse" data-bs-target="#ref-89" aria-expanded="false" aria-controls="ref-89" class="btn btn-sm btn-danger btn-pub"><i class="bi bi-plus-lg"></i></button>
 <div id="ref-89" class="collapse">
 <p class="small">
@@ -1352,7 +1367,7 @@ Jongerling J., <b>López-Pernas S</b>., Saqr M., Vogelsmeier L. (2024). Structur
 <br>
 </div>
 </li>
-<li style="position:relative;margin-bottom:0.8rem;list-style:none;">
+<li style="position:relative;margin-bottom:0.8rem;list-style:none;" class="is-la">
 Jovanovic J., <b>López-Pernas S</b>., Saqr M. (2024). Predictive Modelling in Learning Analytics using R. <i>Learning analytics methods and tutorials: A practical guide using R</i> (in-press). <a target="_blank" href="https://lamethods.github.io/chapters/ch07-prediction/ch7-pred.html">https://lamethods.github.io/chapters/ch07-prediction/ch7-pred.html</a>. <button type="button" data-bs-toggle="collapse" data-bs-target="#ref-90" aria-expanded="false" aria-controls="ref-90" class="btn btn-sm btn-danger btn-pub"><i class="bi bi-plus-lg"></i></button>
 <div id="ref-90" class="collapse">
 <p class="small">
@@ -1364,7 +1379,7 @@ Jovanovic J., <b>López-Pernas S</b>., Saqr M. (2024). Predictive Modelling in L
 <br>
 </div>
 </li>
-<li style="position:relative;margin-bottom:0.8rem;list-style:none;">
+<li style="position:relative;margin-bottom:0.8rem;list-style:none;" class="is-la">
 Murphy K., <b>López-Pernas S</b>., Saqr M. (2024). Dissimilarity-based Cluster Analysis of Educational Data: A Comparative Tutorial using R. <i>Learning analytics methods and tutorials: A practical guide using R</i> (in-press). <a target="_blank" href="https://lamethods.github.io/chapters/ch08-clustering/ch8-clus.html">https://lamethods.github.io/chapters/ch08-clustering/ch8-clus.html</a>. <button type="button" data-bs-toggle="collapse" data-bs-target="#ref-98" aria-expanded="false" aria-controls="ref-98" class="btn btn-sm btn-danger btn-pub"><i class="bi bi-plus-lg"></i></button>
 <div id="ref-98" class="collapse">
 <p class="small">
@@ -1376,7 +1391,7 @@ Murphy K., <b>López-Pernas S</b>., Saqr M. (2024). Dissimilarity-based Cluster 
 <br>
 </div>
 </li>
-<li style="position:relative;margin-bottom:0.8rem;list-style:none;">
+<li style="position:relative;margin-bottom:0.8rem;list-style:none;" class="is-la">
 Saqr M., <b>López-Pernas S</b>., Conde M. Á., Hernández-García Á. (2024). Social Network Analysis: A Primer, a Guide and a Tutorial in R. <i>Learning analytics methods and tutorials: A practical guide using R</i> (in-press). <a target="_blank" href="https://lamethods.github.io/chapters/ch15-sna/ch15-sna.html">https://lamethods.github.io/chapters/ch15-sna/ch15-sna.html</a>. <button type="button" data-bs-toggle="collapse" data-bs-target="#ref-100" aria-expanded="false" aria-controls="ref-100" class="btn btn-sm btn-danger btn-pub"><i class="bi bi-plus-lg"></i></button>
 <div id="ref-100" class="collapse">
 <p class="small">
@@ -1388,7 +1403,7 @@ Saqr M., <b>López-Pernas S</b>., Conde M. Á., Hernández-García Á. (2024). S
 <br>
 </div>
 </li>
-<li style="position:relative;margin-bottom:0.8rem;list-style:none;">
+<li style="position:relative;margin-bottom:0.8rem;list-style:none;" class="is-la">
 Saqr M., <b>López-Pernas S</b>., Helske S., Durand M., Murphy K., Studer M., Ritschard G. (2024). Sequence Analysis in Education: Principles, Technique, and Tutorial with R. <i>Learning analytics methods and tutorials: A practical guide using R</i> (in-press). <a target="_blank" href="https://lamethods.github.io/chapters/ch10-sequence-analysis/ch10-seq.html">https://lamethods.github.io/chapters/ch10-sequence-analysis/ch10-seq.html</a>. <button type="button" data-bs-toggle="collapse" data-bs-target="#ref-101" aria-expanded="false" aria-controls="ref-101" class="btn btn-sm btn-danger btn-pub"><i class="bi bi-plus-lg"></i></button>
 <div id="ref-101" class="collapse">
 <p class="small">
@@ -1400,7 +1415,7 @@ Saqr M., <b>López-Pernas S</b>., Helske S., Durand M., Murphy K., Studer M., Ri
 <br>
 </div>
 </li>
-<li style="position:relative;margin-bottom:0.8rem;list-style:none;">
+<li style="position:relative;margin-bottom:0.8rem;list-style:none;" class="is-la">
 Saqr M., Beck E., <b>López-Pernas S</b>. (2024). Psychological Networks: A Modern Approach to Analysis of Learning and Complex Learning Processes. <i>Learning analytics methods and tutorials: A practical guide using R</i> (in-press). <a target="_blank" href="https://lamethods.github.io/chapters/ch19-psychological-networks/ch19-psych.html">https://lamethods.github.io/chapters/ch19-psychological-networks/ch19-psych.html</a>. <button type="button" data-bs-toggle="collapse" data-bs-target="#ref-99" aria-expanded="false" aria-controls="ref-99" class="btn btn-sm btn-danger btn-pub"><i class="bi bi-plus-lg"></i></button>
 <div id="ref-99" class="collapse">
 <p class="small">
@@ -1412,7 +1427,7 @@ Saqr M., Beck E., <b>López-Pernas S</b>. (2024). Psychological Networks: A Mode
 <br>
 </div>
 </li>
-<li style="position:relative;margin-bottom:0.8rem;list-style:none;">
+<li style="position:relative;margin-bottom:0.8rem;list-style:none;" class="is-la">
 Saqr M., Schreuder M. J., <b>López-Pernas S</b>. (2024). Why educational research needs a complex system revolution that embraces individual differences, heterogeneity, and uncertainty. <i>Learning analytics methods and tutorials: A practical guide using R</i> (in-press). <a target="_blank" href="https://lamethods.github.io/chapters/ch22-conclusion/ch22-conclusion.html">https://lamethods.github.io/chapters/ch22-conclusion/ch22-conclusion.html</a>. <button type="button" data-bs-toggle="collapse" data-bs-target="#ref-102" aria-expanded="false" aria-controls="ref-102" class="btn btn-sm btn-danger btn-pub"><i class="bi bi-plus-lg"></i></button>
 <div id="ref-102" class="collapse">
 <p class="small">
@@ -1424,7 +1439,7 @@ Saqr M., Schreuder M. J., <b>López-Pernas S</b>. (2024). Why educational resear
 <br>
 </div>
 </li>
-<li style="position:relative;margin-bottom:0.8rem;list-style:none;">
+<li style="position:relative;margin-bottom:0.8rem;list-style:none;" class="is-la">
 Scrucca L., Saqr M., <b>López-Pernas S</b>., Murphy K. (2024). An Introduction and R Tutorial to Model-based Clustering in Education via Latent Profile Analysis. <i>Learning analytics methods and tutorials: A practical guide using R</i> (in-press). <a target="_blank" href="https://lamethods.github.io/chapters/ch09-model-based-clustering/ch9-model.html">https://lamethods.github.io/chapters/ch09-model-based-clustering/ch9-model.html</a>. <button type="button" data-bs-toggle="collapse" data-bs-target="#ref-103" aria-expanded="false" aria-controls="ref-103" class="btn btn-sm btn-danger btn-pub"><i class="bi bi-plus-lg"></i></button>
 <div id="ref-103" class="collapse">
 <p class="small">
@@ -1436,7 +1451,7 @@ Scrucca L., Saqr M., <b>López-Pernas S</b>., Murphy K. (2024). An Introduction 
 <br>
 </div>
 </li>
-<li style="position:relative;margin-bottom:0.8rem;list-style:none;">
+<li style="position:relative;margin-bottom:0.8rem;list-style:none;" class="is-la">
 Vogelsmeier L. V. D. E., Saqr M., <b>López-Pernas S</b>., Jongerling J. (2024). Factor Analysis in Education Research using R. <i>Learning analytics methods and tutorials: A practical guide using R</i> (in-press). <a target="_blank" href="https://lamethods.github.io/chapters/ch20-factor-analysis/ch20-factor.html">https://lamethods.github.io/chapters/ch20-factor-analysis/ch20-factor.html</a>. <button type="button" data-bs-toggle="collapse" data-bs-target="#ref-106" aria-expanded="false" aria-controls="ref-106" class="btn btn-sm btn-danger btn-pub"><i class="bi bi-plus-lg"></i></button>
 <div id="ref-106" class="collapse">
 <p class="small">
@@ -1448,7 +1463,7 @@ Vogelsmeier L. V. D. E., Saqr M., <b>López-Pernas S</b>., Jongerling J. (2024).
 <br>
 </div>
 </li>
-<li style="position:relative;margin-bottom:0.8rem;list-style:none;">
+<li style="position:relative;margin-bottom:0.8rem;list-style:none;" class="is-la">
 Helske J., Helske S., Saqr M., <b>López-Pernas S</b>., Murphy K. (2024). A Modern Approach to Transition Analysis and Process Mining with Markov Models in Education. <i>Learning analytics methods and tutorials: A practical guide using R</i> (in-press). <a target="_blank" href="https://lamethods.github.io/chapters/ch12-markov/ch12-markov.html">https://lamethods.github.io/chapters/ch12-markov/ch12-markov.html</a>. <button type="button" data-bs-toggle="collapse" data-bs-target="#ref-87" aria-expanded="false" aria-controls="ref-87" class="btn btn-sm btn-danger btn-pub"><i class="bi bi-plus-lg"></i></button>
 <div id="ref-87" class="collapse">
 <p class="small">
@@ -1460,7 +1475,7 @@ Helske J., Helske S., Saqr M., <b>López-Pernas S</b>., Murphy K. (2024). A Mode
 <br>
 </div>
 </li>
-<li style="position:relative;margin-bottom:0.8rem;list-style:none;">
+<li style="position:relative;margin-bottom:0.8rem;list-style:none;" class="is-la">
 Hernández-García Á., Cuenca-Enrique C., Traxler A., <b>López-Pernas S</b>., Conde M. Á., Saqr M. (2024). Community Detection in Learning Networks Using R. <i>Learning analytics methods and tutorials: A practical guide using R</i> (in-press). <a target="_blank" href="https://lamethods.github.io/chapters/ch16-community/ch16-comm.html">https://lamethods.github.io/chapters/ch16-community/ch16-comm.html</a>. <button type="button" data-bs-toggle="collapse" data-bs-target="#ref-88" aria-expanded="false" aria-controls="ref-88" class="btn btn-sm btn-danger btn-pub"><i class="bi bi-plus-lg"></i></button>
 <div id="ref-88" class="collapse">
 <p class="small">
@@ -1472,7 +1487,7 @@ Hernández-García Á., Cuenca-Enrique C., Traxler A., <b>López-Pernas S</b>., 
 <br>
 </div>
 </li>
-<li style="position:relative;margin-bottom:0.8rem;list-style:none;">
+<li style="position:relative;margin-bottom:0.8rem;list-style:none;" class="is-la">
 Kopra J., Tikka S., Heinäniemi M., <b>López-Pernas S</b>., Saqr M. (2024). An R Approach to Data Cleaning and Wrangling for Education Research. <i>Learning analytics methods and tutorials: A practical guide using R</i> (in-press). <a target="_blank" href="https://lamethods.github.io/chapters/ch04-data-cleaning/ch4-datacleaning.html">https://lamethods.github.io/chapters/ch04-data-cleaning/ch4-datacleaning.html</a>. <button type="button" data-bs-toggle="collapse" data-bs-target="#ref-91" aria-expanded="false" aria-controls="ref-91" class="btn btn-sm btn-danger btn-pub"><i class="bi bi-plus-lg"></i></button>
 <div id="ref-91" class="collapse">
 <p class="small">
@@ -1484,7 +1499,7 @@ Kopra J., Tikka S., Heinäniemi M., <b>López-Pernas S</b>., Saqr M. (2024). An 
 <br>
 </div>
 </li>
-<li style="position:relative;margin-bottom:0.8rem;list-style:none;">
+<li style="position:relative;margin-bottom:0.8rem;list-style:none;" class="is-la">
 Tikka S., Kopra J., Heinäniemi M., <b>López-Pernas S</b>., Saqr M. (2024). Getting started with R for Education Research. <i>Learning analytics methods and tutorials: A practical guide using R</i> (in-press). <a target="_blank" href="https://lamethods.github.io/chapters/ch03-intro-r/ch3-intor.html">https://lamethods.github.io/chapters/ch03-intro-r/ch3-intor.html</a>. <button type="button" data-bs-toggle="collapse" data-bs-target="#ref-104" aria-expanded="false" aria-controls="ref-104" class="btn btn-sm btn-danger btn-pub"><i class="bi bi-plus-lg"></i></button>
 <div id="ref-104" class="collapse">
 <p class="small">
@@ -1496,7 +1511,7 @@ Tikka S., Kopra J., Heinäniemi M., <b>López-Pernas S</b>., Saqr M. (2024). Get
 <br>
 </div>
 </li>
-<li style="position:relative;margin-bottom:0.8rem;list-style:none;">
+<li style="position:relative;margin-bottom:0.8rem;list-style:none;" class="is-la">
 Tikka S., Kopra J., Heinäniemi M., <b>López-Pernas S</b>., Saqr M. (2024). Introductory Statistics with R for Educational Researchers. <i>Learning analytics methods and tutorials: A practical guide using R</i> (in-press). <a target="_blank" href="https://lamethods.github.io/chapters/ch05-basic-stats/ch5-stats.html">https://lamethods.github.io/chapters/ch05-basic-stats/ch5-stats.html</a>. <button type="button" data-bs-toggle="collapse" data-bs-target="#ref-105" aria-expanded="false" aria-controls="ref-105" class="btn btn-sm btn-danger btn-pub"><i class="bi bi-plus-lg"></i></button>
 <div id="ref-105" class="collapse">
 <p class="small">
@@ -1513,7 +1528,7 @@ Tikka S., Kopra J., Heinäniemi M., <b>López-Pernas S</b>., Saqr M. (2024). Int
 2023
 </h3>
 <ul style="padding-left: 3rem">
-<li style="position:relative;margin-bottom:0.8rem;list-style:none;">
+<li style="position:relative;margin-bottom:0.8rem;list-style:none;" class="is-biblio">
 <b>López-Pernas S</b>., Saqr M., Apiola M. (2023). Scientometrics: A Concise Introduction and a Detailed Methodology for Mapping the Scientific Field of Computing Education Research. <i>Past, Present and Future of Computing Education Research: A Global Perspective. Springer</i>, pp.&nbsp;79-99. doi: <a target="_blank" href="https://doi.org/10.1007/978-3-031-25336-2_5">10.1007/978-3-031-25336-2_5</a>. <button type="button" data-bs-toggle="collapse" data-bs-target="#ref-107" aria-expanded="false" aria-controls="ref-107" class="btn btn-sm btn-danger btn-pub"><i class="bi bi-plus-lg"></i></button>
 <div id="ref-107" class="collapse">
 <p class="small">
@@ -1525,7 +1540,7 @@ Tikka S., Kopra J., Heinäniemi M., <b>López-Pernas S</b>., Saqr M. (2024). Int
 <br>
 </div>
 </li>
-<li style="position:relative;margin-bottom:0.8rem;list-style:none;">
+<li style="position:relative;margin-bottom:0.8rem;list-style:none;" class="is-biblio">
 <b>López-Pernas S</b>., Apiola M., Saqr M., Pears A., Tedre M. (2023). A Scientometric Perspective on the Evolution of the SIGCSE Technical Symposium: 1970–2021. <i>Past, Present and Future of Computing Education Research: A Global Perspective, Springer</i>, pp.&nbsp;193-212. doi: <a target="_blank" href="https://doi.org/10.1007/978-3-031-25336-2_10">10.1007/978-3-031-25336-2_10</a>. <button type="button" data-bs-toggle="collapse" data-bs-target="#ref-108" aria-expanded="false" aria-controls="ref-108" class="btn btn-sm btn-danger btn-pub"><i class="bi bi-plus-lg"></i></button>
 <div id="ref-108" class="collapse">
 <p class="small">
@@ -1537,7 +1552,7 @@ Tikka S., Kopra J., Heinäniemi M., <b>López-Pernas S</b>., Saqr M. (2024). Int
 <br>
 </div>
 </li>
-<li style="position:relative;margin-bottom:0.8rem;list-style:none;">
+<li style="position:relative;margin-bottom:0.8rem;list-style:none;" class="is-biblio">
 Apiola M., <b>López-Pernas S</b>., Saqr M., Malmi L., Daniels M. (2023). Exploring the Past, Present and Future of Computing Education Research: An Introduction. <i>Past, Present and Future of Computing Education Research: A Global Perspective, Springer</i>, pp.&nbsp;1-7. doi: <a target="_blank" href="https://doi.org/10.1007/978-3-031-25336-2_1">10.1007/978-3-031-25336-2_1</a>. <button type="button" data-bs-toggle="collapse" data-bs-target="#ref-109" aria-expanded="false" aria-controls="ref-109" class="btn btn-sm btn-danger btn-pub"><i class="bi bi-plus-lg"></i></button>
 <div id="ref-109" class="collapse">
 <p class="small">
@@ -1549,7 +1564,7 @@ Apiola M., <b>López-Pernas S</b>., Saqr M., Malmi L., Daniels M. (2023). Explor
 <br>
 </div>
 </li>
-<li style="position:relative;margin-bottom:0.8rem;list-style:none;">
+<li style="position:relative;margin-bottom:0.8rem;list-style:none;" class="is-biblio">
 Apiola M., <b>López-Pernas S</b>., Saqr M. (2023). The Venues that Shaped Computing Education Research: Dissemination Under the Lens. <i>Past, Present and Future of Computing Education Research: A Global Perspective, Springer</i>, pp.&nbsp;121-150. doi: <a target="_blank" href="https://doi.org/10.1007/978-3-031-25336-2_7">10.1007/978-3-031-25336-2_7</a>. <button type="button" data-bs-toggle="collapse" data-bs-target="#ref-113" aria-expanded="false" aria-controls="ref-113" class="btn btn-sm btn-danger btn-pub"><i class="bi bi-plus-lg"></i></button>
 <div id="ref-113" class="collapse">
 <p class="small">
@@ -1561,7 +1576,7 @@ Apiola M., <b>López-Pernas S</b>., Saqr M. (2023). The Venues that Shaped Compu
 <br>
 </div>
 </li>
-<li style="position:relative;margin-bottom:0.8rem;list-style:none;">
+<li style="position:relative;margin-bottom:0.8rem;list-style:none;" class="is-biblio">
 Saqr M., <b>López-Pernas S</b>., Apiola M. (2023). Capturing the Impact and the Chatter Around Computing Education Research Beyond Academia in Social Media, Patents, and Blogs. <i>Past, Present and Future of Computing Education Research: A Global Perspective. Springer</i>, pp.&nbsp;171-191. doi: <a target="_blank" href="https://doi.org/10.1007/978-3-031-25336-2_9">10.1007/978-3-031-25336-2_9</a>. <button type="button" data-bs-toggle="collapse" data-bs-target="#ref-116" aria-expanded="false" aria-controls="ref-116" class="btn btn-sm btn-danger btn-pub"><i class="bi bi-plus-lg"></i></button>
 <div id="ref-116" class="collapse">
 <p class="small">
@@ -1573,7 +1588,7 @@ Saqr M., <b>López-Pernas S</b>., Apiola M. (2023). Capturing the Impact and the
 <br>
 </div>
 </li>
-<li style="position:relative;margin-bottom:0.8rem;list-style:none;">
+<li style="position:relative;margin-bottom:0.8rem;list-style:none;" class="is-biblio">
 Agbo F.J., Ntinda M., <b>López-Pernas S</b>., Saqr M., Apiola M. (2023). Computing Education Research in the Global South. <i>Past, Present and Future of Computing Education Research: A Global Perspective, Springer</i>, pp.&nbsp;311-333. doi: <a target="_blank" href="https://doi.org/10.1007/978-3-031-25336-2_15">10.1007/978-3-031-25336-2_15</a>. <button type="button" data-bs-toggle="collapse" data-bs-target="#ref-112" aria-expanded="false" aria-controls="ref-112" class="btn btn-sm btn-danger btn-pub"><i class="bi bi-plus-lg"></i></button>
 <div id="ref-112" class="collapse">
 <p class="small">
@@ -1585,7 +1600,7 @@ Agbo F.J., Ntinda M., <b>López-Pernas S</b>., Saqr M., Apiola M. (2023). Comput
 <br>
 </div>
 </li>
-<li style="position:relative;margin-bottom:0.8rem;list-style:none;">
+<li style="position:relative;margin-bottom:0.8rem;list-style:none;" class="is-biblio">
 Apiola M., Saqr M., <b>López-Pernas S</b>. (2023). The Hands that Made Computing Education Research: Top Authors, Networks, Collaboration and Newcomers. <i>Past, Present and Future of Computing Education Research: A Global Perspective, Springer</i>, pp.&nbsp;101-119. doi: <a target="_blank" href="https://doi.org/10.1007/978-3-031-25336-2_6">10.1007/978-3-031-25336-2_6</a>. <button type="button" data-bs-toggle="collapse" data-bs-target="#ref-114" aria-expanded="false" aria-controls="ref-114" class="btn btn-sm btn-danger btn-pub"><i class="bi bi-plus-lg"></i></button>
 <div id="ref-114" class="collapse">
 <p class="small">
@@ -1597,7 +1612,7 @@ Apiola M., Saqr M., <b>López-Pernas S</b>. (2023). The Hands that Made Computin
 <br>
 </div>
 </li>
-<li style="position:relative;margin-bottom:0.8rem;list-style:none;">
+<li style="position:relative;margin-bottom:0.8rem;list-style:none;" class="is-biblio">
 Apiola M., Saqr M., <b>López-Pernas S</b>. (2023). The Evolving Themes of Computing Education Research: Trends, Topic Models, and Emerging Research. <i>Past, Present and Future of Computing Education Research: A Global Perspective, Springer</i>, pp.&nbsp;151-169. doi: <a target="_blank" href="https://doi.org/10.1007/978-3-031-25336-2_8">10.1007/978-3-031-25336-2_8</a>. <button type="button" data-bs-toggle="collapse" data-bs-target="#ref-115" aria-expanded="false" aria-controls="ref-115" class="btn btn-sm btn-danger btn-pub"><i class="bi bi-plus-lg"></i></button>
 <div id="ref-115" class="collapse">
 <p class="small">
@@ -1609,7 +1624,7 @@ Apiola M., Saqr M., <b>López-Pernas S</b>. (2023). The Evolving Themes of Compu
 <br>
 </div>
 </li>
-<li style="position:relative;margin-bottom:0.8rem;list-style:none;">
+<li style="position:relative;margin-bottom:0.8rem;list-style:none;" class="is-biblio">
 Dagienė V., Gülbahar Y., Grgurina N., <b>López-Pernas S</b>., Saqr M., Apiola M., Stupurienė G. (2023). Computing Education Research in Schools. <i>Past, Present and Future of Computing Education Research: A Global Perspective, Springer</i>, pp.&nbsp;481-520. doi: <a target="_blank" href="https://doi.org/10.1007/978-3-031-25336-2_20">10.1007/978-3-031-25336-2_20</a>. <button type="button" data-bs-toggle="collapse" data-bs-target="#ref-110" aria-expanded="false" aria-controls="ref-110" class="btn btn-sm btn-danger btn-pub"><i class="bi bi-plus-lg"></i></button>
 <div id="ref-110" class="collapse">
 <p class="small">
@@ -1621,7 +1636,7 @@ Dagienė V., Gülbahar Y., Grgurina N., <b>López-Pernas S</b>., Saqr M., Apiola
 <br>
 </div>
 </li>
-<li style="position:relative;margin-bottom:0.8rem;list-style:none;">
+<li style="position:relative;margin-bottom:0.8rem;list-style:none;" class="is-la">
 Sointu E., Väisänen S., Hirsto L., Paavilainen T., Saqr M., <b>López-Pernas S</b>., Valtonen T. (2023). Creatively Opening the Constraints of Learning Analytics in Inclusive, Elementary School-Level STEAM Education. <i>The Power of Creativity in the Classroom</i> (in-press). <button type="button" data-bs-toggle="collapse" data-bs-target="#ref-117" aria-expanded="false" aria-controls="ref-117" class="btn btn-sm btn-danger btn-pub"><i class="bi bi-plus-lg"></i></button>
 <div id="ref-117" class="collapse">
 <p class="small">
@@ -1633,7 +1648,7 @@ Sointu E., Väisänen S., Hirsto L., Paavilainen T., Saqr M., <b>López-Pernas S
 <br>
 </div>
 </li>
-<li style="position:relative;margin-bottom:0.8rem;list-style:none;">
+<li style="position:relative;margin-bottom:0.8rem;list-style:none;" class="is-biblio">
 Malmi L., Hellas A., Ihantola P., Isomöttönen V., Jormanainen I., Kilamo T., Knutas A., Korhonen A., Laakso M.-J., <b>López-Pernas S</b>., Poranen T., Salakoski T., Suhonen J. (2023). Computing Education Research in Finland. <i>Past, Present and Future of Computing Education Research: A Global Perspective, Springer</i>, pp.&nbsp;335-372. doi: <a target="_blank" href="https://doi.org/10.1007/978-3-031-25336-2_16">10.1007/978-3-031-25336-2_16</a>. <button type="button" data-bs-toggle="collapse" data-bs-target="#ref-111" aria-expanded="false" aria-controls="ref-111" class="btn btn-sm btn-danger btn-pub"><i class="bi bi-plus-lg"></i></button>
 <div id="ref-111" class="collapse">
 <p class="small">
@@ -1647,8 +1662,6 @@ Malmi L., Hellas A., Ihantola P., Isomöttönen V., Jormanainen I., Kilamo T., K
 </li>
 </ul>
 
-<p>:::{.hidden render-id=“footer-right-<span style="text-sm"><a target="_blank" href="https://github.com/sonsoleslp/sonsolelp.github.io">Source code</a>. Based on <a target="_blank" href="https://github.com/ddimmery/quarto-website">ddimmery</a></span>”} <span style="text-sm"><a target="_blank" href="https://github.com/sonsoleslp/sonsolelp.github.io">Source code</a>. Based on <a target="_blank" href="https://github.com/ddimmery/quarto-website">ddimmery</a></span> :::</p>
-<p>:::</p>
 
 </section>
 
@@ -1732,9 +1745,10 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     // clear code selection
     e.clearSelection();
   });
-  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+  function tippyHover(el, contentFn) {
     const config = {
       allowHTML: true,
+      content: contentFn,
       maxWidth: 500,
       delay: 100,
       arrow: false,
@@ -1744,17 +1758,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       interactive: true,
       interactiveBorder: 10,
       theme: 'quarto',
-      placement: 'bottom-start',
+      placement: 'bottom-start'
     };
-    if (contentFn) {
-      config.content = contentFn;
-    }
-    if (onTriggerFn) {
-      config.onTrigger = onTriggerFn;
-    }
-    if (onUntriggerFn) {
-      config.onUntrigger = onUntriggerFn;
-    }
     window.tippy(el, config); 
   }
   const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
@@ -1767,125 +1772,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
       return note.innerHTML;
-    });
-  }
-  const xrefs = window.document.querySelectorAll('a.quarto-xref');
-  const processXRef = (id, note) => {
-    // Strip column container classes
-    const stripColumnClz = (el) => {
-      el.classList.remove("page-full", "page-columns");
-      if (el.children) {
-        for (const child of el.children) {
-          stripColumnClz(child);
-        }
-      }
-    }
-    stripColumnClz(note)
-    if (id === null || id.startsWith('sec-')) {
-      // Special case sections, only their first couple elements
-      const container = document.createElement("div");
-      if (note.children && note.children.length > 2) {
-        container.appendChild(note.children[0].cloneNode(true));
-        for (let i = 1; i < note.children.length; i++) {
-          const child = note.children[i];
-          if (child.tagName === "P" && child.innerText === "") {
-            continue;
-          } else {
-            container.appendChild(child.cloneNode(true));
-            break;
-          }
-        }
-        if (window.Quarto?.typesetMath) {
-          window.Quarto.typesetMath(container);
-        }
-        return container.innerHTML
-      } else {
-        if (window.Quarto?.typesetMath) {
-          window.Quarto.typesetMath(note);
-        }
-        return note.innerHTML;
-      }
-    } else {
-      // Remove any anchor links if they are present
-      const anchorLink = note.querySelector('a.anchorjs-link');
-      if (anchorLink) {
-        anchorLink.remove();
-      }
-      if (window.Quarto?.typesetMath) {
-        window.Quarto.typesetMath(note);
-      }
-      // TODO in 1.5, we should make sure this works without a callout special case
-      if (note.classList.contains("callout")) {
-        return note.outerHTML;
-      } else {
-        return note.innerHTML;
-      }
-    }
-  }
-  for (var i=0; i<xrefs.length; i++) {
-    const xref = xrefs[i];
-    tippyHover(xref, undefined, function(instance) {
-      instance.disable();
-      let url = xref.getAttribute('href');
-      let hash = undefined; 
-      if (url.startsWith('#')) {
-        hash = url;
-      } else {
-        try { hash = new URL(url).hash; } catch {}
-      }
-      if (hash) {
-        const id = hash.replace(/^#\/?/, "");
-        const note = window.document.getElementById(id);
-        if (note !== null) {
-          try {
-            const html = processXRef(id, note.cloneNode(true));
-            instance.setContent(html);
-          } finally {
-            instance.enable();
-            instance.show();
-          }
-        } else {
-          // See if we can fetch this
-          fetch(url.split('#')[0])
-          .then(res => res.text())
-          .then(html => {
-            const parser = new DOMParser();
-            const htmlDoc = parser.parseFromString(html, "text/html");
-            const note = htmlDoc.getElementById(id);
-            if (note !== null) {
-              const html = processXRef(id, note);
-              instance.setContent(html);
-            } 
-          }).finally(() => {
-            instance.enable();
-            instance.show();
-          });
-        }
-      } else {
-        // See if we can fetch a full url (with no hash to target)
-        // This is a special case and we should probably do some content thinning / targeting
-        fetch(url)
-        .then(res => res.text())
-        .then(html => {
-          const parser = new DOMParser();
-          const htmlDoc = parser.parseFromString(html, "text/html");
-          const note = htmlDoc.querySelector('main.content');
-          if (note !== null) {
-            // This should only happen for chapter cross references
-            // (since there is no id in the URL)
-            // remove the first header
-            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
-              note.children[0].remove();
-            }
-            const html = processXRef(null, note);
-            instance.setContent(html);
-          } 
-        }).finally(() => {
-          instance.enable();
-          instance.show();
-        });
-      }
-    }, function(instance) {
     });
   }
       let selectedAnnoteEl;
@@ -1929,7 +1815,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             }
             div.style.top = top - 2 + "px";
             div.style.height = height + 4 + "px";
-            div.style.left = 0;
             let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
             if (gutterDiv === null) {
               gutterDiv = window.document.createElement("div");
@@ -1955,32 +1840,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         });
         selectedAnnoteEl = undefined;
       };
-        // Handle positioning of the toggle
-    window.addEventListener(
-      "resize",
-      throttle(() => {
-        elRect = undefined;
-        if (selectedAnnoteEl) {
-          selectCodeLines(selectedAnnoteEl);
-        }
-      }, 10)
-    );
-    function throttle(fn, ms) {
-    let throttle = false;
-    let timer;
-      return (...args) => {
-        if(!throttle) { // first call gets through
-            fn.apply(this, args);
-            throttle = true;
-        } else { // all the others get throttled
-            if(timer) clearTimeout(timer); // cancel #2
-            timer = setTimeout(() => {
-              fn.apply(this, args);
-              timer = throttle = false;
-            }, ms);
-        }
-      };
-    }
       // Attach click handler to the DT
       const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
       for (const annoteDlNode of annoteDls) {
@@ -2054,15 +1913,10 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       &nbsp;
     </div>
     <div class="nav-footer-right">
-      <ul class="footer-items list-unstyled">
-    <li class="nav-item">
- <span style="text-sm"><a target="_blank" href="https://github.com/sonsoleslp/sonsolelp.github.io">Source code</a>. Based on <a target="_blank" href="https://github.com/ddimmery/quarto-website">ddimmery</a></span>
-  </li>  
-</ul>
+      &nbsp;
     </div>
   </div>
 </footer>
-
 
 
 

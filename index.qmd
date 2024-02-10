@@ -2,6 +2,7 @@
 title: "Sonsoles López-Pernas"
 page-layout: full
 image: /social-card.jpg
+toc: false
 resources:
     - "social-card.jpg"
 ---
@@ -31,4 +32,24 @@ Welcome_tags
 
 :::
 
+## Selected publications
+```{r, include=F}
+library(dplyr)
+source("apa.R")
+Publications = rio::import("cv.xlsx", sheet = "Publications") %>% filter(!is.na(Selected)) %>% arrange(Selected,desc(Year),Source)
+
+(Publications) %>% ungroup %>% dplyr::mutate(seq = seq_along(Title)) -> Publications
+Publications %>%  rowwise %>% 
+  dplyr::mutate(Ref = generateAPARef(Publications[seq,],F)) -> Publications
+```
+```{r,echo=F}
+selected_publ <- htmltools::tagList()
+for (i in 1:length(Publications$Ref)) {
+  selected_publ[[i]] <-htmltools::HTML(paste0(Publications$Ref[i]))
+}
+selected_publ
+```
+<a href="publications.html" class="btn btn-danger btn-sm">View all</a>
+
+ 
 

@@ -137,8 +137,8 @@ awardstags = htmltools::tagList()
 
 for (i in 1:nrow(awards)) {
   awa = awards[i,]
-  awardstags[[i]] <- htmltools::tags$li(
-    paste0("(",awa$Year,") ",awa$Description)
+  awardstags[[i]] <- htmltools::tags$li(htmltools::tagList(
+    htmltools::tags$span(paste0("(",awa$Year,") "),htmltools::HTML(awa$Description)))
   )
 }
 htmltools::tags$ul(
@@ -146,7 +146,7 @@ awardstags
 )
 ```
 
-## Editorial work
+## Editorial and community service work
 ```{r,echo=F}
 editorial = rio::import("cv.xlsx", sheet = "Editorial_work")
 editorialtags = htmltools::tagList()
@@ -155,7 +155,7 @@ for (i in 1:nrow(editorial)) {
   edi = editorial[i,]
   editorialtags[[i]] <- htmltools::tags$li(htmltools::tagList(
    htmltools::tags$span( paste0("(",edi$Year,") ")),
-   htmltools::tags$span(  edi$Description)
+   htmltools::HTML(paste0("<span>",edi$Description,"</span>"))
   ))
 }
 htmltools::tags$ul(
