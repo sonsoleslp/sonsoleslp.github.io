@@ -28,6 +28,7 @@ Welcome_tags
 </div>
 
 <div class="column-margin column-container">
+
 ![](headshot.jpg){.rounded}
 
 </div>
@@ -44,6 +45,7 @@ Publications = rio::import("cv.xlsx", sheet = "Publications") %>% filter(!is.na(
 Publications %>%  rowwise %>% 
   dplyr::mutate(Ref = generateAPARef(Publications[seq,],F)) -> Publications
 ```
+
 ```{r,echo=F}
 selected_publ <- htmltools::tagList()
 for (i in 1:length(Publications$Ref)) {
