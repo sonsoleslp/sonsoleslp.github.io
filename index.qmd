@@ -38,7 +38,7 @@ Welcome_tags
 ```{r, include=F}
 library(dplyr)
 source("apa.R")
-Publications = rio::import("cv.xlsx", sheet = "Publications") %>% filter(!is.na(Selected)) %>% arrange(Selected,desc(Year),Source)
+Publications = rio::import("cv.xlsx", sheet = "Publications") %>% filter(!is.na(Selected)) %>% arrange(as.integer(Selected),desc(Year),Source)
 
 (Publications) %>% ungroup %>% dplyr::mutate(seq = seq_along(Title)) -> Publications
 Publications %>%  rowwise %>% 
