@@ -7,18 +7,34 @@ include-before-body:
     var filterCat = function(name) {
             var x = document.getElementById("badge-"+name);
             x.classList.toggle("active");
-            var y = document.getElementsByClassName("is-"+name)
-            if (x.classList.contains === "active") {
-                for(var i = 0; i< y.length;i++) {
-                  y[i].style.display = "block";
+          
+            document.querySelectorAll(".cat-badge:not(#badge-"+ name + ")").forEach(e=>(e.classList.remove("active")))
+
+            var all_articles = document.getElementsByClassName("ref-entry");
+          
+            if (x.classList.contains("active")) {
+                for(var i = 0; i< all_articles.length;i++) {
+                  all_articles[i].style.display = all_articles[i].classList.contains("is-"+name) ? "block":"none";
                 }
             } else {
-               for(var i = 0; i< y.length;i++) {
-                  y[i].style.display = "none";
+               for(var i = 0; i< all_articles.length;i++) {
+                  all_articles[i].style.display = "block";
                 } 
             }
       }
+      window.onload = function(){
+        const searchParams = new URLSearchParams(window.location.search);
+        if (searchParams.has("filter")) {
+          if (searchParams.get('filter')=="la"){filterCat("la")}
+          if (searchParams.get('filter')=="biblio"){filterCat("biblio")}
+          if (searchParams.get('filter')=="gbl"){filterCat("gbl")}
+          if (searchParams.get('filter')=="eng"){filterCat("eng")}
+  
+        }
+      }
+
     </script>
+    
 ---
 
 
@@ -116,10 +132,10 @@ generateAPARef <- function(df) {
                      "</p><p>",kws,"</p><br/>"," </div>", sep = "") 
     }
 
-    entry <- paste("<li style='position:relative;margin-bottom:0.8rem;list-style:none;' class='",
-                   ifelse(!is.na(latag) , "is-la", ""), 
-                   ifelse(!is.na(bibtag), "is-biblio", ""), 
-                   ifelse(!is.na(gbltag), "is-gbl", ""),
+    entry <- paste("<li style='position:relative;margin-bottom:0.8rem;list-style:none;' class='ref-entry ",
+                   ifelse(!is.na(latag) , "is-la", " "), 
+                   ifelse(!is.na(bibtag), "is-biblio", " "), 
+                   ifelse(!is.na(gbltag), "is-gbl", " "),
                    "'>", entry, "</li>", sep = "")
     
     entry
@@ -160,16 +176,16 @@ for (i in 1:length(types_pub)) {
 htmltools::tags$p(output)
 ```
  
-<!--
-<button style='margin-right: 2px; margin-bottom: 2px;' class='btn badge rounded-pill bg-danger cat-badge active' id='badge-la' onclick="filterCat('la')">learning analytics</button>
-<button style='margin-right: 2px; margin-bottom: 2px;' class='btn badge rounded-pill bg-danger cat-badge active' id='badge-gbl' onclick="filterCat('gbl')">game-based learning</button>
-<button style='margin-right: 2px; margin-bottom: 2px;' class='btn badge rounded-pill bg-danger cat-badge active' id='badge-biblio' onclick="filterCat('biblio')">bibliometrics</button>
-
+<span><b style="vertical-align:'middle;'">Filter by topic: </b>
+<button style='margin-right: 2px; margin-bottom: 2px;' class='btn badge rounded-pill bg-danger cat-badge ' id='badge-la' onclick="filterCat('la')">learning analytics</button>
+<button style='margin-right: 2px; margin-bottom: 2px;' class='btn badge rounded-pill bg-danger cat-badge ' id='badge-gbl' onclick="filterCat('gbl')">game-based learning</button>
+<button style='margin-right: 2px; margin-bottom: 2px;' class='btn badge rounded-pill bg-danger cat-badge ' id='badge-biblio' onclick="filterCat('biblio')">bibliometrics</button>
+</span>
 <style>
 .cat-badge:not(.active) {
   opacity:0.5;
 }
-</style>-->
+</style>
 ```{r, echo= F, include=F, warning = F}
 pub_types = (unique(Publications$`Document Type`))
 pub_tags <- htmltools::tagList()
@@ -227,5 +243,6 @@ for (p in 1:length(pub_types)) {
   cat(paste0("\n## ", pub_types[p],"s\n"))
   print(year_tags)
 }
+
 ```
 
