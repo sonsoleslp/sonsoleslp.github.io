@@ -174,18 +174,23 @@ for (i in 1:length(types_pub)) {
                    ifelse( lastt,".",", "))
 }
 htmltools::tags$p(output)
+la <- Publications |> filter(LA=="X") |> nrow()
+bibliometrics <- Publications |> filter(BIBLIOMETRICS=="X") |> nrow()
+gbl <- Publications |> filter(GBL=="X") |> nrow()
 ```
- 
+
+
 <span><b style="vertical-align:'middle;'">Filter by topic: </b>
-<button style='margin-right: 2px; margin-bottom: 2px;' class='btn badge rounded-pill bg-danger cat-badge ' id='badge-la' onclick="filterCat('la')">learning analytics</button>
-<button style='margin-right: 2px; margin-bottom: 2px;' class='btn badge rounded-pill bg-danger cat-badge ' id='badge-gbl' onclick="filterCat('gbl')">game-based learning</button>
-<button style='margin-right: 2px; margin-bottom: 2px;' class='btn badge rounded-pill bg-danger cat-badge ' id='badge-biblio' onclick="filterCat('biblio')">bibliometrics</button>
+<button style='margin-right: 2px; margin-bottom: 2px;' class='btn badge rounded-pill bg-danger cat-badge ' id='badge-la' onclick="filterCat('la')">learning analytics (`r la`)</button>
+<button style='margin-right: 2px; margin-bottom: 2px;' class='btn badge rounded-pill bg-danger cat-badge ' id='badge-gbl' onclick="filterCat('gbl')">game-based learning (`r gbl`)</button>
+<button style='margin-right: 2px; margin-bottom: 2px;' class='btn badge rounded-pill bg-danger cat-badge ' id='badge-biblio' onclick="filterCat('biblio')">bibliometrics (`r bibliometrics`)</button>
 </span>
 <style>
 .cat-badge:not(.active) {
   opacity:0.5;
 }
 </style>
+
 ```{r, echo= F, include=F, warning = F}
 pub_types = (unique(Publications$`Document Type`))
 pub_tags <- htmltools::tagList()
