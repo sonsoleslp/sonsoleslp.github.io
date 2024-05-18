@@ -251,7 +251,5 @@ for (p in 1:length(pub_types)) {
 
 ```
 
-```{r}
-Publications %>%   tidyr::separate_rows(Keywords,sep="; ") %>% mutate(Keywords=stringr::str_to_lower(Keywords)) %>% group_by(Keywords) %>% count() %>% arrange(desc(n))
-```
+
 
