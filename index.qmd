@@ -41,9 +41,10 @@ library(dplyr)
 source("apa.R")
 Publications = rio::import("cv.xlsx", sheet = "Publications") %>% filter(!is.na(Selected)) %>% arrange(as.integer(Selected),desc(Year),Source)
 
-(Publications) %>% ungroup %>% dplyr::mutate(seq = seq_along(Title)) -> Publications
-Publications %>%  rowwise %>% 
-  dplyr::mutate(Ref = generateAPARef(Publications[seq,],F)) -> Publications
+(Publications) %>% ungroup %>% dplyr::mutate(seq1 = seq_along(Title)) -> Publications
+Publications %>%  rowwise %>% head(10) %>%
+  dplyr::mutate(Ref = generateAPARef(Publications[seq1,],F)) -> Publications
+ generateAPARef(Publications[1,],F)
 ```
 
 ```{r,echo=F}
