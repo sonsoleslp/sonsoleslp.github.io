@@ -69,6 +69,24 @@ exptags
 )
 ```
 
+
+## Awards
+
+```{r,echo=F}
+awards = rio::import("cv.xlsx", sheet = "Awards")
+awardstags = htmltools::tagList()
+
+for (i in 1:nrow(awards)) {
+  awa = awards[i,]
+  awardstags[[i]] <- htmltools::tags$li(htmltools::tagList(
+    htmltools::tags$span(paste0("(",awa$Year,") "),htmltools::HTML(awa$Description)))
+  )
+}
+htmltools::tags$ul(
+awardstags
+)
+```
+
 ## Teaching
 
 ```{r,echo=F}
@@ -129,22 +147,7 @@ visitstags
 )
 ```
 
-## Awards
 
-```{r,echo=F}
-awards = rio::import("cv.xlsx", sheet = "Awards")
-awardstags = htmltools::tagList()
-
-for (i in 1:nrow(awards)) {
-  awa = awards[i,]
-  awardstags[[i]] <- htmltools::tags$li(htmltools::tagList(
-    htmltools::tags$span(paste0("(",awa$Year,") "),htmltools::HTML(awa$Description)))
-  )
-}
-htmltools::tags$ul(
-awardstags
-)
-```
 
 ## Editorial and community service work
 ```{r,echo=F}

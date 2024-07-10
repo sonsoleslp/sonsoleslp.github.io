@@ -12,6 +12,18 @@ p {
   border-width: 0px;
   border-radius: 50%;
 }
+.btn-note {
+  position: absolute;
+  left: -80px;
+  top: 0;
+  padding: 0.35rem 0.5rem;
+  border-width: 0px;
+  border-radius: 50%;
+}
+
+.btn-note i {
+  color: orange;
+}
 
 .btn-social {
   margin-right: 5px;

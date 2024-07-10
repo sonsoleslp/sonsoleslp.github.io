@@ -31,6 +31,10 @@ include-before-body:
           if (searchParams.get('filter')=="eng"){filterCat("eng")}
   
         }
+        var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+        var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+           return new bootstrap.Tooltip(tooltipTriggerEl)
+        })
       }
 
     </script>
@@ -60,6 +64,7 @@ generateAPARef <- function(df) {
     pages <- ""
     doi <- df$DOI[i]
     url <- df$URL[i]
+    note <- df$Note[i]
     number <- df$seq[i]
     keywords <- df$Keywords[i]
     jcr <- df$JCR[i]  
@@ -76,6 +81,7 @@ generateAPARef <- function(df) {
     if (is.na(abstract)) { abstract <- "" }
     if (is.na(jcr)) { jcr <- "" }
     if (is.na(num)) { num <- "" }
+    if (is.na(note)) { note <- "" }
     if (!is.na(page_start)) {
       if (!is.na(page_end)) {
         pages <- paste0(page_start,"-",page_end) 
@@ -120,6 +126,9 @@ generateAPARef <- function(df) {
       entry <- paste(entry, ". ", "(JCR ",jcr, ")", sep="")
     }  
     entry <- paste0(entry,".")
+    if (note != "") {
+      entry <- paste(entry,"<button class='btn btn-sm btn-blank btn-note'  data-bs-toggle='tooltip' data-bs-placement='bottom' title='", note, "'><i class='bi bi-star-fill'></i></button>", sep = "")
+    }
     if (abstract != "") { 
       entry <- paste(entry, " <button type='button' data-bs-toggle='collapse' data-bs-target='#ref-",number,"'   aria-expanded='false'  aria-controls='ref-",number,"' class='btn btn-sm btn-danger btn-pub'><i class='bi bi-plus-lg'></i></button>", sep = "")
       kws <-""
@@ -131,7 +140,7 @@ generateAPARef <- function(df) {
                      abstract , 
                      "</p><p>",kws,"</p><br/>"," </div>", sep = "") 
     }
-
+    
     entry <- paste("<li style='position:relative;margin-bottom:0.8rem;list-style:none;' class='ref-entry ",
                    ifelse(!is.na(latag) , "is-la", " "), 
                    ifelse(!is.na(bibtag), "is-biblio", " "), 
