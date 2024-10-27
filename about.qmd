@@ -175,21 +175,40 @@ projtags = htmltools::tagList()
 
 for (i in 1:nrow(projects)) {
   proj = projects[i,]
+  # Unique ID for each dropdown
+  description_id <- paste0("description-", i)
+  
   projtags[[i]] <- htmltools::tags$li(
     htmltools::tagList(
-      htmltools::tags$span(paste0("(",proj$Year,") ")),
-      htmltools::tags$strong(proj$Name), 
-      htmltools::tags$span(paste0(" - Funded by: ", proj$Funding)), 
-      htmltools::tags$br(),
-      htmltools::tags$small(ifelse(!is.na(proj$Description),proj$Description,""),
-      htmltools::tags$br(),htmltools::tags$br()
-      )
-    )
+      htmltools::tags$span(paste0("(", proj$Year, ") ")),
+      htmltools::tags$strong(proj$Name),
+      htmltools::tags$span(paste0(" - Funded by: ", proj$Funding)),
+      
+      # Toggle button for the dropdown
+      htmltools::tags$button(
+        htmltools::HTML("<i class='bi bi-plus-lg'></i></button>"),
+        class = "btn btn-sm btn-danger btn-pub",
+        style = "left: -30px;",
+        `data-bs-toggle` = "collapse",
+        `data-bs-target` = paste0("#", description_id),
+        `aria-expanded` = "false",
+        `aria-controls` = description_id
+      ),
+      
+      # Description section in a collapsible div
+      htmltools::tags$div(
+        class = "collapse",
+        id = description_id,
+        htmltools::tags$small(ifelse(!is.na(proj$Description), proj$Description, ""))
+      ),
+      
+      htmltools::tags$br(), htmltools::tags$br()
+    ), style = "position:relative;"
   )
 }
-htmltools::tags$ul(
-projtags
-)
+
+htmltools::tags$ul(projtags)
+
 ```
 
 ## Other merits
