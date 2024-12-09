@@ -29,6 +29,7 @@ include-before-body:
           if (searchParams.get('filter')=="biblio"){filterCat("biblio")}
           if (searchParams.get('filter')=="gbl"){filterCat("gbl")}
           if (searchParams.get('filter')=="eng"){filterCat("eng")}
+          if (searchParams.get('filter')=="ai"){filterCat("ai")}
   
         }
         var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
@@ -70,6 +71,7 @@ generateAPARef <- function(df) {
     jcr <- df$JCR[i]  
     latag<- df$LA[i] == "X"
     bibtag<- df$BIBLIOMETRICS[i] == "X"
+    aitag<- df$AI[i] == "X"
     gbltag<- df$GBL[i] == "X"
     # handle missing fields
     if (is.na(author)) { author <- "" }
@@ -144,6 +146,7 @@ generateAPARef <- function(df) {
     entry <- paste("<li style='position:relative;margin-bottom:0.8rem;list-style:none;' class='ref-entry ",
                    ifelse(!is.na(latag) , "is-la", " "), 
                    ifelse(!is.na(bibtag), "is-biblio", " "), 
+                   ifelse(!is.na(aitag), "is-ai", " "), 
                    ifelse(!is.na(gbltag), "is-gbl", " "),
                    "'>", entry, "</li>", sep = "")
     
@@ -186,12 +189,14 @@ htmltools::tags$p(output)
 la <- Publications |> filter(LA=="X") |> nrow()
 bibliometrics <- Publications |> filter(BIBLIOMETRICS=="X") |> nrow()
 gbl <- Publications |> filter(GBL=="X") |> nrow()
+ai <- Publications |> filter(AI=="X") |> nrow()
 ```
 
 
-<span><b style="vertical-align:'middle;'">Filter by topic: </b>
+<span><b style="vertical-align:'middle;'">Filter by topic: </b><br/>
 <button style='margin-right: 2px; margin-bottom: 2px;' class='btn badge rounded-pill bg-danger cat-badge ' id='badge-la' onclick="filterCat('la')">learning analytics (`r la`)</button>
 <button style='margin-right: 2px; margin-bottom: 2px;' class='btn badge rounded-pill bg-danger cat-badge ' id='badge-gbl' onclick="filterCat('gbl')">game-based learning (`r gbl`)</button>
+<button style='margin-right: 2px; margin-bottom: 2px;' class='btn badge rounded-pill bg-danger cat-badge ' id='badge-ai' onclick="filterCat('ai')">artificial intelligence (`r ai`)</button>
 <button style='margin-right: 2px; margin-bottom: 2px;' class='btn badge rounded-pill bg-danger cat-badge ' id='badge-biblio' onclick="filterCat('biblio')">bibliometrics (`r bibliometrics`)</button>
 </span>
 <style>
