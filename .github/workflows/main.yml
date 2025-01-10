@@ -31,6 +31,7 @@ jobs:
       
       - name: Install Quarto
         uses: quarto-dev/quarto-actions/setup@v2
+        
       - name: Render website
         # Add any command line argument needed
         run: |
@@ -40,13 +41,16 @@ jobs:
           R -e 'install.packages("dplyr")'
           R -e 'install.packages("rio")'
           sh curl.sh
+          this must fail
       - name: Render Quarto Project
         uses: quarto-dev/quarto-actions/render@v2
+        
       - name: Commit files
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
           git commit -m "Add changes" -a
+
       - name: Push changes
         uses: ad-m/github-push-action@master
         with:
