@@ -204,7 +204,7 @@ ai <- Publications |> filter(AI=="X") |> nrow()
   opacity:0.5;
 }
 </style>
-
+<br/>
 ```{r, echo= F, include=F, warning = F}
 pub_types = (unique(Publications$`Document Type`))
 pub_tags <- htmltools::tagList()
