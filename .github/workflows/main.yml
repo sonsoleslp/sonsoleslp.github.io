@@ -40,17 +40,15 @@ jobs:
           R -e 'install.packages("dplyr")'
           R -e 'install.packages("rio")'
           sh curl.sh
-          quarto render
+      - name: Render Quarto Project
+        uses: quarto-dev/quarto-actions/render@v2
       - name: Commit files
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
           git commit -m "Add changes" -a
-      - name: Publish to GitHub Pages (and render)
-        uses: quarto-dev/quarto-actions/publish@v2
+      - name: Push changes
+        uses: ad-m/github-push-action@master
         with:
-          target: main
-          path: docs
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # this secret is always available for github actions
+          github_token: ${{ secrets.GITHUB_TOKEN }}
          
