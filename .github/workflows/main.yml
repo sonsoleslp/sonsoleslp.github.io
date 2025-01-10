@@ -25,7 +25,7 @@ jobs:
           use-public-rspm: true
           
       - name: Install jsonlite
-        run:  R -e 'install.packages(c("jsonlite"), dependencies = TRUE)'
+        run:  R -e 'install.packages("jsonlite", repos = "https://cran.r-project.org")'
         
       - uses: r-lib/actions/setup-renv@v2
       
