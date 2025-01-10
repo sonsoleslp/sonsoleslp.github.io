@@ -9,7 +9,6 @@ title: "About"
 ```{r,echo=F}
 Research_interests = rio::import("cv.xlsx", sheet = "Research_interests")
 Research_interests_tags = htmltools::tagList()
-
 for (i in 1:nrow(Research_interests)) {
   inte = Research_interests[i,]
   if (!is.na(inte)){
