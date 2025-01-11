@@ -180,8 +180,11 @@ for (i in 1:nrow(projects)) {
   projtags[[i]] <- htmltools::tags$li(
     htmltools::tagList(
       htmltools::tags$span(paste0("(", proj$Year, ") ")),
-      htmltools::tags$strong(proj$Name),
-      htmltools::tags$span(paste0(" - Funded by: ", proj$Funding)),
+       htmltools::tagList(
+          htmltools::tags$a(proj$Name, href = proj$Link, target = "_blank"),
+          htmltools::tags$span(paste0(ifelse(!is.na(proj$Role), 
+                               paste0("(role: ",proj$Role,")"), "")," - Funded by: ", proj$Funding))),
+       
       
       # Toggle button for the dropdown
       htmltools::tags$button(
@@ -198,7 +201,11 @@ for (i in 1:nrow(projects)) {
       htmltools::tags$div(
         class = "collapse",
         id = description_id,
-        htmltools::tags$small(ifelse(!is.na(proj$Description), proj$Description, ""))
+        htmltools::tags$small(
+          paste0(ifelse(!is.na(proj$Description), proj$Description, "")#,
+          # ifelse(!is.na(proj$Money), paste0("\nFunding: ", proj$Money, ""),"")
+          ),
+          )
       ),
       
       htmltools::tags$br(), htmltools::tags$br()
