@@ -26,6 +26,8 @@ jobs:
           
       - name: Install jsonlite
         run:  R -e 'install.packages("jsonlite", repos = "https://cran.r-project.org")'
+        
+      - uses: r-lib/actions/setup-renv@v2
       
       - name: Install Quarto
         uses: quarto-dev/quarto-actions/setup@v2
@@ -39,8 +41,9 @@ jobs:
           R -e 'install.packages("dplyr")'
           R -e 'install.packages("rio")'
           sh curl.sh
-          quarto render
-
+          this must fail
+      - name: Render Quarto Project
+        uses: quarto-dev/quarto-actions/render@v2
         
       - name: Commit files
         run: |
