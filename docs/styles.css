@@ -31,10 +31,14 @@ p {
   border-radius: 50%;
 }
 
-.primary-links a {
-  color: #f21a98;  
-}
+ 
 
-.primary-links a:hover {
-  color: #f21a98;  
+
+.btn-social {
+  width: 40px;
+  height: 40px;
+  vertical-align: middle;
+  text-align: center;
+  line-height: 28px;
+  padding: 6px;
 }
