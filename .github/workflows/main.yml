@@ -41,9 +41,8 @@ jobs:
           R -e 'install.packages("dplyr")'
           R -e 'install.packages("rio")'
           sh curl.sh
-          this must fail
-      - name: Render Quarto Project
-        uses: quarto-dev/quarto-actions/render@v2
+          quarto render
+
         
       - name: Commit files
         run: |
