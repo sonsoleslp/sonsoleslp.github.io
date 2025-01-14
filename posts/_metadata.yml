@@ -19,6 +19,7 @@ author:
     affiliation: University of Eastern Finland
 
 # citation
-citation: true
+citation:
+   type: article
 
 # Enable CC licence appendix

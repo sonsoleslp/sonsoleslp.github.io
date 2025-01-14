@@ -1,0 +1,24 @@
+---
+title: "IGLUE New funding from Erasmus+"
+description: |
+    Implementation of game-based learning using escape rooms
+date: "2024-09-30"
+categories:
+  - funding
+  - game-based learning
+# engine: markdown
+code-fold: false
+warning: false
+message: false
+fig.align: center
+---
+
+We recently received the great news that we obtained funding from the European Commission, within its Erasmus+ KA220 Higher Education call, to implement the IGLUE project. IGLUE stands for **"Implementation of game-based learning using escape rooms"**. The project aims to empower universities to create and conduct pedagogically sound educational escape rooms and promote the widespread adoption of such innovative learning activities across Europe.The project will have an initial pedagogical design phase in which a methodology for designing effective instructional interventions based on educational escape rooms will be defined. On this basis, a virtual platform for creating, conducting and sharing educational escape rooms will be developed and deployed at each participating institution forming an open and decentralized European network dedicated to the creation, sharing and execution of escape rooms. The developed platform will enable the creation of technology-enhanced educational escape rooms through reusable virtual puzzles and will support all the logistics of conducting an escape room whether face-to-face or remotely. In order to provide teachers, not only with the digital tools, but also with the training they need to create their own educational escape rooms, materials and courses will be created and used to train teachers in the use of the developed methodology and platform.
+
+
+![](puzzle.png){fig-align="center" width="50%"}
+
+I am very excited about this project, not only because I led the initiative and it was the first funding proposal that I ever wrote, but because it builds on the topic of escape rooms that I worked on during my PhD studies. It relies on some of the tools I developed, such as the Escapp platform. Moreover, I get to work with a mix of colleagues that I work with separately but not often in combination, coming from Universidad Politécnica de Madrid, UNIR and Belgrade Metropolitan University.
+
+For more details check the [website](https://iglue.dit.upm.es/about-us/).
+

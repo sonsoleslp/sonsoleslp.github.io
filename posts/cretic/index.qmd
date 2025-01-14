@@ -1,0 +1,24 @@
+---
+title: "Funding from the Research Council Finland!"
+description: |
+    CRETIC: Optimizing Clinical Reasoning in Time-Critical Scenarios: A data-driven multimodal approach
+date: "2024-06-13"
+categories:
+  - funding
+  - game-based learning
+  - learning analytics
+# engine: markdown
+code-fold: false
+warning: false
+message: false
+fig.align: center
+image: "cretic.png"  
+---
+
+I had the amazing news that I got the prestigious Academy Research Fellowship funding from the Research Council of Finland (Suomen Akatemia). I applied to the *Human factors and technology* *design* panel and I ranked 1st of all the applications in the panel (only 14 made it to the end)! The name of my project is **"Optimizing Clinical Reasoning in Time-Critical Scenarios: A data-driven multimodal approach (CRETIC)"**. It will last 4 years with a granted funding of 606,199€. \
+\
+I would like to take this opportunity to thank everyone who helped me along the way. First and foremost, I need to thank [Mohammed Saqr](https://saqr.me) for all his help and the great impact that he has had in my career and life overall. I wouldn't be here without you. I would also like to thank my colleagues at University of Eastern Finland for all your support, as well as my former colleagues from Universidad Politécnica de Madrid. I am of course thankful to the collaborators who endorsed my application: Dragan Gasevic, Sameh M. Said, Alper Bayazıt, and Susanne Lajoie.\
+\
+CRETIC aims to optimize emergency training of healthcare students and trainees. I will develop an innovative gamified platform that combines virtual patients and elements of educational escape rooms to simulate clinical emergencies. Data from multiple sources (physiological sensors, questionnaires and digital logs among others) will be collected to capture the full breadth of the dynamics of the clinical reasoning process. The data will be analyzed using temporal learning analytics and explainable artificial intelligence methods to map the clinical reasoning process and the factors that lead to successful and effective decision-making. The proposal will result in an open scalable platform that will dramatically improve the training of medical emergencies, offer personalized insights into effective decision-making, provide a safe environment for practicing challenging clinical situations, and ultimately decrease medical errors, one of the leading causes of death worldwide.\
+\
+The topic of the project is very special to me because it combines everything that I have ever worked on with everything that I have been wanting to learn lately. Regarding the former, the project departs from my PhD topic: educational escape rooms, although this time for medical education. In terms of methodology, the project will rely on temporal learning analytics, which has been the focus of my latest research. In terms of technology, it will require real-time data analytics, which builds on the tools I developed during my time at UPM, working on the FIWARE ecosystem. Regarding the new knowledge and skills I would like to develop, the project incorporates multimodal learning analytics, which I have interested in for a while (but lacked the resources to explore), and xAI, a hot topic that is currently understudied in learning analytics.

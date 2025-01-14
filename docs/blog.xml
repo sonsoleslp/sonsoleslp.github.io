@@ -10,34 +10,707 @@
 <atom:link href="https://sonsoleslp.github.io/blog.xml" rel="self" type="application/rss+xml"/>
 <description>Personal website of Sonsoles López Pernas</description>
 <generator>quarto-1.6.40</generator>
-<lastBuildDate>Sat, 10 Dec 2022 22:00:00 GMT</lastBuildDate>
+<lastBuildDate>Sun, 29 Sep 2024 21:00:00 GMT</lastBuildDate>
 <item>
-  <title>First post</title>
+  <title>IGLUE New funding from Erasmus+</title>
   <dc:creator>Sonsoles López Pernas</dc:creator>
-  <link>https://sonsoleslp.github.io/posts/first-post/</link>
+  <link>https://sonsoleslp.github.io/posts/iglue/</link>
   <description><![CDATA[ 
 
 
 
 
 
+<p>We recently received the great news that we obtained funding from the European Commission, within its Erasmus+ KA220 Higher Education call, to implement the IGLUE project. IGLUE stands for <strong>“Implementation of game-based learning using escape rooms”</strong>. The project aims to empower universities to create and conduct pedagogically sound educational escape rooms and promote the widespread adoption of such innovative learning activities across Europe.The project will have an initial pedagogical design phase in which a methodology for designing effective instructional interventions based on educational escape rooms will be defined. On this basis, a virtual platform for creating, conducting and sharing educational escape rooms will be developed and deployed at each participating institution forming an open and decentralized European network dedicated to the creation, sharing and execution of escape rooms. The developed platform will enable the creation of technology-enhanced educational escape rooms through reusable virtual puzzles and will support all the logistics of conducting an escape room whether face-to-face or remotely. In order to provide teachers, not only with the digital tools, but also with the training they need to create their own educational escape rooms, materials and courses will be created and used to train teachers in the use of the developed methodology and platform.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://sonsoleslp.github.io/posts/iglue/puzzle.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:50.0%"></p>
+</figure>
+</div>
+<p>I am very excited about this project, not only because I led the initiative and it was the first funding proposal that I ever wrote, but because it builds on the topic of escape rooms that I worked on during my PhD studies. It relies on some of the tools I developed, such as the Escapp platform. Moreover, I get to work with a mix of colleagues that I work with separately but not often in combination, coming from Universidad Politécnica de Madrid, UNIR and Belgrade Metropolitan University.</p>
+<p>For more details check the <a href="https://iglue.dit.upm.es/about-us/">website</a>.</p>
 
 
 
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-citation"><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{lópez_pernas2022,
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@misc{lópez_pernas2024,
   author = {López Pernas, Sonsoles},
-  title = {First Post},
-  date = {2022-12-11},
-  url = {https://sonsoleslp.github.io/posts/first-post/},
+  title = {IGLUE {New} Funding from {Erasmus+}},
+  date = {2024-09-30},
+  url = {https://sonsoleslp.github.io/posts/iglue/},
   langid = {en}
 }
-</code></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-lópez_pernas2022" class="csl-entry quarto-appendix-citeas">
-López Pernas, Sonsoles. 2022. <span>“First Post.”</span> December 11,
-2022. <a href="https://sonsoleslp.github.io/posts/first-post/">https://sonsoleslp.github.io/posts/first-post/</a>.
+</code></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-lópez_pernas2024" class="csl-entry quarto-appendix-citeas">
+López Pernas, Sonsoles. 2024. <span>“IGLUE New Funding from
+Erasmus+.”</span> <a href="https://sonsoleslp.github.io/posts/iglue/">https://sonsoleslp.github.io/posts/iglue/</a>.
 </div></div></section></div> ]]></description>
-  <category>website</category>
-  <guid>https://sonsoleslp.github.io/posts/first-post/</guid>
-  <pubDate>Sat, 10 Dec 2022 22:00:00 GMT</pubDate>
+  <category>funding</category>
+  <category>game-based learning</category>
+  <guid>https://sonsoleslp.github.io/posts/iglue/</guid>
+  <pubDate>Sun, 29 Sep 2024 21:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>The VaSSTra method</title>
+  <dc:creator>Sonsoles López Pernas</dc:creator>
+  <link>https://sonsoleslp.github.io/posts/vasstra/</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<p>The <strong>VaSSTra</strong> (Variabes-States-Sequences-Trajectories) began as a simple yet ambitious idea that later evolved into a groundbreaking method in learning analytics. Most sequence analysis studies in this field focus on representing sequences of clicks or other events within a learning management system (LMS) or similar online platforms. These sequences often depict momentary actions or events.</p>
+<p>However, in 2021, my colleague <a href="https://saqr.me">Mohammed Saqr</a> and I took a different approach. In our article <span class="citation" data-cites="saqr2021">(Saqr and López-Pernas 2021)</span>, we applied sequence analysis more in line with its origins—tracking life events and longitudinal trajectories. Instead of mapping each block in a sequence to a single momentary action or event, we used each block to represent a state over the duration of an entire course, whereby the entire sequence represented a complete study program. These states were derived by clustering students’ engagement indicators from LMS logs using latent class analysis (LCA).</p>
+<p>We quickly realized the novelty of this approach in the context of learning analytics. It provided a way to examine how students’ behaviors and engagement evolved over a whole study period. This kickstarted a series of applications. We extended the method to other constructs, such as learning strategies <span class="citation" data-cites="saqr2023">(Saqr, López-Pernas, Jovanović, et al. 2023)</span>, and collaborative roles in computer-supported collaborative learning (CSCL).</p>
+<p>We presented the method on its own in a conference paper in 2022 <span class="citation" data-cites="lópez-pernas2023">(López-Pernas and Saqr 2023)</span> and we presented a tutorial on how to implement it with R <span class="citation" data-cites="lópez-pernas2024a">(López-Pernas and Saqr 2024a)</span> in our book “Learning Analytics Methods and Tutorials”.</p>
+<p>We then began experimenting with extensions of the method, exploring multi-channel sequence analysis to examine multiple simultaneous dimensions <span class="citation" data-cites="saqr2023a">(Saqr, López-Pernas, Helske, et al. 2023)</span>. We also adopted theoretical frameworks like complex systems theory, which provided fresh perspectives on how these patterns of behavior could be understood <span class="citation" data-cites="lópez-pernas2024">(López-Pernas and Saqr 2024b)</span>.</p>
+<p><strong>VaSSTra</strong> utilizes a combination of person-based methods (to capture the latent states) along with life events methods to model the longitudinal process. In doing so, <strong>VaSSTra</strong> effectively leverages the benefits of both families of methods in mapping the patterns of longitudinal temporal dynamics. The method has three main steps that can be summarized as (1) identifying latent <strong>S</strong>tates from <strong>Va</strong>riables, (2) modeling states as <strong>S</strong>equences, and (3) identifying <strong>Tra</strong>jectories within sequences. The three steps are depicted in the figure and described in detail below:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://sonsoleslp.github.io/posts/vasstra/vasstra.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+</figure>
+</div>
+<ul>
+<li><p><strong>Step 1. From variables to states:</strong> In the first step of the analysis, we identify the “states” within the data using a method that can capture latent or unobserved patterns from multidimensional data (variables). The said states represent a behavioral pattern, function or a construct that can be inferred from the data. For instance, engagement is a multidimensional construct and is usually captured through several indicators. e.g., students’ frequency and time spent online, course activities, cognitive activities and social interactions. Using an appropriate method, such as person-based clustering in our case, we can derive students’ engagement states for a given activity or course. For instance, the method would classify students who invest significant time, effort and mental work are “engaged.” Similarly, students who are investing low effort and time in studying would be classified as “diseganged.” Such powerful summarization would allow us to use the discretized states in further steps. An important aspect of such states is that they are calculated for a specific timespan. Therefore, in our example we could infer students’ engagement states per activity, per week, per lesson, per course, etc. Sometimes, such time divisions are by design (e.g., lessons or courses), but in other occasions researchers have to establish a time scheme according to the data and research questions (e.g., weeks or days). Computing states for multiple time periods is a necessary step to create time-ordered state sequences and prepare the data for sequence analysis.</p></li>
+<li><p><strong>Step 2. From states to sequences:</strong> Once we have a state for each student at each time point, we can construct an ordered sequence of such states for each student. For example, if we used the scenario mentioned above about measuring engagement states, a sequence of a single student’s engagement states across a six-lesson course would be like the one below. When we convert the ordered states to sequences, we unlock the potential of sequence analysis and life events methods. We are able to plot the distribution of states at each time point, study the individual pathways, the entropy, the mean time spent at each state, etc. We can also estimate how frequently students switch states, and what is the likelihood they finish their sequence in a “desirable” state (i.e., “engaged”).</p></li>
+</ul>
+<!-- -->
+<ul>
+<li><strong>Step 3. From sequences to trajectories:</strong> Our last step is to identify similar trajectories —sequences of states with a similar temporal evolution— using temporal clustering methods (e.g., hidden Markov models or hierarchical clustering). Covariates (i.e., variables that could explain cluster membership) can be added at this stage to help identify why a trajectory has evolved in a certain way. Moreover, sequence analysis can be used to study the different trajectories, and not only the complete cohort. We can compare trajectories according to their sequence properties, or to other variables (e.g., performance).</li>
+</ul>
+
+
+
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0">
+<div id="ref-lópez-pernas2023" class="csl-entry">
+López-Pernas, Sonsoles, and Mohammed Saqr. 2023. <span>“From Variables to States to Trajectories (VaSSTra): A Method for Modelling the Longitudinal Dynamics of Learning and Behaviour.”</span> In, 1169–78. Springer Nature Singapore. <a href="https://doi.org/10.1007/978-981-99-0942-1_123">https://doi.org/10.1007/978-981-99-0942-1_123</a>.
+</div>
+<div id="ref-lópez-pernas2024a" class="csl-entry">
+———. 2024a. <span>“Modeling the Dynamics of Longitudinal Processes in Education. A Tutorial with R for the VaSSTra Method.”</span> In, 355–79. Springer Nature Switzerland. <a href="https://doi.org/10.1007/978-3-031-54464-4_11">https://doi.org/10.1007/978-3-031-54464-4_11</a>.
+</div>
+<div id="ref-lópez-pernas2024" class="csl-entry">
+———. 2024b. <span>“How the Dynamics of Engagement Explain the Momentum of Achievement and the Inertia of Disengagement: A Complex Systems Theory Approach.”</span> <em>Computers in Human Behavior</em> 153 (April): 108126. <a href="https://doi.org/10.1016/j.chb.2023.108126">https://doi.org/10.1016/j.chb.2023.108126</a>.
+</div>
+<div id="ref-saqr2021" class="csl-entry">
+Saqr, Mohammed, and Sonsoles López-Pernas. 2021. <span>“The Longitudinal Trajectories of Online Engagement over a Full Program.”</span> <em>Computers &amp; Education</em> 175 (December): 104325. <a href="https://doi.org/10.1016/j.compedu.2021.104325">https://doi.org/10.1016/j.compedu.2021.104325</a>.
+</div>
+<div id="ref-saqr2023a" class="csl-entry">
+Saqr, Mohammed, Sonsoles López-Pernas, Satu Helske, and Stefan Hrastinski. 2023. <span>“The Longitudinal Association Between Engagement and Achievement Varies by Time, Students<span>’</span> Profiles, and Achievement State: A Full Program Study.”</span> <em>Computers &amp; Education</em> 199 (July): 104787. <a href="https://doi.org/10.1016/j.compedu.2023.104787">https://doi.org/10.1016/j.compedu.2023.104787</a>.
+</div>
+<div id="ref-saqr2023" class="csl-entry">
+Saqr, Mohammed, Sonsoles López-Pernas, Jelena Jovanović, and Dragan Gašević. 2023. <span>“Intense, Turbulent, or Wallowing in the Mire: A Longitudinal Study of Cross-Course Online Tactics, Strategies, and Trajectories.”</span> <em>The Internet and Higher Education</em> 57 (April): 100902. <a href="https://doi.org/10.1016/j.iheduc.2022.100902">https://doi.org/10.1016/j.iheduc.2022.100902</a>.
+</div>
+</div></section><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@misc{lópez_pernas2024,
+  author = {López Pernas, Sonsoles},
+  title = {The {VaSSTra} Method},
+  date = {2024-08-17},
+  url = {https://sonsoleslp.github.io/posts/vasstra/},
+  langid = {en}
+}
+</code></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-lópez_pernas2024" class="csl-entry quarto-appendix-citeas">
+López Pernas, Sonsoles. 2024. <span>“The VaSSTra Method.”</span> <a href="https://sonsoleslp.github.io/posts/vasstra/">https://sonsoleslp.github.io/posts/vasstra/</a>.
+</div></div></section></div> ]]></description>
+  <category>funding</category>
+  <category>game-based learning</category>
+  <guid>https://sonsoleslp.github.io/posts/vasstra/</guid>
+  <pubDate>Fri, 16 Aug 2024 21:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>Alluvial plots for transition analysis</title>
+  <dc:creator>Sonsoles López Pernas</dc:creator>
+  <link>https://sonsoleslp.github.io/posts/alluvial/</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<p>Recently, one of my collaborators asked me for the code that I used to generate one of the plots (Fig. 3) in our joined paper:</p>
+<p>Mohammed Saqr, Sonsoles López-Pernas, Leonie V.D.E. Vogelsmeier, When, how and for whom changes in engagement happen: A transition analysis of instructional variables, <em>Computers &amp; Education</em>, Volume 207, 2023, 104934, <a href="https://doi.org/10.1016/j.compedu.2023.104934">https://doi.org/10.1016/j.compedu.2023.104934</a>.</p>
+<p>I decided to share it in case it is useful for someone else.</p>
+<p>The first step, as usual, is to load the necessary libraries.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">library</span>(dplyr)</span>
+<span id="cb1-2"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">library</span>(ggplot2)</span>
+<span id="cb1-3"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">library</span>(ggalluvial)</span></code></pre></div>
+</div>
+<p>Then we need some data. We will create a synthetic dataset for the purpose of this tutorial. We will create four possible states (<code>states</code>) and the probability to be in each state (<code>probs</code>), as well as define the number of simulated students (<code>N</code>). We will create a function that generates a random state based on the established probability distribution. We will then generate random states for all users across 6 time points following that probability distribution. We do that within a new dataframe where the user column represents the user number (between 1 and 30 in our case), the six following columns are each of the six time points, and the last column (<code>Freq</code>) holds the value <code>1</code> for every student (we will need this for the next step).</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1">STATES <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Active"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Moderate"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Disengaged"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Dropout"</span>)</span>
+<span id="cb2-2">PROBS <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.1</span>, <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.65</span>, <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.25</span>, <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.2</span>)</span>
+<span id="cb2-3">N <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">30</span></span>
+<span id="cb2-4"></span>
+<span id="cb2-5">getRandom <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">function</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">states =</span> STATES, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">probs =</span> PROBS, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">N =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">30</span>) {</span>
+<span id="cb2-6">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">factor</span>(base<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">sample</span>(states, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">30</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">replace =</span> <span class="cn" style="color: #8f5902;
+background-color: null;
+font-style: inherit;">TRUE</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">prob =</span> probs), <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">levels =</span> states)</span>
+<span id="cb2-7">}</span>
+<span id="cb2-8"></span>
+<span id="cb2-9">sample_data <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">=</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">data.frame</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">user=</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">:</span>N,</span>
+<span id="cb2-10">                         <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">`</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">1</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">`</span> <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">=</span>  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">getRandom</span>(),</span>
+<span id="cb2-11">                         <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">`</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">2</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">`</span> <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">=</span>  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">getRandom</span>(),</span>
+<span id="cb2-12">                         <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">`</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">3</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">`</span> <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">=</span>  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">getRandom</span>(),</span>
+<span id="cb2-13">                         <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">`</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">4</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">`</span> <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">=</span>  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">getRandom</span>(),</span>
+<span id="cb2-14">                         <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">`</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">5</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">`</span> <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">=</span>  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">getRandom</span>(),</span>
+<span id="cb2-15">                         <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">`</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">6</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">`</span> <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">=</span>  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">getRandom</span>(),</span>
+<span id="cb2-16">                         <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">Freq =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">rep</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>,N))</span>
+<span id="cb2-17"></span>
+<span id="cb2-18">sample_data</span></code></pre></div>
+<div class="cell-output-display">
+<div data-pagedtable="false">
+  <script data-pagedtable-source="" type="application/json">
+{"columns":[{"label":["user"],"name":[1],"type":["int"],"align":["right"]},{"label":["X1"],"name":[2],"type":["fct"],"align":["left"]},{"label":["X2"],"name":[3],"type":["fct"],"align":["left"]},{"label":["X3"],"name":[4],"type":["fct"],"align":["left"]},{"label":["X4"],"name":[5],"type":["fct"],"align":["left"]},{"label":["X5"],"name":[6],"type":["fct"],"align":["left"]},{"label":["X6"],"name":[7],"type":["fct"],"align":["left"]},{"label":["Freq"],"name":[8],"type":["dbl"],"align":["right"]}],"data":[{"1":"1","2":"Moderate","3":"Moderate","4":"Moderate","5":"Disengaged","6":"Moderate","7":"Dropout","8":"1"},{"1":"2","2":"Moderate","3":"Active","4":"Moderate","5":"Moderate","6":"Moderate","7":"Moderate","8":"1"},{"1":"3","2":"Moderate","3":"Disengaged","4":"Moderate","5":"Disengaged","6":"Moderate","7":"Moderate","8":"1"},{"1":"4","2":"Moderate","3":"Dropout","4":"Disengaged","5":"Dropout","6":"Moderate","7":"Dropout","8":"1"},{"1":"5","2":"Dropout","3":"Moderate","4":"Moderate","5":"Dropout","6":"Moderate","7":"Moderate","8":"1"},{"1":"6","2":"Moderate","3":"Moderate","4":"Moderate","5":"Moderate","6":"Moderate","7":"Moderate","8":"1"},{"1":"7","2":"Moderate","3":"Moderate","4":"Disengaged","5":"Active","6":"Dropout","7":"Dropout","8":"1"},{"1":"8","2":"Moderate","3":"Disengaged","4":"Disengaged","5":"Moderate","6":"Moderate","7":"Active","8":"1"},{"1":"9","2":"Disengaged","3":"Moderate","4":"Moderate","5":"Moderate","6":"Moderate","7":"Moderate","8":"1"},{"1":"10","2":"Disengaged","3":"Moderate","4":"Active","5":"Dropout","6":"Disengaged","7":"Moderate","8":"1"},{"1":"11","2":"Moderate","3":"Disengaged","4":"Moderate","5":"Disengaged","6":"Active","7":"Moderate","8":"1"},{"1":"12","2":"Moderate","3":"Moderate","4":"Disengaged","5":"Dropout","6":"Dropout","7":"Moderate","8":"1"},{"1":"13","2":"Moderate","3":"Moderate","4":"Moderate","5":"Moderate","6":"Dropout","7":"Moderate","8":"1"},{"1":"14","2":"Active","3":"Disengaged","4":"Moderate","5":"Active","6":"Dropout","7":"Moderate","8":"1"},{"1":"15","2":"Dropout","3":"Moderate","4":"Moderate","5":"Moderate","6":"Moderate","7":"Moderate","8":"1"},{"1":"16","2":"Moderate","3":"Disengaged","4":"Dropout","5":"Moderate","6":"Moderate","7":"Moderate","8":"1"},{"1":"17","2":"Moderate","3":"Dropout","4":"Disengaged","5":"Dropout","6":"Moderate","7":"Moderate","8":"1"},{"1":"18","2":"Moderate","3":"Moderate","4":"Moderate","5":"Moderate","6":"Moderate","7":"Active","8":"1"},{"1":"19","2":"Disengaged","3":"Moderate","4":"Dropout","5":"Moderate","6":"Moderate","7":"Moderate","8":"1"},{"1":"20","2":"Dropout","3":"Dropout","4":"Disengaged","5":"Moderate","6":"Moderate","7":"Disengaged","8":"1"},{"1":"21","2":"Dropout","3":"Disengaged","4":"Moderate","5":"Moderate","6":"Moderate","7":"Moderate","8":"1"},{"1":"22","2":"Moderate","3":"Moderate","4":"Dropout","5":"Active","6":"Moderate","7":"Moderate","8":"1"},{"1":"23","2":"Moderate","3":"Moderate","4":"Moderate","5":"Moderate","6":"Moderate","7":"Disengaged","8":"1"},{"1":"24","2":"Moderate","3":"Disengaged","4":"Moderate","5":"Active","6":"Moderate","7":"Disengaged","8":"1"},{"1":"25","2":"Disengaged","3":"Moderate","4":"Moderate","5":"Moderate","6":"Moderate","7":"Moderate","8":"1"},{"1":"26","2":"Moderate","3":"Moderate","4":"Moderate","5":"Moderate","6":"Dropout","7":"Moderate","8":"1"},{"1":"27","2":"Moderate","3":"Dropout","4":"Dropout","5":"Moderate","6":"Moderate","7":"Moderate","8":"1"},{"1":"28","2":"Disengaged","3":"Disengaged","4":"Disengaged","5":"Moderate","6":"Moderate","7":"Moderate","8":"1"},{"1":"29","2":"Disengaged","3":"Moderate","4":"Moderate","5":"Moderate","6":"Disengaged","7":"Disengaged","8":"1"},{"1":"30","2":"Moderate","3":"Moderate","4":"Moderate","5":"Moderate","6":"Moderate","7":"Dropout","8":"1"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+</div>
+</div>
+<p>Now we transform the data into a format suitable for alluvial plotting using the <code>to_lodes_form</code> function. We input the previous dataset as the first argument to the function and we provide the range of columns that hold the timepoints as the <code>axes</code> argument. We then need to add make transformations, such as adding the count of each state per timepoint (<code>Total</code>) and calculating the proportion (<code>Prop</code>).</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1">lodes <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">to_lodes_form</span>(sample_data, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">axes =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">:</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">7</span>) <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># From 1 to 6</span></span>
+<span id="cb3-2">lodesclean <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> lodes <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span> </span>
+<span id="cb3-3">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">group_by</span>(x) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb3-4">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">add_count</span>(Freq, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">name =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Total"</span>) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span> </span>
+<span id="cb3-5">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">ungroup</span>() <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span> </span>
+<span id="cb3-6">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">transform</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">Prop =</span> Freq<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">/</span>Total)</span>
+<span id="cb3-7"></span>
+<span id="cb3-8">lodesclean</span></code></pre></div>
+<div class="cell-output-display">
+<div data-pagedtable="false">
+  <script data-pagedtable-source="" type="application/json">
+{"columns":[{"label":["user"],"name":[1],"type":["int"],"align":["right"]},{"label":["Freq"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["alluvium"],"name":[3],"type":["int"],"align":["right"]},{"label":["x"],"name":[4],"type":["fct"],"align":["left"]},{"label":["stratum"],"name":[5],"type":["fct"],"align":["left"]},{"label":["Total"],"name":[6],"type":["int"],"align":["right"]},{"label":["Prop"],"name":[7],"type":["dbl"],"align":["right"]}],"data":[{"1":"1","2":"1","3":"1","4":"X1","5":"Moderate","6":"30","7":"0.03333333"},{"1":"2","2":"1","3":"2","4":"X1","5":"Moderate","6":"30","7":"0.03333333"},{"1":"3","2":"1","3":"3","4":"X1","5":"Moderate","6":"30","7":"0.03333333"},{"1":"4","2":"1","3":"4","4":"X1","5":"Moderate","6":"30","7":"0.03333333"},{"1":"5","2":"1","3":"5","4":"X1","5":"Dropout","6":"30","7":"0.03333333"},{"1":"6","2":"1","3":"6","4":"X1","5":"Moderate","6":"30","7":"0.03333333"},{"1":"7","2":"1","3":"7","4":"X1","5":"Moderate","6":"30","7":"0.03333333"},{"1":"8","2":"1","3":"8","4":"X1","5":"Moderate","6":"30","7":"0.03333333"},{"1":"9","2":"1","3":"9","4":"X1","5":"Disengaged","6":"30","7":"0.03333333"},{"1":"10","2":"1","3":"10","4":"X1","5":"Disengaged","6":"30","7":"0.03333333"},{"1":"11","2":"1","3":"11","4":"X1","5":"Moderate","6":"30","7":"0.03333333"},{"1":"12","2":"1","3":"12","4":"X1","5":"Moderate","6":"30","7":"0.03333333"},{"1":"13","2":"1","3":"13","4":"X1","5":"Moderate","6":"30","7":"0.03333333"},{"1":"14","2":"1","3":"14","4":"X1","5":"Active","6":"30","7":"0.03333333"},{"1":"15","2":"1","3":"15","4":"X1","5":"Dropout","6":"30","7":"0.03333333"},{"1":"16","2":"1","3":"16","4":"X1","5":"Moderate","6":"30","7":"0.03333333"},{"1":"17","2":"1","3":"17","4":"X1","5":"Moderate","6":"30","7":"0.03333333"},{"1":"18","2":"1","3":"18","4":"X1","5":"Moderate","6":"30","7":"0.03333333"},{"1":"19","2":"1","3":"19","4":"X1","5":"Disengaged","6":"30","7":"0.03333333"},{"1":"20","2":"1","3":"20","4":"X1","5":"Dropout","6":"30","7":"0.03333333"},{"1":"21","2":"1","3":"21","4":"X1","5":"Dropout","6":"30","7":"0.03333333"},{"1":"22","2":"1","3":"22","4":"X1","5":"Moderate","6":"30","7":"0.03333333"},{"1":"23","2":"1","3":"23","4":"X1","5":"Moderate","6":"30","7":"0.03333333"},{"1":"24","2":"1","3":"24","4":"X1","5":"Moderate","6":"30","7":"0.03333333"},{"1":"25","2":"1","3":"25","4":"X1","5":"Disengaged","6":"30","7":"0.03333333"},{"1":"26","2":"1","3":"26","4":"X1","5":"Moderate","6":"30","7":"0.03333333"},{"1":"27","2":"1","3":"27","4":"X1","5":"Moderate","6":"30","7":"0.03333333"},{"1":"28","2":"1","3":"28","4":"X1","5":"Disengaged","6":"30","7":"0.03333333"},{"1":"29","2":"1","3":"29","4":"X1","5":"Disengaged","6":"30","7":"0.03333333"},{"1":"30","2":"1","3":"30","4":"X1","5":"Moderate","6":"30","7":"0.03333333"},{"1":"1","2":"1","3":"1","4":"X2","5":"Moderate","6":"30","7":"0.03333333"},{"1":"2","2":"1","3":"2","4":"X2","5":"Active","6":"30","7":"0.03333333"},{"1":"3","2":"1","3":"3","4":"X2","5":"Disengaged","6":"30","7":"0.03333333"},{"1":"4","2":"1","3":"4","4":"X2","5":"Dropout","6":"30","7":"0.03333333"},{"1":"5","2":"1","3":"5","4":"X2","5":"Moderate","6":"30","7":"0.03333333"},{"1":"6","2":"1","3":"6","4":"X2","5":"Moderate","6":"30","7":"0.03333333"},{"1":"7","2":"1","3":"7","4":"X2","5":"Moderate","6":"30","7":"0.03333333"},{"1":"8","2":"1","3":"8","4":"X2","5":"Disengaged","6":"30","7":"0.03333333"},{"1":"9","2":"1","3":"9","4":"X2","5":"Moderate","6":"30","7":"0.03333333"},{"1":"10","2":"1","3":"10","4":"X2","5":"Moderate","6":"30","7":"0.03333333"},{"1":"11","2":"1","3":"11","4":"X2","5":"Disengaged","6":"30","7":"0.03333333"},{"1":"12","2":"1","3":"12","4":"X2","5":"Moderate","6":"30","7":"0.03333333"},{"1":"13","2":"1","3":"13","4":"X2","5":"Moderate","6":"30","7":"0.03333333"},{"1":"14","2":"1","3":"14","4":"X2","5":"Disengaged","6":"30","7":"0.03333333"},{"1":"15","2":"1","3":"15","4":"X2","5":"Moderate","6":"30","7":"0.03333333"},{"1":"16","2":"1","3":"16","4":"X2","5":"Disengaged","6":"30","7":"0.03333333"},{"1":"17","2":"1","3":"17","4":"X2","5":"Dropout","6":"30","7":"0.03333333"},{"1":"18","2":"1","3":"18","4":"X2","5":"Moderate","6":"30","7":"0.03333333"},{"1":"19","2":"1","3":"19","4":"X2","5":"Moderate","6":"30","7":"0.03333333"},{"1":"20","2":"1","3":"20","4":"X2","5":"Dropout","6":"30","7":"0.03333333"},{"1":"21","2":"1","3":"21","4":"X2","5":"Disengaged","6":"30","7":"0.03333333"},{"1":"22","2":"1","3":"22","4":"X2","5":"Moderate","6":"30","7":"0.03333333"},{"1":"23","2":"1","3":"23","4":"X2","5":"Moderate","6":"30","7":"0.03333333"},{"1":"24","2":"1","3":"24","4":"X2","5":"Disengaged","6":"30","7":"0.03333333"},{"1":"25","2":"1","3":"25","4":"X2","5":"Moderate","6":"30","7":"0.03333333"},{"1":"26","2":"1","3":"26","4":"X2","5":"Moderate","6":"30","7":"0.03333333"},{"1":"27","2":"1","3":"27","4":"X2","5":"Dropout","6":"30","7":"0.03333333"},{"1":"28","2":"1","3":"28","4":"X2","5":"Disengaged","6":"30","7":"0.03333333"},{"1":"29","2":"1","3":"29","4":"X2","5":"Moderate","6":"30","7":"0.03333333"},{"1":"30","2":"1","3":"30","4":"X2","5":"Moderate","6":"30","7":"0.03333333"},{"1":"1","2":"1","3":"1","4":"X3","5":"Moderate","6":"30","7":"0.03333333"},{"1":"2","2":"1","3":"2","4":"X3","5":"Moderate","6":"30","7":"0.03333333"},{"1":"3","2":"1","3":"3","4":"X3","5":"Moderate","6":"30","7":"0.03333333"},{"1":"4","2":"1","3":"4","4":"X3","5":"Disengaged","6":"30","7":"0.03333333"},{"1":"5","2":"1","3":"5","4":"X3","5":"Moderate","6":"30","7":"0.03333333"},{"1":"6","2":"1","3":"6","4":"X3","5":"Moderate","6":"30","7":"0.03333333"},{"1":"7","2":"1","3":"7","4":"X3","5":"Disengaged","6":"30","7":"0.03333333"},{"1":"8","2":"1","3":"8","4":"X3","5":"Disengaged","6":"30","7":"0.03333333"},{"1":"9","2":"1","3":"9","4":"X3","5":"Moderate","6":"30","7":"0.03333333"},{"1":"10","2":"1","3":"10","4":"X3","5":"Active","6":"30","7":"0.03333333"},{"1":"11","2":"1","3":"11","4":"X3","5":"Moderate","6":"30","7":"0.03333333"},{"1":"12","2":"1","3":"12","4":"X3","5":"Disengaged","6":"30","7":"0.03333333"},{"1":"13","2":"1","3":"13","4":"X3","5":"Moderate","6":"30","7":"0.03333333"},{"1":"14","2":"1","3":"14","4":"X3","5":"Moderate","6":"30","7":"0.03333333"},{"1":"15","2":"1","3":"15","4":"X3","5":"Moderate","6":"30","7":"0.03333333"},{"1":"16","2":"1","3":"16","4":"X3","5":"Dropout","6":"30","7":"0.03333333"},{"1":"17","2":"1","3":"17","4":"X3","5":"Disengaged","6":"30","7":"0.03333333"},{"1":"18","2":"1","3":"18","4":"X3","5":"Moderate","6":"30","7":"0.03333333"},{"1":"19","2":"1","3":"19","4":"X3","5":"Dropout","6":"30","7":"0.03333333"},{"1":"20","2":"1","3":"20","4":"X3","5":"Disengaged","6":"30","7":"0.03333333"},{"1":"21","2":"1","3":"21","4":"X3","5":"Moderate","6":"30","7":"0.03333333"},{"1":"22","2":"1","3":"22","4":"X3","5":"Dropout","6":"30","7":"0.03333333"},{"1":"23","2":"1","3":"23","4":"X3","5":"Moderate","6":"30","7":"0.03333333"},{"1":"24","2":"1","3":"24","4":"X3","5":"Moderate","6":"30","7":"0.03333333"},{"1":"25","2":"1","3":"25","4":"X3","5":"Moderate","6":"30","7":"0.03333333"},{"1":"26","2":"1","3":"26","4":"X3","5":"Moderate","6":"30","7":"0.03333333"},{"1":"27","2":"1","3":"27","4":"X3","5":"Dropout","6":"30","7":"0.03333333"},{"1":"28","2":"1","3":"28","4":"X3","5":"Disengaged","6":"30","7":"0.03333333"},{"1":"29","2":"1","3":"29","4":"X3","5":"Moderate","6":"30","7":"0.03333333"},{"1":"30","2":"1","3":"30","4":"X3","5":"Moderate","6":"30","7":"0.03333333"},{"1":"1","2":"1","3":"1","4":"X4","5":"Disengaged","6":"30","7":"0.03333333"},{"1":"2","2":"1","3":"2","4":"X4","5":"Moderate","6":"30","7":"0.03333333"},{"1":"3","2":"1","3":"3","4":"X4","5":"Disengaged","6":"30","7":"0.03333333"},{"1":"4","2":"1","3":"4","4":"X4","5":"Dropout","6":"30","7":"0.03333333"},{"1":"5","2":"1","3":"5","4":"X4","5":"Dropout","6":"30","7":"0.03333333"},{"1":"6","2":"1","3":"6","4":"X4","5":"Moderate","6":"30","7":"0.03333333"},{"1":"7","2":"1","3":"7","4":"X4","5":"Active","6":"30","7":"0.03333333"},{"1":"8","2":"1","3":"8","4":"X4","5":"Moderate","6":"30","7":"0.03333333"},{"1":"9","2":"1","3":"9","4":"X4","5":"Moderate","6":"30","7":"0.03333333"},{"1":"10","2":"1","3":"10","4":"X4","5":"Dropout","6":"30","7":"0.03333333"},{"1":"11","2":"1","3":"11","4":"X4","5":"Disengaged","6":"30","7":"0.03333333"},{"1":"12","2":"1","3":"12","4":"X4","5":"Dropout","6":"30","7":"0.03333333"},{"1":"13","2":"1","3":"13","4":"X4","5":"Moderate","6":"30","7":"0.03333333"},{"1":"14","2":"1","3":"14","4":"X4","5":"Active","6":"30","7":"0.03333333"},{"1":"15","2":"1","3":"15","4":"X4","5":"Moderate","6":"30","7":"0.03333333"},{"1":"16","2":"1","3":"16","4":"X4","5":"Moderate","6":"30","7":"0.03333333"},{"1":"17","2":"1","3":"17","4":"X4","5":"Dropout","6":"30","7":"0.03333333"},{"1":"18","2":"1","3":"18","4":"X4","5":"Moderate","6":"30","7":"0.03333333"},{"1":"19","2":"1","3":"19","4":"X4","5":"Moderate","6":"30","7":"0.03333333"},{"1":"20","2":"1","3":"20","4":"X4","5":"Moderate","6":"30","7":"0.03333333"},{"1":"21","2":"1","3":"21","4":"X4","5":"Moderate","6":"30","7":"0.03333333"},{"1":"22","2":"1","3":"22","4":"X4","5":"Active","6":"30","7":"0.03333333"},{"1":"23","2":"1","3":"23","4":"X4","5":"Moderate","6":"30","7":"0.03333333"},{"1":"24","2":"1","3":"24","4":"X4","5":"Active","6":"30","7":"0.03333333"},{"1":"25","2":"1","3":"25","4":"X4","5":"Moderate","6":"30","7":"0.03333333"},{"1":"26","2":"1","3":"26","4":"X4","5":"Moderate","6":"30","7":"0.03333333"},{"1":"27","2":"1","3":"27","4":"X4","5":"Moderate","6":"30","7":"0.03333333"},{"1":"28","2":"1","3":"28","4":"X4","5":"Moderate","6":"30","7":"0.03333333"},{"1":"29","2":"1","3":"29","4":"X4","5":"Moderate","6":"30","7":"0.03333333"},{"1":"30","2":"1","3":"30","4":"X4","5":"Moderate","6":"30","7":"0.03333333"},{"1":"1","2":"1","3":"1","4":"X5","5":"Moderate","6":"30","7":"0.03333333"},{"1":"2","2":"1","3":"2","4":"X5","5":"Moderate","6":"30","7":"0.03333333"},{"1":"3","2":"1","3":"3","4":"X5","5":"Moderate","6":"30","7":"0.03333333"},{"1":"4","2":"1","3":"4","4":"X5","5":"Moderate","6":"30","7":"0.03333333"},{"1":"5","2":"1","3":"5","4":"X5","5":"Moderate","6":"30","7":"0.03333333"},{"1":"6","2":"1","3":"6","4":"X5","5":"Moderate","6":"30","7":"0.03333333"},{"1":"7","2":"1","3":"7","4":"X5","5":"Dropout","6":"30","7":"0.03333333"},{"1":"8","2":"1","3":"8","4":"X5","5":"Moderate","6":"30","7":"0.03333333"},{"1":"9","2":"1","3":"9","4":"X5","5":"Moderate","6":"30","7":"0.03333333"},{"1":"10","2":"1","3":"10","4":"X5","5":"Disengaged","6":"30","7":"0.03333333"},{"1":"11","2":"1","3":"11","4":"X5","5":"Active","6":"30","7":"0.03333333"},{"1":"12","2":"1","3":"12","4":"X5","5":"Dropout","6":"30","7":"0.03333333"},{"1":"13","2":"1","3":"13","4":"X5","5":"Dropout","6":"30","7":"0.03333333"},{"1":"14","2":"1","3":"14","4":"X5","5":"Dropout","6":"30","7":"0.03333333"},{"1":"15","2":"1","3":"15","4":"X5","5":"Moderate","6":"30","7":"0.03333333"},{"1":"16","2":"1","3":"16","4":"X5","5":"Moderate","6":"30","7":"0.03333333"},{"1":"17","2":"1","3":"17","4":"X5","5":"Moderate","6":"30","7":"0.03333333"},{"1":"18","2":"1","3":"18","4":"X5","5":"Moderate","6":"30","7":"0.03333333"},{"1":"19","2":"1","3":"19","4":"X5","5":"Moderate","6":"30","7":"0.03333333"},{"1":"20","2":"1","3":"20","4":"X5","5":"Moderate","6":"30","7":"0.03333333"},{"1":"21","2":"1","3":"21","4":"X5","5":"Moderate","6":"30","7":"0.03333333"},{"1":"22","2":"1","3":"22","4":"X5","5":"Moderate","6":"30","7":"0.03333333"},{"1":"23","2":"1","3":"23","4":"X5","5":"Moderate","6":"30","7":"0.03333333"},{"1":"24","2":"1","3":"24","4":"X5","5":"Moderate","6":"30","7":"0.03333333"},{"1":"25","2":"1","3":"25","4":"X5","5":"Moderate","6":"30","7":"0.03333333"},{"1":"26","2":"1","3":"26","4":"X5","5":"Dropout","6":"30","7":"0.03333333"},{"1":"27","2":"1","3":"27","4":"X5","5":"Moderate","6":"30","7":"0.03333333"},{"1":"28","2":"1","3":"28","4":"X5","5":"Moderate","6":"30","7":"0.03333333"},{"1":"29","2":"1","3":"29","4":"X5","5":"Disengaged","6":"30","7":"0.03333333"},{"1":"30","2":"1","3":"30","4":"X5","5":"Moderate","6":"30","7":"0.03333333"},{"1":"1","2":"1","3":"1","4":"X6","5":"Dropout","6":"30","7":"0.03333333"},{"1":"2","2":"1","3":"2","4":"X6","5":"Moderate","6":"30","7":"0.03333333"},{"1":"3","2":"1","3":"3","4":"X6","5":"Moderate","6":"30","7":"0.03333333"},{"1":"4","2":"1","3":"4","4":"X6","5":"Dropout","6":"30","7":"0.03333333"},{"1":"5","2":"1","3":"5","4":"X6","5":"Moderate","6":"30","7":"0.03333333"},{"1":"6","2":"1","3":"6","4":"X6","5":"Moderate","6":"30","7":"0.03333333"},{"1":"7","2":"1","3":"7","4":"X6","5":"Dropout","6":"30","7":"0.03333333"},{"1":"8","2":"1","3":"8","4":"X6","5":"Active","6":"30","7":"0.03333333"},{"1":"9","2":"1","3":"9","4":"X6","5":"Moderate","6":"30","7":"0.03333333"},{"1":"10","2":"1","3":"10","4":"X6","5":"Moderate","6":"30","7":"0.03333333"},{"1":"11","2":"1","3":"11","4":"X6","5":"Moderate","6":"30","7":"0.03333333"},{"1":"12","2":"1","3":"12","4":"X6","5":"Moderate","6":"30","7":"0.03333333"},{"1":"13","2":"1","3":"13","4":"X6","5":"Moderate","6":"30","7":"0.03333333"},{"1":"14","2":"1","3":"14","4":"X6","5":"Moderate","6":"30","7":"0.03333333"},{"1":"15","2":"1","3":"15","4":"X6","5":"Moderate","6":"30","7":"0.03333333"},{"1":"16","2":"1","3":"16","4":"X6","5":"Moderate","6":"30","7":"0.03333333"},{"1":"17","2":"1","3":"17","4":"X6","5":"Moderate","6":"30","7":"0.03333333"},{"1":"18","2":"1","3":"18","4":"X6","5":"Active","6":"30","7":"0.03333333"},{"1":"19","2":"1","3":"19","4":"X6","5":"Moderate","6":"30","7":"0.03333333"},{"1":"20","2":"1","3":"20","4":"X6","5":"Disengaged","6":"30","7":"0.03333333"},{"1":"21","2":"1","3":"21","4":"X6","5":"Moderate","6":"30","7":"0.03333333"},{"1":"22","2":"1","3":"22","4":"X6","5":"Moderate","6":"30","7":"0.03333333"},{"1":"23","2":"1","3":"23","4":"X6","5":"Disengaged","6":"30","7":"0.03333333"},{"1":"24","2":"1","3":"24","4":"X6","5":"Disengaged","6":"30","7":"0.03333333"},{"1":"25","2":"1","3":"25","4":"X6","5":"Moderate","6":"30","7":"0.03333333"},{"1":"26","2":"1","3":"26","4":"X6","5":"Moderate","6":"30","7":"0.03333333"},{"1":"27","2":"1","3":"27","4":"X6","5":"Moderate","6":"30","7":"0.03333333"},{"1":"28","2":"1","3":"28","4":"X6","5":"Moderate","6":"30","7":"0.03333333"},{"1":"29","2":"1","3":"29","4":"X6","5":"Disengaged","6":"30","7":"0.03333333"},{"1":"30","2":"1","3":"30","4":"X6","5":"Dropout","6":"30","7":"0.03333333"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+</div>
+</div>
+<p>Now, we move on to the plotting part. We provide the <code>lodesclean</code> dataset as an input and specify the column containing the time point (by default <code>x</code>) as the x-axis variable. We do the same for <code>stratum</code> and <code>alluvium</code>. Additionally, we use the <code>Prop</code> column as y-axis variable and we color (<code>fill</code>) by stratum. Then we specify the necessary geometries. The first one (<code>geom_flow</code>), takes care of the transition flows between the time points. We can adjust the <code>width</code> parameter, the curvature (<code>curve_type</code>), the transparency (<code>alpha</code>), among other parameters. Next is <code>geom_stratum</code>, which takes care of drawing the bar plots that represent the states at each time point. We can customize the <code>width</code> again and the font <code>color</code>, among others. Then, we can add labels for both the stratums and the flows by specifying the placement in the <code>stat</code> argument. Adjusting the positioning can be very tricky and might require some trial and error, especially if you have modified the width of the different parts of the figure. Next, we define the color scale. We can choose to provide appropriate colors manually (<code>scale_fill_manual</code>) or use a predefined one from <code>ggplot2</code>. We can do additional aesthetics tweaks, such as changing the labels of the x-axis to Course 1, Course 2, Course 3, etc., switching the theme to <code>theme_void</code> to remove clutter in the figure, modify the legend position, and change the font size and color of the axis text.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">ggplot</span>(lodesclean, <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">aes</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">x =</span> x, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">stratum =</span> stratum, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">alluvium =</span> alluvium, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">y =</span> Prop, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">fill =</span> stratum)) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span id="cb4-2">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">geom_flow</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">width =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">/</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">7</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">knot.prop =</span> F, </span>
+<span id="cb4-3">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">curve_type =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"sine"</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">alpha =</span> <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.25</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">aes.flow =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"backward"</span>) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Transitions</span></span>
+<span id="cb4-4">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">geom_stratum</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">width =</span> .<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">425</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">color =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"white"</span>) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Bars</span></span>
+<span id="cb4-5">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">geom_text</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">stat =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"stratum"</span>, <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Bar labels</span></span>
+<span id="cb4-6">            <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">aes</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">label =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">format</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">round</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">after_stat</span>(prop), <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span>), <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">nsmall =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span>)), <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">size =</span> <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">3.5</span>) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span id="cb4-7">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">geom_text</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">stat =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"flow"</span>, <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Transition labels   </span></span>
+<span id="cb4-8">            <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">aes</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">hjust =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">ifelse</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">after_stat</span>(flow) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">==</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"to"</span>, <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2.75</span>, <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span><span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1.85</span>),</span>
+<span id="cb4-9">                <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">label =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">ifelse</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">is.na</span>((alluvium)), <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">""</span>, </span>
+<span id="cb4-10">                  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">format</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">round</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">after_stat</span>(count)<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">/</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span>), <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">nsmall =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span>))), </span>
+<span id="cb4-11">            <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">size =</span> <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2.5</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">vjust =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"inward"</span>) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span id="cb4-12">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">scale_fill_manual</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">values =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"#007604"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"#53b3cb"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"#f9c22e"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"#e01a4f"</span>), <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"State"</span>) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span id="cb4-13">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">scale_x_discrete</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">labels =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">paste0</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Course "</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">:</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">6</span>)) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span id="cb4-14">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">theme_void</span>() <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span id="cb4-15">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">theme</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">legend.position =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"top"</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">axis.text.x =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">element_text</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">color=</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"#000000"</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">size=</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">10</span>))</span></code></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="https://sonsoleslp.github.io/posts/alluvial/index_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+
+
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@misc{lópez_pernas2024,
+  author = {López Pernas, Sonsoles},
+  title = {Alluvial Plots for Transition Analysis},
+  date = {2024-07-22},
+  url = {https://sonsoleslp.github.io/posts/alluvial/},
+  langid = {en}
+}
+</code></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-lópez_pernas2024" class="csl-entry quarto-appendix-citeas">
+López Pernas, Sonsoles. 2024. <span>“Alluvial Plots for Transition
+Analysis.”</span> <a href="https://sonsoleslp.github.io/posts/alluvial/">https://sonsoleslp.github.io/posts/alluvial/</a>.
+</div></div></section></div> ]]></description>
+  <category>R</category>
+  <category>visualization</category>
+  <category>tutorial</category>
+  <guid>https://sonsoleslp.github.io/posts/alluvial/</guid>
+  <pubDate>Sun, 21 Jul 2024 21:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>Book: Learning Analytics Methods and Tutorials</title>
+  <dc:creator>Sonsoles López Pernas</dc:creator>
+  <link>https://sonsoleslp.github.io/posts/labook/</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<p><img src="https://sonsoleslp.github.io/posts/labook/labook.jpeg" style="float: left; width: 250px; padding-right: 20px; padding-top: 20px;"></p>
+<p>The lack of resources and methodological guidance on learning analytics has been a problem ever since the field started, and continues to be a problem today. Me and my colleague <a href="https://saqr.me">Mohammed Saqr</a> thought that the arduous journey in learning analytics should not be endured by everyone and we decided to make that resource with the help of the learning analytics community as well as our collaborators.</p>
+<p>In this book, we include all the basics of R as a programming language as well as the basics of data cleaning, statistics, and data manipulation. In doing so, we wanted the newcomers to find an easy entry to the field. We also tried to be as comprehensive as we could and included almost all major methodologies. For every method, we started with the basics, explaining the main concepts, the essential techniques, and basic functions. In subsequent chapters, we went deeper into advanced methods that are at the forefront of novel methodological innovations. We also used real-life learning analytics data and made it readily available to researchers. To do so, we collaborated with world-renowned researchers, package developers, and methodological experts from other fields to offer an unprecedented resource on novel topics that are hard to find any resource for.</p>
+<p>We hope the readers find this book useful as a guide through learning analytics methods. We made all the tutorials available on the book <a href="https://lamethods.org">website</a> so they are easy to follow by interested readers. Thank you so much to the School of Computing of University of Eastern Finland for funding the book open access fees to be able to share with the whole research community.</p>
+
+
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@misc{lópez_pernas2024,
+  author = {López Pernas, Sonsoles},
+  title = {Book: {Learning} {Analytics} {Methods} and {Tutorials}},
+  date = {2024-07-15},
+  url = {https://sonsoleslp.github.io/posts/labook/},
+  langid = {en}
+}
+</code></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-lópez_pernas2024" class="csl-entry quarto-appendix-citeas">
+López Pernas, Sonsoles. 2024. <span>“Book: Learning Analytics Methods
+and Tutorials.”</span> <a href="https://sonsoleslp.github.io/posts/labook/">https://sonsoleslp.github.io/posts/labook/</a>.
+</div></div></section></div> ]]></description>
+  <category>learning analytics</category>
+  <category>tutorial</category>
+  <category>R</category>
+  <guid>https://sonsoleslp.github.io/posts/labook/</guid>
+  <pubDate>Sun, 14 Jul 2024 21:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>Funding from the Research Council Finland!</title>
+  <dc:creator>Sonsoles López Pernas</dc:creator>
+  <link>https://sonsoleslp.github.io/posts/cretic/</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<p>I had the amazing news that I got the prestigious Academy Research Fellowship funding from the Research Council of Finland (Suomen Akatemia). I applied to the <em>Human factors and technology</em> <em>design</em> panel and I ranked 1st of all the applications in the panel (only 14 made it to the end)! The name of my project is <strong>“Optimizing Clinical Reasoning in Time-Critical Scenarios: A data-driven multimodal approach (CRETIC)”</strong>. It will last 4 years with a granted funding of 606,199€.<br>
+<br>
+I would like to take this opportunity to thank everyone who helped me along the way. First and foremost, I need to thank <a href="https://saqr.me">Mohammed Saqr</a> for all his help and the great impact that he has had in my career and life overall. I wouldn’t be here without you. I would also like to thank my colleagues at University of Eastern Finland for all your support, as well as my former colleagues from Universidad Politécnica de Madrid. I am of course thankful to the collaborators who endorsed my application: Dragan Gasevic, Sameh M. Said, Alper Bayazıt, and Susanne Lajoie.<br>
+<br>
+CRETIC aims to optimize emergency training of healthcare students and trainees. I will develop an innovative gamified platform that combines virtual patients and elements of educational escape rooms to simulate clinical emergencies. Data from multiple sources (physiological sensors, questionnaires and digital logs among others) will be collected to capture the full breadth of the dynamics of the clinical reasoning process. The data will be analyzed using temporal learning analytics and explainable artificial intelligence methods to map the clinical reasoning process and the factors that lead to successful and effective decision-making. The proposal will result in an open scalable platform that will dramatically improve the training of medical emergencies, offer personalized insights into effective decision-making, provide a safe environment for practicing challenging clinical situations, and ultimately decrease medical errors, one of the leading causes of death worldwide.<br>
+<br>
+The topic of the project is very special to me because it combines everything that I have ever worked on with everything that I have been wanting to learn lately. Regarding the former, the project departs from my PhD topic: educational escape rooms, although this time for medical education. In terms of methodology, the project will rely on temporal learning analytics, which has been the focus of my latest research. In terms of technology, it will require real-time data analytics, which builds on the tools I developed during my time at UPM, working on the FIWARE ecosystem. Regarding the new knowledge and skills I would like to develop, the project incorporates multimodal learning analytics, which I have interested in for a while (but lacked the resources to explore), and xAI, a hot topic that is currently understudied in learning analytics.</p>
+
+
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@misc{lópez_pernas2024,
+  author = {López Pernas, Sonsoles},
+  title = {Funding from the {Research} {Council} {Finland!}},
+  date = {2024-06-13},
+  url = {https://sonsoleslp.github.io/posts/cretic/},
+  langid = {en}
+}
+</code></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-lópez_pernas2024" class="csl-entry quarto-appendix-citeas">
+López Pernas, Sonsoles. 2024. <span>“Funding from the Research Council
+Finland!”</span> <a href="https://sonsoleslp.github.io/posts/cretic/">https://sonsoleslp.github.io/posts/cretic/</a>.
+</div></div></section></div> ]]></description>
+  <category>funding</category>
+  <category>game-based learning</category>
+  <category>learning analytics</category>
+  <guid>https://sonsoleslp.github.io/posts/cretic/</guid>
+  <pubDate>Wed, 12 Jun 2024 21:00:00 GMT</pubDate>
+  <media:content url="https://sonsoleslp.github.io/posts/cretic/cretic.png" medium="image" type="image/png" height="86" width="144"/>
+</item>
+<item>
+  <title>ISILA Funding from Erasmus+</title>
+  <dc:creator>Sonsoles López Pernas</dc:creator>
+  <link>https://sonsoleslp.github.io/posts/isila/</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<p>I have just learned that I received my first-ever research grant. I will be the Principal Investigator of the ISILA project, funded by the Erasmus+ Finnish agency (and ultimately by the European Commission). ISILA stands for <strong>“Improving the quality and sustainability of learning using early intervention methods based on learning analytics”</strong>. The ISILA project aims to stimulate innovative teaching practices by providing tools for tracking student learning and engagement data and in-time information to teachers, allowing for the customization of intervention methods to the teaching context. This will enable teachers to closely monitor students, preventing them from failing the course or dropping out from the courses. The project will also identify learning patterns based on collected data that can be used for further development of teaching and learning platforms for continuous improvement of intervention methods in different educational environments.</p>
+<p><img src="https://sonsoleslp.github.io/posts/isila/image.png" class="img-fluid"></p>
+<p>For more details check the <a href="https://blogs.uef.fi/isila">website</a>.</p>
+
+
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@misc{lópez_pernas2023,
+  author = {López Pernas, Sonsoles},
+  title = {ISILA {Funding} from {Erasmus+}},
+  date = {2023-07-01},
+  url = {https://sonsoleslp.github.io/posts/isila/},
+  langid = {en}
+}
+</code></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-lópez_pernas2023" class="csl-entry quarto-appendix-citeas">
+López Pernas, Sonsoles. 2023. <span>“ISILA Funding from
+Erasmus+.”</span> <a href="https://sonsoleslp.github.io/posts/isila/">https://sonsoleslp.github.io/posts/isila/</a>.
+</div></div></section></div> ]]></description>
+  <category>funding</category>
+  <category>learning analytics</category>
+  <guid>https://sonsoleslp.github.io/posts/isila/</guid>
+  <pubDate>Fri, 30 Jun 2023 21:00:00 GMT</pubDate>
 </item>
 </channel>
 </rss>

@@ -2,7 +2,12 @@
   {
     "listing": "/blog.html",
     "items": [
-      "/posts/first-post/index.html"
+      "/posts/iglue/index.html",
+      "/posts/vasstra/index.html",
+      "/posts/alluvial/index.html",
+      "/posts/labook/index.html",
+      "/posts/cretic/index.html",
+      "/posts/isila/index.html"
     ]
   }
 ]

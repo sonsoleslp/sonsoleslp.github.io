@@ -48,3 +48,7 @@ p {
   line-height: 28px;
   padding: 6px;
 }
+
+.listing-author {
+  display:none;
+}

@@ -1,0 +1,38 @@
+---
+title: "The VaSSTra method"
+description: |
+    From Variables to States to Sequences to Trajectories
+date: "2024-08-17"
+categories:
+  - funding
+  - game-based learning
+# engine: markdown
+code-fold: false
+warning: false
+message: false
+fig.align: center
+bibliography: references.bib
+---
+
+The **VaSSTra** (Variabes-States-Sequences-Trajectories) began as a simple yet ambitious idea that later evolved into a groundbreaking method in learning analytics. Most sequence analysis studies in this field focus on representing sequences of clicks or other events within a learning management system (LMS) or similar online platforms. These sequences often depict momentary actions or events.
+
+However, in 2021, my colleague [Mohammed Saqr](https://saqr.me) and I took a different approach. In our article [@saqr2021], we applied sequence analysis more in line with its origins—tracking life events and longitudinal trajectories. Instead of mapping each block in a sequence to a single momentary action or event, we used each block to represent a state over the duration of an entire course, whereby the entire sequence represented a complete study program. These states were derived by clustering students’ engagement indicators from LMS logs using latent class analysis (LCA).
+
+We quickly realized the novelty of this approach in the context of learning analytics. It provided a way to examine how students’ behaviors and engagement evolved over a whole study period. This kickstarted a series of applications. We extended the method to other constructs, such as learning strategies [@saqr2023], and collaborative roles in computer-supported collaborative learning (CSCL).
+
+We presented the method on its own in a conference paper in 2022 [@lópez-pernas2023] and we presented a tutorial on how to implement it with R [@lópez-pernas2024a] in our book "Learning Analytics Methods and Tutorials".
+
+We then began experimenting with extensions of the method, exploring multi-channel sequence analysis to examine multiple simultaneous dimensions [@saqr2023a]. We also adopted theoretical frameworks like complex systems theory, which provided fresh perspectives on how these patterns of behavior could be understood [@lópez-pernas2024].
+
+**VaSSTra** utilizes a combination of person-based methods (to capture the latent states) along with life events methods to model the longitudinal process. In doing so, **VaSSTra** effectively leverages the benefits of both families of methods in mapping the patterns of longitudinal temporal dynamics. The method has three main steps that can be summarized as (1) identifying latent **S**tates from **Va**riables, (2) modeling states as **S**equences, and (3) identifying **Tra**jectories within sequences. The three steps are depicted in the figure and described in detail below:
+
+![](vasstra.png){fig-align="center"}
+
+-   **Step 1. From variables to states:** In the first step of the analysis, we identify the “states” within the data using a method that can capture latent or unobserved patterns from multidimensional data (variables). The said states represent a behavioral pattern, function or a construct that can be inferred from the data. For instance, engagement is a multidimensional construct and is usually captured through several indicators. e.g., students’ frequency and time spent online, course activities, cognitive activities and social interactions. Using an appropriate method, such as person-based clustering in our case, we can derive students’ engagement states for a given activity or course. For instance, the method would classify students who invest significant time, effort and mental work are “engaged.” Similarly, students who are investing low effort and time in studying would be classified as “diseganged.” Such powerful summarization would allow us to use the discretized states in further steps. An important aspect of such states is that they are calculated for a specific timespan. Therefore, in our example we could infer students’ engagement states per activity, per week, per lesson, per course, etc. Sometimes, such time divisions are by design (e.g., lessons or courses), but in other occasions researchers have to establish a time scheme according to the data and research questions (e.g., weeks or days). Computing states for multiple time periods is a necessary step to create time-ordered state sequences and prepare the data for sequence analysis.
+
+-   **Step 2. From states to sequences:** Once we have a state for each student at each time point, we can construct an ordered sequence of such states for each student. For example, if we used the scenario mentioned above about measuring engagement states, a sequence of a single student’s engagement states across a six-lesson course would be like the one below. When we convert the ordered states to sequences, we unlock the potential of sequence analysis and life events methods. We are able to plot the distribution of states at each time point, study the individual pathways, the entropy, the mean time spent at each state, etc. We can also estimate how frequently students switch states, and what is the likelihood they finish their sequence in a “desirable” state (i.e., “engaged”).
+
+```{=html}
+<!-- -->
+```
+-   **Step 3. From sequences to trajectories:** Our last step is to identify similar trajectories —sequences of states with a similar temporal evolution— using temporal clustering methods (e.g., hidden Markov models or hierarchical clustering). Covariates (i.e., variables that could explain cluster membership) can be added at this stage to help identify why a trajectory has evolved in a certain way. Moreover, sequence analysis can be used to study the different trajectories, and not only the complete cohort. We can compare trajectories according to their sequence properties, or to other variables (e.g., performance).

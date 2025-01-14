@@ -1,0 +1,21 @@
+---
+title: "ISILA Funding from Erasmus+"
+description: |
+    Improving the quality and sustainability of learning using early intervention methods based on learning analytics
+date: "2023-07-01"
+categories:
+  - funding
+  - learning analytics
+# engine: markdown
+code-fold: false
+warning: false
+message: false
+fig.align: center
+---
+
+I have just learned that I received my first-ever research grant. I will be the Principal Investigator of the ISILA project, funded by the Erasmus+ Finnish agency (and ultimately by the European Commission). ISILA stands for **"Improving the quality and sustainability of learning using early intervention methods based on learning analytics"**. The ISILA project aims to stimulate innovative teaching practices by providing tools for tracking student learning and engagement data and in-time information to teachers, allowing for the customization of intervention methods to the teaching context. This will enable teachers to closely monitor students, preventing them from failing the course or dropping out from the courses. The project will also identify learning patterns based on collected data that can be used for further development of teaching and learning platforms for continuous improvement of intervention methods in different educational environments.
+
+![](image.png)
+
+For more details check the [website](https://blogs.uef.fi/isila).
+
