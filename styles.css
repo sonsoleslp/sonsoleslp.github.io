@@ -31,7 +31,13 @@ p {
   border-radius: 50%;
 }
 
- 
+.primary-links a {
+  color: #f21a98;  
+}
+
+.primary-links a:hover {
+  color: #f21a98;  
+}
 
 
 .btn-social {

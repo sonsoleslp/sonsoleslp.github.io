@@ -146,26 +146,6 @@ visitstags
 )
 ```
 
-
-
-## Editorial and community service work
-```{r,echo=F}
-editorial = rio::import("cv.xlsx", sheet = "Editorial_work")
-editorialtags = htmltools::tagList()
-
-for (i in 1:nrow(editorial)) {
-  edi = editorial[i,]
-  editorialtags[[i]] <- htmltools::tags$li(htmltools::tagList(
-   htmltools::tags$span( paste0("(",edi$Year,") ")),
-   htmltools::HTML(paste0("<span>",edi$Description,"</span>"))
-  ))
-}
-htmltools::tags$ul(
-editorialtags
-)
-```
-
-
 ## Research Projects
 
 ```{r,echo=F}
@@ -181,7 +161,7 @@ for (i in 1:nrow(projects)) {
     htmltools::tagList(
       htmltools::tags$span(paste0("(", proj$Year, ") ")),
        htmltools::tagList(
-          htmltools::tags$a(proj$Name, href = proj$Link, target = "_blank"),
+          htmltools::tags$b(proj$Name),
           htmltools::tags$span(paste0(ifelse(!is.na(proj$Role), 
                                paste0("(role: ",proj$Role,")"), "")," - Funded by: ", proj$Funding))),
        
@@ -201,20 +181,78 @@ for (i in 1:nrow(projects)) {
       htmltools::tags$div(
         class = "collapse",
         id = description_id,
-        htmltools::tags$small(
-          paste0(ifelse(!is.na(proj$Description), proj$Description, "")#,
-          # ifelse(!is.na(proj$Money), paste0("\nFunding: ", proj$Money, ""),"")
+        htmltools::tagList(
+          htmltools::tags$small(
+            paste0(ifelse(!is.na(proj$Description), proj$Description, "")#,
+            # ifelse(!is.na(proj$Money), paste0("\nFunding: ", proj$Money, ""),"")
+            ),
           ),
-          )
-      ),
+          htmltools::tags$div(
+            htmltools::tags$a(htmltools::tags$button(htmltools::HTML("<i class='bi bi-link-45deg'></i> Website"),class="btn btn-sm btn-outline-danger"), 
+                              href = proj$Link, target = "_blank"), style="margin-top:10px;")
+        )
+      )
       
-      htmltools::tags$br(), htmltools::tags$br()
-    ), style = "position:relative;"
+      
+    ), style = "position:relative;margin-bottom:10px;"
   )
 }
 
 htmltools::tags$ul(projtags)
 
+```
+
+
+## Editorial work
+```{r,echo=F}
+editorial = rio::import("cv.xlsx", sheet = "Editorial_work")
+editorialtags = htmltools::tagList()
+
+for (i in 1:nrow(editorial)) {
+  edi = editorial[i,]
+  editorialtags[[i]] <- htmltools::tags$li(htmltools::tagList(
+   htmltools::tags$span( paste0("(",edi$Year,") ")),
+   htmltools::HTML(paste0("<span>",edi$Description,"</span>"))
+  ))
+}
+htmltools::tags$ul(
+editorialtags
+)
+```
+
+## Other community service work
+```{r,echo=F}
+editorial = rio::import("cv.xlsx", sheet = "Community_service")
+editorialtags = htmltools::tagList()
+
+for (i in 1:nrow(editorial)) {
+  edi = editorial[i,]
+  editorialtags[[i]] <- htmltools::tags$li(htmltools::tagList(
+   htmltools::tags$span( paste0("(",edi$Year,") ")),
+   htmltools::HTML(paste0("<span>",edi$Description,"</span>"))
+  ))
+}
+htmltools::tags$ul(
+editorialtags
+)
+```
+
+## Diversity, Equity, and Inclusion Activities
+
+```{r,echo=F}
+editorial = rio::import("cv.xlsx", sheet = "DEI")
+editorialtags = htmltools::tagList()
+
+for (i in 1:nrow(editorial)) {
+  edi = editorial[i,]
+  editorialtags[[i]] <- htmltools::tags$li(htmltools::tagList(
+   htmltools::tags$span( paste0("(",edi$Year,") ")),
+   htmltools::HTML(paste0("<span>",edi$Description,"</span>"))
+  ))
+}
+htmltools::tags$ul(
+editorialtags
+)
 ```
 
 ## Other merits
