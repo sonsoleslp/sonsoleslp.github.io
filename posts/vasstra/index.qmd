@@ -14,7 +14,7 @@ fig.align: center
 bibliography: references.bib
 ---
 
-The **VaSSTra** (Variabes-States-Sequences-Trajectories) began as a simple yet ambitious idea that later evolved into a groundbreaking method in learning analytics. Most sequence analysis studies in this field focus on representing sequences of clicks or other events within a learning management system (LMS) or similar online platforms. These sequences often depict momentary actions or events.
+The **VaSSTra** (Variables-States-Sequences-Trajectories) began as a simple yet ambitious idea that later evolved into a groundbreaking method in learning analytics. Most sequence analysis studies in this field focus on representing sequences of clicks or other events within a learning management system (LMS) or similar online platforms. These sequences often depict momentary actions or events.
 
 However, in 2021, my colleague [Mohammed Saqr](https://saqr.me) and I took a different approach. In our article [@saqr2021], we applied sequence analysis more in line with its origins—tracking life events and longitudinal trajectories. Instead of mapping each block in a sequence to a single momentary action or event, we used each block to represent a state over the duration of an entire course, whereby the entire sequence represented a complete study program. These states were derived by clustering students’ engagement indicators from LMS logs using latent class analysis (LCA).
 
@@ -32,7 +32,6 @@ We then began experimenting with extensions of the method, exploring multi-chann
 
 -   **Step 2. From states to sequences:** Once we have a state for each student at each time point, we can construct an ordered sequence of such states for each student. For example, if we used the scenario mentioned above about measuring engagement states, a sequence of a single student’s engagement states across a six-lesson course would be like the one below. When we convert the ordered states to sequences, we unlock the potential of sequence analysis and life events methods. We are able to plot the distribution of states at each time point, study the individual pathways, the entropy, the mean time spent at each state, etc. We can also estimate how frequently students switch states, and what is the likelihood they finish their sequence in a “desirable” state (i.e., “engaged”).
 
-```{=html}
 <!-- -->
-```
+
 -   **Step 3. From sequences to trajectories:** Our last step is to identify similar trajectories —sequences of states with a similar temporal evolution— using temporal clustering methods (e.g., hidden Markov models or hierarchical clustering). Covariates (i.e., variables that could explain cluster membership) can be added at this stage to help identify why a trajectory has evolved in a certain way. Moreover, sequence analysis can be used to study the different trajectories, and not only the complete cohort. We can compare trajectories according to their sequence properties, or to other variables (e.g., performance).

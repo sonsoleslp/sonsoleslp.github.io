@@ -15,7 +15,7 @@ fig.align: center
 image: "cretic.png"  
 ---
 
-I had the amazing news that I got the prestigious Academy Research Fellowship funding from the Research Council of Finland (Suomen Akatemia). I applied to the *Human factors and technology* *design* panel and I ranked 1st of all the applications in the panel (only 14 made it to the end)! The name of my project is **"Optimizing Clinical Reasoning in Time-Critical Scenarios: A data-driven multimodal approach (CRETIC)"**. It will last 4 years with a granted funding of 606,199€. \
+I had the amazing news that I got the prestigious Academy Research Fellowship funding from the Research Council of Finland (Suomen Akatemia). I applied to the *Human factors and technology* *design* panel and I ranked 1st of all the applications in the panel (only 14 made it to the end)! The name of my project is **"Optimizing Clinical Reasoning in Time-Critical Scenarios: A data-driven multimodal approach (CRETIC)"**. It will last 4 years with a granted funding of 606,199€.\
 \
 I would like to take this opportunity to thank everyone who helped me along the way. First and foremost, I need to thank [Mohammed Saqr](https://saqr.me) for all his help and the great impact that he has had in my career and life overall. I wouldn't be here without you. I would also like to thank my colleagues at University of Eastern Finland for all your support, as well as my former colleagues from Universidad Politécnica de Madrid. I am of course thankful to the collaborators who endorsed my application: Dragan Gasevic, Sameh M. Said, Alper Bayazıt, and Susanne Lajoie.\
 \
