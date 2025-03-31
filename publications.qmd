@@ -206,7 +206,7 @@ ai <- Publications |> filter(AI=="X") |> nrow()
 </style>
 <br/>
 ```{r, echo= F, include=F, warning = F}
-pub_types = unique(c("Journal Article", "Conference Paper", "Book Chapter", Publications$`Document Type`))
+pub_types = unique(c("Journal Article", "Conference Paper", "Book Chapter", "Editorial", Publications$`Document Type`))
 pub_tags <- htmltools::tagList()
 for (p in 1:length(pub_types)) {
   year_tags = htmltools::tagList()
@@ -240,7 +240,7 @@ for (p in 1:length(pub_types)) {
 ```
  
 ```{r, echo= F, results='asis', warning = F}
-pub_types = (unique(Publications$`Document Type`))
+# pub_types = (unique(Publications$`Document Type`))
 pub_tags <- htmltools::tagList()
 for (p in 1:length(pub_types)) {
   year_tags = htmltools::tagList()
