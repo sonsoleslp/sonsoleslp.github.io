@@ -164,7 +164,12 @@ only_types <- Publications %>% janitor::tabyl(JCR) %>% data.frame %>% filter(!is
 output = paste0("My ", nrow(Publications), " research publications include ")
 types_pub = rev(names(outcomes))
 for (i in 1:length(types_pub)) {
+  
   pubb <- types_pub[i]
+  print(pubb)
+  if (pubb == "Other") {
+    
+  } else {
   numberr <- outcomes[[pubb]]
   lastt <- i==length(types_pub)
   jcrs <- ""
@@ -184,6 +189,7 @@ for (i in 1:length(types_pub)) {
                    ifelse(numberr > 1,"s",""),
                    jcrs,
                    ifelse( lastt,".",", "))
+  }
 }
 htmltools::tags$p(output)
 la <- Publications |> filter(LA=="X") |> nrow()
