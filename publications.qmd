@@ -166,7 +166,6 @@ types_pub = rev(names(outcomes))
 for (i in 1:length(types_pub)) {
   
   pubb <- types_pub[i]
-  print(pubb)
   if (pubb == "Other") {
     
   } else {
