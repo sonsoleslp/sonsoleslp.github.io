@@ -27,7 +27,7 @@ jobs:
       - name: Install jsonlite
         run:  R -e 'install.packages("jsonlite", repos = "https://cran.r-project.org")'
         
-      - uses: r-lib/actions/setup-renv@v2
+
       
       - name: Install Quarto
         uses: quarto-dev/quarto-actions/setup@v2
@@ -41,15 +41,18 @@ jobs:
           R -e 'install.packages("dplyr")'
           R -e 'install.packages("rio")'
           sh curl.sh
-          this must fail
+
+      - name: Delete old docs
+        run: rm -rf docs/
       - name: Render Quarto Project
-        uses: quarto-dev/quarto-actions/render@v2
+        run: quarto render .
         
       - name: Commit files
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
-          git commit -m "Add changes" -a
+          git add .
+          git commit -m "Add changes"
 
       - name: Push changes
         uses: ad-m/github-push-action@master
