@@ -17,7 +17,7 @@ Welcome_tags = htmltools::tagList()
 
 for (i in 1:length(Welcome)) {
   if (!is.na(Welcome[i])){
-    Welcome_tags[[i]] <- htmltools::HTML(paste0("<p class='primary-links'>",Welcome[i],"</p>"))
+    Welcome_tags[[i]] <- htmltools::HTML(paste0("<p >",Welcome[i],"</p>"))
   }
 }
 

@@ -6,8 +6,11 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="Sonsoles López-Pernas">
+<meta name="dcterms.date" content="2025-07-30">
+<meta name="description" content="My favorite figures from my papers that are my own creation">
 
-<title>Blog – sonsoleslp</title>
+<title>Data visualization for research – sonsoleslp</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,28 +23,46 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<link href="./favicon.png" rel="icon" type="image/png">
-<script src="site_libs/quarto-listing/list.min.js"></script>
-<script src="site_libs/quarto-listing/quarto-listing.js"></script>
-<script src="site_libs/quarto-html/quarto.js"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-9e1f2a4632985dffc2c80318c992baf5.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-311ec518fdacdf19848d6daa317550f1.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<link href="../../favicon.png" rel="icon" type="image/png">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-9e1f2a4632985dffc2c80318c992baf5.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-311ec518fdacdf19848d6daa317550f1.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -69,35 +90,6 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
-<script>
-
-  window.document.addEventListener("DOMContentLoaded", function (_event) {
-    const listingTargetEl = window.document.querySelector('#listing-listing .list');
-    if (!listingTargetEl) {
-      // No listing discovered, do not attach.
-      return; 
-    }
-
-    const options = {
-      valueNames: ['listing-date','listing-title','listing-author','listing-image','listing-description','listing-categories',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
-      
-      searchColumns: ["listing-date","listing-title","listing-author","listing-image","listing-description","listing-categories"],
-    };
-
-    window['quarto-listings'] = window['quarto-listings'] || {};
-    window['quarto-listings']['listing-listing'] = new List('listing-listing', options);
-
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  });
-
-  window.addEventListener('hashchange',() => {
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  })
-  </script>
 <script async="" src="https://www.googletagmanager.com/gtag/js?id=G-251HR7GW52"></script>
 
 <script type="text/javascript">
@@ -107,75 +99,31 @@ function gtag(){dataLayer.push(arguments);}
 gtag('js', new Date());
 gtag('config', 'G-251HR7GW52', { 'anonymize_ip': true});
 </script>
+<style>html{ scroll-behavior: smooth; }</style>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
 
-  <script>window.backupDefine = window.define; window.define = undefined;</script><script src="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.js"></script>
-  <script>document.addEventListener("DOMContentLoaded", function () {
- var mathElements = document.getElementsByClassName("math");
- var macros = [];
- for (var i = 0; i < mathElements.length; i++) {
-  var texText = mathElements[i].firstChild;
-  if (mathElements[i].tagName == "SPAN") {
-   katex.render(texText.data, mathElements[i], {
-    displayMode: mathElements[i].classList.contains('display'),
-    throwOnError: false,
-    macros: macros,
-    fleqn: false
-   });
-}}});
-  </script>
-  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css">
 
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
-
-<link rel="stylesheet" href="styles.css">
-<link rel="alternate" type="application/rss+xml" title="sonsoleslp" href="blog.xml" data-external="1"><meta property="og:title" content="Blog – sonsoleslp">
-<meta property="og:image" content="https://sonsoleslp.github.io/posts/cretic/cretic.png">
+<link rel="stylesheet" href="../../styles.css">
+<meta property="og:title" content="Data visualization for research – sonsoleslp">
+<meta property="og:description" content="My favorite figures from my papers that are my own creation">
+<meta property="og:image" content="https://sonsoleslp.github.io/posts/visualization/selected-viz/momentum.jpg">
 <meta property="og:site_name" content="sonsoleslp">
-<meta property="og:image:height" content="459">
-<meta property="og:image:width" content="768">
-<meta name="twitter:title" content="Blog – sonsoleslp">
-<meta name="twitter:image" content="https://sonsoleslp.github.io/posts/cretic/cretic.png">
+<meta name="twitter:title" content="Data visualization for research – sonsoleslp">
+<meta name="twitter:description" content="My favorite figures from my papers that are my own creation">
+<meta name="twitter:image" content="https://sonsoleslp.github.io/posts/visualization/selected-viz/momentum.jpg">
 <meta name="twitter:creator" content="@sonsoleslp">
 <meta name="twitter:site" content="@sonsoleslp">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image-height" content="459">
-<meta name="twitter:image-width" content="768">
 </head>
 
 <body class="nav-fixed">
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top">
+  <header id="quarto-header" class="headroom fixed-top quarto-banner">
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="./index.html">
+    <a class="navbar-brand" href="../../index.html">
     <span class="navbar-title">sonsoleslp</span>
     </a>
   </div>
@@ -186,23 +134,23 @@ window.Quarto = {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="./index.html"> 
+    <a class="nav-link" href="../../index.html"> 
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./about.html"> 
+    <a class="nav-link" href="../../about.html"> 
 <span class="menu-text">About</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./publications.html"> 
+    <a class="nav-link" href="../../publications.html"> 
 <span class="menu-text">Publications</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./softwares.html"> 
+    <a class="nav-link" href="../../softwares.html"> 
 <span class="menu-text">Software</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link active" href="./blog.html" aria-current="page"> 
+    <a class="nav-link" href="../../blog.html"> 
 <span class="menu-text">Blog</span></a>
   </li>  
 </ul>
@@ -213,306 +161,108 @@ window.Quarto = {
     </nav>
 </header>
 <!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">Data visualization for research</h1>
+                  <div>
+        <div class="description">
+          <p>My favorite figures from my papers that are my own creation</p>
+        </div>
+      </div>
+                          <div class="quarto-categories">
+                <div class="quarto-category">visualization</div>
+                <div class="quarto-category">ggplot2</div>
+              </div>
+                  </div>
+  </div>
+    
+  <div class="quarto-title-meta-author">
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-heading">Affiliation</div>
+    
+      <div class="quarto-title-meta-contents">
+      <p class="author"><a href="https://sonsoles.me">Sonsoles López-Pernas</a> </p>
+    </div>
+    <div class="quarto-title-meta-contents">
+          <p class="affiliation">
+              University of Eastern Finland
+            </p>
+        </div>
+    </div>
+
+  <div class="quarto-title-meta">
+
+        
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">July 30, 2025</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
         
-    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(7)</span></div><div class="category" data-category="Ug==">R <span class="quarto-category-count">(2)</span></div><div class="category" data-category="ZnVuZGluZw==">funding <span class="quarto-category-count">(4)</span></div><div class="category" data-category="Z2FtZS1iYXNlZCUyMGxlYXJuaW5n">game-based learning <span class="quarto-category-count">(3)</span></div><div class="category" data-category="Z2dwbG90Mg==">ggplot2 <span class="quarto-category-count">(1)</span></div><div class="category" data-category="bGVhcm5pbmclMjBhbmFseXRpY3M=">learning analytics <span class="quarto-category-count">(3)</span></div><div class="category" data-category="dHV0b3JpYWw=">tutorial <span class="quarto-category-count">(2)</span></div><div class="category" data-category="dmlzdWFsaXphdGlvbg==">visualization <span class="quarto-category-count">(2)</span></div></div></div>
+    </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
-
-<header id="title-block-header" class="quarto-title-block default">
-<div class="quarto-title">
-<h1 class="title">Blog</h1>
-</div>
-
-
-
-<div class="quarto-title-meta">
-
-    
-  
-    
-  </div>
-  
-
-
-</header>
+<main class="content quarto-banner-title-block" id="quarto-document-content">
 
 
 
 
 
+<p>Data visualization is definitely my favorite part of research. I am not a designer and have not received formal training in data visualization, but it’s something I deeply enjoy and it is one of the tasks that I do when I want to feel productive but I don’t feel like writing or responding to emails.</p>
+<p>The images I’ve collected in this post are some of my favorites from different papers. Some are meant to explain a complicated finding. Others try to capture a messy idea or illustrate the full analytical pipeline.</p>
+<p>The first figure is a classic in my research, which is using sequence analysis to illustrate longitudinal trajectories of categorical variables. This one specifically is from a recent paper in <em>Computers in Human Behaviour</em> <span class="citation" data-cites="Lopez-Pernas2024-bv">(<a href="#ref-Lopez-Pernas2024-bv" role="doc-biblioref">López-Pernas and Saqr 2024</a>)</span>. I use the <code>TraMineR</code> package for this. For the transitions, I use <code>tna</code>, our own package for Transition Network Analysis, based on <code>qgraph</code>. I love this figure not only because I think it is very aesthetically pleasing but because it allows you to see the whole picture immediately. I have used many of such figures in my research using the VaSStra method, to which I devoted <a href="../vasstra">another post</a>.</p>
+<p><img src="selected-viz/momentum.jpg" class="img-fluid"></p>
+<p>Another type of figure that my colleagues really like is the alluvial plot. I have shared a tutorial on how to create it with <code>ggalluvial</code> in a <a href="../alluvial">previous post</a>. The example below is meant to illustrate transitions between (categorical) answers to a pre-test and post-test about AI in social media <span class="citation" data-cites="Vartiainen2024-vf">(<a href="#ref-Vartiainen2024-vf" role="doc-biblioref">Vartiainen et al. 2024</a>)</span>.</p>
+<p><img src="selected-viz/alluvial.png" class="img-fluid"></p>
+<p>One of my latest favorites is this image from our recent study on LLM-generated responses to the MSLQ questionnaire <span class="citation" data-cites="Vogelsmeier2025-hi">(<a href="#ref-Vogelsmeier2025-hi" role="doc-biblioref">Vogelsmeier et al. 2025</a>)</span>. For this one, I used my go-to package <code>ggplot2</code>. The code will be available once the article is published. The figure represents the factor loadings from Exploratory Factor Anaysis, with columns representing extracted factors (f1 – f7 on the x-axis) and rows grouped by theoretical constructs of MSLQ.</p>
+<p><img src="selected-viz/leonie.png" class="img-fluid"></p>
+<p>Lastly, I often create figures that summarize the analytical pipeline in my papers, so readers can understand the methods used easily. I don’t use any fancy tools, just Google Slides and a lot of patience.</p>
+<p>For example, the following figure illustrates three levels of sequence analysis clustering, following VaSSTra, part of one of my early papers in learning analytics <span class="citation" data-cites="Saqr2023-ts">(<a href="#ref-Saqr2023-ts" role="doc-biblioref">Saqr et al. 2023</a>)</span>.</p>
+<p><img src="selected-viz/intense.jpg" class="img-fluid" data-fig.width="400px"></p>
+<p>For my recent <a href="https://lamethods.org">book</a>, I also created many of these figures. For example, for the chapter on eXplainable AI using LLMs <span class="citation" data-cites="Lopez-Pernas2025-dw">(<a href="#ref-Lopez-Pernas2025-dw" role="doc-biblioref">López-Pernas et al. 2025</a>)</span>.</p>
+<p><img src="selected-viz/xaillms.png" class="img-fluid"></p>
+<p>Shoutout to the <a href="https://venngage.com/blog/free-people-icons/">Free Pople Icons for Diverse &amp; Inclusive Designs</a> for making their icons available freely. I use them all the time.</p>
 
-<div class="quarto-listing quarto-listing-container-default" id="listing-listing">
-<div class="list quarto-listing-default">
-<div class="quarto-post image-right" data-index="0" data-categories="dmlzdWFsaXphdGlvbiUyQ2dncGxvdDI=" data-listing-date-sort="1753822800000" data-listing-file-modified-sort="1753895392622" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="410">
-<div class="thumbnail">
-<p><a href="./posts/visualization/index.html" class="no-external"></a></p><a href="./posts/visualization/index.html" class="no-external">
-<p class="card-img-top"><img src="posts/visualization/selected-viz/momentum.jpg"  class="thumbnail-image card-img"/></p>
-</a><p><a href="./posts/visualization/index.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/visualization/index.html" class="no-external">Data visualization for research</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/visualization/index.html" class="no-external"></a>
-</div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('dmlzdWFsaXphdGlvbg=='); return false;">
-visualization
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('Z2dwbG90Mg=='); return false;">
-ggplot2
-</div>
-</div>
-<div class="listing-description">
-<a href="./posts/visualization/index.html" class="no-external">My favorite figures from my papers that are my own creation </a>
-</div>
-</div>
-<div class="metadata">
-<a href="./posts/visualization/index.html" class="no-external">
-<div class="listing-date">
-Jul 30, 2025
-</div>
-<div class="listing-author">
-Sonsoles López-Pernas
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="1" data-categories="ZnVuZGluZyUyQ2dhbWUtYmFzZWQlMjBsZWFybmluZw==" data-listing-date-sort="1727643600000" data-listing-file-modified-sort="1736883379101" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="297">
-<div class="thumbnail">
-<p><a href="./posts/iglue/index.html" class="no-external"></a></p><a href="./posts/iglue/index.html" class="no-external">
-<p class="card-img-top"><img src="posts/iglue/puzzle.png"  class="thumbnail-image card-img"/></p>
-</a><p><a href="./posts/iglue/index.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/iglue/index.html" class="no-external">IGLUE New funding from Erasmus+</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/iglue/index.html" class="no-external"></a>
-</div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('ZnVuZGluZw=='); return false;">
-funding
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('Z2FtZS1iYXNlZCUyMGxlYXJuaW5n'); return false;">
-game-based learning
-</div>
-</div>
-<div class="listing-description">
-<a href="./posts/iglue/index.html" class="no-external">Implementation of game-based learning using escape rooms </a>
-</div>
-</div>
-<div class="metadata">
-<a href="./posts/iglue/index.html" class="no-external">
-<div class="listing-date">
-Sep 30, 2024
-</div>
-<div class="listing-author">
-Sonsoles López-Pernas
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="2" data-categories="ZnVuZGluZyUyQ2dhbWUtYmFzZWQlMjBsZWFybmluZw==" data-listing-date-sort="1723842000000" data-listing-file-modified-sort="1738681036122" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="5" data-listing-word-count-sort="823">
-<div class="thumbnail">
-<p><a href="./posts/vasstra/index.html" class="no-external"></a></p><a href="./posts/vasstra/index.html" class="no-external">
-<p class="card-img-top"><img src="posts/vasstra/vasstra.png"  class="thumbnail-image card-img"/></p>
-</a><p><a href="./posts/vasstra/index.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/vasstra/index.html" class="no-external">The VaSSTra method</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/vasstra/index.html" class="no-external"></a>
-</div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('ZnVuZGluZw=='); return false;">
-funding
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('Z2FtZS1iYXNlZCUyMGxlYXJuaW5n'); return false;">
-game-based learning
-</div>
-</div>
-<div class="listing-description">
-<a href="./posts/vasstra/index.html" class="no-external">From Variables to States to Sequences to Trajectories </a>
-</div>
-</div>
-<div class="metadata">
-<a href="./posts/vasstra/index.html" class="no-external">
-<div class="listing-date">
-Aug 17, 2024
-</div>
-<div class="listing-author">
-Sonsoles López-Pernas
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="3" data-categories="UiUyQ3Zpc3VhbGl6YXRpb24lMkN0dXRvcmlhbA==" data-listing-date-sort="1721595600000" data-listing-file-modified-sort="1736882740035" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="5" data-listing-word-count-sort="985">
-<div class="thumbnail">
-<p><a href="./posts/alluvial/index.html" class="no-external"></a></p><a href="./posts/alluvial/index.html" class="no-external">
-<p class="card-img-top"><img src="posts/alluvial/index_files/figure-html/unnamed-chunk-5-1.png"  class="thumbnail-image card-img"/></p>
-</a><p><a href="./posts/alluvial/index.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/alluvial/index.html" class="no-external">Alluvial plots for transition analysis</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/alluvial/index.html" class="no-external"></a>
-</div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('Ug=='); return false;">
-R
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('dmlzdWFsaXphdGlvbg=='); return false;">
-visualization
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('dHV0b3JpYWw='); return false;">
-tutorial
-</div>
-</div>
-<div class="listing-description">
-<a href="./posts/alluvial/index.html" class="no-external">Generating transition plots in R with <code>ggalluvial</code> </a>
-</div>
-</div>
-<div class="metadata">
-<a href="./posts/alluvial/index.html" class="no-external">
-<div class="listing-date">
-Jul 22, 2024
-</div>
-<div class="listing-author">
-Sonsoles López-Pernas
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="4" data-categories="bGVhcm5pbmclMjBhbmFseXRpY3MlMkN0dXRvcmlhbCUyQ1I=" data-listing-date-sort="1720990800000" data-listing-file-modified-sort="1736885956586" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="279">
-<div class="thumbnail">
-<p><a href="./posts/labook/index.html" class="no-external"></a></p><a href="./posts/labook/index.html" class="no-external">
-<p class="card-img-top"><img src="posts/labook/labook.jpeg"  class="thumbnail-image card-img"/></p>
-</a><p><a href="./posts/labook/index.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/labook/index.html" class="no-external">Book: Learning Analytics Methods and Tutorials</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/labook/index.html" class="no-external"></a>
-</div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('bGVhcm5pbmclMjBhbmFseXRpY3M='); return false;">
-learning analytics
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('dHV0b3JpYWw='); return false;">
-tutorial
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('Ug=='); return false;">
-R
-</div>
-</div>
-<div class="listing-description">
-<a href="./posts/labook/index.html" class="no-external">Learning Analytics Methods and Tutorials: A practical guide using R </a>
-</div>
-</div>
-<div class="metadata">
-<a href="./posts/labook/index.html" class="no-external">
-<div class="listing-date">
-Jul 15, 2024
-</div>
-<div class="listing-author">
-Sonsoles López-Pernas
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="5" data-categories="ZnVuZGluZyUyQ2dhbWUtYmFzZWQlMjBsZWFybmluZyUyQ2xlYXJuaW5nJTIwYW5hbHl0aWNz" data-listing-date-sort="1718226000000" data-listing-file-modified-sort="1738681039562" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="450">
-<div class="thumbnail">
-<p><a href="./posts/cretic/index.html" class="no-external"></a></p><a href="./posts/cretic/index.html" class="no-external">
-<p><img loading="lazy" src="./posts/cretic/cretic.png" class="thumbnail-image"></p>
-</a><p><a href="./posts/cretic/index.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/cretic/index.html" class="no-external">Funding from the Research Council Finland!</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/cretic/index.html" class="no-external"></a>
-</div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('ZnVuZGluZw=='); return false;">
-funding
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('Z2FtZS1iYXNlZCUyMGxlYXJuaW5n'); return false;">
-game-based learning
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('bGVhcm5pbmclMjBhbmFseXRpY3M='); return false;">
-learning analytics
-</div>
-</div>
-<div class="listing-description">
-<a href="./posts/cretic/index.html" class="no-external">CRETIC: Optimizing Clinical Reasoning in Time-Critical Scenarios: A data-driven multimodal approach </a>
-</div>
-</div>
-<div class="metadata">
-<a href="./posts/cretic/index.html" class="no-external">
-<div class="listing-date">
-Jun 13, 2024
-</div>
-<div class="listing-author">
-Sonsoles López-Pernas
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="6" data-categories="ZnVuZGluZyUyQ2xlYXJuaW5nJTIwYW5hbHl0aWNz" data-listing-date-sort="1688158800000" data-listing-file-modified-sort="1736883642011" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="144">
-<div class="thumbnail">
-<p><a href="./posts/isila/index.html" class="no-external"></a></p><a href="./posts/isila/index.html" class="no-external">
-<p class="card-img-top"><img src="posts/isila/image.png"  class="thumbnail-image card-img"/></p>
-</a><p><a href="./posts/isila/index.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/isila/index.html" class="no-external">ISILA Funding from Erasmus+</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/isila/index.html" class="no-external"></a>
-</div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('ZnVuZGluZw=='); return false;">
-funding
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('bGVhcm5pbmclMjBhbmFseXRpY3M='); return false;">
-learning analytics
-</div>
-</div>
-<div class="listing-description">
-<a href="./posts/isila/index.html" class="no-external">Improving the quality and sustainability of learning using early intervention methods based on learning analytics </a>
-</div>
-</div>
-<div class="metadata">
-<a href="./posts/isila/index.html" class="no-external">
-<div class="listing-date">
-Jul 1, 2023
-</div>
-<div class="listing-author">
-Sonsoles López-Pernas
-</div>
-</a>
-</div>
-</div>
-</div>
-<div class="listing-no-matching d-none">
-No matching items
-</div>
-</div></main> <!-- /main -->
+
+
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="ref-Lopez-Pernas2024-bv" class="csl-entry" role="listitem">
+López-Pernas, Sonsoles, and Mohammed Saqr. 2024. <span>“How the Dynamics of Engagement Explain the Momentum of Achievement and the Inertia of Disengagement: A Complex Systems Theory Approach.”</span> <em>Comput. Human Behav.</em> 153 (April): 108126. <a href="https://doi.org/10.1016/j.chb.2023.108126">https://doi.org/10.1016/j.chb.2023.108126</a>.
+</div>
+<div id="ref-Lopez-Pernas2025-dw" class="csl-entry" role="listitem">
+López-Pernas, Sonsoles, Yige Song, Eduardo Oliveira, and Mohammed Saqr. 2025. <span>“<span>LLMs</span> for Explainable Artificial Intelligence: Automating Natural Language Explanations of Predictive Analytics Models.”</span> In <em>Advanced Learning Analytics Methods: AI, Precision and Complexity</em>, edited by Mohammed Saqr and Sonsoles López-Pernas. Cham: Springer Nature Switzerland. <a href="https://lamethods.github.io/book2/chapters/ch11-llmsxai/ch11-llmsxai.html">https://lamethods.github.io/book2/chapters/ch11-llmsxai/ch11-llmsxai.html</a>.
+</div>
+<div id="ref-Saqr2023-ts" class="csl-entry" role="listitem">
+Saqr, Mohammed, Sonsoles López-Pernas, Jelena Jovanović, and Dragan Gašević. 2023. <span>“Intense, Turbulent, or Wallowing in the Mire: A Longitudinal Study of Cross-Course Online Tactics, Strategies, and Trajectories.”</span> <em>Internet High</em> 57: 100902. <a href="https://doi.org/10.1016/j.iheduc.2022.100902">https://doi.org/10.1016/j.iheduc.2022.100902</a>.
+</div>
+<div id="ref-Vartiainen2024-vf" class="csl-entry" role="listitem">
+Vartiainen, Henriikka, Juho Kahila, Matti Tedre, Sonsoles López-Pernas, and Nicolas Pope. 2024. <span>“Enhancing Children’s Understanding of Algorithmic Biases in and with Text-to-Image Generative <span>AI</span>.”</span> <em>New Media Soc.</em>, May. <a href="https://doi.org/10.1177/14614448241252820">https://doi.org/10.1177/14614448241252820</a>.
+</div>
+<div id="ref-Vogelsmeier2025-hi" class="csl-entry" role="listitem">
+Vogelsmeier, Leonie V D E, Eduardo Oliveira, Kamila Misiejuk, Sonsoles López-Pernas, and Mohammed Saqr. 2025. <span>“Delving into the Psychology of Machines: Exploring the Structure of Self-Regulated Learning via <span>LLM</span>-Generated Survey Responses.”</span> <em>arXiv [Cs.AI]</em>, June. <a href="http://arxiv.org/abs/2506.13384">http://arxiv.org/abs/2506.13384</a>.
+</div>
+</div></section><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@misc{lópez-pernas2025,
+  author = {López-Pernas, Sonsoles},
+  title = {Data Visualization for Research},
+  date = {2025-07-30},
+  url = {https://sonsoleslp.github.io/posts/visualization/},
+  langid = {en}
+}
+</code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-lópez-pernas2025" class="csl-entry quarto-appendix-citeas" role="listitem">
+López-Pernas, Sonsoles. 2025. <span>“Data Visualization for
+Research.”</span> <a href="https://sonsoleslp.github.io/posts/visualization/">https://sonsoleslp.github.io/posts/visualization/</a>.
+</div></div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
@@ -952,4 +702,5 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 
 
 
+<script src="../../site_libs/quarto-html/zenscroll-min.js"></script>
 </body></html>

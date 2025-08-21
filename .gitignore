@@ -3,3 +3,6 @@
 *.rdb
 *.rdx
 .Rproj.user
+*_cache
+*.aux
+*.log

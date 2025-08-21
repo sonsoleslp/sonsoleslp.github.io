@@ -7,35 +7,48 @@ I am skilled in several programming languages such as R, Python, Scala, Java, Ru
 ```{r, include=F}
 library(dplyr)
 Software = rio::import("cv.xlsx", sheet = "Software")
-generateSW <- function(Title,	Description,	Repo,	Demo,	Web) {
-  result <- paste0(
-  '<h2 id="',gsub(" ", "_", Title),'" class="anchored">',Title,
-'<a class="anchorjs-link " aria-label="Anchor" data-anchorjs-icon="" href="#',Title,'" style="font: 1em / 1 anchorjs-icons; padding-left: 0.375em;"></a></h2>
-<p>',Description,'</p>',
+generateSW <- function(Title, Description, Repo, Demo, Web, Logo) {
+  # Determine whether to include image
+  image_html <- if (!is.na(Logo) && Logo != "") {
+    paste0(
+      '<img src="', Logo, '" class="img-thumbnail me-3" alt="', Title, ' logo" ',
+      'style="width: 100px; height: auto; object-fit: contain;">'
+    )
+  } else {
+    ""
+  }
 
-ifelse(is.na(Repo),'',paste0('<a class="btn btn-dark btn-sm" ,="" href="',Repo,'" target="_blank" rel="noopener noreferrer" style="margin-right:5px;">
-  <i class="bi bi-github" role="img" aria-label="Github"></i>
-  Github
-</a>')),
-ifelse(is.na(Web),'',paste0('<a class="btn btn-danger btn-sm" ,="" href="',Web,'" target="_blank" rel="noopener noreferrer" style="margin-right:5px;">
-  <i class="bi bi-info" role="img" aria-label="Website"></i>
-  Website
-</a>')),
-ifelse(is.na(Demo),'',paste0('<a class="btn btn-warning btn-sm" ,="" href="',Demo,'" target="_blank" rel="noopener noreferrer" style="margin-right:5px;">
-  <i class="bi bi-play" role="img" aria-label="Demo"></i>
-  Demo
-</a>')))
+  result <- paste0(
+    '<div class="col-md-6 mb-4">
+      <div class="card shadow-sm h-100 d-flex flex-row align-items-center p-3">',
+        image_html,
+        '<div class="card-body p-2">
+          <h5 class="card-title">', Title, '</h5>
+          <p class="card-text">', Description, '</p>',
+          ifelse(is.na(Repo), '', paste0('<a class="btn btn-dark btn-sm me-2" href="', Repo, '" target="_blank">Github</a>')),
+          ifelse(is.na(Web), '', paste0('<a class="btn btn-danger btn-sm me-2" href="', Web, '" target="_blank">Website</a>')),
+          ifelse(is.na(Demo), '', paste0('<a class="btn btn-warning btn-sm" href="', Demo, '" target="_blank">Demo</a>')),
+        '</div>
+      </div>
+    </div>'
+  )
+
   htmltools::HTML(result)
 }
 
-sww<-Software %>% rowwise %>% dplyr::mutate(Text = generateSW(Title,	Description,	Repo,	Demo,	Web) )
+
+
+sww<-Software %>% rowwise %>% dplyr::mutate(Text = generateSW(Title,	Description,	Repo,	Demo,	Web, Logo) )
+
+
+
 ```
  
 ```{r, echo=F, warning=FALSE}
 
 
 
-htmltools::HTML(paste(sww$Text,collapse=""))
+htmltools::HTML(paste0("<div class='container-fluid'><div class='row'>",paste(sww$Text,collapse=""), '</div></div>'))
 #htmltools::tagList(list(sww$Text))
 ```
 

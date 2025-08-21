@@ -72,39 +72,92 @@ exptags
 ## Awards
 
 ```{r,echo=F}
-awards = rio::import("cv.xlsx", sheet = "Awards")
-awardstags = htmltools::tagList()
+awards <- rio::import("cv.xlsx", sheet = "Awards")
+awardstags <- htmltools::tagList()
 
-for (i in 1:nrow(awards)) {
-  awa = awards[i,]
-  awardstags[[i]] <- htmltools::tags$li(htmltools::tagList(
-    htmltools::tags$span(paste0("(",awa$Year,") "),htmltools::HTML(awa$Description)))
+# Define the category you want first
+first_category <- c("Career", "Best paper", "Teaching", "Thesis", "Reviewing", "Teaching-related", "Software")
+
+remaining_categories <- setdiff(unique(awards$Category), first_category)
+ordered_levels <- c(first_category, sort(remaining_categories))
+awards$Category <- factor(awards$Category, levels = ordered_levels)
+
+# Split and prepare tag list
+awardstags <- htmltools::tagList()
+award_groups <- split(awards, awards$Category)
+
+for (catname in names(award_groups)) {
+  group <- award_groups[[catname]]
+  
+  # Skip if group has no rows
+  if (nrow(group) == 0) next
+  
+  sublist <- htmltools::tagList()
+  for (i in seq_len(nrow(group))) {
+    awa <- group[i, ]
+    sublist[[i]] <- htmltools::tags$li(
+      htmltools::tags$span(paste0("(", awa$Year, ") "), htmltools::HTML(awa$Description))
+    )
+  }
+  
+  awardstags[[length(awardstags) + 1]] <- htmltools::tags$li(
+    htmltools::tagList(
+      htmltools::tags$strong(catname),
+      htmltools::tags$ul(sublist)
+    )
   )
 }
-htmltools::tags$ul(
-awardstags
-)
+
+htmltools::tags$ul(awardstags)
+
 ```
 
 ## Teaching
 
 ```{r,echo=F}
-teaching = rio::import("cv.xlsx", sheet = "Teaching")
-teatags = htmltools::tagList()
+# Load the teaching data
+teaching <- rio::import("cv.xlsx", sheet = "Teaching")
 
-for (i in 1:nrow(teaching)) {
-  tea = teaching[i,]
-  teatags[[i]] <- htmltools::tags$li(
+# Convert Level to a factor to preserve the order in the data (optional)
+
+# Prepare the HTML tag list
+teatags <- htmltools::tagList()
+
+# Split the teaching data by Level
+teaching_groups <- split(teaching, teaching$Level)
+
+# Loop through each Level group
+for (levelname in names(teaching_groups)) {
+  group <- teaching_groups[[levelname]]
+  
+  # Skip if group has no rows
+  if (nrow(group) == 0) next
+  
+  # Inner list for each course under this Level
+  sublist <- htmltools::tagList()
+  for (i in seq_len(nrow(group))) {
+    tea <- group[i, ]
+    sublist[[i]] <- htmltools::tags$li(
+      htmltools::tagList(
+        htmltools::tags$span(paste0("(", tea$Year, ") ")),
+        htmltools::tags$strong(tea$Course),
+        htmltools::tags$span(paste0(" - ", tea$Institution))
+      )
+    )
+  }
+  
+  # Outer list item: Level + nested UL
+  teatags[[length(teatags) + 1]] <- htmltools::tags$li(
     htmltools::tagList(
-      htmltools::tags$span(paste0("(",tea$Year,") ")),
-      htmltools::tags$strong(tea$Course), 
-      htmltools::tags$span(paste0(" - ", tea$Institution)) 
+      htmltools::tags$strong(levelname),
+      htmltools::tags$ul(sublist)
     )
   )
 }
-htmltools::tags$ul(
-teatags
-)
+
+# Return the full list
+htmltools::tags$ul(teatags)
+
 ```
 
 ## Supervision
@@ -203,39 +256,56 @@ htmltools::tags$ul(projtags)
 ```
 
 
-## Editorial work
+## Editorial work and other community service
 ```{r,echo=F}
-editorial = rio::import("cv.xlsx", sheet = "Editorial_work")
-editorialtags = htmltools::tagList()
+# Load the editorial work data
+editorial <- rio::import("cv.xlsx", sheet = "Editorial_work")
 
-for (i in 1:nrow(editorial)) {
-  edi = editorial[i,]
-  editorialtags[[i]] <- htmltools::tags$li(htmltools::tagList(
-   htmltools::tags$span( paste0("(",edi$Year,") ")),
-   htmltools::HTML(paste0("<span>",edi$Description,"</span>"))
-  ))
+
+# Define the category you want first
+first_category <- c("Journals","Conferences","Books", "Scientific societies", "Grants", "Other")
+
+remaining_categories <- setdiff(unique(editorial$Where), first_category)
+ordered_levels <- c(first_category, sort(remaining_categories))
+editorial$Where <- factor(editorial$Where, levels = ordered_levels)
+
+# Prepare the HTML tag list
+editorialtags <- htmltools::tagList()
+
+# Split by 'Where'
+editorial_groups <- split(editorial, editorial$Where)
+
+# Loop through each group
+for (wherename in names(editorial_groups)) {
+  group <- editorial_groups[[wherename]]
+  
+  if (nrow(group) == 0) next
+  
+  sublist <- htmltools::tagList()
+  for (i in seq_len(nrow(group))) {
+    edi <- group[i, ]
+    sublist[[i]] <- htmltools::tags$li(
+      htmltools::tagList(
+        htmltools::tags$span(paste0("(", edi$Year, ") ")),
+        htmltools::HTML(paste0("<span>", edi$Description, "</span>"))
+      )
+    )
+  }
+  
+  editorialtags[[length(editorialtags) + 1]] <- htmltools::tags$li(
+    htmltools::tagList(
+      htmltools::tags$strong(wherename),
+      htmltools::tags$ul(sublist)
+    )
+  )
 }
-htmltools::tags$ul(
-editorialtags
-)
+
+# Wrap in a top-level <ul>
+htmltools::tags$ul(editorialtags)
+
 ```
 
-## Other community service work
-```{r,echo=F}
-editorial = rio::import("cv.xlsx", sheet = "Community_service")
-editorialtags = htmltools::tagList()
 
-for (i in 1:nrow(editorial)) {
-  edi = editorial[i,]
-  editorialtags[[i]] <- htmltools::tags$li(htmltools::tagList(
-   htmltools::tags$span( paste0("(",edi$Year,") ")),
-   htmltools::HTML(paste0("<span>",edi$Description,"</span>"))
-  ))
-}
-htmltools::tags$ul(
-editorialtags
-)
-```
 
 ## Diversity, Equity, and Inclusion Activities
 

@@ -10,10 +10,70 @@
 <atom:link href="https://sonsoleslp.github.io/blog.xml" rel="self" type="application/rss+xml"/>
 <description>Personal website of Sonsoles López Pernas</description>
 <generator>quarto-1.6.40</generator>
-<lastBuildDate>Sun, 29 Sep 2024 21:00:00 GMT</lastBuildDate>
+<lastBuildDate>Tue, 29 Jul 2025 21:00:00 GMT</lastBuildDate>
+<item>
+  <title>Data visualization for research</title>
+  <dc:creator>Sonsoles López-Pernas</dc:creator>
+  <link>https://sonsoleslp.github.io/posts/visualization/</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<p>Data visualization is definitely my favorite part of research. I am not a designer and have not received formal training in data visualization, but it’s something I deeply enjoy and it is one of the tasks that I do when I want to feel productive but I don’t feel like writing or responding to emails.</p>
+<p>The images I’ve collected in this post are some of my favorites from different papers. Some are meant to explain a complicated finding. Others try to capture a messy idea or illustrate the full analytical pipeline.</p>
+<p>The first figure is a classic in my research, which is using sequence analysis to illustrate longitudinal trajectories of categorical variables. This one specifically is from a recent paper in <em>Computers in Human Behaviour</em> <span class="citation" data-cites="Lopez-Pernas2024-bv">(López-Pernas and Saqr 2024)</span>. I use the <code>TraMineR</code> package for this. For the transitions, I use <code>tna</code>, our own package for Transition Network Analysis, based on <code>qgraph</code>. I love this figure not only because I think it is very aesthetically pleasing but because it allows you to see the whole picture immediately. I have used many of such figures in my research using the VaSStra method, to which I devoted <a href="../vasstra">another post</a>.</p>
+<p><img src="https://sonsoleslp.github.io/posts/visualization/selected-viz/momentum.jpg" class="img-fluid"></p>
+<p>Another type of figure that my colleagues really like is the alluvial plot. I have shared a tutorial on how to create it with <code>ggalluvial</code> in a <a href="../alluvial">previous post</a>. The example below is meant to illustrate transitions between (categorical) answers to a pre-test and post-test about AI in social media <span class="citation" data-cites="Vartiainen2024-vf">(Vartiainen et al. 2024)</span>.</p>
+<p><img src="https://sonsoleslp.github.io/posts/visualization/selected-viz/alluvial.png" class="img-fluid"></p>
+<p>One of my latest favorites is this image from our recent study on LLM-generated responses to the MSLQ questionnaire <span class="citation" data-cites="Vogelsmeier2025-hi">(Vogelsmeier et al. 2025)</span>. For this one, I used my go-to package <code>ggplot2</code>. The code will be available once the article is published. The figure represents the factor loadings from Exploratory Factor Anaysis, with columns representing extracted factors (f1 – f7 on the x-axis) and rows grouped by theoretical constructs of MSLQ.</p>
+<p><img src="https://sonsoleslp.github.io/posts/visualization/selected-viz/leonie.png" class="img-fluid"></p>
+<p>Lastly, I often create figures that summarize the analytical pipeline in my papers, so readers can understand the methods used easily. I don’t use any fancy tools, just Google Slides and a lot of patience.</p>
+<p>For example, the following figure illustrates three levels of sequence analysis clustering, following VaSSTra, part of one of my early papers in learning analytics <span class="citation" data-cites="Saqr2023-ts">(Saqr et al. 2023)</span>.</p>
+<p><img src="https://sonsoleslp.github.io/posts/visualization/selected-viz/intense.jpg" class="img-fluid" data-fig.width="400px"></p>
+<p>For my recent <a href="https://lamethods.org">book</a>, I also created many of these figures. For example, for the chapter on eXplainable AI using LLMs <span class="citation" data-cites="Lopez-Pernas2025-dw">(López-Pernas et al. 2025)</span>.</p>
+<p><img src="https://sonsoleslp.github.io/posts/visualization/selected-viz/xaillms.png" class="img-fluid"></p>
+<p>Shoutout to the <a href="https://venngage.com/blog/free-people-icons/">Free Pople Icons for Diverse &amp; Inclusive Designs</a> for making their icons available freely. I use them all the time.</p>
+
+
+
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0">
+<div id="ref-Lopez-Pernas2024-bv" class="csl-entry">
+López-Pernas, Sonsoles, and Mohammed Saqr. 2024. <span>“How the Dynamics of Engagement Explain the Momentum of Achievement and the Inertia of Disengagement: A Complex Systems Theory Approach.”</span> <em>Comput. Human Behav.</em> 153 (April): 108126. <a href="https://doi.org/10.1016/j.chb.2023.108126">https://doi.org/10.1016/j.chb.2023.108126</a>.
+</div>
+<div id="ref-Lopez-Pernas2025-dw" class="csl-entry">
+López-Pernas, Sonsoles, Yige Song, Eduardo Oliveira, and Mohammed Saqr. 2025. <span>“<span>LLMs</span> for Explainable Artificial Intelligence: Automating Natural Language Explanations of Predictive Analytics Models.”</span> In <em>Advanced Learning Analytics Methods: AI, Precision and Complexity</em>, edited by Mohammed Saqr and Sonsoles López-Pernas. Cham: Springer Nature Switzerland. <a href="https://lamethods.github.io/book2/chapters/ch11-llmsxai/ch11-llmsxai.html">https://lamethods.github.io/book2/chapters/ch11-llmsxai/ch11-llmsxai.html</a>.
+</div>
+<div id="ref-Saqr2023-ts" class="csl-entry">
+Saqr, Mohammed, Sonsoles López-Pernas, Jelena Jovanović, and Dragan Gašević. 2023. <span>“Intense, Turbulent, or Wallowing in the Mire: A Longitudinal Study of Cross-Course Online Tactics, Strategies, and Trajectories.”</span> <em>Internet High</em> 57: 100902. <a href="https://doi.org/10.1016/j.iheduc.2022.100902">https://doi.org/10.1016/j.iheduc.2022.100902</a>.
+</div>
+<div id="ref-Vartiainen2024-vf" class="csl-entry">
+Vartiainen, Henriikka, Juho Kahila, Matti Tedre, Sonsoles López-Pernas, and Nicolas Pope. 2024. <span>“Enhancing Children’s Understanding of Algorithmic Biases in and with Text-to-Image Generative <span>AI</span>.”</span> <em>New Media Soc.</em>, May. <a href="https://doi.org/10.1177/14614448241252820">https://doi.org/10.1177/14614448241252820</a>.
+</div>
+<div id="ref-Vogelsmeier2025-hi" class="csl-entry">
+Vogelsmeier, Leonie V D E, Eduardo Oliveira, Kamila Misiejuk, Sonsoles López-Pernas, and Mohammed Saqr. 2025. <span>“Delving into the Psychology of Machines: Exploring the Structure of Self-Regulated Learning via <span>LLM</span>-Generated Survey Responses.”</span> <em>arXiv [Cs.AI]</em>, June. <a href="http://arxiv.org/abs/2506.13384">http://arxiv.org/abs/2506.13384</a>.
+</div>
+</div></section><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@misc{lópez-pernas2025,
+  author = {López-Pernas, Sonsoles},
+  title = {Data Visualization for Research},
+  date = {2025-07-30},
+  url = {https://sonsoleslp.github.io/posts/visualization/},
+  langid = {en}
+}
+</code></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-lópez-pernas2025" class="csl-entry quarto-appendix-citeas">
+López-Pernas, Sonsoles. 2025. <span>“Data Visualization for
+Research.”</span> <a href="https://sonsoleslp.github.io/posts/visualization/">https://sonsoleslp.github.io/posts/visualization/</a>.
+</div></div></section></div> ]]></description>
+  <category>visualization</category>
+  <category>ggplot2</category>
+  <guid>https://sonsoleslp.github.io/posts/visualization/</guid>
+  <pubDate>Tue, 29 Jul 2025 21:00:00 GMT</pubDate>
+</item>
 <item>
   <title>IGLUE New funding from Erasmus+</title>
-  <dc:creator>Sonsoles López Pernas</dc:creator>
+  <dc:creator>Sonsoles López-Pernas</dc:creator>
   <link>https://sonsoleslp.github.io/posts/iglue/</link>
   <description><![CDATA[ 
 
@@ -32,15 +92,15 @@
 
 
 
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@misc{lópez_pernas2024,
-  author = {López Pernas, Sonsoles},
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@misc{lópez-pernas2024,
+  author = {López-Pernas, Sonsoles},
   title = {IGLUE {New} Funding from {Erasmus+}},
   date = {2024-09-30},
   url = {https://sonsoleslp.github.io/posts/iglue/},
   langid = {en}
 }
-</code></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-lópez_pernas2024" class="csl-entry quarto-appendix-citeas">
-López Pernas, Sonsoles. 2024. <span>“IGLUE New Funding from
+</code></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-lópez-pernas2024" class="csl-entry quarto-appendix-citeas">
+López-Pernas, Sonsoles. 2024. <span>“IGLUE New Funding from
 Erasmus+.”</span> <a href="https://sonsoleslp.github.io/posts/iglue/">https://sonsoleslp.github.io/posts/iglue/</a>.
 </div></div></section></div> ]]></description>
   <category>funding</category>
@@ -50,7 +110,7 @@ Erasmus+.”</span> <a href="https://sonsoleslp.github.io/posts/iglue/">https://
 </item>
 <item>
   <title>The VaSSTra method</title>
-  <dc:creator>Sonsoles López Pernas</dc:creator>
+  <dc:creator>Sonsoles López-Pernas</dc:creator>
   <link>https://sonsoleslp.github.io/posts/vasstra/</link>
   <description><![CDATA[ 
 
@@ -100,15 +160,15 @@ Saqr, Mohammed, Sonsoles López-Pernas, Satu Helske, and Stefan Hrastinski. 2023
 <div id="ref-saqr2023" class="csl-entry">
 Saqr, Mohammed, Sonsoles López-Pernas, Jelena Jovanović, and Dragan Gašević. 2023. <span>“Intense, Turbulent, or Wallowing in the Mire: A Longitudinal Study of Cross-Course Online Tactics, Strategies, and Trajectories.”</span> <em>The Internet and Higher Education</em> 57 (April): 100902. <a href="https://doi.org/10.1016/j.iheduc.2022.100902">https://doi.org/10.1016/j.iheduc.2022.100902</a>.
 </div>
-</div></section><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@misc{lópez_pernas2024,
-  author = {López Pernas, Sonsoles},
+</div></section><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@misc{lópez-pernas2024,
+  author = {López-Pernas, Sonsoles},
   title = {The {VaSSTra} Method},
   date = {2024-08-17},
   url = {https://sonsoleslp.github.io/posts/vasstra/},
   langid = {en}
 }
-</code></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-lópez_pernas2024" class="csl-entry quarto-appendix-citeas">
-López Pernas, Sonsoles. 2024. <span>“The VaSSTra Method.”</span> <a href="https://sonsoleslp.github.io/posts/vasstra/">https://sonsoleslp.github.io/posts/vasstra/</a>.
+</code></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-lópez-pernas2024" class="csl-entry quarto-appendix-citeas">
+López-Pernas, Sonsoles. 2024. <span>“The VaSSTra Method.”</span> <a href="https://sonsoleslp.github.io/posts/vasstra/">https://sonsoleslp.github.io/posts/vasstra/</a>.
 </div></div></section></div> ]]></description>
   <category>funding</category>
   <category>game-based learning</category>
@@ -117,7 +177,7 @@ López Pernas, Sonsoles. 2024. <span>“The VaSSTra Method.”</span> <a href="h
 </item>
 <item>
   <title>Alluvial plots for transition analysis</title>
-  <dc:creator>Sonsoles López Pernas</dc:creator>
+  <dc:creator>Sonsoles López-Pernas</dc:creator>
   <link>https://sonsoleslp.github.io/posts/alluvial/</link>
   <description><![CDATA[ 
 
@@ -591,15 +651,15 @@ font-style: inherit;">10</span>))</span></code></pre></div>
 
 
 
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@misc{lópez_pernas2024,
-  author = {López Pernas, Sonsoles},
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@misc{lópez-pernas2024,
+  author = {López-Pernas, Sonsoles},
   title = {Alluvial Plots for Transition Analysis},
   date = {2024-07-22},
   url = {https://sonsoleslp.github.io/posts/alluvial/},
   langid = {en}
 }
-</code></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-lópez_pernas2024" class="csl-entry quarto-appendix-citeas">
-López Pernas, Sonsoles. 2024. <span>“Alluvial Plots for Transition
+</code></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-lópez-pernas2024" class="csl-entry quarto-appendix-citeas">
+López-Pernas, Sonsoles. 2024. <span>“Alluvial Plots for Transition
 Analysis.”</span> <a href="https://sonsoleslp.github.io/posts/alluvial/">https://sonsoleslp.github.io/posts/alluvial/</a>.
 </div></div></section></div> ]]></description>
   <category>R</category>
@@ -610,7 +670,7 @@ Analysis.”</span> <a href="https://sonsoleslp.github.io/posts/alluvial/">https
 </item>
 <item>
   <title>Book: Learning Analytics Methods and Tutorials</title>
-  <dc:creator>Sonsoles López Pernas</dc:creator>
+  <dc:creator>Sonsoles López-Pernas</dc:creator>
   <link>https://sonsoleslp.github.io/posts/labook/</link>
   <description><![CDATA[ 
 
@@ -625,15 +685,15 @@ Analysis.”</span> <a href="https://sonsoleslp.github.io/posts/alluvial/">https
 
 
 
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@misc{lópez_pernas2024,
-  author = {López Pernas, Sonsoles},
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@misc{lópez-pernas2024,
+  author = {López-Pernas, Sonsoles},
   title = {Book: {Learning} {Analytics} {Methods} and {Tutorials}},
   date = {2024-07-15},
   url = {https://sonsoleslp.github.io/posts/labook/},
   langid = {en}
 }
-</code></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-lópez_pernas2024" class="csl-entry quarto-appendix-citeas">
-López Pernas, Sonsoles. 2024. <span>“Book: Learning Analytics Methods
+</code></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-lópez-pernas2024" class="csl-entry quarto-appendix-citeas">
+López-Pernas, Sonsoles. 2024. <span>“Book: Learning Analytics Methods
 and Tutorials.”</span> <a href="https://sonsoleslp.github.io/posts/labook/">https://sonsoleslp.github.io/posts/labook/</a>.
 </div></div></section></div> ]]></description>
   <category>learning analytics</category>
@@ -644,7 +704,7 @@ and Tutorials.”</span> <a href="https://sonsoleslp.github.io/posts/labook/">ht
 </item>
 <item>
   <title>Funding from the Research Council Finland!</title>
-  <dc:creator>Sonsoles López Pernas</dc:creator>
+  <dc:creator>Sonsoles López-Pernas</dc:creator>
   <link>https://sonsoleslp.github.io/posts/cretic/</link>
   <description><![CDATA[ 
 
@@ -662,15 +722,15 @@ The topic of the project is very special to me because it combines everything th
 
 
 
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@misc{lópez_pernas2024,
-  author = {López Pernas, Sonsoles},
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@misc{lópez-pernas2024,
+  author = {López-Pernas, Sonsoles},
   title = {Funding from the {Research} {Council} {Finland!}},
   date = {2024-06-13},
   url = {https://sonsoleslp.github.io/posts/cretic/},
   langid = {en}
 }
-</code></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-lópez_pernas2024" class="csl-entry quarto-appendix-citeas">
-López Pernas, Sonsoles. 2024. <span>“Funding from the Research Council
+</code></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-lópez-pernas2024" class="csl-entry quarto-appendix-citeas">
+López-Pernas, Sonsoles. 2024. <span>“Funding from the Research Council
 Finland!”</span> <a href="https://sonsoleslp.github.io/posts/cretic/">https://sonsoleslp.github.io/posts/cretic/</a>.
 </div></div></section></div> ]]></description>
   <category>funding</category>
@@ -682,7 +742,7 @@ Finland!”</span> <a href="https://sonsoleslp.github.io/posts/cretic/">https://
 </item>
 <item>
   <title>ISILA Funding from Erasmus+</title>
-  <dc:creator>Sonsoles López Pernas</dc:creator>
+  <dc:creator>Sonsoles López-Pernas</dc:creator>
   <link>https://sonsoleslp.github.io/posts/isila/</link>
   <description><![CDATA[ 
 
@@ -696,15 +756,15 @@ Finland!”</span> <a href="https://sonsoleslp.github.io/posts/cretic/">https://
 
 
 
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@misc{lópez_pernas2023,
-  author = {López Pernas, Sonsoles},
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@misc{lópez-pernas2023,
+  author = {López-Pernas, Sonsoles},
   title = {ISILA {Funding} from {Erasmus+}},
   date = {2023-07-01},
   url = {https://sonsoleslp.github.io/posts/isila/},
   langid = {en}
 }
-</code></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-lópez_pernas2023" class="csl-entry quarto-appendix-citeas">
-López Pernas, Sonsoles. 2023. <span>“ISILA Funding from
+</code></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-lópez-pernas2023" class="csl-entry quarto-appendix-citeas">
+López-Pernas, Sonsoles. 2023. <span>“ISILA Funding from
 Erasmus+.”</span> <a href="https://sonsoleslp.github.io/posts/isila/">https://sonsoleslp.github.io/posts/isila/</a>.
 </div></div></section></div> ]]></description>
   <category>funding</category>
