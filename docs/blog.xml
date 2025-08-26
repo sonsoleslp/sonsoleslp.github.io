@@ -9,8 +9,8 @@
 <link>https://sonsoleslp.github.io/blog.html</link>
 <atom:link href="https://sonsoleslp.github.io/blog.xml" rel="self" type="application/rss+xml"/>
 <description>Personal website of Sonsoles López Pernas</description>
-<generator>quarto-1.6.40</generator>
-<lastBuildDate>Tue, 29 Jul 2025 21:00:00 GMT</lastBuildDate>
+<generator>quarto-1.7.33</generator>
+<lastBuildDate>Wed, 30 Jul 2025 00:00:00 GMT</lastBuildDate>
 <item>
   <title>Data visualization for research</title>
   <dc:creator>Sonsoles López-Pernas</dc:creator>
@@ -69,7 +69,7 @@ Research.”</span> <a href="https://sonsoleslp.github.io/posts/visualization/">
   <category>visualization</category>
   <category>ggplot2</category>
   <guid>https://sonsoleslp.github.io/posts/visualization/</guid>
-  <pubDate>Tue, 29 Jul 2025 21:00:00 GMT</pubDate>
+  <pubDate>Wed, 30 Jul 2025 00:00:00 GMT</pubDate>
 </item>
 <item>
   <title>IGLUE New funding from Erasmus+</title>
@@ -106,7 +106,7 @@ Erasmus+.”</span> <a href="https://sonsoleslp.github.io/posts/iglue/">https://
   <category>funding</category>
   <category>game-based learning</category>
   <guid>https://sonsoleslp.github.io/posts/iglue/</guid>
-  <pubDate>Sun, 29 Sep 2024 21:00:00 GMT</pubDate>
+  <pubDate>Mon, 30 Sep 2024 00:00:00 GMT</pubDate>
 </item>
 <item>
   <title>The VaSSTra method</title>
@@ -173,7 +173,7 @@ López-Pernas, Sonsoles. 2024. <span>“The VaSSTra Method.”</span> <a href="h
   <category>funding</category>
   <category>game-based learning</category>
   <guid>https://sonsoleslp.github.io/posts/vasstra/</guid>
-  <pubDate>Fri, 16 Aug 2024 21:00:00 GMT</pubDate>
+  <pubDate>Sat, 17 Aug 2024 00:00:00 GMT</pubDate>
 </item>
 <item>
   <title>Alluvial plots for transition analysis</title>
@@ -666,7 +666,7 @@ Analysis.”</span> <a href="https://sonsoleslp.github.io/posts/alluvial/">https
   <category>visualization</category>
   <category>tutorial</category>
   <guid>https://sonsoleslp.github.io/posts/alluvial/</guid>
-  <pubDate>Sun, 21 Jul 2024 21:00:00 GMT</pubDate>
+  <pubDate>Mon, 22 Jul 2024 00:00:00 GMT</pubDate>
 </item>
 <item>
   <title>Book: Learning Analytics Methods and Tutorials</title>
@@ -700,7 +700,7 @@ and Tutorials.”</span> <a href="https://sonsoleslp.github.io/posts/labook/">ht
   <category>tutorial</category>
   <category>R</category>
   <guid>https://sonsoleslp.github.io/posts/labook/</guid>
-  <pubDate>Sun, 14 Jul 2024 21:00:00 GMT</pubDate>
+  <pubDate>Mon, 15 Jul 2024 00:00:00 GMT</pubDate>
 </item>
 <item>
   <title>Funding from the Research Council Finland!</title>
@@ -737,7 +737,7 @@ Finland!”</span> <a href="https://sonsoleslp.github.io/posts/cretic/">https://
   <category>game-based learning</category>
   <category>learning analytics</category>
   <guid>https://sonsoleslp.github.io/posts/cretic/</guid>
-  <pubDate>Wed, 12 Jun 2024 21:00:00 GMT</pubDate>
+  <pubDate>Thu, 13 Jun 2024 00:00:00 GMT</pubDate>
   <media:content url="https://sonsoleslp.github.io/posts/cretic/cretic.png" medium="image" type="image/png" height="86" width="144"/>
 </item>
 <item>
@@ -770,7 +770,7 @@ Erasmus+.”</span> <a href="https://sonsoleslp.github.io/posts/isila/">https://
   <category>funding</category>
   <category>learning analytics</category>
   <guid>https://sonsoleslp.github.io/posts/isila/</guid>
-  <pubDate>Fri, 30 Jun 2023 21:00:00 GMT</pubDate>
+  <pubDate>Sat, 01 Jul 2023 00:00:00 GMT</pubDate>
 </item>
 </channel>
 </rss>
