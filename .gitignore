@@ -6,3 +6,4 @@
 *_cache
 *.aux
 *.log
+**/*.quarto_ipynb

@@ -9,7 +9,7 @@
 <link>https://sonsoleslp.github.io/blog.html</link>
 <atom:link href="https://sonsoleslp.github.io/blog.xml" rel="self" type="application/rss+xml"/>
 <description>Personal website of Sonsoles López Pernas</description>
-<generator>quarto-1.6.40</generator>
+<generator>quarto-1.8.25</generator>
 <lastBuildDate>Tue, 29 Jul 2025 21:00:00 GMT</lastBuildDate>
 <item>
   <title>Data visualization for research</title>
@@ -190,7 +190,7 @@ López-Pernas, Sonsoles. 2024. <span>“The VaSSTra Method.”</span> <a href="h
 <p>I decided to share it in case it is useful for someone else.</p>
 <p>The first step, as usual, is to load the necessary libraries.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><span class="fu" style="color: #4758AB;
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">library</span>(dplyr)</span>
 <span id="cb1-2"><span class="fu" style="color: #4758AB;
@@ -198,11 +198,11 @@ background-color: null;
 font-style: inherit;">library</span>(ggplot2)</span>
 <span id="cb1-3"><span class="fu" style="color: #4758AB;
 background-color: null;
-font-style: inherit;">library</span>(ggalluvial)</span></code></pre></div>
+font-style: inherit;">library</span>(ggalluvial)</span></code></pre></div></div>
 </div>
 <p>Then we need some data. We will create a synthetic dataset for the purpose of this tutorial. We will create four possible states (<code>states</code>) and the probability to be in each state (<code>probs</code>), as well as define the number of simulated students (<code>N</code>). We will create a function that generates a random state based on the established probability distribution. We will then generate random states for all users across 6 time points following that probability distribution. We do that within a new dataframe where the user column represents the user number (between 1 and 30 in our case), the six following columns are each of the six time points, and the last column (<code>Freq</code>) holds the value <code>1</code> for every student (we will need this for the next step).</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1">STATES <span class="ot" style="color: #003B4F;
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1">STATES <span class="ot" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
 background-color: null;
@@ -352,7 +352,7 @@ font-style: inherit;">rep</span>(<span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">1</span>,N))</span>
 <span id="cb2-17"></span>
-<span id="cb2-18">sample_data</span></code></pre></div>
+<span id="cb2-18">sample_data</span></code></pre></div></div>
 <div class="cell-output-display">
 <div data-pagedtable="false">
   <script data-pagedtable-source="" type="application/json">
@@ -363,7 +363,7 @@ font-style: inherit;">1</span>,N))</span>
 </div>
 <p>Now we transform the data into a format suitable for alluvial plotting using the <code>to_lodes_form</code> function. We input the previous dataset as the first argument to the function and we provide the range of columns that hold the timepoints as the <code>axes</code> argument. We then need to add make transformations, such as adding the count of each state per timepoint (<code>Total</code>) and calculating the proportion (<code>Prop</code>).</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1">lodes <span class="ot" style="color: #003B4F;
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1">lodes <span class="ot" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
 background-color: null;
@@ -410,7 +410,7 @@ font-style: inherit;">Prop =</span> Freq<span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">/</span>Total)</span>
 <span id="cb3-7"></span>
-<span id="cb3-8">lodesclean</span></code></pre></div>
+<span id="cb3-8">lodesclean</span></code></pre></div></div>
 <div class="cell-output-display">
 <div data-pagedtable="false">
   <script data-pagedtable-source="" type="application/json">
@@ -421,7 +421,7 @@ font-style: inherit;">/</span>Total)</span>
 </div>
 <p>Now, we move on to the plotting part. We provide the <code>lodesclean</code> dataset as an input and specify the column containing the time point (by default <code>x</code>) as the x-axis variable. We do the same for <code>stratum</code> and <code>alluvium</code>. Additionally, we use the <code>Prop</code> column as y-axis variable and we color (<code>fill</code>) by stratum. Then we specify the necessary geometries. The first one (<code>geom_flow</code>), takes care of the transition flows between the time points. We can adjust the <code>width</code> parameter, the curvature (<code>curve_type</code>), the transparency (<code>alpha</code>), among other parameters. Next is <code>geom_stratum</code>, which takes care of drawing the bar plots that represent the states at each time point. We can customize the <code>width</code> again and the font <code>color</code>, among others. Then, we can add labels for both the stratums and the flows by specifying the placement in the <code>stat</code> argument. Adjusting the positioning can be very tricky and might require some trial and error, especially if you have modified the width of the different parts of the figure. Next, we define the color scale. We can choose to provide appropriate colors manually (<code>scale_fill_manual</code>) or use a predefined one from <code>ggplot2</code>. We can do additional aesthetics tweaks, such as changing the labels of the x-axis to Course 1, Course 2, Course 3, etc., switching the theme to <code>theme_void</code> to remove clutter in the figure, modify the legend position, and change the font size and color of the axis text.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><span class="fu" style="color: #4758AB;
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">ggplot</span>(lodesclean, <span class="fu" style="color: #4758AB;
 background-color: null;
@@ -639,7 +639,7 @@ font-style: inherit;">"#000000"</span>, <span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">size=</span><span class="dv" style="color: #AD0000;
 background-color: null;
-font-style: inherit;">10</span>))</span></code></pre></div>
+font-style: inherit;">10</span>))</span></code></pre></div></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
