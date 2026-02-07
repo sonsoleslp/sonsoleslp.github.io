@@ -1,0 +1,618 @@
+---
+title: "TNA Group Analysis: Comparing Groups and Discovering Clusters"
+subtitle: "Companion Tutorial for Transition Network Analysis"
+date: "2026-02-07"
+author:
+  - name: Mohammed Saqr
+    url: https://saqr.me
+    affiliation: University of Eastern Finland
+  - name: Sonsoles López-Pernas
+    url: https://sonsoles.me
+    affiliation: University of Eastern Finland
+citation:
+   type: article
+   author:
+    - family: "Saqr"
+      given: "Mohammed"
+    - family: "López-Pernas"
+      given: "Sonsoles"
+categories:
+  - learning analytics
+  - tutorial
+  - R
+# engine: markdown
+warning: false
+message: false
+fig.align: center
+format:
+  html:
+    toc: true
+    toc-depth: 3
+    number-sections: true
+    code-fold: false
+    code-tools: true
+    theme: cosmo
+    self-contained: true
+execute:
+  warning: false
+  message: false
+knitr:
+  opts_chunk:
+    fig.width: 8
+    fig.height: 6
+    dpi: 600
+    comment: ""
+image: preview.png
+---
+
+```{r, echo = FALSE}
+library(knitr)
+options(scipen = 999999999, digits = 2)
+knit_print.data.frame <- function (x, options, ...) {
+  rmarkdown::paged_table(x, options) |>
+    rmarkdown:::print.paged_df( )
+}
+
+registerS3method("knit_print", "data.frame", knit_print.data.frame)
+```
+
+```{r}
+#| label: setup
+#| include: false
+library("tna")
+```
+
+# Introduction
+
+This is the companion tutorial to the [main TNA tutorial](../tna-tutorial/index.html), focusing on **group comparisons, permutation testing, bootstrapping, and data-driven clustering**. We assume you have already worked through the main tutorial and understand the basics of building and analyzing a TNA model.
+
+A single TNA model describes the *average* transition dynamics across all individuals. But averages can hide important differences. Do high and low achievers follow different regulatory strategies? Are there latent subgroups with distinct behavioral patterns? Answering these questions requires moving beyond the aggregate model to group-level analysis.
+
+We cover three complementary approaches:
+
+1.  **Group comparison** --- split data by a known variable and compare transition structures.
+2.  **Permutation testing** --- determine whether observed group differences are statistically significant or could have arisen by chance.
+3.  **Bootstrap validation** --- quantify the reliability of group-specific edges and centralities.
+
+For **data-driven clustering** (discovering latent subgroups when no grouping variable exists), see the companion tutorial: [TNA Clustering](../tna-clustering/index.html).
+
+## Installation
+
+The `tna` package is the only package required. It provides all the functions needed for data preparation, model building, visualization, group comparison, permutation testing, bootstrapping, clustering, and sequence analysis.
+
+Install from CRAN:
+
+```{r}
+#| label: install-cran
+#| eval: false
+install.packages("tna")
+```
+
+Or install the development version from GitHub:
+
+```{r}
+#| label: install-github
+#| eval: false
+# install.packages("remotes")
+remotes::install_github("sonsoleslp/tna")
+```
+
+## Setup
+
+We use the same built-in `group_regulation_long` dataset introduced in the main tutorial. This dataset contains coded collaborative regulation behaviors from student groups, with each row recording an action performed by an actor at a specific time. Crucially, the dataset includes an `Achiever` column that classifies each actor as "High" or "Low" --- this is the grouping variable we will use for between-group comparisons.
+
+The `prepare_data()` function converts the long-format event log into sequences and automatically preserves the `Achiever` column as metadata, making it available for `group_tna()` later.
+
+```{r}
+#| label: prepare-data
+# Load the built-in collaborative regulation dataset
+data("group_regulation_long")
+
+# Convert to sequences, preserving the Achiever metadata column
+prepared_data <- prepare_data(
+  group_regulation_long,
+  action = "Action",   # behavioral states (network nodes)
+  actor = "Actor",     # participant IDs (one sequence per actor)
+  time = "Time"        # timestamps (for ordering and session splitting)
+)
+
+# Build the aggregate TNA model (all sequences combined)
+model <- tna(prepared_data)
+```
+
+::: {.callout-tip collapse="true"}
+## `prepare_data()` Arguments Explained
+
+Each argument controls a different aspect of how the raw data is converted into sequences.
+
+### `action` --- what happened
+
+The only required argument. The name of the column containing the events or states to model (e.g., "Plan", "Monitor", "Discuss"). These become the nodes in your network. Called with `action` alone, every row chains into one long sequence --- the last event of student A transitions directly into the first event of student B. Fine for a single continuous observation stream, but almost always wrong for multi-participant data.
+
+### `actor` --- who did it
+
+The column identifying who performed the action (student ID, user ID, group ID). Creates one sequence per actor instead of one sequence for the entire dataset. This is the single most important argument after `action`. Events within each actor are sorted by row order, so if your data is already sorted chronologically, this suffices.
+
+### `time` --- when it happened
+
+The column containing timestamps. Does two things: (1) sorts events chronologically within each actor, and (2) splits sequences at temporal gaps. If two consecutive events from the same actor are more than 15 minutes apart (the default), they become separate sequences. Change this with `time_threshold` (in seconds):
+
+```{r}
+#| label: time-threshold-group
+#| eval: false
+# 10-minute gap starts a new sequence
+prepared <- prepare_data(df, action = "Action", actor = "Actor",
+                         time = "Time", time_threshold = 10 * 60)
+```
+
+### `order` --- what came first
+
+A numeric column for event ordering when timestamps are unavailable (step number, turn counter). If both `time` and `order` are provided, data is sorted by `time` first with ties broken by `order`.
+
+Any columns not specified as `action`, `actor`, `time`, or `order` are automatically preserved as metadata. The `Achiever` column (High/Low) is preserved and available for `group_tna()`.
+:::
+
+::: {.callout-tip collapse="true"}
+## Other Supported Data Types
+
+This tutorial uses long-format event data via `prepare_data()`, but `tna()` accepts several other input formats directly. Choose whichever matches your data.
+
+### Wide Data Frame
+
+Each row is one sequence; each column is a time point. Cell values are categorical state labels. `NA` values are permitted for variable-length sequences.
+
+```{r}
+#| label: data-wide
+#| eval: false
+data("group_regulation")
+model <- tna(group_regulation)
+
+# If extra columns exist, select sequence columns with `cols`:
+model <- tna(group_regulation, cols = T1:T26)
+```
+
+### Pre-Computed Transition Matrix
+
+A square numeric matrix where element `[i, j]` is the weight of the transition from state `i` to state `j`. Row and column names define the state labels.
+
+```{r}
+#| label: data-matrix
+#| eval: false
+mat <- matrix(
+  c(0.1, 0.6, 0.3,
+    0.4, 0.2, 0.4,
+    0.3, 0.3, 0.4),
+  nrow = 3, byrow = TRUE,
+  dimnames = list(c("A", "B", "C"), c("A", "B", "C"))
+)
+model <- tna(mat, inits = c(A = 0.5, B = 0.3, C = 0.2))
+```
+
+### TraMineR Sequence Object (`stslist`)
+
+Sequence objects created by `TraMineR::seqdef()` can be passed directly to `tna()`.
+
+```{r}
+#| label: data-stslist
+#| eval: false
+data("engagement")
+model <- tna(engagement)
+```
+
+### One-Hot Encoded Data
+
+Binary (0/1) data where each column is a feature. `import_onehot()` computes co-occurrence weights and returns a `tna` model directly.
+
+```{r}
+#| label: data-onehot
+#| eval: false
+model <- import_onehot(binary_data, feature1:feature6, window = "window_id")
+```
+
+### Summary
+
+| Input Format | Function | Description |
+|---------------------------|--------------------|-------------------------|
+| Long event log | `prepare_data()` then `tna()` | Timestamped events with actors |
+| Wide data frame | `tna(df)` | Rows = sequences, columns = time points |
+| Pre-computed matrix | `tna(mat)` | Square weight matrix with named rows and columns |
+| TraMineR sequence | `tna(seqobj)` | Object from `TraMineR::seqdef()` |
+| One-hot binary data | `import_onehot()` | Co-occurrence model from binary feature data |
+:::
+
+# Group Analysis with Known Variables
+
+When a meaningful grouping variable is available (e.g., achievement level, course section, experimental condition), we can build separate TNA models for each group and directly compare their transition structures. Because `prepare_data()` preserved the `Achiever` column as metadata, we can use `group_tna()` to split the data into groups automatically:
+
+```{r}
+#| label: group-tna
+# Split data by the Achiever variable and build one TNA model per group
+gtna <- group_tna(prepared_data, group = "Achiever")
+```
+
+This creates two complete TNA models (one for "High", one for "Low"), each with its own transition probability matrix, initial probabilities, and sequence data.
+
+::: {.callout-tip collapse="true"}
+## Accessing Individual Group Models
+
+Each group is a standard `tna` object accessible with `$`:
+
+```{r}
+#| label: group-weights
+# Transition probability matrix for the High achievers group
+knitr::kable(round(gtna$High$weights, 3))
+```
+
+```{r}
+#| label: group-inits
+# Initial state probabilities for the Low achievers group
+knitr::kable(t(round(gtna$Low$inits, 3)))
+```
+
+```{r}
+#| label: group-summary
+# Summary statistics for both groups
+summary(gtna)
+```
+:::
+
+## Visualizing Group Networks
+
+Similar to standard TNA, almost all types of analysis work the same way and require no extra arguments. Only `plot()` is needed here with the group model --- TNA recognizes that it is a group model and plots all of its networks automatically. Plotting the group models side by side reveals structural differences at a glance. Thicker edges indicate higher transition probabilities; the `minimum` and `cut` arguments control which edges are displayed.
+
+```{r}
+#| label: fig-group-networks
+#| fig-cap: "Transition networks by achievement group"
+#| fig-width: 6
+#| fig-height: 6
+#| classes: preview-image
+#| layout-ncol: 2
+# Side-by-side network plots; minimum hides edges below 0.05, cut fades below 0.1
+plot(gtna, minimum = 0.05, cut = 0.1)
+```
+
+## Group-Level Frequency and Mosaic Plots
+
+State frequency and mosaic plots offer complementary views of how state usage differs between groups. The frequency plot shows raw counts, while the mosaic plot displays proportional composition.
+
+```{r}
+#| label: fig-freq-group
+#| fig-cap: "State frequencies by group"
+# Bar chart of state frequencies for each group
+plot_frequencies(gtna)
+```
+
+```{r}
+#| label: fig-mosaic-group
+#| fig-cap: "Mosaic plot comparing groups"
+# Mosaic plot showing proportional state composition by group
+plot_mosaic(gtna)
+```
+### Difference Plot
+
+While side-by-side plots are useful, `plot_compare()` makes differences explicit by overlaying both networks and coloring edges by direction of difference. This makes it easy to spot which transitions are stronger in one group versus the other.
+
+```{r}
+#| label: fig-group-compare
+#| fig-cap: "Difference network between High and Low achievers"
+#| fig-width: 8
+#| fig-height: 8
+# Overlay both networks; edges colored by which group is stronger
+plot_compare(gtna$High, gtna$Low, minimum = 0.01, cut = 0.1)
+```
+
+## Model Comparison with `compare()`
+
+The `compare()` function provides a comprehensive numerical comparison between two TNA models. It computes the difference in every edge weight, summarizes overall divergence, and compares centrality rankings --- giving you a full picture of *how much* and *where* the two groups differ.
+
+```{r}
+#| label: compare
+# Compute comprehensive numerical comparison between the two group models
+comp <- compare(gtna$High, gtna$Low)
+```
+
+::: {.callout-tip collapse="true"}
+## `compare()` Components
+
+### Difference Matrix
+
+Each cell is the difference in transition probability (High minus Low). Positive values indicate transitions that are stronger in the High group; negative values indicate transitions stronger in the Low group.
+
+```{r}
+#| label: compare-diff
+# Each cell: High minus Low transition probability (positive = stronger in High)
+round(comp$difference_matrix, 3)
+```
+
+### Summary Metrics
+
+```{r}
+#| label: compare-summary
+# Overall divergence metrics between the two group networks
+comp$summary_metrics
+```
+
+### Network-Level Properties
+
+```{r}
+#| label: compare-network
+# Network-level properties for each group (density, reciprocity, etc.)
+comp$network_metrics
+```
+
+### Centrality Differences
+
+```{r}
+#| label: compare-centrality
+# Differences in centrality measures between the two groups
+comp$centrality_differences
+```
+:::
+
+## Permutation Testing {#sec-permutation}
+
+### Why Permutation Tests?
+
+The `compare()` function quantifies the magnitude of differences between two group models, but magnitude alone does not establish statistical significance. Observed differences may reflect genuine structural divergence between groups, or they may be stochastic variation that would arise under any random partition of the data. Without a formal inferential procedure, there is no principled basis for distinguishing the two.
+
+Permutation testing addresses between-group comparisons, which are particularly susceptible to inflated Type I error rates when multiple edges are tested simultaneously. By randomly reassigning group labels while preserving the internal sequential structure of each case, the procedure constructs exact null distributions for edge-level and centrality-level differences, accompanied by effect sizes (van Borkulo et al., 2023). This preserves the temporal dependency structure that parametric tests on summary statistics necessarily violate, and provides a principled basis for distinguishing substantive group differences from stochastic variation.
+
+The permutation approach is especially appropriate for TNA because transition probability matrices are high-dimensional, dependent structures for which standard parametric assumptions (normality, independence, homoscedasticity) do not hold. The test makes no distributional assumptions; it derives significance directly from the data.
+
+::: callout-note
+## How the Permutation Test Works
+
+1.  **Observe**: Record the actual difference in each edge weight and centrality measure between the two groups.
+2.  **Shuffle**: Randomly reassign sequences to groups, breaking the association between group membership and transition behavior while preserving the internal sequential structure of each case.
+3.  **Recompute**: Build new TNA models from the shuffled data and calculate new differences.
+4.  **Repeat**: Iterate 1,000 times (or more) to construct the **null distribution** --- the distribution of differences expected if group membership had no systematic relationship with transition dynamics.
+5.  **Compare**: The **p-value** for each edge is the proportion of permuted differences that equal or exceed the observed difference in absolute magnitude.
+
+A small p-value (\< 0.05) indicates that the observed difference is unlikely under the null hypothesis of no group effect, providing evidence of a genuine structural difference. The accompanying effect size quantifies the magnitude of that difference relative to the variability in the null distribution.
+:::
+
+### Running the Test
+
+All you need is to pass the group TNA model directly. TNA recognizes it as a group model and compares the groups automatically.
+
+```{r}
+#| label: permutation
+#| cache: true
+set.seed(265)  # for reproducibility
+# Test whether edge and centrality differences between groups exceed chance
+Permutation <- permutation_test(
+  gtna,
+  iter = 1000,  # number of random group reassignments
+  measures = c("InStrength", "OutStrength", "Betweenness")
+)
+```
+
+The `measures` argument specifies which centrality measures to test in addition to edge weights. With `iter = 1000`, the smallest achievable p-value is 0.001, which provides adequate resolution for most analyses. For publication-quality results where precise small p-values are needed, increase to 5,000--10,000 iterations.
+
+### Edge-Level Results
+
+Each row reports one edge (transition) with its observed difference, effect size, and p-value:
+
+```{r}
+#| label: permutation-edges
+# Results are nested by comparison pair; extract the first (and only) comparison
+perm_results <- Permutation[[1]]
+perm_results$edges$stats
+```
+
+::: {.callout-tip collapse="true"}
+## Interpreting the Columns
+
+| Column | Meaning | Interpretation |
+|------------------|--------------------|----------------------------------|
+| `edge_name` | The transition (from -\> to) | Which behavioral transition is being tested |
+| `diff_true` | Observed difference (High minus Low) | Direction and magnitude of the group difference |
+| `effect_size` | Difference / SD of permuted differences | Standardized effect size (analogous to Cohen's *d*). Values \> 0.5 indicate moderate effects; \> 0.8 large effects |
+| `p_value` | Proportion of permutations as extreme as observed | Statistical significance. Values \< 0.05 are conventionally significant |
+:::
+
+### Statistically Significant Edges
+
+Filtering for p \< 0.05 identifies the transitions for which the observed group difference exceeds what would be expected under the null hypothesis:
+
+```{r}
+#| label: permutation-sig
+# Filter for statistically significant edges and sort by effect size
+sig_perm <- perm_results$edges$stats[perm_results$edges$stats$p_value < 0.05, ]
+sig_perm <- sig_perm[order(-abs(sig_perm$effect_size)), ]
+sig_perm
+```
+
+::: callout-important
+## Reading the Results
+
+-   **Positive `diff_true`**: The transition is more probable in the High group than the Low group.
+-   **Negative `diff_true`**: The transition is more probable in the Low group.
+-   **Large `|effect_size|`**: The difference is not only statistically significant but substantively meaningful. Effect sizes provide information that p-values alone cannot: a highly significant result with a small effect size may reflect a trivial difference detected through large sample size.
+-   **Non-significant edges**: Even where `compare()` reported a nonzero difference, a non-significant p-value indicates that such a difference is consistent with chance variation. These edges should not be treated as evidence of group divergence.
+:::
+
+### Centrality-Level Results
+
+Beyond individual edges, the permutation test evaluates whether group differences in node-level centrality measures are statistically significant. This determines whether certain states occupy structurally different positions in the two groups' networks --- information that cannot be obtained from edge-level tests alone:
+
+```{r}
+#| label: permutation-centralities
+# Filter for significant centrality differences between groups
+sig_cent <- perm_results$centralities$stats[perm_results$centralities$stats$p_value < 0.05, ]
+sig_cent
+```
+
+A significant centrality difference indicates that the state's role in the network architecture differs between groups. For instance, if "Monitor" has significantly higher betweenness centrality in the High group, this indicates that monitoring occupies a more central bridging position in the regulatory process of high achievers --- a structural difference that has direct implications for understanding how self-regulation operates differently across achievement levels.
+
+### Visualization
+
+The permutation plot displays only the edges that reached statistical significance, providing a clear visual summary of the confirmed group differences:
+
+```{r}
+#| label: fig-permutation
+#| fig-cap: "Significant group differences in transition probabilities"
+#| fig-width: 8
+#| fig-height: 8
+# Only edges with p < 0.05 are displayed
+plot(Permutation, minimum = 0.01, cut = 0.1)
+```
+
+## Bootstrap Validation of Group Models {#sec-bootstrap}
+
+### Why Bootstrap Group Models?
+
+Permutation testing establishes which between-group differences are statistically significant, but it does not address the reliability of the individual group models themselves. A group-specific transition probability of 0.15 is a point estimate. Without further validation, there is no basis for determining whether this estimate reflects a stable property of the underlying process or whether it would shift substantially under a different sample of sequences.
+
+Bootstrapping addresses the replicability of individual edges within each group. By resampling sequences with replacement and reconstructing the transition matrix across a large number of iterations, the procedure generates empirical sampling distributions for each edge weight, thereby distinguishing transitions that are stable properties of the underlying process from those whose presence is contingent on the particular sample at hand (Saqr, Lopez-Pernas, & Tikka, 2025). Edges that do not consistently exceed a defined threshold or that deviate beyond an acceptable consistency range are identified as non-significant, yielding a model in which every retained transition has demonstrated resampling support.
+
+::: callout-note
+## Bootstrap and Permutation Test: Complementary Confirmatory Roles
+
+These two procedures address distinct inferential questions and are both necessary for a rigorous group analysis:
+
+| Method | Inferential Target | What It Confirms |
+|-----------------|-----------------------------|---------------------------|
+| **Permutation test** | Between-group differences | Whether observed differences in edge weights and centralities exceed what would be expected under random group assignment |
+| **Bootstrap** | Within-group edge stability | Whether individual edges within each group model are replicable properties of the data or artifacts of sampling variability |
+
+A group difference can be statistically significant (permutation) even when the constituent group estimates are individually imprecise (bootstrap), and an edge can be stable within one group (bootstrap) while not differing significantly from the other group (permutation). Neither test subsumes the other. Together, they provide a complete inferential framework: the bootstrap identifies which transitions reliably exist within each group, and the permutation test identifies which transitions reliably differ between groups.
+:::
+
+### Bootstrapping the Group Model
+
+Just like `permutation_test()`, `bootstrap()` accepts the group model directly. TNA recognizes it as a group model and bootstraps each group automatically:
+
+```{r}
+#| label: bootstrap-groups
+#| cache: true
+set.seed(265)  # for reproducibility
+# Pass the group model directly; TNA bootstraps each group automatically
+boot_groups <- bootstrap(gtna, iter = 1000, level = 0.05)
+```
+
+### Interpreting Bootstrap Results
+
+Each bootstrap summary reports, for every edge, whether it demonstrated resampling stability. An edge marked `sig = TRUE` appeared consistently across 1,000 resampled datasets; an edge marked `sig = FALSE` did not survive this replicability criterion and should not be treated as a confirmed feature of the group's transition structure:
+
+**High achievers: significant edge**
+```{r}
+#| label: bootstrap-high-summary
+# Edges that survived the bootstrap stability criterion
+boot_high_df <- boot_groups$High$summary[boot_groups$High$summary$sig == TRUE, ]
+boot_high_df
+```
+
+**Low achievers: significant edges**
+```{r}
+#| label: bootstrap-low-summary
+# Edges that survived the bootstrap stability criterion
+boot_low_df <- boot_groups$Low$summary[boot_groups$Low$summary$sig == TRUE, ]
+boot_low_df
+```
+
+::: {.callout-tip collapse="true"}
+## Bootstrap Summary Columns
+
+| Column | Meaning |
+|----------------------------------|--------------------------------------|
+| `from`, `to` | The transition being evaluated |
+| `mean` | Average edge weight across bootstrap resamples |
+| `ci_lower`, `ci_upper` | 95% confidence interval for the edge weight |
+| `sig` | `TRUE` if the edge demonstrated resampling stability --- the transition is a confirmed feature of the network |
+
+Edges where `sig = TRUE` constitute the replicable structure of the group model. Edges where `sig = FALSE` may appear in the point-estimate network but lack the resampling support necessary for substantive interpretation.
+:::
+
+### Visualizing Bootstrapped Networks
+
+The plot below displays only the edges that survived the bootstrap procedure for each group --- the confirmed, replicable transition structure. As with other group-level functions, `plot()` recognizes the group bootstrap object and plots all groups automatically:
+
+```{r}
+#| label: fig-bootstrap-groups
+#| fig-cap: "Bootstrap-validated networks by achievement group"
+#| fig-width: 6
+#| fig-height: 6
+#| layout-ncol: 2
+# TNA plots both group bootstrap networks automatically
+plot(boot_groups, cut = 0.1)
+```
+
+Comparing these validated networks to the raw group networks reveals which features of each group's transition structure survive statistical scrutiny. Transitions present in the raw model but absent from the bootstrapped model were contingent on the particular sample and should not form the basis of substantive conclusions.
+
+# Group-Level Sequence Analysis
+
+## Comparing Subsequence Patterns
+
+While `compare()` compares *transition matrices* (single-step probabilities), `compare_sequences()` compares the actual *multi-step subsequence patterns* in each group. This captures higher-order dynamics that pairwise transitions miss. For example, a three-step pattern like Plan -\> Monitor -\> Adapt may be common in one group but rare in another, even if each individual pairwise transition looks similar.
+
+The function uses Fisher's exact test on subsequence frequencies, with Bonferroni correction for multiple comparisons:
+
+```{r}
+#| label: compare-sequences
+# Compare multi-step subsequence frequencies between groups (lengths 2-5)
+seq_comp <- compare_sequences(gtna, sub = 2:5, min_freq = 5)
+seq_comp
+```
+
+```{r}
+#| label: fig-compare-sequences
+#| fig-cap: "Most differentially frequent patterns between groups"
+plot(seq_comp)
+```
+
+::: {.callout-tip collapse="true"}
+## `compare_sequences()` vs `compare()`
+
+`compare()` looks at pairwise transition probabilities (e.g., "how likely is Adapt -\> Plan?"). `compare_sequences()` looks at multi-step subsequence patterns (e.g., "how often does Plan -\> Monitor -\> Adapt appear?"). Subsequences capture higher-order dynamics that pairwise transitions miss.
+
+| Argument   | Description                    | Default        |
+|------------|--------------------------------|----------------|
+| `sub`      | Subsequence lengths to compare | `2:5`          |
+| `min_freq` | Minimum frequency to test      | `5`            |
+| `adjust`   | Multiple comparison correction | `"bonferroni"` |
+:::
+
+## Sequence Plots by Group
+
+Sequence plots provide a visual overview of the raw sequences, split by group. The index plot shows each individual sequence as a horizontal bar, while the distribution plot shows the proportion of each state at each sequence position.
+
+```{r}
+#| label: fig-seq-group-index
+#| fig-cap: "Sequence index plot by achievement group"
+# Each row is one sequence, colored by state; faceted by Achiever group
+plot_sequences(prepared_data, group = "Achiever")
+```
+
+```{r}
+#| label: fig-seq-group-dist
+#| fig-cap: "State distribution by achievement group"
+# Proportion of each state at each position, by group
+plot_sequences(prepared_data, group = "Achiever", type = "distribution")
+```
+
+
+# Summary of Statistical Testing {#sec-summary}
+
+Descriptive comparison of transition networks --- visual inspection, difference matrices, centrality rankings --- is a necessary starting point but is insufficient for drawing conclusions. Without inferential procedures, there is no basis for distinguishing genuine structural properties from sampling artifacts, or genuine group differences from stochastic variation. This tutorial demonstrated two complementary confirmatory procedures that address distinct inferential targets:
+
+| Method | Inferential Target | What It Establishes | Key Output |
+|---------------|--------------------|----------------------|---------------|
+| **Permutation test** | Between-group differences | Whether observed differences in transition probabilities and centralities exceed what would be expected under random group assignment | p-values, effect sizes for each edge and centrality measure |
+| **Bootstrap** | Within-group edge stability | Whether individual transitions within each group model are replicable properties of the data or sample-contingent artifacts | Confidence intervals, significance flags for each edge |
+
+Neither procedure subsumes the other. A permutation-significant difference between groups can involve edges that are individually imprecise within each group; conversely, a bootstrap-stable edge within one group may not differ significantly from the corresponding edge in another group.
+
+**Recommended workflow:**
+
+1.  Build group models with `group_tna()` and inspect them visually.
+2.  Use `compare()` to quantify the direction and magnitude of differences.
+3.  Run `permutation_test()` to determine which differences are statistically significant, obtaining both p-values and effect sizes.
+4.  Run `bootstrap()` on each group model to identify which edges constitute replicable features of each group's transition structure.
+5.  Report and interpret only edges and differences that survive the relevant inferential test. Edges that failed the bootstrap should not be interpreted substantively; group differences that failed the permutation test should not be reported as findings.
+
+# References {.unnumbered}
+
+-   Tikka, S., Lopez-Pernas, S., & Saqr, M. (2025). tna: An R Package for Transition Network Analysis. *Applied Psychological Measurement*. <https://doi.org/10.1177/01466216251348840>
+-   Package website: <https://sonsoles.me/tna/>
+-   López-Pernas, S., Tikka, S., & Saqr, M. (2025). Mining Patterns and Clusters with Transition Network Analysis: A Heterogeneity Approach. In M. Saqr & S. López-Pernas (Eds.), *Advanced Learning Analytics Methods: AI, Precision and Complexity*. Springer. <https://lamethods.org/book2/chapters/ch17-tna-clusters/ch17-tna-clusters.html>

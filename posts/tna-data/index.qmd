@@ -1,0 +1,583 @@
+---
+title: "TNA Data Preparation: A Comprehensive Guide to `prepare_data()`"
+subtitle: "Companion Tutorial for Transition Network Analysis"
+author:
+  - name: Mohammed Saqr
+    url: https://saqr.me
+    affiliation: University of Eastern Finland
+  - name: Sonsoles López-Pernas
+    url: https://sonsoles.me
+    affiliation: University of Eastern Finland
+citation:
+   type: article
+   author:
+    - family: "Saqr"
+      given: "Mohammed"
+    - family: "López-Pernas"
+      given: "Sonsoles"
+categories:
+  - learning analytics
+  - tutorial
+  - R
+# engine: markdown
+warning: false
+message: false
+fig.align: center
+format:
+  html:
+    toc: true
+    toc-depth: 3
+    number-sections: true
+    code-fold: false
+    code-tools: true
+    theme: cosmo
+    self-contained: true
+execute:
+  warning: false
+  message: false
+knitr:
+  opts_chunk:
+    fig.width: 6
+    fig.height: 6
+    dpi: 600
+    comment: ""
+image: main.png
+---
+
+```{r, echo = FALSE}
+library(knitr)
+options(scipen = 999999999, digits = 2)
+knit_print.data.frame <- function (x, options, ...) {
+  rmarkdown::paged_table(x, options) |>
+    rmarkdown:::print.paged_df( )
+}
+
+registerS3method("knit_print", "data.frame", knit_print.data.frame)
+```
+
+```{r}
+#| label: setup
+#| include: false
+library("tna")
+```
+# Introduction
+
+Before building a TNA model, your raw event data needs to be reshaped into sequences. The `prepare_data()` function does this in one call. For most data, the call is three arguments and you are done.
+
+This tutorial has two parts:
+
+1. **Quick Start** --- the three-argument call that covers 90% of use cases. Start here.
+2. **Detailed Guide** --- session splitting, time parsing, output anatomy, edge cases. Only needed when the defaults don't fit your data.
+
+**Other tutorials:**
+
+- [TNA Main Tutorial](../tna-tutorial/index.html) --- building and analyzing a TNA model
+- [TNA Group Analysis](../tna-group/index.html) --- group comparisons, permutation testing, bootstrapping
+- [TNA Clustering](../tna-clustering/index.html) --- data-driven clustering of sequences
+- [TNA Compare](../tna-group/index.html) --- comparing two TNA models numerically
+
+## Installation
+
+```{r}
+#| label: install-cran
+#| eval: false
+install.packages("tna")
+```
+
+Or the development version:
+
+```{r}
+#| label: install-github
+#| eval: false
+# install.packages("remotes")
+remotes::install_github("sonsoleslp/tna")
+```
+
+# Quick Start
+
+## Load your data
+
+Your data should be in long format: one row per event, with columns for what happened, who did it, and when.
+
+We use the built-in dataset as an example:
+
+```{r}
+#| label: load-data
+# Built-in dataset: coded collaborative regulation behaviors
+data("group_regulation_long")
+group_regulation_long
+```
+
+The columns that matter for `prepare_data()`:
+
+- **Action** --- what happened (the behavioral state). These become network nodes.
+- **Actor** --- who did it (participant ID). One sequence per actor.
+- **Time** --- when it happened (timestamp). Used for sorting and session splitting.
+
+Everything else (Achiever, Group, Course) is kept automatically as metadata.
+
+## Prepare the data
+
+```{r}
+#| label: prepare
+# Three arguments: action, actor, time. That's it.
+pd <- prepare_data(
+  group_regulation_long,
+  action = "Action",
+  actor = "Actor",
+  time = "Time"
+)
+```
+
+That's the whole call. Events are sorted by time within each actor, split into sessions when gaps exceed 15 minutes, and pivoted into wide format. Metadata columns are preserved automatically.
+
+## Build a model
+
+```{r}
+#| label: build-model
+# Build a TNA model from the prepared data
+model <- tna(pd)
+plot(model)
+```
+
+## Group comparisons
+
+Any column you did not assign to `action`, `actor`, or `time` is preserved as metadata. You can use it for group comparisons without any extra work:
+
+```{r}
+#| label: group-model
+# The Achiever column was preserved automatically
+group_models <- group_tna(pd, group = "Achiever")
+plot(group_models)
+```
+
+::: {.callout-tip collapse="true"}
+## Checking the result
+
+After preparing, you can inspect the statistics to see how many sequences were created, how many actors, sequence lengths, and the time range:
+
+```{r}
+#| label: check-stats
+pd$statistics
+```
+
+If these numbers look reasonable, you are ready to go.
+:::
+
+That covers the typical workflow. If the defaults work for your data, you can stop here and move on to the [main tutorial](TNA_Tutorial.html).
+
+# Detailed Guide (Not Usually Needed) {#sec-detailed}
+
+The rest of this tutorial covers situations where the defaults don't fit: custom session thresholds, unusual timestamp formats, the full output structure, and troubleshooting. Read this when you run into a specific issue.
+
+## The Full Function Signature
+
+```{r}
+#| label: function-signature
+#| eval: false
+prepare_data(
+  data,
+  action,
+  actor = NULL,
+  time = NULL,
+  order = NULL,
+  time_threshold = 900,
+  custom_format = NULL,
+  is_unix_time = FALSE,
+  unix_time_unit = "seconds",
+  unused_fn = NULL
+)
+```
+
+| Argument | Default | What It Does |
+|----------|---------|--------------|
+| `data` | *(required)* | Raw event data in long format |
+| `action` | *(required)* | Column with events/states (become network nodes) |
+| `actor` | `NULL` | Column with participant IDs (one sequence per actor) |
+| `time` | `NULL` | Column with timestamps (sorting + session splitting) |
+| `order` | `NULL` | Column for tiebreaking same-timestamp events |
+| `time_threshold` | `900` | Gap in seconds that starts a new session (default: 15 min) |
+| `custom_format` | `NULL` | `strptime` format for unusual timestamps |
+| `is_unix_time` | `FALSE` | Force Unix timestamp interpretation |
+| `unix_time_unit` | `"seconds"` | Unit for Unix timestamps |
+| `unused_fn` | `NULL` | Aggregation function for metadata during pivot |
+
+Only `data` and `action` are required. But without `actor`, the entire dataset becomes one sequence --- you lose the ability to do permutation testing, bootstrapping, or group comparisons. Always include `actor` unless your data genuinely has a single observation stream.
+
+## Session Splitting with `time_threshold`
+
+When `time` is provided, `prepare_data()` splits each actor's events into sessions. If two consecutive events are more than `time_threshold` seconds apart, a new session starts. The default is 900 seconds (15 minutes).
+
+How it works for an actor with events at 9:00, 9:03, 9:07, 10:30, 10:32 with a 15-minute threshold:
+
+- 9:00 → 9:03 (3 min gap) --- same session
+- 9:03 → 9:07 (4 min gap) --- same session
+- 9:07 → 10:30 (83 min gap) --- **new session**
+- 10:30 → 10:32 (2 min gap) --- same session
+
+Result: two sequences --- (9:00, 9:03, 9:07) and (10:30, 10:32).
+
+Changing the threshold affects how many sequences you get:
+
+```{r}
+#| label: threshold-low
+# 5-minute gaps start a new session → more, shorter sessions
+pd_5min <- prepare_data(
+  group_regulation_long,
+  action = "Action", actor = "Actor", time = "Time",
+  time_threshold = 300
+)
+```
+
+```{r}
+#| label: threshold-high
+# 1-hour gaps start a new session → fewer, longer sessions
+pd_1hr <- prepare_data(
+  group_regulation_long,
+  action = "Action", actor = "Actor", time = "Time",
+  time_threshold = 3600
+)
+```
+
+```{r}
+#| label: threshold-comparison
+# Compare
+threshold_comparison <- data.frame(
+  Threshold = c("300s (5 min)", "900s (15 min, default)", "3600s (1 hour)"),
+  Sessions = c(
+    pd_5min$statistics$total_sessions,
+    pd$statistics$total_sessions,
+    pd_1hr$statistics$total_sessions
+  )
+)
+threshold_comparison
+```
+
+::: {.callout-tip collapse="true"}
+## Choosing the right threshold
+
+- **Chat or messaging data:** 2--5 min. Conversations have rapid exchanges.
+- **LMS logs:** 10--30 min. Students pause to read or think. The 15-minute default works well.
+- **Collaborative coding:** 15--60 min. Longer focused work sessions.
+- **Diary studies:** hours or days. Each entry is a separate session.
+
+If unsure, try a few values and check `$statistics`. Sessions should be long enough to contain meaningful transitions (not just 1--2 events) but short enough that unrelated events aren't chained together.
+:::
+
+## The `order` Argument
+
+Some logging systems record multiple events with the exact same timestamp. The `order` argument provides a tiebreaker --- a numeric column (step number, line number) that determines which event comes first among same-timestamp events.
+
+```{r}
+#| label: order-example
+#| eval: false
+# Use step_number to break ties when events share the same timestamp
+prepared <- prepare_data(
+  my_data,
+  action = "Action", actor = "Actor", time = "Time",
+  order = "step_number"
+)
+```
+
+When both `time` and `order` are given, events are sorted by `time` first, ties broken by `order`. You can also use `order` without `time` (sorts by that column alone, no session splitting), but this is rarely needed --- data is usually already in the right row order.
+
+## The Output Object
+
+`prepare_data()` returns a `tna_data` object with five components:
+
+| Component | What It Contains | When Present |
+|-----------|------------------|--------------|
+| `$long_data` | Original data + `.standardized_time`, `.session_nr`, `.session_id`, `.sequence` | Always |
+| `$sequence_data` | Wide format: rows = sequences, columns = time positions | Always |
+| `$meta_data` | `.session_id` + all columns not assigned to action/actor/time/order | Always |
+| `$time_data` | Wide timestamps aligned with `$sequence_data` | Only with `time` |
+| `$statistics` | Session counts, user counts, actions per session, time range | Always |
+
+### Sequence data
+
+Wide format: each row is one sequence, each column is a time position. Shorter sequences are padded with `NA`.
+
+```{r}
+#| label: output-seq
+# First 5 rows, first 10 columns
+pd$sequence_data[1:5, 1:10]
+```
+
+### Metadata
+
+One row per sequence. Contains `.session_id` and every column not used as action/actor/time/order. This is how `group_tna(pd, group = "Achiever")` knows which sequences belong to which group.
+
+```{r}
+#| label: output-meta
+pd$meta_data
+```
+
+### Long data
+
+The original events, sorted and annotated with session information:
+
+```{r}
+#| label: output-long
+pd$long_data
+```
+
+### Time data
+
+Wide-format timestamps aligned with `$sequence_data`. Each cell is the timestamp of the corresponding event. `NULL` when `time` is not provided.
+
+```{r}
+#| label: output-time
+pd$time_data[1:5, 1:8]
+```
+
+::: {.callout-tip collapse="true"}
+## The `print()` method
+
+You can inspect components without `$` notation:
+
+```{r}
+#| label: print-methods
+# Print sequence data
+print(pd, data = "sequence")
+```
+
+```{r}
+#| label: print-meta
+# Print metadata
+print(pd, data = "meta")
+```
+:::
+
+## Time Parsing
+
+The time parser auto-detects 52 timestamp formats. You usually don't need to do anything --- just pass the column name.
+
+::: {.callout-tip collapse="true"}
+## All 52 auto-detected formats
+
+**Date + time (YYYY-MM-DD)**
+
+| Format | Example |
+|--------|---------|
+| `%Y-%m-%d %H:%M:%S` | 2023-01-09 18:44:00 |
+| `%Y-%m-%d %H:%M` | 2023-01-09 18:44 |
+| `%Y/%m/%d %H:%M:%S` | 2023/01/09 18:44:00 |
+| `%Y/%m/%d %H:%M` | 2023/01/09 18:44 |
+| `%Y.%m.%d %H:%M:%S` | 2023.01.09 18:44:00 |
+| `%Y.%m.%d %H:%M` | 2023.01.09 18:44 |
+
+**ISO 8601 (T separator)**
+
+| Format | Example |
+|--------|---------|
+| `%Y-%m-%dT%H:%M:%S` | 2023-01-09T18:44:00 |
+| `%Y-%m-%dT%H:%M` | 2023-01-09T18:44 |
+| `%Y-%m-%dT%H:%M:%OS` | 2023-01-09T18:44:00.123 |
+
+**With timezone offset**
+
+| Format | Example |
+|--------|---------|
+| `%Y-%m-%d %H:%M:%S%z` | 2023-01-09 18:44:00+0100 |
+| `%Y-%m-%d %H:%M%z` | 2023-01-09 18:44+0100 |
+| `%Y-%m-%d %H:%M:%S %z` | 2023-01-09 18:44:00 +0100 |
+| `%Y-%m-%d %H:%M %z` | 2023-01-09 18:44 +0100 |
+
+**Compact (no separators)**
+
+| Format | Example |
+|--------|---------|
+| `%Y%m%d%H%M%S` | 20230109184400 |
+| `%Y%m%d%H%M` | 202301091844 |
+
+**European (DD-MM-YYYY)**
+
+| Format | Example |
+|--------|---------|
+| `%d-%m-%Y %H:%M:%S` | 09-01-2023 18:44:00 |
+| `%d-%m-%Y %H:%M` | 09-01-2023 18:44 |
+| `%d/%m/%Y %H:%M:%S` | 09/01/2023 18:44:00 |
+| `%d/%m/%Y %H:%M` | 09/01/2023 18:44 |
+| `%d.%m.%Y %H:%M:%S` | 09.01.2023 18:44:00 |
+| `%d.%m.%Y %H:%M` | 09.01.2023 18:44 |
+| `%d-%m-%YT%H:%M:%S` | 09-01-2023T18:44:00 |
+| `%d-%m-%YT%H:%M` | 09-01-2023T18:44 |
+
+**US (MM-DD-YYYY)**
+
+| Format | Example |
+|--------|---------|
+| `%m-%d-%Y %H:%M:%S` | 01-09-2023 18:44:00 |
+| `%m-%d-%Y %H:%M` | 01-09-2023 18:44 |
+| `%m/%d/%Y %H:%M:%S` | 01/09/2023 18:44:00 |
+| `%m/%d/%Y %H:%M` | 01/09/2023 18:44 |
+| `%m.%d.%Y %H:%M:%S` | 01.09.2023 18:44:00 |
+| `%m.%d.%Y %H:%M` | 01.09.2023 18:44 |
+| `%m-%d-%YT%H:%M:%S` | 01-09-2023T18:44:00 |
+| `%m-%d-%YT%H:%M` | 01-09-2023T18:44 |
+
+**With month names**
+
+| Format | Example |
+|--------|---------|
+| `%d %b %Y %H:%M:%S` | 09 Jan 2023 18:44:00 |
+| `%d %b %Y %H:%M` | 09 Jan 2023 18:44 |
+| `%d %B %Y %H:%M:%S` | 09 January 2023 18:44:00 |
+| `%d %B %Y %H:%M` | 09 January 2023 18:44 |
+| `%b %d %Y %H:%M:%S` | Jan 09 2023 18:44:00 |
+| `%b %d %Y %H:%M` | Jan 09 2023 18:44 |
+| `%B %d %Y %H:%M:%S` | January 09 2023 18:44:00 |
+| `%B %d %Y %H:%M` | January 09 2023 18:44 |
+
+**Date only**
+
+| Format | Example |
+|--------|---------|
+| `%Y-%m-%d` | 2023-01-09 |
+| `%Y/%m/%d` | 2023/01/09 |
+| `%Y.%m.%d` | 2023.01.09 |
+| `%d-%m-%Y` | 09-01-2023 |
+| `%d/%m/%Y` | 09/01/2023 |
+| `%d.%m.%Y` | 09.01.2023 |
+| `%m-%d-%Y` | 01-09-2023 |
+| `%m/%d/%Y` | 01/09/2023 |
+| `%m.%d.%Y` | 01.09.2023 |
+| `%d %b %Y` | 09 Jan 2023 |
+| `%d %B %Y` | 09 January 2023 |
+| `%b %d %Y` | Jan 09 2023 |
+| `%B %d %Y` | January 09 2023 |
+
+Unix timestamps (numeric seconds, milliseconds, or microseconds since epoch) are also detected automatically.
+:::
+
+For unusual formats not covered by auto-detection:
+
+```{r}
+#| label: custom-format
+#| eval: false
+# Custom format: "15-Mar-2024_14h30m"
+prepared <- prepare_data(
+  data, action = "Action", actor = "Actor",
+  time = "Time", custom_format = "%d-%b-%Y_%Hh%Mm"
+)
+```
+
+For Unix timestamps (numeric seconds or milliseconds since epoch):
+
+```{r}
+#| label: unix-time
+#| eval: false
+# Time column contains Unix timestamps in milliseconds
+prepared <- prepare_data(
+  data, action = "Action", actor = "Actor",
+  time = "Time", is_unix_time = TRUE, unix_time_unit = "milliseconds"
+)
+```
+
+::: {.callout-warning collapse="true"}
+## Ambiguous date formats
+
+`03/04/2024` could be March 4 (US) or April 3 (European). The parser tries US format first. If your data uses European dates and the day values never exceed 12, use `custom_format`:
+
+```{r}
+#| label: ambiguous-dates
+#| eval: false
+# Force European date interpretation
+prepared <- prepare_data(
+  data, action = "Action", actor = "Actor",
+  time = "Time", custom_format = "%d/%m/%Y %H:%M:%S"
+)
+```
+:::
+
+## The `unused_fn` Argument
+
+During the pivot from long to wide, metadata columns are collapsed from multiple rows per actor to one row per sequence. By default, the first value is taken. This works when metadata is constant within a session (e.g., achievement level doesn't change between events).
+
+If metadata varies within a session (e.g., a running score):
+
+```{r}
+#| label: unused-fn
+#| eval: false
+# Take the last value per session
+prepared <- prepare_data(
+  data, action = "Action", actor = "Actor", time = "Time",
+  unused_fn = dplyr::last
+)
+```
+
+For most use cases (grouping variables, demographics), the default is correct.
+
+## Troubleshooting
+
+**One giant sequence:** You forgot `actor`. Without it, the entire dataset becomes one sequence.
+
+**Too many / too few sessions:** Adjust `time_threshold`. Check `$statistics` to see if the session count looks right.
+
+**Wrong event order:** Without `time`, events are read in row order. If your data isn't sorted, provide `time`.
+
+**Time parsing errors:** Use `custom_format` to specify the format explicitly.
+
+**Very short sequences:** Sequences of length 1 contribute zero transitions. Increase `time_threshold` to merge micro-sessions, or filter them out.
+
+**`NA` in the action column:** Remove or impute before calling `prepare_data()`.
+
+::: {.callout-tip collapse="true"}
+## Debugging with `$long_data`
+
+When something looks wrong, check the annotated long data:
+
+```{r}
+#| label: debugging
+#| eval: false
+# Check a specific actor's events
+subset(pd$long_data, Actor == "some_actor_id")
+
+# Look at session boundaries
+library(dplyr)
+pd$long_data |>
+  group_by(.session_id) |>
+  summarize(n_events = n(), start = min(.standardized_time),
+            end = max(.standardized_time))
+```
+:::
+
+# Quick Reference
+
+## Decision Guide
+
+```{mermaid}
+flowchart LR
+  A["Do you have multiple participants?"]
+  A -->|Yes| B["use actor"]
+  A -->|No| C["omit actor (single observation stream)"]
+```
+ 
+```{mermaid}
+flowchart LR
+  D["Do you have timestamps?"]
+  D -->|Yes| E["use time (sorting + session splitting)"]
+  D -->|No| F["make sure rows are already in the right order"]
+
+  E --> G["Are the default 15-min sessions appropriate?"]
+  G -->|Yes| H["done!"]
+  G -->|No| I["set time_threshold (in seconds)"]
+
+  E --> J["Can multiple events share the same timestamp?"]
+  J -->|Yes| K["also use order"]
+  J -->|No| L["time alone is fine"]
+```
+
+```{mermaid}
+flowchart LR
+  M["Do you need group comparisons later?"]
+  M -->|Yes| N["keep grouping variable as a column (preserved automatically)"]
+  M -->|No| O["no extra steps"]
+```
+
+
+# References {.unnumbered}
+
+- Saqr, M., López-Pernas, S., Törmänen, T., Kaliisa, R., Misiejuk, K., & Tikka, S. (2025). Transition Network Analysis: A Novel Framework for Modeling, Visualizing, and Identifying the Temporal Patterns of Learners and Learning Processes. In *Proceedings of the 15th International Learning Analytics and Knowledge Conference (LAK '25)* (pp. 351--361). ACM. <https://doi.org/10.1145/3706468.3706513>
+- Tikka, S., López-Pernas, S., & Saqr, M. (2025). tna: An R Package for Transition Network Analysis. *Applied Psychological Measurement*. <https://doi.org/10.1177/01466216251348840>
+- Package website: <https://sonsoles.me/tna/>

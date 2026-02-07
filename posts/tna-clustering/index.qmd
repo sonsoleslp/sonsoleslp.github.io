@@ -1,0 +1,468 @@
+---
+title: "TNA Clustering: Discovering Latent Subgroups from Sequence Data"
+subtitle: "Companion Tutorial for Transition Network Analysis"
+date: "2026-02-07"
+author:
+  - name: Mohammed Saqr
+    url: https://saqr.me
+    affiliation: University of Eastern Finland
+  - name: Sonsoles López-Pernas
+    url: https://sonsoles.me
+    affiliation: University of Eastern Finland
+citation:
+   type: article
+   author:
+    - family: "Saqr"
+      given: "Mohammed"
+    - family: "López-Pernas"
+      given: "Sonsoles"
+categories:
+  - learning analytics
+  - tutorial
+  - R
+# engine: markdown
+warning: false
+message: false
+fig.align: center
+format:
+  html:
+    toc: true
+    toc-depth: 3
+    number-sections: true
+    code-fold: false
+    code-tools: true
+    theme: cosmo
+    self-contained: true
+execute:
+  warning: false
+  message: false
+knitr:
+  opts_chunk:
+    fig.width: 8
+    fig.height: 6
+    dpi: 600
+    comment: ""
+image: main.png
+
+---
+```{r, echo = FALSE}
+library(knitr)
+options(scipen = 999999999, digits = 2)
+knit_print.data.frame <- function (x, options, ...) {
+  rmarkdown::paged_table(x, options) |>
+    rmarkdown:::print.paged_df( )
+}
+ 
+print.tna_data <- function (x, data = "sequence", ...) 
+{
+  tna:::check_missing(x)
+  tna:::check_class(x, "tna_data")
+  data <- tna:::check_match(data, c("sequence", "meta", "long", 
+    "names"))
+  idx <- paste0(data, "_data")
+  rmarkdown::paged_table(x[[idx]] |> as.data.frame()) |>
+    rmarkdown:::print.paged_df( )
+}
+
+registerS3method("knit_print", "data.frame", knit_print.data.frame)
+```
+
+```{r}
+#| label: setup
+#| include: false
+library("tna")
+```
+
+# Introduction
+
+This tutorial covers **data-driven clustering** of temporal sequences using the `tna` package. It is a companion to the [main TNA tutorial](../tna-tutorial) and the [group comparison tutorial](../tna-group). We assume familiarity with the basics of building and analyzing a TNA model.
+
+When a meaningful grouping variable is available (e.g., achievement level, experimental condition), the [group tutorial](../tna-group) shows how to split data by that variable and compare group-specific models. But in many research settings, no such variable exists --- or the researcher suspects that the true structure of behavioral differences does not align with any available categorical variable. In these cases, **data-driven clustering** discovers naturally occurring subgroups directly from the sequence data, without imposing predefined categories.
+
+This tutorial demonstrates how to:
+
+1.  Cluster sequences based on structural dissimilarity.
+2.  Build group-specific TNA models from the discovered clusters.
+3.  Compare and visualize cluster-specific networks.
+4.  Validate cluster differences with permutation testing.
+5.  Assess within-cluster edge reliability with bootstrapping.
+6.  Choose an appropriate number of clusters.
+
+## Installation
+
+The `tna` package is the only package required. It provides all the functions needed for data preparation, model building, visualization, clustering, permutation testing, and bootstrapping.
+
+Install from CRAN:
+
+```{r}
+#| label: install-cran
+#| eval: false
+install.packages("tna")
+```
+
+Or install the development version from GitHub:
+
+```{r}
+#| label: install-github
+#| eval: false
+# install.packages("remotes")
+remotes::install_github("sonsoleslp/tna")
+```
+
+## Data Preparation
+
+We use the built-in `group_regulation_long` dataset, which contains coded collaborative regulation behaviors from student groups. The `prepare_data()` function converts this long-format event log into the structure required for TNA.
+
+```{r}
+#| label: prepare-data
+# Load the built-in collaborative regulation dataset
+data("group_regulation_long")
+
+# Convert long-format event log into TNA data
+prepared_data <- prepare_data(
+  group_regulation_long,
+  action = "Action",   # behavioral states (network nodes)
+  actor = "Actor",     # participant IDs (one sequence per actor)
+  time = "Time"        # timestamps (for ordering and session splitting)
+)
+
+# Build the aggregate TNA model (all sequences combined)
+model <- tna(prepared_data)
+```
+
+::: {.callout-tip collapse="true"}
+## `prepare_data()` Arguments
+
+| Argument | Description |
+|-------------------------------|----------------------------------------|
+| `action` | **(Required)** Column containing the events or states to model. These become the network nodes. |
+| `actor` | Column identifying who performed the action. Creates one sequence per actor. |
+| `time` | Column with timestamps. Sorts events and splits sequences at temporal gaps (default: 15 minutes). |
+| `order` | Numeric column for event ordering when timestamps are unavailable. |
+| `time_threshold` | Gap duration in seconds that starts a new session (default: `900`). |
+
+Any columns not specified as `action`, `actor`, `time`, or `order` are automatically preserved as metadata.
+:::
+
+::: {.callout-tip collapse="true"}
+## Other Supported Data Types
+
+This tutorial uses long-format event data, but `tna()` accepts several other input formats:
+
+| Input Format | Function | Description |
+|---------------------------|--------------------|-------------------------|
+| Long event log | `prepare_data()` then `tna()` | Timestamped events with actors |
+| Wide data frame | `tna(df)` | Rows = sequences, columns = time points |
+| Pre-computed matrix | `tna(mat)` | Square weight matrix with named rows and columns |
+| TraMineR sequence | `tna(seqobj)` | Object from `TraMineR::seqdef()` |
+| One-hot binary data | `import_onehot()` | Co-occurrence model from binary feature data |
+:::
+
+# Why Cluster?
+
+A single TNA model computed from all sequences describes the *average* transition dynamics across all individuals. But averages can mask substantial heterogeneity. If one subgroup of learners follows a strategic regulatory cycle (plan &rarr; monitor &rarr; adapt) while another subgroup is stuck in social loops (discuss &rarr; consensus &rarr; discuss), the aggregate model shows a blend of both patterns that accurately represents neither.
+
+Clustering addresses this by partitioning sequences into subgroups with distinct transition structures, allowing each cluster to be modeled separately. The result is a set of group-specific TNA models --- one per cluster --- that capture the actual behavioral patterns present in the data rather than an uninformative average.
+
+This is exploratory analysis: we let the data reveal structure rather than imposing predefined categories. The discovered clusters may correspond to meaningful behavioral profiles --- different learning strategies, different levels of engagement, different regulatory styles --- that would be invisible in an aggregate analysis.
+
+# Running `cluster_sequences()`
+
+The `cluster_sequences()` function takes a sequence data frame, computes pairwise dissimilarities between sequences, and partitions them into `k` groups:
+
+```{r}
+#| label: clustering
+# Partition sequences into 2 clusters based on pairwise dissimilarity
+clustering <- cluster_sequences(prepared_data$sequence_data, k = 2)
+print(clustering)
+```
+
+::: {.callout-tip collapse="true"}
+## How It Works
+
+The procedure has two steps:
+
+1.  **Compute pairwise dissimilarity** between all sequences using a string distance metric. Each pair of sequences receives a dissimilarity score reflecting how structurally different they are.
+2.  **Cluster** the dissimilarity matrix using the chosen algorithm and assign each sequence to one of `k` groups.
+
+| Argument | Description | Default |
+|-----------------------|-----------------------------|---------------------|
+| `data` | Sequence data frame (e.g., `prepared_data$sequence_data`) | --- |
+| `k` | Number of clusters | --- |
+| `dissimilarity` | Distance metric: `"hamming"`, `"lcs"`, `"cosine"`, `"jaccard"`, `"osa"`, etc. | `"hamming"` |
+| `method` | Clustering algorithm: `"pam"`, `"ward.D2"`, `"complete"`, `"average"`, etc. | `"pam"` |
+
+**Dissimilarity metrics:**
+
+-   `"hamming"` --- counts the number of positions where two sequences differ. Fast and interpretable; requires equal-length sequences.
+-   `"lcs"` --- longest common subsequence. Handles variable-length sequences and is sensitive to ordering.
+-   `"osa"` --- optimal string alignment. Allows insertions, deletions, and substitutions; flexible but slower.
+-   `"cosine"` / `"jaccard"` --- set-based metrics that compare state compositions regardless of order.
+
+**Clustering algorithms:**
+
+-   `"pam"` --- Partitioning Around Medoids. Robust to outliers; identifies a representative sequence (medoid) for each cluster.
+-   `"ward.D2"` --- Ward's hierarchical clustering. Minimizes within-cluster variance; produces compact clusters.
+-   `"complete"` / `"average"` --- other hierarchical linkage methods for different cluster shape assumptions.
+:::
+
+# Building Group TNA from Clusters
+
+The clustering result can be passed directly to `group_tna()`, which builds a separate TNA model for each cluster:
+
+Once clusters are identified, we pass the clustering result directly to `group_tna()`, which builds a separate TNA model for each cluster. We also rename the clusters to give them more descriptive labels.
+
+```{r}
+#| label: group-cluster
+# Build one TNA model per cluster and assign descriptive names
+gtna_clust <- group_tna(clustering)
+gtna_clust <- rename_groups(gtna_clust, c("Pattern A", "Pattern B"))
+```
+
+Plotting the cluster-specific models side by side reveals how the discovered subgroups differ in their transition structures:
+
+```{r}
+#| label: fig-cluster-networks
+#| fig-cap: "Transition networks by discovered cluster"
+#| fig-width: 8
+#| fig-height: 8
+#| classes: preview-image
+
+plot(gtna_clust, cut = 0.1, minimum = 0.05)
+```
+
+The summary provides network-level statistics for each cluster, including density, reciprocity, and the number of sequences assigned to each group:
+
+```{r, eval = F}
+summary(gtna_clust)
+```
+```{r, echo = F}
+#| label: cluster-summary
+summary(gtna_clust) |> dplyr::mutate_at(2:3, \(x) round(x,3))
+```
+
+# Comparing Clusters
+
+## Difference Network
+
+The difference plot highlights where the two clusters diverge. Edges are colored by direction: one color for transitions stronger in Pattern A, another for transitions stronger in Pattern B.
+
+```{r}
+#| label: fig-cluster-compare
+#| fig-cap: "Difference network between clusters"
+#| fig-width: 8
+#| fig-height: 8
+# Edges colored by which cluster has a stronger transition
+plot_compare(gtna_clust$`Pattern A`, gtna_clust$`Pattern B`, minimum = 0.01, cut = 0.1)
+```
+
+## Community Structure
+
+Community detection identifies groups of states that are more densely connected to each other than to the rest of the network. Comparing community structures across clusters reveals whether the modular organization of the process differs between subgroups:
+
+```{r}
+#| label: cluster-communities
+#| fig-cap: "Communities by cluster"
+#| fig-width: 6
+#| fig-height: 6
+#| layout-ncol: 2
+# Detect community structure within each cluster's network
+# igraph may override the `communities` function. That is why we use the prefix `tna::`
+comm_clust <- tna::communities(gtna_clust) 
+plot(comm_clust, cut = 0.1, minimum = 0.01)
+```
+
+## Centralities
+
+Centrality measures summarize the structural importance of each state within each cluster. Comparing centrality profiles across clusters identifies states that play different roles in different subgroups:
+
+```{r}
+#| label: fig-cluster-centralities
+#| fig-cap: "Centralities by cluster"
+# Compute and compare centrality measures across clusters
+cent_clust <- centralities(gtna_clust)
+plot(cent_clust)
+```
+
+# Permutation Test for Clusters {#sec-permutation}
+
+## Why Permutation Testing Is Essential for Clusters
+
+Permutation testing is particularly important for data-driven clusters. Unlike known groups (where group membership is defined independently of the transition data), clustering algorithms partition sequences *to maximize* between-group separation. Some degree of apparent difference is therefore guaranteed by construction. The permutation test provides the necessary corrective: by randomly reassigning sequences to groups while preserving internal sequential structure, it constructs the null distribution of differences expected under random partitioning. Only differences that exceed this null distribution constitute evidence of genuine structural divergence rather than algorithmic artifacts.
+
+The permutation approach preserves the temporal dependency structure that parametric tests on summary statistics necessarily violate, and provides a principled basis for distinguishing substantive cluster differences from stochastic variation (van Borkulo et al., 2023).
+
+```{r}
+#| label: cluster-permutation
+#| cache: true
+set.seed(265)  # for reproducibility
+# Test whether cluster differences exceed what random partitioning would produce
+perm_clust <- permutation_test(
+  gtna_clust$`Pattern A`, gtna_clust$`Pattern B`,
+  iter = 1000,  # number of random reassignments
+  measures = c("InStrength", "OutStrength", "Betweenness")
+)
+```
+
+## Results
+
+Filtering for p \< 0.05 identifies the transitions for which the observed cluster difference exceeds what would be expected under the null hypothesis:
+
+```{r}
+#| label: cluster-perm-results
+# Filter for statistically significant edges and sort by effect size
+sig_clust <- perm_clust$edges$stats[perm_clust$edges$stats$p_value < 0.05, ]
+sig_clust <- sig_clust[order(-abs(sig_clust$effect_size)), ]
+sig_clust
+```
+
+::: {.callout-tip collapse="true"}
+## Interpreting the Columns
+
+| Column | Meaning | Interpretation |
+|------------------|--------------------|----------------------------------|
+| `edge_name` | The transition (from &rarr; to) | Which behavioral transition is being tested |
+| `diff_true` | Observed difference (Pattern A minus Pattern B) | Direction and magnitude of the cluster difference |
+| `effect_size` | Difference / SD of permuted differences | Standardized effect size (analogous to Cohen's *d*). Values \> 0.5 moderate; \> 0.8 large |
+| `p_value` | Proportion of permutations as extreme as observed | Statistical significance. Values \< 0.05 are conventionally significant |
+:::
+
+## Visualization
+
+The permutation plot displays only the edges that reached statistical significance:
+
+```{r}
+#| label: fig-cluster-permutation
+#| fig-cap: "Significant differences between clusters"
+# Only edges with p < 0.05 are displayed
+plot(perm_clust, minimum = 0.01, cut = 0.1)
+```
+
+# Bootstrap Validation of Clusters {#sec-bootstrap}
+
+## Why Bootstrap Cluster Models?
+
+The same replicability concern that applies to any TNA model applies with particular force to cluster-specific models. Because cluster assignments are derived from the data itself, cluster-specific transition estimates are susceptible to overfitting: edges that appear in the point-estimate model for a given cluster may not survive resampling.
+
+Bootstrapping addresses this directly. By resampling sequences with replacement and reconstructing the transition matrix across a large number of iterations, the procedure generates empirical sampling distributions for each edge weight, thereby distinguishing transitions that are stable properties of the discovered pattern from those whose presence is contingent on the particular sample at hand (Saqr, Lopez-Pernas, & Tikka, 2025). Edges that do not consistently exceed a defined threshold are identified as non-significant, yielding a model in which every retained transition has demonstrated resampling support.
+
+::: callout-note
+## Permutation and Bootstrap: Complementary Confirmatory Roles
+
+| Method | Inferential Target | What It Confirms |
+|-----------------|-----------------------------|---------------------------|
+| **Permutation test** | Between-cluster differences | Whether observed differences exceed what would be expected under random cluster assignment |
+| **Bootstrap** | Within-cluster edge stability | Whether individual edges within each cluster model are replicable or sample-contingent |
+
+Neither test subsumes the other. Together, they provide a complete inferential framework: the bootstrap identifies which transitions reliably exist within each cluster, and the permutation test identifies which transitions reliably differ between clusters.
+:::
+
+## Running the Bootstrap
+
+We apply `bootstrap()` to each cluster model separately. Each bootstrap resamples the sequences assigned to that cluster and reconstructs the transition matrix, repeating 1,000 times to build empirical sampling distributions for each edge.
+
+```{r}
+#| label: bootstrap-clusters
+#| cache: true
+set.seed(265)  # for reproducibility
+# Bootstrap each cluster model to assess within-cluster edge stability
+boot_patA <- bootstrap(gtna_clust$`Pattern A`, iter = 1000, level = 0.05)
+boot_patB <- bootstrap(gtna_clust$`Pattern B`, iter = 1000, level = 0.05)
+```
+
+## Results
+
+An edge marked `sig = TRUE` appeared consistently across 1,000 resampled datasets; an edge marked `sig = FALSE` did not survive this replicability criterion:
+
+**Pattern A: significant edges**
+```{r}
+#| label: bootstrap-cluster-results-a
+#| fig-width: 6
+#| fig-height: 6
+# Edges that survived the bootstrap stability criterion for Pattern A
+boot_patA$summary[boot_patA$summary$sig == TRUE, ] 
+```
+**Pattern B: significant edges**
+```{r}
+#| label: bootstrap-cluster-results-b
+#| fig-width: 6
+#| fig-height: 6
+# Edges that survived the bootstrap stability criterion for Pattern B
+boot_patB$summary[boot_patB$summary$sig == TRUE, ] 
+```
+
+::: {.callout-tip collapse="true"}
+## Bootstrap Summary Columns
+
+| Column | Meaning |
+|----|----|
+| `from`, `to` | The transition being evaluated |
+| `mean` | Average edge weight across bootstrap resamples |
+| `ci_lower`, `ci_upper` | 95% confidence interval for the edge weight |
+| `sig` | `TRUE` if the edge demonstrated resampling stability |
+:::
+
+## Visualizing Bootstrapped Cluster Networks
+
+The plots below display only the edges that survived the bootstrap procedure --- the confirmed, replicable transition structure of each cluster:
+
+```{r}
+#| label: fig-bootstrap-clusters
+#| fig-cap: "Bootstrap-validated networks for each cluster"
+#| fig-width: 12
+#| fig-height: 6
+# Side-by-side: only edges that survived the bootstrap are displayed
+par(mfrow = c(1, 2))
+plot(boot_patA, cut = 0.1)
+plot(boot_patB, cut = 0.1)
+par(mfrow = c(1, 1))
+```
+
+# Choosing the Number of Clusters
+
+The choice of `k` is a substantive decision. There is no single "correct" number of clusters --- the goal is to find a solution where clusters have meaningfully different structures and each cluster is interpretable.
+
+A practical approach is to try several values and compare:
+
+```{r}
+#| label: choose-k
+#| eval: false
+# Try several values of k and compare cluster summaries
+for (k in 2:5) {
+  clust_k <- cluster_sequences(prepared_data$sequence_data, k = k)
+  gtna_k <- group_tna(clust_k)
+  cat("\n--- k =", k, "---\n")
+  print(summary(gtna_k))
+}
+```
+
+If increasing *k* only splits an existing cluster into two nearly identical subgroups, fewer clusters suffice. If a new *k* reveals a genuinely distinct behavioral pattern (e.g., a cluster with a strong plan &rarr; monitor &rarr; adapt cycle that was previously merged with a different pattern), the higher *k* may be warranted.
+
+::: {.callout-tip collapse="true"}
+## Clustering vs. Known Groups
+
+| Approach | When to Use | How |
+|------------------------|-------------------------------|-----------------|
+| **Known groups** | Pre-existing grouping variable | `group_tna(data, group = "Variable")` |
+| **Data-driven clusters** | No grouping variable, or exploring latent patterns | `cluster_sequences()` then `group_tna()` |
+
+These are complementary. Cluster for exploration, then validate against known variables. If clusters align with a known variable (e.g., high vs. low achievers), this provides convergent evidence. If they do not, the clusters may reveal behavioral dimensions that the known variable does not capture.
+:::
+
+# Summary
+
+This tutorial demonstrated a complete workflow for data-driven discovery of behavioral subgroups:
+
+1.  **Cluster** sequences with `cluster_sequences()` based on structural dissimilarity.
+2.  **Build** group-specific TNA models with `group_tna()` and visualize them.
+3.  **Compare** clusters with difference plots, community detection, and centrality profiles.
+4.  **Validate differences** with `permutation_test()` to confirm that cluster differences exceed what would be expected by chance.
+5.  **Validate edges** with `bootstrap()` to confirm that within-cluster transitions are replicable.
+6.  **Report** only edges and differences that survive the relevant inferential test.
+
+For group comparisons using known variables (e.g., achievement group, experimental condition), see the [group comparison tutorial](../tna-group/index.html).
+
+# References {.unnumbered}
+
+-   Tikka, S., Lopez-Pernas, S., & Saqr, M. (2025). tna: An R Package for Transition Network Analysis. *Applied Psychological Measurement*. <https://doi.org/10.1177/01466216251348840>
+-   Package website: <https://sonsoles.me/tna/>

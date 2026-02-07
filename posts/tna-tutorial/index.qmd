@@ -1,0 +1,887 @@
+---
+title: "An Updated Comprehensive Tutorial on Transition Network Analysis (TNA)"
+description: |
+    A modern approach to rigorous analysis of behavioral processes
+date: "2026-02-07"
+author:
+  - name: Mohammed Saqr
+    url: https://saqr.me
+    affiliation: University of Eastern Finland
+  - name: Sonsoles López-Pernas
+    url: https://sonsoles.me
+    affiliation: University of Eastern Finland
+citation:
+   type: article
+   author:
+    - family: "Saqr"
+      given: "Mohammed"
+    - family: "López-Pernas"
+      given: "Sonsoles"
+categories:
+  - learning analytics
+  - tutorial
+  - R
+# engine: markdown
+warning: false
+message: false
+fig.align: center
+format:
+  html:
+    toc: true
+    toc-depth: 3
+    number-sections: true
+    code-fold: false
+    code-tools: true
+    theme: cosmo
+    self-contained: true
+execute:
+  warning: false
+  message: false
+knitr:
+  opts_chunk:
+    fig.width: 8
+    fig.height: 6
+    dpi: 600
+    comment: ""
+image: fig-network-1.png
+---
+
+```{r, echo = FALSE}
+library(knitr)
+options(scipen = 999999999, digits = 2)
+knit_print.data.frame <- function (x, options, ...) {
+  rmarkdown::paged_table(x, options) |>
+    rmarkdown:::print.paged_df( )
+}
+ 
+print.tna_data <- function (x, data = "sequence", ...) 
+{
+  tna:::check_missing(x)
+  tna:::check_class(x, "tna_data")
+  data <- tna:::check_match(data, c("sequence", "meta", "long", 
+    "names"))
+  idx <- paste0(data, "_data")
+  rmarkdown::paged_table(x[[idx]] |> as.data.frame()) |>
+    rmarkdown:::print.paged_df( )
+}
+
+registerS3method("knit_print", "data.frame", knit_print.data.frame)
+```
+
+```{r}
+#| label: setup
+#| include: false
+library("tna")
+```
+
+# Introduction
+
+Transition Network Analysis (TNA) is a method for modeling temporal sequences as directed weighted networks. Each unique state (e.g., a learning behavior, an interaction type, or a regulatory action) becomes a node in the network, and each transition between states becomes a directed edge weighted by its estimated probability. TNA provides a rich analytical framework that encompasses visualization, pruning, pattern detection, centrality analysis, community detection, and bootstrapping for statistical inference.
+
+This tutorial demonstrates the complete TNA workflow using the `tna` R package (version `r packageVersion("tna")`), starting from raw long-format event logs --- the kind of data typically exported from log files, coded interaction data, or learning management systems. We use the built-in `group_regulation_long` dataset, which contains coded collaborative regulation behaviors from student groups.
+
+For **group comparisons and permutation testing**, see the companion tutorial: [TNA Group Analysis](../tna-group/index.html). For **data-driven clustering** of sequences into latent subgroups, see the [TNA Clustering tutorial](../tna-clustering/index.html).
+
+# Installation
+
+The `tna` package is the only package required for this tutorial. It provides all the functions needed for data preparation, model building, visualization, pruning, centrality analysis, community detection, bootstrapping, permutation testing, and sequence analysis --- no additional dependencies need to be loaded.
+
+Install the stable release from CRAN:
+
+```{r}
+#| label: install-cran
+#| eval: false
+install.packages("tna")
+```
+
+Alternatively, install the development version from GitHub to access the latest features:
+
+```{r}
+#| label: install-github
+#| eval: false
+# install.packages("remotes")  # if not already installed
+remotes::install_github("sonsoleslp/tna")
+```
+
+Once installed, load the package:
+
+```{r}
+#| label: load-tna
+#| eval: false
+library("tna")
+```
+
+# Getting Started with Long-Format Data
+
+The `tna` package includes `prepare_data()` which is a very powerful function that converts long-format event data into the structure required for TNA. `prepare_data()` handles many tedious issues under the hood and makes using TNA easy and straightforward and less error prone. It also handles ordering, session detection, and --- most importantly --- **preserves metadata columns** (like achievement group, gender, or course) so you can use them later for group comparisons without manual data wrangling.
+
+For the sake of this tutorial we will use the data set built into TNA but you can use any event data set that has actions, states or behaviors that are ordered or chronologically stored. Let's have a look at the data.
+
+```{r}
+#| label: load-data
+# Load the built-in dataset of coded collaborative regulation behaviors
+data("group_regulation_long")
+group_regulation_long
+```
+
+The `group_regulation_long` dataset has **`r format(nrow(group_regulation_long), big.mark = ",")` rows and `r ncol(group_regulation_long)` columns**. Each row is a single event: an action performed by an actor at a specific point in time, along with metadata columns like `Achiever` (High/Low achievement group).
+
+# Understanding `prepare_data()`
+
+The `prepare_data()` function is the bridge between your raw event data and TNA:
+
+```{r}
+#| label: prepare-data
+# Convert long-format event log into sequences for TNA
+prepared_data <- prepare_data(
+  group_regulation_long,
+  action = "Action",   # column with behavioral states (become network nodes)
+  actor = "Actor",     # column with participant IDs (one sequence per actor)
+  time = "Time"        # column with timestamps (for ordering and session splitting)
+)
+```
+
+## Arguments
+
+Each argument controls a different aspect of how the raw data is converted into sequences. The **action** argument defines the behaviors or events that serve as nodes in your network model. Without additional arguments, default processing treats all rows as one long continuous sequence. Including **actor** identifies specific participants and shapes the modeling on a per-person basis. This is essential for ensuring that transitions only occur between events from the same individual. The **time** argument uses timestamps to sort events chronologically and handles shuffled data frame rows.
+
+::: {.callout-tip collapse="true"}
+## `action` --- what happened
+
+The only argument the function technically requires. This is the name of the column that contains the events, states, or behaviors you want to model --- things like "Plan", "Monitor", "Discuss". These become the nodes in your network.
+
+```{r}
+#| label: action-only
+#| eval: false
+# Minimal call --- works, but probably not what you want
+prepared <- prepare_data(df, action = "Action")
+```
+
+If you call `prepare_data()` with just `action`, the function reads every row in the data frame from top to bottom and treats the whole thing as one long sequence. Row 1 transitions to row 2, row 2 transitions to row 3, and so on, all the way down. That means:
+
+-   Every person's events get chained together as if they were one continuous stream. The last event of student A transitions directly into the first event of student B, which makes no sense --- those two events have nothing to do with each other.
+-   The row order in your data frame is the sequence order. If your data is not sorted properly, the transitions will be wrong.
+-   There is no session splitting. If a student did something on Monday and something else on Thursday, those two events are treated as consecutive steps in the same sequence.
+
+For a classroom observation where one researcher coded one continuous stream of events in real time, this minimal call might actually be fine. But for most research data --- where you have multiple participants, timestamps, or natural breaks between sessions --- you need the other arguments.
+:::
+
+::: {.callout-tip collapse="true"}
+## `actor` --- who did it
+
+The name of the column identifying who performed the action: a student ID, a user ID, a group ID, whatever defines a unit of analysis. When you include `actor`, the function creates one sequence per actor instead of mashing everyone together.
+
+```{r}
+#| label: actor-arg
+#| eval: false
+prepared <- prepare_data(df, action = "Action", actor = "Actor")
+```
+
+This is the single most important argument after `action`. Without it, you get one sequence for the whole dataset. With it, you get one sequence per person (or per group, or per whatever your actor column represents). Almost every analysis needs this.
+
+The function sorts events within each actor by their row order. So if your data is already sorted chronologically within each actor, this is enough. If it is not sorted, you need `time` or `order` to fix that.
+:::
+
+::: {.callout-tip collapse="true"}
+## `time` --- when it happened
+
+The name of the column containing timestamps. This does two things:
+
+1.  **Sorts events in the right order.** Within each actor, events get sorted by their timestamp, so it does not matter if your data frame rows are shuffled.
+2.  **Splits sequences at gaps.** If two consecutive events from the same actor are more than 15 minutes apart (the default threshold), the function treats them as belonging to different sequences. A student who works from 9:00--9:30, takes a break, and comes back at 10:15 gets two separate sequences instead of one. This matters because a transition from the last event before a break to the first event after a break is not a real transition --- there is a gap in between where the process stopped.
+
+```{r}
+#| label: time-arg
+#| eval: false
+prepared <- prepare_data(df, action = "Action", actor = "Actor", time = "Time")
+```
+
+The 15-minute default works well for many learning analytics datasets, but your data may need something different. A chat conversation might need a 2-minute threshold. A longitudinal study with weekly sessions might need a 1-day threshold. You can change it with `time_threshold`:
+
+```{r}
+#| label: time-threshold
+#| eval: false
+# 10-minute gap starts a new sequence
+prepared <- prepare_data(
+  df, action = "Action", actor = "Actor",
+  time = "Time", time_threshold = 10 * 60
+)
+
+# 1-hour gap starts a new sequence
+prepared <- prepare_data(
+  df, action = "Action", actor = "Actor",
+  time = "Time", time_threshold = 60 * 60
+)
+```
+
+The value is in seconds, so multiply minutes by 60 or hours by 3600.
+:::
+
+::: {.callout-tip collapse="true"}
+## `order` --- what came first
+
+Sometimes your data does not have timestamps, but it does have a column that tells you the order of events --- a step number, a turn counter, a line number. The `order` argument tells the function to sort events within each actor by that column.
+
+```{r}
+#| label: order-arg
+#| eval: false
+prepared <- prepare_data(df, action = "Action", actor = "Actor", order = "step")
+```
+
+If both `time` and `order` are provided, data is sorted by `time` first with ties broken by `order`. This is useful when multiple events share the same timestamp and you need a secondary sort criterion.
+:::
+
+Any columns *not* specified as `action`, `actor`, `time`, or `order` are **automatically preserved as metadata**. The `Achiever` column (High/Low) is preserved and can be used later with `group_tna()` for group comparisons.
+
+## Inspecting the Prepared Data
+
+The output of `prepare_data()` is a list with three parts (sequence data, metadata, and the original long-format data) and will be the input that TNA uses to build the model for analysis.
+
+::: {.callout-tip collapse="true"}
+The first is the sequences in wide format — a data frame where each row is one sequence and each column is a position, so a sequence of length 7 sits in the first 7 columns and the rest are `NA`. The second is the metadata — a data frame with one row per sequence containing every column from your original data that you didn't assign to `action`, `actor`, `time`, or `order`, things like achievement level or experimental condition. This is how `group_tna()` knows which sequences belong to which group when you write `group_tna(prepared_data, group = "Achievement")`. The third is the original long-format data, sorted and tagged with sequence IDs, which functions like `plot_sequences()` and `compare_sequences()` go back to when they need event-level detail. The three parts share the same indexing: row 1 of the wide sequences, row 1 of the metadata, and all long-format rows tagged as sequence 1 all refer to the same actor or session. You can inspect each part with `print(prepared_data, data = "sequence")`, `print(prepared_data, data = "meta")`, and `print(prepared_data, data = "long")`. The whole point is that you run `prepare_data()` once and pass the result to everything else — `tna()`, `group_tna()`, `cluster_sequences()`, `plot_sequences()` — without reshaping anything again.
+:::
+
+```{r}
+#| label: inspect-prepared
+# View the wide-format sequence data (rows = sequences, columns = positions)
+print(prepared_data, data = "sequence")
+```
+
+```{r}
+#| label: inspect-meta
+# View the preserved metadata (e.g., Achiever group) for each sequence
+print(prepared_data, data = "meta")
+```
+
+::: {.callout-tip collapse="true"}
+## Other TNA Supported Data Types
+
+This tutorial uses long-format event data via `prepare_data()`, but `tna()` accepts several other input formats directly. You can choose whichever matches your data.
+
+
+For a complete tutorial on `prepare_data()` check our [newest tutorial](../tna-data/index.html)
+### Wide Data Frame
+
+Each row is one sequence; each column is a time point. Cell values are categorical state labels. `NA` values are permitted for variable-length sequences. The built-in `group_regulation` dataset is in this format.
+
+```{r}
+#| label: data-wide
+#| eval: false
+data("group_regulation")
+model <- tna(group_regulation)
+```
+
+If the data frame contains non-sequence columns (e.g., an ID or group variable), use the `cols` argument to select only the sequence columns:
+
+```{r}
+#| label: data-wide-cols
+#| eval: false
+model <- tna(group_regulation, cols = T1:T26)
+```
+
+### Pre-Computed Transition Matrix
+
+A square numeric matrix where element `[i, j]` is the weight of the transition from state `i` to state `j`. Row and column names define the state labels. This is useful when transition probabilities have been estimated externally or obtained from the literature.
+
+```{r}
+#| label: data-matrix
+#| eval: false
+mat <- matrix(
+  c(0.1, 0.6, 0.3,
+    0.4, 0.2, 0.4,
+    0.3, 0.3, 0.4),
+  nrow = 3, byrow = TRUE,
+  dimnames = list(c("A", "B", "C"), c("A", "B", "C"))
+)
+model <- tna(mat)
+
+# Optionally supply initial probabilities:
+model <- tna(mat, inits = c(A = 0.5, B = 0.3, C = 0.2))
+```
+
+### TraMineR Sequence Object (`stslist`)
+
+If you already work with the `TraMineR` package for sequence analysis, you can pass a sequence object created by `TraMineR::seqdef()` directly to `tna()`. The built-in `engagement` dataset is in this format.
+
+```{r}
+#| label: data-stslist
+#| eval: false
+data("engagement")
+class(engagement)  # "stslist" "data.frame"
+model <- tna(engagement)
+```
+
+### One-Hot Encoded Data
+
+Binary (0/1) data where each column is a feature and rows represent observations within windows. `import_onehot()` computes co-occurrence weights and returns a `tna` model directly.
+
+```{r}
+#| label: data-onehot
+#| eval: false
+model <- import_onehot(binary_data, feature1:feature6, window = "window_id")
+```
+
+### Summary
+
+| Input Format | Function | Description |
+|---------------------------|--------------------|-------------------------|
+| Long event log | `prepare_data()` then `tna()` | Timestamped events with actors --- the most common starting point |
+| Wide data frame | `tna(df)` | Rows = sequences, columns = time points |
+| Pre-computed matrix | `tna(mat)` | Square weight matrix with named rows and columns |
+| TraMineR sequence | `tna(seqobj)` | Object from `TraMineR::seqdef()` |
+| One-hot binary data | `import_onehot()` | Co-occurrence model from binary feature data |
+:::
+
+# Building the TNA Model
+
+With the prepared data in hand, we can now build a TNA model. The `tna()` function estimates a first-order Markov transition probability matrix from the sequences, along with initial state probabilities. This single call produces the core model object used by all subsequent analysis and visualization functions.
+
+```{r}
+#| label: build-model
+# Build the TNA model from the prepared sequence data
+model <- tna(prepared_data)
+```
+
+The resulting `model` object contains everything needed for analysis. You can access components with `$` if needed.
+
+::: {.callout-tip collapse="true"}
+## Exploring Model Components
+
+### `model$weights` --- Transition Probability Matrix
+
+Each cell `[i, j]` is the probability of transitioning from state `i` to state `j`. Rows sum to 1.
+
+```{r}
+#| label: model-weights
+round(model$weights, 3)
+```
+
+### `model$inits` --- Initial Probabilities
+
+The probability of starting in each state. In the network plot, these appear as the colored rim around each node.
+
+```{r}
+#| label: model-inits
+round(model$inits, 3)
+```
+
+### `model$labels` --- State Labels
+
+```{r}
+#| label: model-labels
+model$labels
+```
+
+| Component       | What it tells you                               |
+|-----------------|-------------------------------------------------|
+| `model$weights` | How likely each state-to-state transition is    |
+| `model$inits`   | Where the process typically starts              |
+| `model$labels`  | The names of each node in the network           |
+| `model$data`    | Internal sequence data (used for bootstrapping) |
+:::
+
+The `summary()` function provides an overview of the model, including the number of states, sequences, and key network-level statistics:
+
+```{r}
+#| label: model-summary
+summary(model)
+```
+
+# Visualizations
+
+## Transition Network Plot
+
+The core visualization. Nodes represent states, arrows represent transitions (thicker = higher probability), and the colored rim shows initial probability.
+
+```{r}
+#| label: fig-network
+#| fig-cap: "Transition network plot"
+#| fig-width: 8
+#| fig-height: 8
+#| classes: preview-image
+# minimum: hide edges below 0.05; cut: fade edges below 0.1
+plot(model, minimum = 0.05, cut = 0.1)
+```
+
+::: {.callout-tip collapse="true"}
+## Key parameters for `plot()`
+
+| Parameter | What it does |
+|--------------------------------|----------------------------------------|
+| `minimum` | Edges with weight below this value are hidden entirely but are retained in all analysis. |
+| `cut` | Edges with weight below this value appear faded/thinner |
+| `edge.label.position` | Position of edge labels along the arrow (0 = start, 1 = end) |
+| `edge.label.cex` | Size of edge labels |
+:::
+
+::: {.callout-tip collapse="true"}
+## Histogram of Edge Weights
+
+Shows the distribution of all transition probabilities. Useful for choosing a pruning threshold.
+
+```{r}
+#| label: fig-hist
+#| fig-cap: "Distribution of transition probabilities"
+hist(model)
+```
+:::
+
+## Frequency Distribution of States
+
+How often each state appears in the data (raw frequency, not transition probability):
+
+```{r}
+#| label: fig-frequencies
+#| fig-cap: "Frequency of each regulatory state"
+# Bar chart of how often each state appears across all sequences
+plot_frequencies(model)
+```
+
+# Pruning
+
+A transition probability matrix is almost always fully connected --- every state has some nonzero probability of transitioning to every other state. Pruning removes weak edges so only the *backbone* remains, making the network more readable. However, pruning is purely for visualization and interpretation; it does not affect the underlying model or any analytical results.
+
+The `prune()` function supports several methods. Below we demonstrate three common approaches: a fixed threshold, removing the lowest proportion, and the disparity filter (a statistically principled backbone extraction method).
+
+```{r}
+#| label: pruning-methods
+# Three pruning strategies for comparison
+pruned_threshold <- prune(model, method = "threshold", threshold = 0.05) # remove edges < 0.05
+pruned_lowest    <- prune(model, method = "lowest", lowest = 0.05)       # remove bottom 5%
+pruned_disparity <- prune(model, method = "disparity", level = 0.5)      # disparity filter
+```
+
+```{r}
+#| label: fig-pruned
+#| fig-cap: "Pruned network using the disparity filter"
+#| fig-width: 8
+#| fig-height: 8
+plot(pruned_disparity, cut = 0.1)
+```
+
+::: {.callout-tip collapse="true"}
+## Why Prune?
+
+Pruning is not necessary for any analysis --- all edges are retained internally regardless of pruning. Its purpose is to make the network visualization more interpretable by removing weak connections that contribute visual clutter without carrying substantive meaning. The `hist(model)` function (shown above) helps identify a sensible threshold by revealing the distribution of edge weights.
+
+Use `pruning_details()` to inspect what was removed, and `deprune()` to restore the original model.
+:::
+
+::: {.callout-tip collapse="true"}
+## Choosing a Pruning Method
+
+| Method | Logic | Best for |
+|-----------------------|--------------------|-----------------------------|
+| `"threshold"` | Remove edges below a fixed weight | Simple; check `hist(model)` first |
+| `"lowest"` | Remove the bottom X% of edges | Fixed proportion of the network |
+| `"disparity"` | Disparity filter (Serrano et al., 2009) | Statistically principled backbone |
+| `"bootstrap"` | Remove non-significant edges | Data-driven pruning via bootstrap |
+
+Use `pruning_details()` to inspect what was removed, and `deprune()` to restore the original.
+:::
+
+# Patterns: Cliques
+
+A clique is a fully connected subnetwork where every state has strong mutual transitions to every other state in the group. Cliques reveal self-reinforcing behavioral loops --- for example, a "plan -> monitor -> adapt -> plan" cycle where each state frequently transitions to each of the others.
+
+We search for cliques of increasing size (dyads, triads, quads). As clique size increases, we lower the threshold because fully mutual connections among more states become increasingly unlikely.
+
+```{r}
+#| label: cliques-compute
+# Find cliques of size 2, 3, and 4 with decreasing thresholds
+cliques_of_two   <- cliques(model, size = 2, threshold = 0.1)   # dyads
+cliques_of_three <- cliques(model, size = 3, threshold = 0.05)  # triads
+cliques_of_four  <- cliques(model, size = 4, threshold = 0.03)  # quads
+```
+
+```{r}
+#| label: cliques-print
+print(cliques_of_two)
+print(cliques_of_three)
+print(cliques_of_four)
+```
+
+::: {.callout-tip collapse="true"}
+## Why Identify Cliques?
+
+Cliques identify subsets of states that form tightly coupled cycles. These are substantively interesting because they represent behavioral patterns that sustain themselves: once a learner enters a clique, the transition probabilities keep them cycling within it. A clique among regulatory states (e.g., Plan, Monitor, Adapt) may indicate an effective self-regulation cycle, whereas a clique among social states may indicate off-task loops.
+:::
+
+::: {layout-ncol="3"}
+```{r}
+#| label: fig-cliques-dyads
+#| fig-cap: "Dyad cliques"
+#| fig-width: 5
+#| fig-height: 5
+plot(cliques_of_two)
+```
+
+```{r}
+#| label: fig-cliques-triads
+#| fig-cap: "Triad cliques"
+#| fig-width: 5
+#| fig-height: 5
+plot(cliques_of_three)
+```
+
+```{r}
+#| label: fig-cliques-quads
+#| fig-cap: "Quadruple cliques"
+#| fig-width: 5
+#| fig-height: 5
+plot(cliques_of_four)
+```
+:::
+
+::: {.callout-tip collapse="true"}
+## Parameters and Interpretation
+
+| Parameter | Meaning |
+|---------------------------------------|---------------------------------|
+| `size` | Number of states in each clique (2 = dyads, 3 = triads, etc.) |
+| `threshold` | Minimum transition probability for each edge in the clique |
+| `sum_weights` | If `TRUE`, rank cliques by the sum of edge weights |
+
+Lower the threshold as clique size increases, since fully mutual connections become increasingly unlikely.
+:::
+
+# Centralities
+
+Centrality measures reduce each state to a single number capturing its structural importance in the network. Different measures answer different questions: which states are the most common destinations (InStrength), the most common origins (OutStrength), the key bridges connecting other states (Betweenness), or the most influential in spreading activation (Diffusion).
+
+## Node-Level Measures
+
+The `centralities()` function computes a suite of node-level centrality measures for the model. The resulting plot shows each measure as a separate panel, allowing comparison of which states are most central under each definition.
+
+```{r}
+#| label: centralities
+# Compute all centrality measures for each state
+Centralities <- centralities(model)
+```
+
+```{r}
+#| label: fig-centralities
+#| fig-cap: "Centrality measures for each state"
+plot(Centralities)
+```
+
+::: {.callout-tip collapse="true"}
+## What Each Centrality Measure Tells You
+
+| Measure | Interpretation |
+|---------------------------|---------------------------------------------|
+| **OutStrength** | Total outgoing weight. Frequent *origin* state. |
+| **InStrength** | Total incoming weight. "Attractor" in the process. |
+| **ClosenessIn / ClosenessOut** | Reachability from/to other states. |
+| **Closeness** | Overall connectedness. |
+| **Betweenness** | Bridge/bottleneck between other states. |
+| **BetweennessRSP** | Robust betweenness via randomized shortest paths. |
+| **Diffusion** | Spread of activation through the network. |
+| **Clustering** | Whether neighbors are also connected to each other. |
+
+Customize with `measures`, `loops = TRUE`, or `normalize = TRUE`.
+:::
+
+## Edge-Level Measures: Edge Betweenness
+
+While node centrality summarizes the importance of individual states, edge betweenness identifies the most critical *transitions* in the network --- the connections that serve as bridges between different parts of the process. Transitions with high edge betweenness lie on many shortest paths and therefore play a key structural role.
+
+```{r}
+#| label: edge-betweenness
+# Compute edge betweenness for all transitions
+Edge_betweenness <- betweenness_network(model)
+```
+
+```{r}
+#| label: fig-edge-betweenness
+#| fig-cap: "Edge betweenness network"
+#| fig-width: 8
+#| fig-height: 8
+plot(Edge_betweenness, cut = 0.1)
+```
+
+# Community Detection
+
+Communities are groups of states that are more densely connected to each other than to the rest of the network. Unlike cliques (which require every pair to be mutually connected), community detection uses modularity-based algorithms to reveal the modular structure and functional subsystems within the transition network.
+
+The `communities()` function applies a community detection algorithm and assigns each state to a community. The resulting plot colors nodes by their community membership.
+
+```{r}
+#| label: communities
+# Detect communities using the default algorithm (leading eigenvector)
+comms <- communities(model)
+print(comms)
+```
+
+```{r}
+#| label: fig-communities
+#| fig-cap: "Community structure of the transition network"
+#| fig-width: 8
+#| fig-height: 8
+plot(comms, cut = 0.1)
+```
+
+::: {.callout-tip collapse="true"}
+## Choosing the Detection Algorithm
+
+Use the `methods` parameter (plural --- you can run several at once):
+
+```{r}
+#| label: communities-methods
+#| eval: false
+communities(model, methods = "leading_eigen")   # default
+communities(model, methods = "walktrap")         # random walk based
+communities(model, methods = "fast_greedy")      # modularity optimization
+communities(model, methods = c("leading_eigen", "walktrap", "fast_greedy"))
+```
+
+| Method            | Logic                                                |
+|-------------------|------------------------------------------------------|
+| `"leading_eigen"` | Leading eigenvector of the modularity matrix         |
+| `"walktrap"`      | Random walks; nodes visited together belong together |
+| `"fast_greedy"`   | Greedy modularity optimization                       |
+| `"spinglass"`     | Spin glass model for fine-grained structure          |
+| `"infomap"`       | Description length minimization for directed flow    |
+:::
+
+# Bootstrapping
+
+## Why Bootstrap?
+
+The transition probabilities estimated by `tna()` are descriptive estimates derived from a particular sample of sequences. Without further validation, there is no basis for determining which of these estimates reflect stable properties of the underlying process and which are artifacts of sampling variability. A transition probability of 0.12 may represent a genuine, recurrent pathway --- or it may be an unstable estimate that would shift substantially had a different set of sequences been observed.
+
+Bootstrapping addresses this directly by resampling sequences with replacement and reconstructing the transition matrix across a large number of iterations, the procedure generates empirical sampling distributions for each edge weight. This distinguishes transitions that are stable properties of the underlying process from those whose presence is contingent on the particular sample at hand. Edges that do not consistently exceed a defined threshold or that deviate beyond an acceptable consistency range are identified as non-significant, yielding a model in which every retained transition has demonstrated resampling support (Saqr, Lopez-Pernas, & Tikka, 2025).
+
+The bootstrap is therefore not an optional diagnostic --- it is a confirmatory step that determines whether the network structure warrants substantive interpretation.
+
+```{r}
+#| label: bootstrap
+#| cache: true
+set.seed(265)  # for reproducibility
+# Resample sequences 1000 times and assess edge stability
+boot <- bootstrap(model, iter = 1000, level = 0.05)
+```
+
+::: {.callout-tip collapse="true"}
+## Bootstrap Arguments
+
+| Argument            | Default         | Meaning                        |
+|---------------------|-----------------|--------------------------------|
+| `iter`              | 1000            | Number of bootstrap resamples  |
+| `level`             | 0.05            | Significance level             |
+| `method`            | `"stability"`   | `"stability"` or `"threshold"` |
+| `consistency_range` | `c(0.75, 1.25)` | Range for consistency check    |
+:::
+
+## Results
+
+The bootstrap summary reports each edge's observed weight, confidence interval, and whether it survived the stability criterion:
+
+```{r}
+#| label: bootstrap-summary
+# Extract the bootstrap summary table
+boot_df <- boot$summary
+boot_df
+```
+
+::: {.callout-tip collapse="true"}
+## Summary Column Definitions
+
+| Column | Meaning |
+|----|----|
+| `from`, `to` | Source and target state |
+| `weight` | Original observed transition probability |
+| `p_value` | Proportion of inconsistent resamples |
+| `sig` | Whether the edge is significant at the chosen level |
+| `cr_lower`, `cr_upper` | Consistency range bounds |
+| `ci_lower`, `ci_upper` | Bootstrap confidence interval bounds |
+:::
+
+Filtering for significant edges only shows the transitions that constitute the replicable backbone of the network:
+
+```{r}
+#| label: bootstrap-filter
+# Keep only edges that survived the bootstrap and sort by weight
+sig_edges <- boot_df[boot_df$sig == TRUE, ]
+sig_edges <- sig_edges[order(-sig_edges$weight), ]
+sig_edges
+```
+
+## Bootstrapped Network
+
+The plot below displays only the edges that survived the bootstrap procedure --- each retained transition appeared consistently across 1,000 resampled datasets. Edges absent from this plot were present in the original model but failed to demonstrate resampling stability, and should not be treated as reliable features of the network.
+
+```{r}
+#| label: fig-bootstrap
+#| fig-cap: "Bootstrap-significant network"
+#| fig-width: 8
+#| fig-height: 8
+plot(boot, cut = 0.1)
+```
+
+::: {.callout-tip collapse="true"}
+## Interpretation
+
+-   **Significant edges** (`sig = TRUE`): appeared consistently across bootstrap resamples. These transitions are stable properties of the data and warrant substantive interpretation.
+-   **Non-significant edges** (`sig = FALSE`): unstable under resampling. Their presence in the original model may reflect sampling noise rather than a genuine transition pathway.
+-   **Narrow confidence intervals**: the edge weight is precisely estimated. **Wide confidence intervals**: substantial uncertainty remains, even if the edge reached significance.
+-   **Practical implication**: report and interpret only the bootstrap-validated network. Conclusions drawn from non-validated edges risk being non-replicable.
+:::
+
+# Centrality Stability
+
+
+Centrality measures are among the most frequently interpreted yet least frequently validated quantities in network-based analyses. When a researcher reports that "Monitor has the highest betweenness centrality," this claim is meaningful only if that ranking is a stable structural property of the network rather than an artifact of the particular sample. A centrality ordering that deteriorates rapidly under modest data reduction does not constitute a reliable finding; it constitutes a point estimate whose apparent precision is an artifact of the full-sample computation.
+
+The case-dropping bootstrap addresses this directly. The procedure systematically removes increasing proportions of cases (sequences), recomputes centrality at each step, and quantifies the degree to which the original ranking is preserved through the **Correlation Stability (CS) coefficient** (Epskamp, Borsboom, & Fried, 2018). The CS coefficient represents the maximum proportion of cases that can be dropped while maintaining a correlation of at least 0.7 with the original centrality ordering.
+
+| CS Coefficient | Interpretation |
+|-------------------------------------|-----------------------------------|
+| **\>= 0.7** | Excellent --- centrality rankings are robust and can be interpreted with confidence |
+| **0.5 -- 0.7** | Acceptable --- rankings are reasonably stable but should be interpreted with some caution |
+| **\< 0.5** | Poor --- rankings are unreliable and should not serve as the basis for substantive conclusions |
+
+A CS coefficient below 0.5 indicates that the centrality ordering is not sufficiently stable to support claims about which states are "most central" or "most important." In such cases, the appropriate response is to collect additional data or to refrain from interpreting centrality rankings altogether.
+
+```{r}
+#| label: centrality-stability
+#| cache: true
+# Case-dropping bootstrap to assess stability of centrality rankings
+Centrality_stability <- estimate_centrality_stability(model)
+```
+
+```{r}
+#| label: fig-centrality-stability
+#| fig-cap: "Centrality stability across case-dropping proportions"
+plot(Centrality_stability)
+```
+
+The plot shows the average correlation between centrality rankings computed from the full dataset and rankings computed after dropping increasing proportions of cases. A line that remains high (near 1.0) across a wide range of dropped proportions indicates that the centrality ranking is a robust structural property. A line that drops steeply indicates instability.
+
+# Bonus: Sequence Analysis
+
+The sections above all work with the transition network, where each edge represents how often one state follows another across all sequences. Sequence analysis works with the raw sequences directly, before they get collapsed into a transition matrix. This provides a complementary perspective: visualizing the full temporal unfolding of individual sequences and the overall distribution of states across sequence positions.
+
+## Sequence Plots
+
+The sequence index plot shows each individual sequence as a horizontal bar, with colors representing states at each position. This reveals patterns in sequence length, composition, and ordering that the transition matrix alone cannot capture.
+
+```{r}
+#| label: fig-sequences-index
+#| fig-cap: "Sequence index plot --- each row is one sequence"
+# Each row is one sequence; colors represent states at each position
+plot_sequences(prepared_data)
+```
+
+The distribution plot aggregates across all sequences and shows, at each position, the proportion of sequences in each state:
+
+```{r}
+#| label: fig-sequences-dist
+#| fig-cap: "State distribution across sequence positions"
+# Proportion of each state at each sequence position
+plot_sequences(prepared_data, type = "distribution")
+```
+
+## Simulating Sequences
+
+Generate synthetic sequences from the fitted model via Markov simulation:
+
+```{r}
+#| label: simulate
+# Generate 500 synthetic sequences of up to 20 steps from the fitted model
+simulated <- simulate(model, nsim = 500, max_len = 20)
+simulated[1:10, 1:10]
+```
+
+::: {.callout-tip collapse="true"}
+## Why Simulate?
+
+-   **Model checking**: compare simulated vs. real data structure
+-   **Power analysis**: how many sequences to detect a given effect?
+-   **Teaching**: generate data with known properties
+:::
+
+## Converting to igraph
+
+If you want to perform analyses beyond the built-in functions, you can convert the TNA model to an `igraph` object and use the full suite of graph-theoretic tools available in that package.
+
+```{r}
+#| label: igraph-convert
+library(igraph)
+# Resolve namespace conflict: igraph::communities() masks tna::communities()
+communities <- tna::communities
+
+# Convert TNA model to igraph object for access to igraph's full toolkit
+g <- as.igraph(model)
+cat("Clustering coefficient:", transitivity(g), "\n")
+cat("Diameter:", diameter(g), "\n")
+cat("PageRank:\n")
+print(round(page_rank(g)$vector, 4))
+```
+
+# Complete Workflow at a Glance
+
+```{r}
+#| label: workflow
+#| eval: false
+library("tna")
+my_data <- read.csv("your_data.csv")
+
+prepared <- prepare_data(
+  my_data,
+  action = "event",
+  actor = "user_id",
+  time = "timestamp",
+  time_threshold = 900
+)
+# -- Model -----------------------------------------------------------------
+model <- tna(prepared)
+
+# -- Visualize -------------------------------------------------------------
+plot(model, minimum = 0.05, cut = 0.1)
+hist(model)
+plot_frequencies(model)
+
+# -- Prune -----------------------------------------------------------------
+pruned <- prune(model, method = "disparity", level = 0.5)
+plot(pruned, cut = 0.1)
+
+# -- Cliques ---------------------------------------------------------------
+plot(cliques(model, size = 2, threshold = 0.1))
+plot(cliques(model, size = 3, threshold = 0.05))
+
+# -- Centralities ----------------------------------------------------------
+plot(centralities(model), cut = 0.1)
+plot(betweenness_network(model), cut = 0.1)
+
+# -- Communities -----------------------------------------------------------
+plot(communities(model, methods = "leading_eigen"), cut = 0.1)
+
+# -- Bootstrap -------------------------------------------------------------
+set.seed(265)
+boot <- bootstrap(model, iter = 1000, level = 0.05)
+plot(boot, cut = 0.1)
+
+# -- Centrality stability --------------------------------------------------
+plot(estimate_centrality_stability(model))
+
+# -- Sequences -------------------------------------------------------------
+plot_sequences(prepared)
+simulated <- simulate(model, nsim = 500, max_len = 20)
+boot_cliq <- bootstrap_cliques(model, threshold = 0.1, size = 2, iter = 1000)
+```
+
+ 
+
+# References {.unnumbered}
+
+-   Saqr, M., López-Pernas, S., Törmänen, T., Kaliisa, R., Misiejuk, K., & Tikka, S. (2025). Transition Network Analysis: A Novel Framework for Modeling, Visualizing, and Identifying the Temporal Patterns of Learners and Learning Processes. In *Proceedings of the 15th International Learning Analytics and Knowledge Conference (LAK '25)* (pp. 351–361). ACM. <https://doi.org/10.1145/3706468.3706513>
+
+-   Tikka, S., López-Pernas, S., & Saqr, M. (2025). tna: An R Package for Transition Network Analysis. *Applied Psychological Measurement*. <https://doi.org/10.1177/01466216251348840>
+
+-   Saqr, M., López-Pernas, S., & Tikka, S. (2025). Mapping Relational Dynamics with Transition Network Analysis: A Primer and Tutorial. In M. Saqr & S. López-Pernas (Eds.), *Advanced Learning Analytics Methods: AI, Precision and Complexity*. Springer. <https://lamethods.org/book2/chapters/ch15-tna/ch15-tna.html>
+
+-   Saqr, M., López-Pernas, S., & Tikka, S. (2025). Capturing The Breadth and Dynamics of the Temporal Processes with Frequency Transition Network Analysis: A Primer and Tutorial. In M. Saqr & S. López-Pernas (Eds.), *Advanced Learning Analytics Methods: AI, Precision and Complexity*. Springer. <https://lamethods.org/book2/chapters/ch16-ftna/ch16-ftna.html>
+
+-   López-Pernas, S., Tikka, S., & Saqr, M. (2025). Mining Patterns and Clusters with Transition Network Analysis: A Heterogeneity Approach. In M. Saqr & S. López-Pernas (Eds.), *Advanced Learning Analytics Methods: AI, Precision and Complexity*. Springer. <https://lamethods.org/book2/chapters/ch17-tna-clusters/ch17-tna-clusters.html>
+

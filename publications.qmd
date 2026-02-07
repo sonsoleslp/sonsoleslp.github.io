@@ -270,5 +270,3 @@ for (p in 1:length(pub_types)) {
 
 ```
 
-
-

@@ -39,6 +39,7 @@ jobs:
           R -e 'install.packages("rmarkdown")'
           R -e 'install.packages("janitor")'
           R -e 'install.packages("dplyr")'
+          R -e 'install.packages("tna")'
           R -e 'install.packages("rio")'
           sh curl.sh
 
