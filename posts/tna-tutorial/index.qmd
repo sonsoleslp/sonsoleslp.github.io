@@ -75,7 +75,7 @@ library("tna")
 
 # Introduction
 
-Transition Network Analysis (TNA) has emerged as a methodologically rigorous framework for modeling sequential processes as weighted directed networks, combining the temporal resolution of stochastic process mining with the structural analytic capacity of graph theory (Saqr, López-Pernas, Törmänen, et al., 2025). Since its introduction at LAK 2025, the framework has expanded rapidly: it now supports multiple model types—first-order Markov models, frequency-based transition models, co-occurrence.
+Transition Network Analysis (TNA) has emerged as a methodologically rigorous framework for modeling behavioral processes as weighted directed networks, combining the temporal resolution of stochastic process mining with the structural analytic capacity of graph theory (Saqr, López-Pernas, Törmänen, et al., 2025). Since its introduction at LAK 2025, the framework has expanded rapidly: it now supports multiple model types—first-order Markov models, frequency-based transition models, co-occurrence.
 
 In TNA, each unique state (e.g., a learning behavior, an interaction type, or a regulatory action) becomes a node in the network, and each transition between states becomes a directed edge weighted by its estimated probability. TNA provides a rich analytical framework that encompasses visualization, pruning, pattern detection, centrality analysis, community detection, and bootstrapping for statistical inference.
 

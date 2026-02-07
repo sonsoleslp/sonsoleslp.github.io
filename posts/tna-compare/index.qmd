@@ -74,7 +74,7 @@ library("tna")
 
 # Introduction
 
-Transition Network Analysis (TNA) has emerged as a methodologically rigorous framework for modeling sequential processes as weighted directed networks, combining the temporal resolution of stochastic process mining with the structural analytic capacity of graph theory (Saqr, López-Pernas, Törmänen, et al., 2025). Since its introduction at LAK 2025, the framework has expanded rapidly: it now supports multiple model types—first-order Markov models, frequency-based transition models, co-occurrence.
+Transition Network Analysis (TNA) has emerged as a methodologically rigorous framework for modeling behavioral processes as weighted directed networks, combining the temporal resolution of stochastic process mining with the structural analytic capacity of graph theory (Saqr, López-Pernas, Törmänen, et al., 2025). Since its introduction at LAK 2025, the framework has expanded rapidly: it now supports multiple model types—first-order Markov models, frequency-based transition models, co-occurrence.
 
 This is the companion tutorial to the [main TNA tutorial](../tna-tutorial/index.html), focusing on **pairwise model comparison** using the `compare()` function. We assume you have already worked through the main tutorial and understand the basics of building a TNA model.
 
