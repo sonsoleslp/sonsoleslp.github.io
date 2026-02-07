@@ -1,0 +1,689 @@
+---
+title: "TNA Model Comparison: A Complete Guide to `compare()` Metrics"
+date: "2026-02-06"
+author:
+  - name: Mohammed Saqr
+    url: https://saqr.me
+    affiliation: University of Eastern Finland
+  - name: Sonsoles López-Pernas
+    url: https://sonsoles.me
+    affiliation: University of Eastern Finland
+citation:
+   type: article
+   author:
+    - family: "Saqr"
+      given: "Mohammed"
+    - family: "López-Pernas"
+      given: "Sonsoles"
+categories:
+  - tutorial
+  - R
+# engine: markdown
+warning: false
+message: false
+fig.align: center
+format:
+  html:
+    toc: true
+    toc-depth: 3
+    number-sections: true
+    code-fold: false
+    code-tools: false
+    theme: cosmo
+    self-contained: true
+execute:
+  warning: false
+  message: false
+knitr:
+  opts_chunk:
+    fig.width: 8
+    fig.height: 6
+    dpi: 600
+    comment: ""
+image: main.png
+---
+
+```{r, echo = FALSE}
+library(knitr)
+options(scipen = 999999999, digits = 2)
+knit_print.data.frame <- function (x, options, ...) {
+  rmarkdown::paged_table(x, options) |>
+    rmarkdown:::print.paged_df( )
+}
+ 
+print.tna_data <- function (x, data = "sequence", ...) 
+{
+  tna:::check_missing(x)
+  tna:::check_class(x, "tna_data")
+  data <- tna:::check_match(data, c("sequence", "meta", "long", 
+    "names"))
+  idx <- paste0(data, "_data")
+  rmarkdown::paged_table(x[[idx]] |> as.data.frame()) |>
+    rmarkdown:::print.paged_df( )
+}
+
+registerS3method("knit_print", "data.frame", knit_print.data.frame)
+```
+
+```{r}
+#| label: setup
+#| include: false
+library("tna")
+```
+
+# Introduction
+
+
+This is the companion tutorial to the [main TNA tutorial](../tna-tutorial/index.html), focusing on **pairwise model comparison** using the `compare()` function. We assume you have already worked through the main tutorial and understand the basics of building a TNA model.
+
+A single TNA model describes one set of transition dynamics. But most research questions involve *two* models --- high vs. low achievers, pre vs. post intervention, treatment vs. control. Visual inspection can suggest differences, but cannot tell you whether a 3% weight gap is meaningful or which of two nearly-equal edges is actually stronger. `compare()` quantifies what changed, by how much, and where, so that you can report precise differences rather than eyeball them.
+
+This tutorial works through comparison at three levels of resolution:
+
+1. **Network-level properties** --- are the two networks structurally different? One might be denser, more centralized, or more reciprocal, and these whole-network differences would be invisible if you only compared individual edges.
+2. **Edge-level differences** --- which specific transitions changed and by how much? This includes the raw difference matrix, 16 per-edge metrics, summary statistics that condense overall divergence into reportable numbers, and visualizations (heatmaps, scatterplots, density plots).
+3. **Centrality** --- did states change roles? A state that acts as a bridge in one group may be peripheral in the other, and centrality differences reveal these structural role shifts.
+
+The `compare()` function returns seven components that map onto these levels:
+
+| Component | What It Contains |
+|---|---|
+| `$network_metrics` | 13 network-level structural properties |
+| `$difference_matrix` | Element-wise difference ($x - y$) |
+| `$edge_metrics` | 16 edge-level comparison metrics |
+| `$summary_metrics` | 22 aggregate divergence metrics across 5 categories |
+| `$matrices` | The (optionally scaled) input matrices |
+| `$centrality_differences` | Per-node centrality differences across 9 measures |
+| `$centrality_correlations` | Cross-model centrality rank correlations |
+
+**Companion tutorials:**
+
+- [TNA Main Tutorial](../tna-tutorial/index.html) --- building and analyzing a single TNA model
+- [TNA Group Analysis](../tna-group/index.html) --- group comparisons, permutation testing, and bootstrapping
+- [TNA Clustering](../tna-clustering/index.html) --- data-driven clustering of sequences
+- [Preparing Data for TNA](../tna-data/index.html) --- data import and preparation
+
+## Installation
+
+The `tna` package is the only package required. Install from CRAN:
+
+```{r}
+#| label: install-cran
+#| eval: false
+install.packages("tna")
+```
+
+Or install the development version from GitHub:
+
+```{r}
+#| label: install-github
+#| eval: false
+# install.packages("remotes")
+remotes::install_github("sonsoleslp/tna")
+```
+
+# Setup: Building Two Models to Compare
+
+We use the built-in `group_regulation_long` dataset and build group-level TNA models for High and Low achievers. This gives us two models with different transition structures.
+
+```{r}
+#| label: prepare-data
+# Load the built-in collaborative regulation dataset
+data("group_regulation_long")
+
+# Convert to sequences, preserving the Achiever metadata column
+prepared_data <- prepare_data(
+  group_regulation_long,
+  action = "Action",
+  actor = "Actor",
+  time = "Time"
+)
+
+# Build separate TNA models for High and Low achievers
+gtna <- group_tna(prepared_data, group = "Achiever")
+```
+
+The simplest way to call `compare()` is to pass the group TNA object directly. If the object has more than two groups, it picks the first two by default. You can also specify which groups to compare with `i` and `j` (by name or index):
+
+```{r}
+#| label: compare
+# Pass the group object directly; compares the first two groups
+comp <- compare(gtna)
+```
+
+::: {.callout-tip collapse="true"}
+## Selecting Specific Groups or Comparing Individual Models
+
+```{r}
+#| label: compare-other
+#| eval: false
+# Pick specific groups by name or index
+comp <- compare(gtna, i = "High", j = "Low")
+
+# Compare two individual tna models directly
+comp <- compare(gtna$High, gtna$Low)
+```
+:::
+
+# Network Plots
+
+Plotting the two networks side by side is the fastest way to get a sense of whether they look similar or different --- before committing to any specific metric. Look for which transitions are strongest, which states are most active, and whether the two networks share the same dominant pathways. The `minimum` argument hides edges below a threshold, and `cut` fades edges below a second threshold, so the dominant structure stands out.
+
+```{r}
+#| label: fig-group-networks
+#| fig-cap: "Transition networks for High and Low achievers"
+#| fig-width: 6
+#| fig-height: 6
+#| layout-ncol: 2
+# Side-by-side network plots
+plot(gtna, minimum = 0.05, cut = 0.1)
+```
+
+## Difference Network
+
+Side-by-side plots make it hard to compare specific edges because the eye has to jump between two layouts. `plot_compare()` solves this by overlaying both networks on the same node positions, coloring each edge by which group uses it more. This makes it immediately clear which behavioral pathways distinguish the groups.
+
+```{r}
+#| label: fig-plot-compare
+#| fig-cap: "Network overlay: edges colored by direction of difference"
+#| fig-width: 8
+#| fig-height: 8
+# Overlay both networks; edge color shows direction of difference
+plot_compare(gtna$High, gtna$Low, minimum = 0.01)
+```
+
+# Network Metrics {#sec-network-metrics}
+
+Before looking at individual edges, it is worth checking whether the two networks differ in overall structure. Two models can share similar average edge weights yet differ in how connections are distributed --- one may route behavior through a few hub states (high centralization) while the other spreads transitions more evenly (high density, low centralization). `$network_metrics` reports 13 structural properties for each model, side by side, so you can spot these architectural differences early.
+
+```{r}
+#| label: network-metrics
+# 13 network-level properties, one value per model
+comp$network_metrics
+```
+
+| Metric | What It Tells You |
+|---|---|
+| **Node Count** | Whether both models have the same state space |
+| **Edge Count** | Network complexity; more edges = more interconnected |
+| **Network Density** | Proportion of possible edges that exist |
+| **Mean Distance** | Average shortest path length between states |
+| **Mean/SD Out-Strength** | Average and variability of outgoing transition weight per node |
+| **Mean/SD In-Strength** | Average and variability of incoming transition weight per node |
+| **Mean/SD Out-Degree** | Average and variability of outgoing connections per node |
+| **Centralization (Out/In-Degree)** | Whether connections are dominated by a few hub nodes (higher = more hub-like) |
+| **Reciprocity** | Proportion of mutual (bidirectional) edges |
+
+If two models differ on these properties, it tells you the groups have fundamentally different behavioral architectures --- not just different strengths on the same pathways.
+
+# Edge-Level Comparisons
+
+Network metrics tell you *whether* the two networks differ structurally, but not *where*. If density or centralization differs, you need to know which specific transitions drive that difference. The `compare()` output includes three edge-level components for this: a difference matrix, a table of 16 per-edge metrics, and 22 summary metrics that aggregate across all edges.
+
+## The Difference Matrix
+
+The `$difference_matrix` is the starting point for edge-level comparison --- it shows exactly which transitions are stronger in which group. The matrix is the element-wise subtraction ($x_{ij} - y_{ij}$), so positive values are transitions stronger in the first model and negative values are transitions stronger in the second. For example, if high achievers transition from Planning to Monitoring more often while low achievers cycle within Monitoring, those cells will have opposite signs. Rows are source states, columns are target states.
+
+```{r}
+#| label: difference-matrix
+# Element-wise: High minus Low (positive = stronger in High)
+comp$difference_matrix
+```
+
+## Difference Heatmap
+
+With many states, scanning a numeric matrix for patterns is slow. The heatmap makes structure visible: clusters of same-colored cells in a row mean one group has systematically stronger outgoing transitions from that state, which indicates the state plays a different role for each group. Isolated intense cells point to specific transitions that distinguish the groups.
+
+```{r}
+#| label: fig-heatmap-diff
+#| fig-cap: "Difference heatmap: blue = stronger in High, red = stronger in Low"
+#| fig-width: 8
+#| fig-height: 7
+# Difference heatmap
+plot(comp, type = "heatmap", population = "difference")
+```
+
+## Scatterplot
+
+The heatmap and difference matrix show *which* edges differ, but not whether the two models agree on the overall pattern of transition weights. The scatterplot answers that: each point is one edge, plotted by its weight in both models, and the correlation coefficient printed on the plot quantifies overall linear agreement. A Pearson $r$ above 0.9 indicates that both models prioritize the same transitions --- they share the same structure at different intensities. A low $r$ means the models disagree about which transitions matter. Points far from the diagonal are the specific edges driving any disagreement; these are candidates for closer inspection in the edge metrics table.
+
+```{r}
+#| label: fig-scatter-pearson
+#| fig-cap: "Edge weight scatterplot with Pearson correlation"
+#| fig-width: 7
+#| fig-height: 7
+# Each point is one edge; diagonal = identical weights
+plot(comp, type = "scatterplot", method = "pearson")
+```
+
+::: {.callout-tip collapse="true"}
+## Scatterplot with Other Correlation Methods
+
+The `method` argument can also be `"spearman"` (rank-based, robust to outliers), `"kendall"` (concordance-based), or `"distance"` (detects nonlinear relationships).
+
+```{r}
+#| label: fig-scatter-spearman
+#| fig-cap: "Edge weight scatterplot with Spearman rank correlation"
+#| fig-width: 6
+#| fig-height: 4
+# Rank-based correlation, robust to outliers
+plot(comp, type = "scatterplot", method = "spearman")
+```
+:::
+
+## Weight Density
+
+The difference matrix and scatterplot compare individual edges, but two models can have similar edge-by-edge profiles yet distribute their total probability very differently. The density plot reveals this: if one group concentrates its weight on a few dominant transitions (peaked, long-tailed distribution) while the other spreads weight more evenly (flatter distribution), the groups differ in behavioral diversity even when their strongest edges agree. This connects directly to the CV Ratio in the summary metrics --- a ratio far from 1.0 means unequal dispersion, and the density plot shows where that dispersion difference comes from.
+
+```{r}
+#| label: fig-weight-density
+#| fig-cap: "Distribution of edge weights in both models"
+#| fig-width: 6
+#| fig-height: 4
+# Overlay of weight distributions
+plot(comp, type = "weight_density")
+```
+
+::: {.callout-tip collapse="true"}
+## Summary of All Plot Options
+
+| `type` | `population` options | `method` options | What It Shows |
+|---|---|---|---|
+| `"heatmap"` | `"difference"`, `"x"`, `"y"` | --- | Edge weight matrices as color grids |
+| `"scatterplot"` | --- | `"pearson"`, `"spearman"`, `"kendall"`, `"distance"` | Edge weights plotted against each other |
+| `"centrality_heatmap"` | --- | --- | Centrality differences by state and measure |
+| `"weight_density"` | --- | --- | Overlaid weight distributions |
+
+All plot types accept `name_x` and `name_y` to label the two models in the plot.
+:::
+
+## Edge Metrics Table
+
+A raw difference of 0.05 between edges weighted 0.06 and 0.01 is a very different situation from the same 0.05 between edges weighted 0.50 and 0.45 --- the first is a fivefold change, the second is a 10% shift. The `$edge_metrics` table ($n^2$ rows, 16 columns) provides multiple ways to quantify each edge's difference so you can distinguish these cases. Sorting by `absolute_difference` identifies the transitions with the largest raw gaps; sorting by `relative_difference` or `similarity_strength_index` surfaces proportionally large changes that raw magnitude would miss. Here are the edges with the largest absolute differences:
+
+```{r}
+#| label: edge-metrics-top
+# Edges sorted by largest absolute difference
+edge_sorted <- comp$edge_metrics[order(-comp$edge_metrics$absolute_difference), ]
+edge_sorted[, c("source", "target", "weight_x", "weight_y",
+                        "raw_difference", "absolute_difference",
+                        "relative_difference", "rank_difference")]
+   
+```
+
+### Which Edge Metric for Which Question?
+
+| Question | Best Metric | Why |
+|---|---|---|
+| Which direction is the difference? | `raw_difference` | Preserves sign |
+| How large is the difference? | `absolute_difference` | Simple, interpretable |
+| Is this edge *proportionally* different? | `relative_difference` | Normalizes by magnitude |
+| How many times stronger? | `similarity_strength_index` | Multiplicative ratio |
+| What % change from baseline? | `difference_index` | Percentage change from model $y$ |
+| Did the edge change in *rank order*? | `rank_difference` | Ordinal, robust to outliers |
+| Is the edge at the same percentile? | `percentile_difference` | Distribution-based |
+| Proportional comparison with zeros? | `logarithmic_ratio` | Handles zeros gracefully |
+| Did relative position change? | `standardized_score_inflation` | Compares z-scores |
+
+::: {.callout-note collapse="true"}
+## Edge Metric Definitions
+
+**`raw_difference`**: $w^x_{ij} - w^y_{ij}$ --- the signed difference. Positive = stronger in model $x$.
+
+**`absolute_difference`**: $|w^x_{ij} - w^y_{ij}|$ --- unsigned magnitude of difference.
+
+**`squared_difference`**: $(w^x_{ij} - w^y_{ij})^2$ --- penalizes large differences disproportionately.
+
+**`relative_difference`**: $\frac{|w^x_{ij} - w^y_{ij}|}{w^x_{ij} + w^y_{ij}}$ --- normalized by combined magnitude. Range: $[0, 1]$. A difference of 0.01 between edges of weight 0.02 and 0.01 (relative = 0.33) is more meaningful than the same 0.01 between 0.50 and 0.49 (relative = 0.01).
+
+**`similarity_strength_index`**: $\frac{w^x_{ij}}{w^y_{ij}}$ --- multiplicative ratio. Value of 2.0 = edge is twice as strong in model $x$.
+
+**`difference_index`**: $\frac{w^x_{ij} - w^y_{ij}}{w^y_{ij}}$ --- percentage change from model $y$.
+
+**`rank_difference`**: $|\text{rank}(w^x_{ij}) - \text{rank}(w^y_{ij})|$ --- ordinal comparison regardless of absolute values.
+
+**`percentile_difference`**: $|F_x(w^x_{ij}) - F_y(w^y_{ij})|$ --- ECDF-based. Range: $[0, 1]$.
+
+**`logarithmic_ratio`**: $\log(1+w^x_{ij}) - \log(1+w^y_{ij})$ --- proportional comparison that handles zeros.
+
+**`standardized_weight_x` / `standardized_weight_y`**: Z-scores within each model: $z^x_{ij} = (w^x_{ij} - \bar{w}^x) / \sigma_{w^x}$.
+
+**`standardized_score_inflation`**: $z^x_{ij} / z^y_{ij}$ --- ratio of standardized weights.
+:::
+
+::: callout-warning
+## NaN and Inf Values in Edge Metrics
+
+Several metrics involve division and produce `NaN` or `Inf` when denominators are zero:
+
+- **`similarity_strength_index`** and **`difference_index`**: `Inf` when $w^y = 0$
+- **`standardized_score_inflation`**: `Inf` or `NaN` when $z^y = 0$
+- **`relative_difference`**: `NaN` when both weights are zero
+
+These occur for edges that exist in only one model. Filter before aggregation (e.g., `dplyr::filter(is.finite(similarity_strength_index))`).
+:::
+
+## Summary Metrics {#sec-summary-metrics}
+
+Edge-level metrics tell you about specific transitions, but a paper or presentation often needs a single number: "how different are these two networks?" The `$summary_metrics` table condenses all edge-level differences into 22 aggregate measures across 5 categories. You can report MAD or Bray-Curtis for overall magnitude, Pearson or Spearman for pattern similarity, or Jaccard and Dice for distributional overlap --- each captures a different aspect of divergence.
+
+```{r}
+#| label: summary-metrics
+# 22 aggregate metrics across 5 categories
+comp$summary_metrics
+```
+
+### Which Summary Metric for Which Research Question?
+
+| Research Question | Recommended Metrics | Why |
+|---|---|---|
+| How different are the models overall? | MAD, RMSD, Bray-Curtis | Intuitive, interpretable magnitudes |
+| Are differences concentrated or spread? | Compare MAD vs RMSD, Max Abs. Diff. | RMSD >> MAD = concentrated in few edges |
+| Do models share the same pattern? | Pearson, Spearman, Cosine | Pattern similarity, scale-invariant |
+| How similar are the weight distributions? | Jaccard, Dice, RV | Overlap-based, bounded [0,1] |
+| Is there a nonlinear relationship? | Distance correlation | Detects nonlinear dependencies |
+| As a percentage of baseline? | Rel. Mean Abs. Diff., Bray-Curtis | Normalized, percentage-like |
+| Is one model more heterogeneous? | CV Ratio | Relative dispersion comparison |
+| Do models agree on priority ordering? | Rank Agreement, Kendall | Ordinal, robust to outliers |
+
+::: {.callout-note collapse="true"}
+## Weight Deviations --- Formulas and Details (6 metrics)
+
+These metrics quantify the typical magnitude of edge-level differences.
+
+**Mean Abs. Diff.:**
+$$\text{MAD} = \frac{1}{n^2} \sum_{i,j} |w^x_{ij} - w^y_{ij}|$$
+The average absolute difference across all edges. Range: $[0, \infty)$. Value of 0 means identical models.
+
+**Median Abs. Diff.:** The median of $|w^x_{ij} - w^y_{ij}|$. More robust to outliers than the mean. If MAD $\gg$ median, a few edges dominate the overall difference.
+
+**RMS Diff.:**
+$$\text{RMSD} = \sqrt{\frac{1}{n^2} \sum_{i,j} (w^x_{ij} - w^y_{ij})^2}$$
+Penalizes large differences disproportionately. If RMSD $\gg$ MAD, the difference is concentrated in a few edges.
+
+**Max Abs. Diff.:**
+$$\max_{i,j} |w^x_{ij} - w^y_{ij}|$$
+The single largest edge difference --- a quick worst-case check.
+
+**Rel. Mean Abs. Diff.:**
+$$\frac{\text{MAD}}{\frac{1}{n^2} \sum_{i,j} |w^y_{ij}|}$$
+MAD as a proportion of the baseline weight magnitude. A value of 0.29 means the average edge differs by 29%.
+
+**CV Ratio:**
+$$\frac{\text{CV}(w^x)}{\text{CV}(w^y)} = \frac{\sigma_{w^x} / \bar{w}^x}{\sigma_{w^y} / \bar{w}^y}$$
+Compares relative dispersion. Value of 1.0 = same spread; > 1 = model $x$ more heterogeneous.
+:::
+
+::: {.callout-note collapse="true"}
+## Correlations --- Formulas and Details (4 metrics)
+
+These assess whether both models agree on the *pattern* of edge weights, independent of absolute magnitudes.
+
+**Pearson:**
+$$r = \frac{\sum (w^x_{ij} - \bar{w}^x)(w^y_{ij} - \bar{w}^y)}{\sqrt{\sum(w^x_{ij} - \bar{w}^x)^2 \cdot \sum(w^y_{ij} - \bar{w}^y)^2}}$$
+Linear correlation. Range: $[-1, 1]$. Sensitive to outliers.
+
+**Spearman:**
+$$\rho = 1 - \frac{6 \sum d^2_{ij}}{n^2(n^4 - 1)}$$
+Rank-based correlation, robust to outliers. Answers: "Do the models agree on which edges are strongest?"
+
+**Kendall:**
+$$\tau = \frac{C - D}{\binom{n^2}{2}}$$
+Concordance-based. More robust than Spearman for small samples and tied values.
+
+**Distance:** The distance correlation of Székely et al. (2007). Detects *nonlinear* dependencies. Range: $[0, 1]$. A value of 0 implies statistical independence.
+
+**Important:** Correlation $\neq$ agreement. Two models can correlate at $r = 0.99$ yet differ systematically. A uniformly scaled version of model $y$ gives perfect correlation but every edge weight is different. Always pair correlation metrics with deviation metrics (MAD, RMSD).
+:::
+
+::: {.callout-note collapse="true"}
+## Dissimilarities --- Formulas and Details (5 metrics)
+
+These quantify the *distance* between two models. Larger = more different.
+
+**Euclidean:**
+$$d_E = \sqrt{\sum_{i,j} (w^x_{ij} - w^y_{ij})^2}$$
+Straight-line distance. Sensitive to outlier edges.
+
+**Manhattan:**
+$$d_M = \sum_{i,j} |w^x_{ij} - w^y_{ij}|$$
+Sum of absolute differences (L1 norm). Less sensitive to outliers. Manhattan = $n^2 \times$ MAD.
+
+**Canberra:**
+$$d_C = \sum_{i,j} \frac{|w^x_{ij} - w^y_{ij}|}{|w^x_{ij}| + |w^y_{ij}|}$$
+Per-edge normalization before summing. Range: $[0, n^2]$.
+
+**Bray-Curtis:**
+$$d_{BC} = \frac{\sum |w^x_{ij} - w^y_{ij}|}{\sum (w^x_{ij} + w^y_{ij})}$$
+Proportion of total weight that differs. Range: $[0, 1]$. A value of 0.14 = 14% of weight is allocated differently.
+
+**Frobenius:**
+$$\|W^x - W^y\|_F = \sqrt{\sum_{i,j} (w^x_{ij} - w^y_{ij})^2}$$
+Matrix norm, divided by $\sqrt{n/2}$ for normalization.
+:::
+
+::: {.callout-note collapse="true"}
+## Similarities --- Formulas and Details (5 metrics)
+
+These quantify how *alike* two models are. Larger = more similar.
+
+**Cosine:**
+$$\cos(\theta) = \frac{\sum w^x_{ij} \cdot w^y_{ij}}{\sqrt{\sum (w^x_{ij})^2} \cdot \sqrt{\sum (w^y_{ij})^2}}$$
+Directional alignment. Range: $[-1, 1]$. Value of 1 = identical patterns regardless of scale.
+
+**Jaccard (weighted):**
+$$J = \frac{\sum \min(w^x_{ij}, w^y_{ij})}{\sum \max(w^x_{ij}, w^y_{ij})}$$
+Overlap relative to union. Range: $[0, 1]$. Sensitive to absolute differences.
+
+**Dice:**
+$$D = \frac{2 \sum \min(w^x_{ij}, w^y_{ij})}{\sum w^x_{ij} + \sum w^y_{ij}}$$
+Emphasizes shared elements. Mathematically: $D = 2J/(1+J)$.
+
+**Overlap:**
+$$O = \frac{\sum \min(w^x_{ij}, w^y_{ij})}{\min(\sum w^x_{ij}, \sum w^y_{ij})}$$
+Normalizes by the smaller total. Useful when models have very different total weight.
+
+**RV Coefficient:** Multivariate generalization of squared Pearson correlation for matrices (Robert & Escoufier, 1976). Range: $[0, 1]$. Considers full matrix structure.
+:::
+
+::: {.callout-note collapse="true"}
+## Pattern Similarities --- Details (2 metrics)
+
+**Rank Agreement:** Proportion of edge pairs where both models agree on relative ordering. Range: $[0, 1]$. Value of 1 = identical priority structure.
+
+**Sign Agreement:** Proportion of edges where the sign relative to the mean is the same. Range: $[0, 1]$. Value of 0.94 = 94% of edges are on the same side of their respective means.
+:::
+
+# Centrality {#sec-centrality}
+
+Network and edge metrics compare the *connections* between states. Centrality shifts the focus to the *states themselves*: did any state change its structural role between groups? A state that acts as a bridge (high betweenness) in one group may be peripheral in the other --- meaning the groups route their behavior through different hubs. A state that gains outstrength has become a more dominant launching point. `compare()` provides three centrality-related outputs: a table of per-node differences, a heatmap visualization, and cross-model correlations.
+
+## Centrality Differences
+
+To identify *which* states changed roles and *how*, check `$centrality_differences`. Each row is one state--measure combination, with columns for each model's value and their difference. A positive difference means the state has higher centrality in the first model; negative means higher in the second.
+
+```{r}
+#| label: centrality-differences
+# Centrality values and differences: 9 measures × 9 states = 81 rows
+comp$centrality_differences
+```
+
+The 9 centrality measures:
+
+| Measure | What It Captures |
+|---|---|
+| **OutStrength** | Total outgoing transition probability. Higher = stronger outgoing transitions |
+| **InStrength** | Total incoming transition probability. Higher = more frequently transitioned *to* |
+| **ClosenessIn** | How quickly a state can be reached from all others. Higher = more accessible |
+| **ClosenessOut** | How quickly all others can be reached from this state. Higher = better launching point |
+| **Closeness** | Combined in/out closeness. Higher = more central overall |
+| **Betweenness** | Shortest paths passing through the state. Higher = more of a bridge |
+| **BetweennessRSP** | Randomized shortest-path betweenness. Considers near-optimal paths too |
+| **Diffusion** | How broadly influence spreads from this state. Higher = more influential |
+| **Clustering** | Local clustering coefficient. Higher = neighbors tend to connect to each other |
+
+## Centrality Heatmap
+
+The heatmap maps all centrality differences at once. Rows (states) with consistently strong colors have changed roles across the board; isolated bright cells point to specific state--measure shifts. Each cell is one state--measure combination; the color intensity shows how large the difference is.
+
+```{r}
+#| label: fig-centrality-heatmap
+#| fig-cap: "Centrality differences: positive = higher in first model, negative = higher in second"
+#| fig-width: 6
+#| fig-height: 6
+# Heatmap of centrality differences across all states and measures
+plot(comp, type = "centrality_heatmap")
+```
+
+## Centrality Correlations
+
+The per-state differences show individual shifts, but you may also want to know whether the overall *hierarchy* of states is preserved. `$centrality_correlations` reports, for each centrality measure, the Pearson correlation of its values across states between the two models. High correlation means both groups agree on which states are important --- the same hierarchy at different magnitudes. Low correlation means the groups organize around different states entirely.
+
+```{r}
+#| label: centrality-correlations
+# How consistently do states maintain their centrality rankings?
+comp$centrality_correlations
+```
+
+- **High correlation** (e.g., OutStrength at `r round(comp$centrality_correlations$correlation[comp$centrality_correlations$centrality == "OutStrength"], 2)`) --- states keep similar structural roles in both models.
+- **Low correlation** (e.g., Betweenness at `r round(comp$centrality_correlations$correlation[comp$centrality_correlations$centrality == "Betweenness"], 2)`) --- structural roles are reshuffled. A state that acts as a bridge in one model may be peripheral in the other.
+
+When correlations are low, check `$centrality_differences` to see *which* states changed roles and *how*.
+
+# Scaling Options {#sec-scaling}
+
+The `scaling` argument in `compare()` transforms both matrices before comparison. This matters when comparing **different types of TNA models** that live on different scales --- for example, a relative (probability) TNA versus a frequency-based model, or an absolute TNA versus a fitted TNA. Raw values are not directly comparable in those cases, and scaling puts both matrices on a common footing.
+
+```{r}
+#| label: scaling-comparison
+# Compare raw vs minmax-scaled summary metrics side by side
+comp_raw <- compare(gtna, i = "High", j = "Low", scaling = "none")
+comp_minmax <- compare(gtna, i = "High", j = "Low", scaling = "minmax")
+
+# Merge for comparison
+merged <- merge(
+  comp_raw$summary_metrics,
+  comp_minmax$summary_metrics,
+  by = c("category", "metric"),
+  suffixes = c("_raw", "_minmax")
+)
+merged
+```
+
+The available scaling methods:
+
+| Method | Formula | Best For |
+|---|---|---|
+| `"none"` | No transformation (default) | Comparing models on the same scale (e.g., two relative TNA models) |
+| `"minmax"` | $\frac{w - \min(w)}{\max(w) - \min(w)}$ | Normalizing to $[0, 1]$; comparing models with different weight ranges (e.g., frequency vs. probability) |
+| `"rank"` | Min-max normalization of ranks | Ordinal comparison; robust to outliers and nonlinear relationships |
+| `"zscore"` | $\frac{w - \bar{w}}{\sigma_w}$ | Standardizing to mean 0, SD 1; comparing relative positions |
+| `"log"` | $\log(w)$ | Skewed distributions with strictly positive weights |
+| `"log1p"` | $\log(1 + w)$ | Skewed distributions that may include zeros (e.g., frequency models) |
+| `"softmax"` | $\frac{e^{w_i}}{\sum_j e^{w_j}}$ | Converting to probability-like scale; useful for frequency or absolute TNA models |
+| `"quantile"` | Empirical CDF via `stats::ecdf()` | Purely distributional comparison; fully nonparametric |
+
+::: callout-tip
+## When to Use Scaling
+
+**Use `"none"` (default) when:** Both models are on the same scale --- the most common scenario (e.g., comparing two relative TNA models from different groups or time periods).
+
+**Use scaling when:** You are comparing models of different types (e.g., a frequency TNA vs. a relative TNA, or an absolute TNA vs. a fitted TNA), where raw weights are on fundamentally different scales.
+:::
+
+::: callout-warning
+## Scaling Caveats
+
+- **`"zscore"`** produces negative values, which can cause errors in centrality computations that require non-negative weights.
+- **`"log"`** requires strictly positive weights (no zeros). Use `"log1p"` instead if your matrix contains zeros.
+- Scaling changes the *magnitude* of all downstream metrics. Summary metrics from scaled matrices are not directly comparable to those from unscaled matrices.
+:::
+
+# From Comparison to Significance {#sec-significance}
+
+`compare()` tells you *how much* two models differ, but not whether those differences are statistically significant. A difference of 0.05 in a transition probability could be real or could be sampling noise. The `permutation_test()` function tests this by randomly reassigning group labels thousands of times to build a null distribution.
+
+```{r}
+#| label: significance-example
+#| cache: true
+set.seed(265)
+# Permutation test: which differences exceed chance?
+perm <- permutation_test(gtna, iter = 500)
+
+# Significant edges
+perm_results <- perm[[1]]
+sig_edges <- perm_results$edges$stats[perm_results$edges$stats$p_value < 0.05, ]
+sig_edges[order(-abs(sig_edges$effect_size)), ]
+```
+
+The recommended workflow: use `compare()` to find *where* and *how much* models differ, then `permutation_test()` to check *which differences are statistically reliable*. See the [Group Analysis tutorial](../tna-group/index.html#sec-permutation) for full treatment of permutation testing and bootstrapping.
+
+::: callout-note
+## Magnitude ≠ Significance
+
+A large difference may not be significant if it falls within the range of chance variation. A small difference can be significant if the null distribution is tight. Always pair `compare()` with `permutation_test()` for inferential claims.
+:::
+
+# Quick Reference {#sec-reference}
+
+## Summary Metrics
+
+| Category | Metric | Range | Value When Identical |
+|---|---|---|---|
+| Weight Deviations | Mean Abs. Diff. | $[0, \infty)$ | 0 |
+| Weight Deviations | Median Abs. Diff. | $[0, \infty)$ | 0 |
+| Weight Deviations | RMS Diff. | $[0, \infty)$ | 0 |
+| Weight Deviations | Max Abs. Diff. | $[0, \infty)$ | 0 |
+| Weight Deviations | Rel. Mean Abs. Diff. | $[0, \infty)$ | 0 |
+| Weight Deviations | CV Ratio | $(0, \infty)$ | 1 |
+| Correlations | Pearson | $[-1, 1]$ | 1 |
+| Correlations | Spearman | $[-1, 1]$ | 1 |
+| Correlations | Kendall | $[-1, 1]$ | 1 |
+| Correlations | Distance | $[0, 1]$ | 1 |
+| Dissimilarities | Euclidean | $[0, \infty)$ | 0 |
+| Dissimilarities | Manhattan | $[0, \infty)$ | 0 |
+| Dissimilarities | Canberra | $[0, n^2]$ | 0 |
+| Dissimilarities | Bray-Curtis | $[0, 1]$ | 0 |
+| Dissimilarities | Frobenius | $[0, \infty)$ | 0 |
+| Similarities | Cosine | $[-1, 1]$ | 1 |
+| Similarities | Jaccard | $[0, 1]$ | 1 |
+| Similarities | Dice | $[0, 1]$ | 1 |
+| Similarities | Overlap | $[0, 1]$ | 1 |
+| Similarities | RV | $[0, 1]$ | 1 |
+| Pattern Similarities | Rank Agreement | $[0, 1]$ | 1 |
+| Pattern Similarities | Sign Agreement | $[0, 1]$ | 1 |
+
+## Edge Metrics
+
+| Metric | Range | Handles Zeros? | Preserves Sign? |
+|---|---|---|---|
+| `raw_difference` | $(-\infty, \infty)$ | Yes | Yes |
+| `absolute_difference` | $[0, \infty)$ | Yes | No |
+| `squared_difference` | $[0, \infty)$ | Yes | No |
+| `relative_difference` | $[0, 1]$ | NaN if both 0 | No |
+| `similarity_strength_index` | $(0, \infty)$ | Inf if $y = 0$ | No (ratio) |
+| `difference_index` | $(-\infty, \infty)$ | Inf if $y = 0$ | Yes |
+| `rank_difference` | $[0, n^2 - 1]$ | Yes | No |
+| `percentile_difference` | $[0, 1]$ | Yes | No |
+| `logarithmic_ratio` | $(-\infty, \infty)$ | Yes (via log1p) | Yes |
+| `standardized_weight_x` | $(-\infty, \infty)$ | Yes | Yes |
+| `standardized_weight_y` | $(-\infty, \infty)$ | Yes | Yes |
+| `standardized_score_inflation` | $(-\infty, \infty)$ | Inf/NaN if $z_y = 0$ | Yes |
+
+## Decision Guide
+
+| Goal | Metric(s) to Use |
+|---|---|
+| Quick overall similarity check | Pearson, Cosine, Bray-Curtis |
+| Identify the most different edges | Sort `edge_metrics` by `absolute_difference` |
+| Compare edge importance orderings | Spearman, Rank Agreement, `rank_difference` |
+| Check if structural roles changed | `centrality_correlations`, `centrality_differences` |
+| Assess global network structure | `network_metrics` (density, reciprocity, centralization) |
+| Statistical significance of differences | Pair with `permutation_test()` |
+
+# References {.unnumbered}
+
+- Tikka, S., López-Pernas, S., & Saqr, M. (2025). tna: An R Package for Transition Network Analysis. *Applied Psychological Measurement*. <https://doi.org/10.1177/01466216251348840>
+- Robert, P., & Escoufier, Y. (1976). A unifying tool for linear multivariate statistical methods: The RV-coefficient. *Journal of the Royal Statistical Society: Series C*, 25(3), 257--265.
+- Székely, G. J., Rizzo, M. L., & Bakirov, N. K. (2007). Measuring and testing dependence by correlation of distances. *The Annals of Statistics*, 35(6), 2769--2794.
+- Package website: <https://sonsoles.me/tna/>

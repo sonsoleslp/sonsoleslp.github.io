@@ -18,7 +18,6 @@ citation:
     - family: "López-Pernas"
       given: "Sonsoles"
 categories:
-  - learning analytics
   - tutorial
   - R
 # engine: markdown
@@ -31,7 +30,7 @@ format:
     toc-depth: 3
     number-sections: true
     code-fold: false
-    code-tools: true
+    code-tools: false
     theme: cosmo
     self-contained: true
 execute:
@@ -76,7 +75,10 @@ library("tna")
 
 # Introduction
 
-Transition Network Analysis (TNA) is a method for modeling temporal sequences as directed weighted networks. Each unique state (e.g., a learning behavior, an interaction type, or a regulatory action) becomes a node in the network, and each transition between states becomes a directed edge weighted by its estimated probability. TNA provides a rich analytical framework that encompasses visualization, pruning, pattern detection, centrality analysis, community detection, and bootstrapping for statistical inference.
+Transition Network Analysis (TNA) has emerged as a methodologically rigorous framework for modeling sequential processes as weighted directed networks, combining the temporal resolution of stochastic process mining with the structural analytic capacity of graph theory (Saqr, López-Pernas, Törmänen, et al., 2025). Since its introduction at LAK 2025, the framework has expanded rapidly: it now supports multiple model types—first-order Markov models, frequency-based transition models, co-occurrence
+
+
+In TNA, each unique state (e.g., a learning behavior, an interaction type, or a regulatory action) becomes a node in the network, and each transition between states becomes a directed edge weighted by its estimated probability. TNA provides a rich analytical framework that encompasses visualization, pruning, pattern detection, centrality analysis, community detection, and bootstrapping for statistical inference.
 
 This tutorial demonstrates the complete TNA workflow using the `tna` R package (version `r packageVersion("tna")`), starting from raw long-format event logs --- the kind of data typically exported from log files, coded interaction data, or learning management systems. We use the built-in `group_regulation_long` dataset, which contains coded collaborative regulation behaviors from student groups.
 

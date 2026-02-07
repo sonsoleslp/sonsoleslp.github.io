@@ -2,10 +2,11 @@
   {
     "listing": "/blog.html",
     "items": [
-      "/posts/tna-data/index.html",
       "/posts/tna-tutorial/index.html",
-      "/posts/tna-clustering/index.html",
+      "/posts/tna-data/index.html",
       "/posts/tna-group/index.html",
+      "/posts/tna-compare/index.html",
+      "/posts/tna-clustering/index.html",
       "/posts/visualization/index.html",
       "/posts/iglue/index.html",
       "/posts/vasstra/index.html",

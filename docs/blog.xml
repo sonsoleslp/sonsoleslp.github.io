@@ -9,33 +9,31 @@
 <link>https://sonsoleslp.github.io/blog.html</link>
 <atom:link href="https://sonsoleslp.github.io/blog.xml" rel="self" type="application/rss+xml"/>
 <description>Personal website of Sonsoles López Pernas</description>
-<generator>quarto-1.8.27</generator>
-<lastBuildDate>Sat, 07 Feb 2026 00:00:00 GMT</lastBuildDate>
+<generator>quarto-1.8.25</generator>
+<lastBuildDate>Fri, 06 Feb 2026 22:00:00 GMT</lastBuildDate>
 <item>
   <title>An Updated Comprehensive Tutorial on Transition Network Analysis (TNA)</title>
   <dc:creator>Sonsoles López-Pernas</dc:creator>
   <dc:creator>Mohammed Saqr</dc:creator>
   <link>https://sonsoleslp.github.io/posts/tna-tutorial/</link>
   <description><![CDATA[ A modern approach to rigorous analysis of behavioral processes ]]></description>
-  <category>learning analytics</category>
   <category>tutorial</category>
   <category>R</category>
   <guid>https://sonsoleslp.github.io/posts/tna-tutorial/</guid>
-  <pubDate>Sat, 07 Feb 2026 00:00:00 GMT</pubDate>
+  <pubDate>Fri, 06 Feb 2026 22:00:00 GMT</pubDate>
   <media:content url="https://sonsoleslp.github.io/posts/tna-tutorial/fig-network-1.png" medium="image" type="image/png" height="144" width="144"/>
 </item>
 <item>
-  <title>TNA Clustering: Discovering Latent Subgroups from Sequence Data</title>
+  <title>TNA Data Preparation: A Comprehensive Guide to prepare_data()</title>
   <dc:creator>Sonsoles López-Pernas</dc:creator>
   <dc:creator>Mohammed Saqr</dc:creator>
-  <link>https://sonsoleslp.github.io/posts/tna-clustering/</link>
-  <description><![CDATA[ This tutorial covers <strong>data-driven clustering</strong> of temporal sequences using the <code>tna</code> package. It is a companion to the <a href="../tna-tutorial">main TNA tutorial</a> and the <a href="../tna-group">group comparison tutorial</a>. We assume familiarity with the basics of building and analyzing a TNA model. ]]></description>
-  <category>learning analytics</category>
+  <link>https://sonsoleslp.github.io/posts/tna-data/</link>
+  <description><![CDATA[ Before building a TNA model, your raw event data needs to be reshaped into sequences. The <code>prepare_data()</code> function does this in one call. For most data, the call is three arguments and you are done. ]]></description>
   <category>tutorial</category>
   <category>R</category>
-  <guid>https://sonsoleslp.github.io/posts/tna-clustering/</guid>
-  <pubDate>Sat, 07 Feb 2026 00:00:00 GMT</pubDate>
-  <media:content url="https://sonsoleslp.github.io/posts/tna-clustering/main.png" medium="image" type="image/png" height="129" width="144"/>
+  <guid>https://sonsoleslp.github.io/posts/tna-data/</guid>
+  <pubDate>Thu, 05 Feb 2026 22:00:00 GMT</pubDate>
+  <media:content url="https://sonsoleslp.github.io/posts/tna-data/main.png" medium="image" type="image/png" height="72" width="144"/>
 </item>
 <item>
   <title>TNA Group Analysis: Comparing Groups and Discovering Clusters</title>
@@ -43,12 +41,35 @@
   <dc:creator>Mohammed Saqr</dc:creator>
   <link>https://sonsoleslp.github.io/posts/tna-group/</link>
   <description><![CDATA[ This is the companion tutorial to the <a href="../tna-tutorial/index.html">main TNA tutorial</a>, focusing on <strong>group comparisons, permutation testing, bootstrapping, and data-driven clustering</strong>. We assume you have already worked through the main tutorial and understand the basics of building and analyzing a TNA model. ]]></description>
-  <category>learning analytics</category>
   <category>tutorial</category>
   <category>R</category>
   <guid>https://sonsoleslp.github.io/posts/tna-group/</guid>
-  <pubDate>Sat, 07 Feb 2026 00:00:00 GMT</pubDate>
+  <pubDate>Thu, 05 Feb 2026 22:00:00 GMT</pubDate>
   <media:content url="https://sonsoleslp.github.io/posts/tna-group/preview.png" medium="image" type="image/png" height="89" width="144"/>
+</item>
+<item>
+  <title>TNA Model Comparison: A Complete Guide to compare() Metrics</title>
+  <dc:creator>Sonsoles López-Pernas</dc:creator>
+  <dc:creator>Mohammed Saqr</dc:creator>
+  <link>https://sonsoleslp.github.io/posts/tna-compare/</link>
+  <description><![CDATA[ This is the companion tutorial to the <a href="../tna-tutorial/index.html">main TNA tutorial</a>, focusing on <strong>pairwise model comparison</strong> using the <code>compare()</code> function. We assume you have already worked through the main tutorial and understand the basics of building a TNA model. ]]></description>
+  <category>tutorial</category>
+  <category>R</category>
+  <guid>https://sonsoleslp.github.io/posts/tna-compare/</guid>
+  <pubDate>Thu, 05 Feb 2026 22:00:00 GMT</pubDate>
+  <media:content url="https://sonsoleslp.github.io/posts/tna-compare/main.png" medium="image" type="image/png" height="144" width="144"/>
+</item>
+<item>
+  <title>TNA Clustering: Discovering Latent Subgroups from Sequence Data</title>
+  <dc:creator>Sonsoles López-Pernas</dc:creator>
+  <dc:creator>Mohammed Saqr</dc:creator>
+  <link>https://sonsoleslp.github.io/posts/tna-clustering/</link>
+  <description><![CDATA[ This tutorial covers <strong>data-driven clustering</strong> of temporal sequences using the <code>tna</code> package. It is a companion to the <a href="../tna-tutorial">main TNA tutorial</a> and the <a href="../tna-group">group comparison tutorial</a>. We assume familiarity with the basics of building and analyzing a TNA model. ]]></description>
+  <category>tutorial</category>
+  <category>R</category>
+  <guid>https://sonsoleslp.github.io/posts/tna-clustering/</guid>
+  <pubDate>Thu, 05 Feb 2026 22:00:00 GMT</pubDate>
+  <media:content url="https://sonsoleslp.github.io/posts/tna-clustering/main.png" medium="image" type="image/png" height="129" width="144"/>
 </item>
 <item>
   <title>Data visualization for research</title>
@@ -58,7 +79,7 @@
   <category>visualization</category>
   <category>ggplot2</category>
   <guid>https://sonsoleslp.github.io/posts/visualization/</guid>
-  <pubDate>Wed, 30 Jul 2025 00:00:00 GMT</pubDate>
+  <pubDate>Tue, 29 Jul 2025 21:00:00 GMT</pubDate>
 </item>
 <item>
   <title>IGLUE New funding from Erasmus+</title>
@@ -68,7 +89,7 @@
   <category>funding</category>
   <category>game-based learning</category>
   <guid>https://sonsoleslp.github.io/posts/iglue/</guid>
-  <pubDate>Mon, 30 Sep 2024 00:00:00 GMT</pubDate>
+  <pubDate>Sun, 29 Sep 2024 21:00:00 GMT</pubDate>
 </item>
 <item>
   <title>The VaSSTra method</title>
@@ -78,7 +99,7 @@
   <category>funding</category>
   <category>game-based learning</category>
   <guid>https://sonsoleslp.github.io/posts/vasstra/</guid>
-  <pubDate>Sat, 17 Aug 2024 00:00:00 GMT</pubDate>
+  <pubDate>Fri, 16 Aug 2024 21:00:00 GMT</pubDate>
 </item>
 <item>
   <title>Alluvial plots for transition analysis</title>
@@ -89,7 +110,7 @@
   <category>visualization</category>
   <category>tutorial</category>
   <guid>https://sonsoleslp.github.io/posts/alluvial/</guid>
-  <pubDate>Mon, 22 Jul 2024 00:00:00 GMT</pubDate>
+  <pubDate>Sun, 21 Jul 2024 21:00:00 GMT</pubDate>
 </item>
 <item>
   <title>Book: Learning Analytics Methods and Tutorials</title>
@@ -100,7 +121,7 @@
   <category>tutorial</category>
   <category>R</category>
   <guid>https://sonsoleslp.github.io/posts/labook/</guid>
-  <pubDate>Mon, 15 Jul 2024 00:00:00 GMT</pubDate>
+  <pubDate>Sun, 14 Jul 2024 21:00:00 GMT</pubDate>
 </item>
 <item>
   <title>Funding from the Research Council Finland!</title>
@@ -111,7 +132,7 @@
   <category>game-based learning</category>
   <category>learning analytics</category>
   <guid>https://sonsoleslp.github.io/posts/cretic/</guid>
-  <pubDate>Thu, 13 Jun 2024 00:00:00 GMT</pubDate>
+  <pubDate>Wed, 12 Jun 2024 21:00:00 GMT</pubDate>
   <media:content url="https://sonsoleslp.github.io/posts/cretic/cretic.png" medium="image" type="image/png" height="86" width="144"/>
 </item>
 <item>
@@ -122,20 +143,7 @@
   <category>funding</category>
   <category>learning analytics</category>
   <guid>https://sonsoleslp.github.io/posts/isila/</guid>
-  <pubDate>Sat, 01 Jul 2023 00:00:00 GMT</pubDate>
-</item>
-<item>
-  <title>TNA Data Preparation: A Comprehensive Guide to prepare_data()</title>
-  <dc:creator>Sonsoles López-Pernas</dc:creator>
-  <dc:creator>Mohammed Saqr</dc:creator>
-  <link>https://sonsoleslp.github.io/posts/tna-data/</link>
-  <description><![CDATA[ Before building a TNA model, your raw event data needs to be reshaped into sequences. The <code>prepare_data()</code> function does this in one call. For most data, the call is three arguments and you are done. ]]></description>
-  <category>learning analytics</category>
-  <category>tutorial</category>
-  <category>R</category>
-  <guid>https://sonsoleslp.github.io/posts/tna-data/</guid>
-  <pubDate>Sat, 07 Feb 2026 09:38:10 GMT</pubDate>
-  <media:content url="https://sonsoleslp.github.io/posts/tna-data/main.png" medium="image" type="image/png" height="72" width="144"/>
+  <pubDate>Fri, 30 Jun 2023 21:00:00 GMT</pubDate>
 </item>
 </channel>
 </rss>

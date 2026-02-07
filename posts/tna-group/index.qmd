@@ -1,7 +1,7 @@
 ---
 title: "TNA Group Analysis: Comparing Groups and Discovering Clusters"
 subtitle: "Companion Tutorial for Transition Network Analysis"
-date: "2026-02-07"
+date: "2026-02-06"
 author:
   - name: Mohammed Saqr
     url: https://saqr.me
@@ -17,7 +17,6 @@ citation:
     - family: "López-Pernas"
       given: "Sonsoles"
 categories:
-  - learning analytics
   - tutorial
   - R
 # engine: markdown
@@ -30,7 +29,7 @@ format:
     toc-depth: 3
     number-sections: true
     code-fold: false
-    code-tools: true
+    code-tools: false
     theme: cosmo
     self-contained: true
 execute:
