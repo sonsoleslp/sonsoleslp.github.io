@@ -1,71 +1,71 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://sonsoleslp.github.io/about.html</loc>
-    <lastmod>2026-02-07T11:00:06.667Z</lastmod>
-  </url>
-  <url>
     <loc>https://sonsoleslp.github.io/blog.html</loc>
-    <lastmod>2026-02-07T11:00:06.667Z</lastmod>
+    <lastmod>2026-02-07T09:39:03.788Z</lastmod>
   </url>
   <url>
-    <loc>https://sonsoleslp.github.io/posts/visualization/index.html</loc>
-    <lastmod>2026-02-07T11:00:08.490Z</lastmod>
-  </url>
-  <url>
-    <loc>https://sonsoleslp.github.io/posts/labook/index.html</loc>
-    <lastmod>2026-02-07T11:00:08.033Z</lastmod>
-  </url>
-  <url>
-    <loc>https://sonsoleslp.github.io/posts/cretic/index.html</loc>
-    <lastmod>2026-02-07T11:00:08.027Z</lastmod>
-  </url>
-  <url>
-    <loc>https://sonsoleslp.github.io/posts/tna-clustering/index.html</loc>
-    <lastmod>2026-02-07T11:00:08.033Z</lastmod>
-  </url>
-  <url>
-    <loc>https://sonsoleslp.github.io/posts/vasstra/index.html</loc>
-    <lastmod>2026-02-07T11:00:08.488Z</lastmod>
-  </url>
-  <url>
-    <loc>https://sonsoleslp.github.io/posts/isila/index.html</loc>
-    <lastmod>2026-02-07T11:00:08.032Z</lastmod>
-  </url>
-  <url>
-    <loc>https://sonsoleslp.github.io/softwares.html</loc>
-    <lastmod>2026-02-07T11:00:08.505Z</lastmod>
+    <loc>https://sonsoleslp.github.io/about.html</loc>
+    <lastmod>2025-07-30T10:02:16.529Z</lastmod>
   </url>
   <url>
     <loc>https://sonsoleslp.github.io/index.html</loc>
-    <lastmod>2026-02-07T11:00:08.027Z</lastmod>
-  </url>
-  <url>
-    <loc>https://sonsoleslp.github.io/posts/tna-data/index.html</loc>
-    <lastmod>2026-02-07T11:00:08.177Z</lastmod>
+    <lastmod>2025-07-30T16:20:31.330Z</lastmod>
   </url>
   <url>
     <loc>https://sonsoleslp.github.io/posts/tna-tutorial/index.html</loc>
-    <lastmod>2026-02-07T11:00:08.307Z</lastmod>
-  </url>
-  <url>
-    <loc>https://sonsoleslp.github.io/posts/tna-group/index.html</loc>
-    <lastmod>2026-02-07T11:00:08.178Z</lastmod>
-  </url>
-  <url>
-    <loc>https://sonsoleslp.github.io/posts/alluvial/index.html</loc>
-    <lastmod>2026-02-07T11:00:08.027Z</lastmod>
+    <lastmod>2026-02-07T11:21:40.050Z</lastmod>
   </url>
   <url>
     <loc>https://sonsoleslp.github.io/posts/tna-compare/index.html</loc>
-    <lastmod>2026-02-07T11:00:08.128Z</lastmod>
+    <lastmod>2026-02-07T11:22:14.498Z</lastmod>
+  </url>
+  <url>
+    <loc>https://sonsoleslp.github.io/posts/vasstra/index.html</loc>
+    <lastmod>2025-02-04T14:57:16.120Z</lastmod>
+  </url>
+  <url>
+    <loc>https://sonsoleslp.github.io/posts/isila/index.html</loc>
+    <lastmod>2025-01-14T19:40:42.009Z</lastmod>
+  </url>
+  <url>
+    <loc>https://sonsoleslp.github.io/posts/cretic/index.html</loc>
+    <lastmod>2025-02-04T14:57:19.559Z</lastmod>
+  </url>
+  <url>
+    <loc>https://sonsoleslp.github.io/posts/tna-data/index.html</loc>
+    <lastmod>2026-02-07T10:53:41.486Z</lastmod>
+  </url>
+  <url>
+    <loc>https://sonsoleslp.github.io/posts/visualization/index.html</loc>
+    <lastmod>2025-07-30T17:09:52.620Z</lastmod>
+  </url>
+  <url>
+    <loc>https://sonsoleslp.github.io/posts/tna-group/index.html</loc>
+    <lastmod>2026-02-07T10:53:45.484Z</lastmod>
   </url>
   <url>
     <loc>https://sonsoleslp.github.io/posts/iglue/index.html</loc>
-    <lastmod>2026-02-07T11:00:08.028Z</lastmod>
+    <lastmod>2025-01-14T19:36:19.100Z</lastmod>
+  </url>
+  <url>
+    <loc>https://sonsoleslp.github.io/posts/alluvial/index.html</loc>
+    <lastmod>2025-01-14T19:25:40.029Z</lastmod>
+  </url>
+  <url>
+    <loc>https://sonsoleslp.github.io/posts/tna-clustering/index.html</loc>
+    <lastmod>2026-02-07T10:53:29.301Z</lastmod>
+  </url>
+  <url>
+    <loc>https://sonsoleslp.github.io/posts/labook/index.html</loc>
+    <lastmod>2025-01-14T20:19:16.580Z</lastmod>
   </url>
   <url>
     <loc>https://sonsoleslp.github.io/publications.html</loc>
-    <lastmod>2026-02-07T11:00:08.504Z</lastmod>
+    <lastmod>2026-02-06T22:02:50.183Z</lastmod>
+  </url>
+  <url>
+    <loc>https://sonsoleslp.github.io/softwares.html</loc>
+    <lastmod>2025-07-19T21:54:28.559Z</lastmod>
   </url>
 </urlset>
