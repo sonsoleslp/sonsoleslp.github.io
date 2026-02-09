@@ -1,5 +1,5 @@
 ---
-title: "TNA Group Analysis: Comparing Groups and Discovering Clusters"
+title: "TNA Group Analysis: Analysis and Comparison of Groups"
 subtitle: "Companion Tutorial for Transition Network Analysis"
 date: "2026-02-06"
 author:

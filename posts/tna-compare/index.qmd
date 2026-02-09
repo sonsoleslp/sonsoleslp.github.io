@@ -1,5 +1,5 @@
 ---
-title: "TNA Model Comparison: A Complete Guide to `compare()` Metrics"
+title: "TNA Model Comparison: A Comprehensive Guide to Network Comparison"
 subtitle: "Companion Tutorial for Transition Network Analysis"
 date: "2026-02-06"
 author:

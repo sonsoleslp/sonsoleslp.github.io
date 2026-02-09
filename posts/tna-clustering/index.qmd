@@ -1,5 +1,5 @@
 ---
-title: "TNA Clustering: Discovering Latent Subgroups from Sequence Data"
+title: "TNA Clustering: Discovering and Analysis of Clusters"
 subtitle: "Companion Tutorial for Transition Network Analysis"
 date: "2026-02-06"
 author:
