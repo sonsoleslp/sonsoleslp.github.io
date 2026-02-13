@@ -550,7 +550,7 @@ The function uses Fisher's exact test on subsequence frequencies, with Bonferron
 ```{r}
 #| label: compare-sequences
 # Compare multi-step subsequence frequencies between groups (lengths 2-5)
-seq_comp <- compare_sequences(gtna, sub = 2:5, min_freq = 5)
+seq_comp <- compare_sequences(gtna, sub = 2:5, min_freq = 5, , test = TRUE)
 seq_comp
 ```
 
