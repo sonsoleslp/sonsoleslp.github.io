@@ -1,0 +1,703 @@
+---
+title: "Sequence Patterns, Outcomes, and Indices with `codyna`"
+subtitle: "A Tutorial on dynamics of behavior with `codyna`"
+date: "2026-02-14"
+author:
+  - name: Mohammed Saqr
+    url: https://saqr.me
+    affiliation: University of Eastern Finland
+  - name: Sonsoles López-Pernas
+    url: https://sonsoles.me
+    affiliation: University of Eastern Finland
+citation:
+   type: article
+   author:
+    - family: "Saqr"
+      given: "Mohammed"
+    - family: "López-Pernas"
+      given: "Sonsoles"
+categories:
+  - tutorial
+  - R
+format:
+  html:
+    toc: true
+    toc-depth: 3
+    number-sections: true
+    # number-offset: [2]
+    code-fold: false
+    code-tools: false
+    theme: cosmo
+    self-contained: true
+execute:
+  warning: false
+  message: false
+knitr:
+  opts_chunk:
+    fig.width: 8
+    fig.height: 6
+    dpi: 600
+    comment: ""
+image: main.png
+---
+
+```{r, echo = FALSE}
+library(knitr)
+options(scipen = 999999999, digits = 2)
+knit_print.data.frame <- function (x, options, ...) {
+  rmarkdown::paged_table(x, options) |>
+    rmarkdown:::print.paged_df( )
+}
+ 
+print.tna_data <- function (x, data = "sequence", ...) 
+{
+  tna:::check_missing(x)
+  tna:::check_class(x, "tna_data")
+  data <- tna:::check_match(data, c("sequence", "meta", "long", 
+    "names"))
+  idx <- paste0(data, "_data")
+  rmarkdown::paged_table(x[[idx]] |> as.data.frame()) |>
+    rmarkdown:::print.paged_df( )
+}
+
+registerS3method("knit_print", "data.frame", knit_print.data.frame)
+```
+
+
+```{r}
+#| label: setup
+#| include: false
+library("tna")
+library("codyna")
+library("ggplot2")
+raw_data <- readRDS("Codyna.RDS")
+codyna_data <- raw_data[, paste0("T", 1:10)]
+
+```
+
+# Exploring Sequences
+
+Learning unfolds as an ordered sequence of states---engagement levels across weeks, problem-solving actions within a session, regulatory behaviors during collaboration. Sequence analysis preserves this temporal ordering rather than collapsing it into a single summary. The approach originated in molecular biology for comparing DNA sequences and was adapted for the social sciences by Abbott (1995). In education, it has been used to study course-taking trajectories, self-regulated learning strategies, and collaborative regulation dynamics (Saqr et al., 2024a).
+
+From a complex dynamic systems perspective, learners exhibit feedback loops, attractor states, and phase transitions (Saqr et al., 2025a). A student's  trajectory is not a random walk---disengagement breeds more disengagement, and current states affect next ones as well as sudden shifts from one stable regime to another are common. Sequence-level analysis captures these dynamics at the individual level, complementing the aggregate view provided by transition models.
+
+::: {.callout-tip title="Companion tutorials"}
+
+This tutorial is part of a series on tutorials on dynamics of learning and learners using Transition Network Analysis with the `tna` and `codyna` R packages:
+
+1. **[Transition Network Analysis with R](https://sonsoles.me/posts/tna-tutorial/)** --- building, visualizing, and interpreting TNA models; centrality, communities, bootstrapping.
+2. **[TNA Group Analysis](https://sonsoles.me/posts/tna-group/)** --- analysis and comparison of groups.
+3. **[TNA Clustering](https://sonsoles.me/posts/tna-clustering/)** --- discovering and analyzing clusters of sequences.
+4. **[TNA Model Comparison](https://sonsoles.me/posts/tna-compare/)** --- edge-level, summary, centrality, and network-level comparison; permutation tests.
+5. **Sequence Patterns, Outcomes, and Indices** (this tutorial) --- pattern discovery, outcome modeling, and structural indices with `codyna`.
+
+Package website: <https://sonsoles.me/tna/>
+
+:::
+
+::: {.callout-note collapse="true" title="What is sequence analysis?"}
+
+Sequence analysis is a family of methods for studying ordered categorical data. In education, the "sequence" is typically a student's trajectory through a series of states measured at successive time points.
+
+Three levels of analysis are possible:
+
+1. **Sequence visualization**: plotting individual trajectories and state distributions to see the raw data before modeling.
+2. **Sequence indices**: computing per-sequence summary measures (entropy, stability, complexity) that characterize *how* each sequence unfolds.
+3. **Pattern discovery**: identifying recurring sub-sequences (n-grams, gapped patterns) that tell us *what* specific pathways students follow.
+
+This tutorial covers all three. For a comprehensive introduction to sequence analysis in education, see Saqr et al. (2024a). For transition-based approaches, see López-Pernas et al. (2024a) on Markov models and Saqr et al. (2025b) on Transition Network Analysis.
+
+:::
+
+This tutorial works with three datasets, each illustrating different scenarios of sequence analysis. Before analyzing any dataset, we visualize it---distribution plots and frequency plots establish the context that makes pattern and index results interpretable.
+
+| Dataset | Source | Sequences | States | Time points | Used for |
+|---|---|---|---|---|---|
+| `group_regulation` | `tna` package | 2,000 | 9 (collaborative regulation) | up to 26 | N-gram examples with filtering |
+| **Codyna** | `Codyna.RDS` | 5,000 | 10 (math exercise actions) | up to 10 | Pattern discovery, outcome modeling |
+| `engagement` | `codyna` package | 1,000 | 3 (Active, Average, Disengaged) | 25 | Sequence indices |
+
+: Datasets used in this tutorial {#tbl-datasets}
+
+## Visualizing the regulation data
+
+The first step with any dataset is to visualize it. We begin with the `group_regulation` dataset---2,000 collaborative regulation sequences with 9 states. TNA provides tools for preparing and visualizing event data. We will use TNA here to prepare the data but we will focus on the sequences not the network analysis.
+
+```{r}
+#| label: prepare-regulation
+data("group_regulation_long", package = "tna")
+prepared <- prepare_data(
+  group_regulation_long,
+  action = "Action", actor = "Actor", time = "Time"
+)
+```
+Having prepared the data we can explore it with sequence analysis and visualize the sequence. TNA comes with several methods for plotting and incldueds sequence plots. Here we will use distribution plots. A state distribution plot aggregates individual trajectories into proportions at each time point:
+
+```{r}
+#| label: fig-seq-distribution
+#| fig-cap: "State proportions over time. The roughly flat distribution indicates a stationary process---no strong temporal trend."
+#| fig-height: 5
+plot_sequences(prepared, type = "distribution", scale = "proportion")
+```
+
+Also, TNA includes tools for plot state frequencies, so you don't have to manually do it. A frequency plot shows overall state prevalence---the marginal baseline for interpreting lift later:
+
+```{r}
+#| label: fig-state-freq
+#| fig-cap: "State frequencies. Consensus and plan dominate; synthesis and adapt are rare."
+#| fig-height: 4
+model_reg <- tna(prepared)
+plot_frequencies(model_reg)
+```
+
+
+## Visualizing the problem-solving data
+
+This math problem solving dataset contains 5,000 math exercise sequences with 10 states (Correct, Wrong, Clue, Guide, Instruct, Question, Quit, Right, Skip, Try). These were students states while solving math problems. The codes for Correct, Quit, Clue, Guide, Question are AI support trying to help students solve the questions. The right and wrong are the outcome of these exercises.
+
+Each row is one problem attempt with up to 10 steps.
+
+```{r}
+#| label: prepare-codyna
+codyna_long <- data.frame(
+  id = rep(seq_len(nrow(codyna_data)), each = ncol(codyna_data)),
+  time = rep(seq_len(ncol(codyna_data)), nrow(codyna_data)),
+  action = as.vector(t(as.matrix(codyna_data)))
+)
+codyna_long <- codyna_long[!is.na(codyna_long$action), ]
+prepared_codyna <- prepare_data(codyna_long, action = "action", actor = "id", time = "time")
+```
+
+```{r}
+#| label: fig-codyna-index
+#| fig-cap: "Sequence index plot: each row is one of 5,000 problem-solving sequences. Most are short (5 steps), and Wrong (red) and Instruct (blue) dominate the early positions."
+#| fig-height: 7
+plot_sequences(prepared_codyna, sort_by ="action_T2")
+
+```
+
+```{r}
+#| label: fig-codyna-distribution
+#| fig-cap: "State proportions over time. Wrong peaks at T1 and declines; Right appears only at the end---the terminal success state."
+#| fig-height: 5
+plot_sequences(prepared_codyna, type = "distribution", scale = "proportion")
+```
+
+```{r}
+#| label: fig-codyna-freq
+#| fig-cap: "State frequencies across all time points. Instruct and Wrong dominate; Right and Correct are less frequent."
+#| fig-height: 4
+model_codyna <- tna(prepared_codyna)
+plot_frequencies(model_codyna)
+```
+
+The index plot reveals that most sequences are short and begin with Wrong which captures students wrong attempts and offered feedback.
+
+
+# Pattern Discovery
+
+TNA builds a transition matrix from all sequences, revealing which pairwise transitions are most probable. Pattern discovery complements this by examining each sequence individually---identifying the specific multi-step sub-sequences that recur across students. Longer pathways like Wrong→Quit→Skip→Instruct→Wrong extend the picture to five-step chains. Patterns can also be linked to outcomes---not just which pathways exist, but which predict success or failure which offers a unique perspective and new functionality that no other package provides.
+
+## N-grams
+
+TNA already captures pairwise transitions (length 2), so the value of n-grams begins at length 3 and above. We start with the regulation data. A TNA model would show consensus→plan and plan→consensus as the two strongest edges. Do these chain into sustained multi-step pathways within the same sequences?
+
+```{r}
+#| label: ngrams-regulation
+#| fig-cap: "Top n-grams (lengths 3–5) from collaborative regulation sequences"
+data("group_regulation")
+reg_ngrams <- discover_patterns(group_regulation, type = "ngram", len = 3:5)
+reg_ngrams 
+```
+
+::: {.callout-note collapse="true" title="Output columns"}
+
+- **Frequency**: total occurrences across all sequences (one sequence can contribute multiple instances).
+- **Count**: number of sequences containing the pattern at least once.
+- **Support**: count / total sequences---the proportion containing the pattern. Use this to compare across datasets of different sizes.
+- **Lift**: observed support / expected support under independence. Above 1 = over-represented; below 1 = under-represented (Agrawal et al., 1993).
+- **Proportion**: pattern's share of total frequency at its length.
+
+:::
+
+consensus→plan→plan (support = `r round(reg_ngrams$support[reg_ngrams$pattern == "consensus->plan->plan"], 3)`) appears in over a third of all sequences; plan→plan→plan (support = `r round(reg_ngrams$support[reg_ngrams$pattern == "plan->plan->plan"], 3)`) in nearly a quarter. The consensus-then-planning loop is a genuine multi-step pathway---groups who reach agreement build extended planning episodes. The two strong TNA edges consensus→plan and plan→plan combine into coherent within-sequence trajectories.
+
+**What follows planning?** The `start` parameter isolates pathways originating from a given state:
+
+```{r}
+#| label: ngrams-reg-plan
+#| fig-label: N-grams starting with plan
+reg_plan <- discover_patterns(group_regulation, type = "ngram", len = 3:4, start = "plan")
+reg_plan
+```
+
+Planning leads three ways: sustained planning (plan→plan→plan, support = `r round(reg_plan$support[reg_plan$pattern == "plan->plan->plan"], 3)`), cycling back to consensus (plan→consensus→plan, support = `r round(reg_plan$support[reg_plan$pattern == "plan->consensus->plan"], 3)`), and emotional reactions (plan→plan→emotion, support = `r round(reg_plan$support[reg_plan$pattern == "plan->plan->emotion"], 3)`). The first two sustain the task; the third signals that extended planning sometimes triggers affect.
+
+**What follows consensus?**
+
+```{r}
+#| label: ngrams-reg-consensus
+#| fig-cap: "N-grams starting with consensus"
+reg_cons <- discover_patterns(group_regulation, type = "ngram", len = 3:4, start = "consensus")
+reg_cons
+```
+
+Consensus chains into planning: the top three trigrams all route through plan. consensus→plan→plan (support = `r round(reg_cons$support[reg_cons$pattern == "consensus->plan->plan"], 3)`) dominates---when groups agree, they commit to extended planning.
+
+**Where does emotion lie within the sequence of interactions** Emotion is a low-frequency state in the TNA network, but pattern discovery reveals its role as a connector or how it mediates other regulatory behaviors.
+
+```{r}
+#| label: ngrams-reg-emotion
+#| fig-cap: "N-grams involving emotion"
+reg_emotion <- discover_patterns(group_regulation, type = "ngram", len = 3:4, contain = "emotion")
+reg_emotion
+```
+
+emotion→cohesion→consensus (support = `r round(reg_emotion$support[reg_emotion$pattern == "emotion->cohesion->consensus"], 3)`) is the dominant pathway. Emotional expression leads to social bonding and then group agreement---a three-step recovery arc invisible in the aggregate network, where emotion has weak edges to many states. Emotion feeds back into the consensus→plan cycle.
+
+Now we apply the same approach to the math problem-solving data. With defaults, `discover_patterns()` extracts n-grams of length 2 through 5:
+
+```{r}
+#| label: ngrams-default
+#| fig-cap: "Top 10 n-grams (default: lengths 2–5)"
+ngrams <- discover_patterns(codyna_data)
+ngrams
+```
+
+```{r}
+#| label: plot-ngrams
+#| fig-cap: "Top 10 n-grams by proportion."
+#| fig-height: 5
+plot(ngrams, n = 10)
+```
+
+Trigrams (length 3) reveal multi-step pathways that bigrams cannot:
+
+```{r}
+#| label: trigrams
+#| fig-cap: "Top 10 trigrams (length 3)"
+trigrams <- discover_patterns(codyna_data, type = "ngram", len = 3)
+trigrams
+```
+
+Wrong→Quit→Skip has lift `r round(trigrams$lift[trigrams$pattern == "Wrong->Quit->Skip"], 2)`---nearly 5 times more frequent than expected. The bigrams Wrong→Quit and Quit→Skip each appear separately, but only the trigram reveals them as a single giving-up sequence. Extracting lengths 3 through 5 shows how the pathway extends:
+
+```{r}
+#| label: ngrams-range
+#| fig-cap: "Top 10 n-grams at lengths 3–5"
+ngrams_range <- discover_patterns(codyna_data, type = "ngram", len = 3:5)
+ngrams_range
+```
+
+At length 4, Wrong→Quit→Skip→Instruct (support = `r round(ngrams_range$support[ngrams_range$pattern == "Wrong->Quit->Skip->Instruct"], 3)`); at length 5, it adds →Wrong---a complete failure loop. Since most sequences are 5 steps long, length-5 n-grams capture entire trajectories:
+
+```{r}
+#| label: ngrams-5
+#| fig-cap: "Top 10 five-step patterns (full sequences)"
+ngrams_5 <- discover_patterns(codyna_data, type = "ngram", len = 5)
+ngrams_5
+```
+
+Wrong→Quit→Skip→Instruct→Wrong (support = `r round(ngrams_5$support[1], 3)`) is the single most common complete trajectory---17% of all students follow this path.
+
+## Gapped patterns
+
+N-grams require consecutive states. Gapped patterns allow wildcards (`*`) between anchoring states, capturing regularities that persist regardless of intervening steps. The same `start`, `end`, and `contain` filters from the n-gram examples work here:
+
+```{r}
+#| label: gapped
+#| fig-cap: "Top 10 gapped patterns (defaults)"
+gapped <- discover_patterns(codyna_data, type = "gapped")
+gapped
+```
+
+Wrong→\*\*\*→Wrong (support = `r round(gapped$support[1], 3)`): half of all sequences contain a return to Wrong after three intervening states. Wrong→\*\*\*→Right (support = `r round(gapped$support[gapped$pattern == "Wrong->***->Right"], 3)`): about a third eventually reach success through three intermediate steps.
+
+::: {.callout-note collapse="true" title="Gapped pattern notation"}
+
+Each `*` matches exactly one wildcard state. Wrong→\*→Right matches any three-step sub-sequence from Wrong to Right. The `gap` parameter controls the range: `gap = 1` produces single-wildcard patterns; `gap = 1:3` produces 1, 2, or 3 wildcards. Defaults cover a range appropriate to the sequence length.
+
+:::
+
+## Repeated patterns
+
+Repeated patterns detect consecutive runs of the same state---instructional loops, hint-seeking chains, or persistent errors:
+
+```{r}
+#| label: repeated
+#| fig-cap: "Repeated patterns (same-state runs)"
+repeated <- discover_patterns(codyna_data, type = "repeated", len = 2:4)
+repeated
+```
+
+Instruct→Instruct dominates (support = `r round(repeated$support[1], 3)`)---16% of sequences contain at least two consecutive Instruct steps. The triple Instruct→Instruct→Instruct still appears in `r round(repeated$support[repeated$pattern == "Instruct->Instruct->Instruct"] * 100, 1)`% of sequences. In Section 6 we will see how `self_loop_tendency` captures this as a per-sequence index.
+
+::: {.callout-note collapse="true" title="Repeated patterns vs. TNA self-loops"}
+
+TNA's diagonal entries give the *aggregate* self-loop probability for each state. Repeated patterns identify *which sequences* contain runs of a given length and how common they are. A high aggregate self-loop with low repeated-pattern support means self-loops are spread thinly across many sequences; high support means they concentrate in specific sequences as genuine loops.
+
+:::
+
+## Targeted search
+
+When theory predicts a specific pathway, test whether it exists. The wildcard `*` matches any single state:
+
+```{r}
+#| label: targeted
+#| fig-cap: "Recovery pathways: Wrong through one step to Correct"
+targeted <- discover_patterns(codyna_data, pattern = "Wrong->*->Correct")
+targeted
+```
+
+Two recovery routes: Wrong→Clue→Correct (support = `r round(targeted$support[1], 3)`) and Wrong→Correct→Correct (support = `r round(targeted$support[2], 3)`). The Clue route has lift near 1.0---common but not over-represented.
+
+```{r}
+#| label: end-right
+#| fig-cap: "Bigrams ending in Right (problem solved)"
+end_right <- discover_patterns(codyna_data, end = "Right", type = "ngram", len = 2)
+end_right
+```
+
+Instruct→Right is the most common final bigram, but its lift (`r round(end_right$lift[end_right$pattern == "Instruct->Right"], 2)`) is below 1---reflecting Instruct's high base rate, not a specific affinity.
+
+## Which sequence lead to different outcomes?
+
+Do specific sequences of actions predict whether a student ultimately succeeds or fails? The `outcome` parameter links each pattern to a binary outcome---here, whether the last observed state is Right (solved) or Wrong (unsolved). For each pattern, `discover_patterns()` counts its prevalence in each outcome group and runs a chi-squared test of association:
+
+```{r}
+#| label: ngrams-outcome
+#| fig-cap: "Top 10 outcome-differentiated n-grams"
+ngrams_outcome <- discover_patterns(
+  codyna_data,
+  outcome = "last_obs",
+  type = "ngram", len = 2:3
+)
+ngrams_outcome
+```
+
+```{r}
+#| label: plot-ngrams-outcome
+#| fig-cap: "Outcome-differentiated n-grams. Patterns with large count imbalances are candidate predictors for Section 5."
+#| fig-height: 5
+plot(ngrams_outcome, n = 10)
+```
+
+::: {.callout-note collapse="true" title="Outcome comparison columns"}
+
+- **count\_\<group\>**: sequences in each outcome group containing the pattern.
+- **chisq**: chi-squared statistic testing independence of pattern presence and outcome.
+- **p\_value**: p-value from the chi-squared test.
+- **effect\_size** (Cramér's V): strength of association, bounded in [0, 1]. Above 0.10 = small; above 0.30 = medium (Cohen, 1988).
+
+The chi-squared treats each pattern independently. Correlated patterns are not adjusted for---the regression models in Section 5 handle this.
+
+:::
+
+Skip→Instruct (p < 0.001) appears in `r ngrams_outcome$count_Wrong[ngrams_outcome$pattern == "Skip->Instruct"]` Wrong-ending sequences and `r ngrams_outcome$count_Right[ngrams_outcome$pattern == "Skip->Instruct"]` Right-ending sequences---every student who skips and then receives instruction ultimately fails. The next section quantifies these effects with regression.
+
+
+# Predicting Outcomes from Patterns
+
+Chi-squared tests (Section 4.5) identify *which* patterns differ between groups but cannot rank them by effect size or adjust for confounding. `analyze_outcome()` selects the top patterns, encodes them as predictors, and fits a logistic regression.
+
+::: {.callout-note collapse="true" title="How analyze_outcome() works"}
+
+Three steps:
+
+1. **Pattern discovery**: calls `discover_patterns()` with the specified `type`, `len`, etc.
+2. **Selection**: ranks patterns by the `priority` criterion (`"chisq"`, `"lift"`, or `"support"`) and picks the top `n`.
+3. **Model fitting**: encodes each pattern as binary (0/1, when `freq = FALSE`) or as within-sequence count (when `freq = TRUE`), then fits `glm()` (or `lme4::glmer()` when `mixed = TRUE`).
+
+The returned object is a standard `glm` or `glmerMod`, so `summary()`, `coef()`, `AIC()`, `predict()`, and `confint()` all work.
+
+:::
+
+## Binary predictors: presence/absence of a certain state. If students receive a clue would it help them get the answer correct?
+
+Each selected pattern becomes a 0/1 predictor:
+
+```{r}
+#| label: model-binary
+model_binary <- analyze_outcome(
+  codyna_data,
+  outcome = "last_obs",
+  reference = "Wrong",
+  n = 5,
+  freq = FALSE,
+  priority = "chisq",
+  type = "ngram",
+  len = 1:2,
+  mixed = FALSE
+)
+summary(model_binary)
+```
+
+`analyze_outcome()` looked at all unigrams and bigrams, ranked them by chi-squared, picked the top 5, and fit a logistic regression using them as 0/1 predictors. `reference = "Wrong"` means positive coefficients increase the odds of Right (success). Converting to odds ratios:
+
+```{r}
+#| label: odds-ratios
+#| fig-cap: "Coefficients as log-odds and odds ratios"
+odds_ratios <- exp(coef(model_binary))
+
+data.frame(
+  Pattern = names(odds_ratios),
+  `Log-Odds` = round(coef(model_binary), 3),
+  `Odds Ratio` = round(odds_ratios, 3),
+  row.names = NULL, check.names = FALSE
+) 
+```
+
+::: {.callout-note collapse="true" title="Reading logistic regression output"}
+
+- **Odds ratio** = exp(coefficient). OR = 3.0 means "3× the odds of success"; OR = 0.5 means "half the odds." OR = 1.0 = no effect.
+- **Confidence intervals**: `exp(confint(model))` on the odds ratio scale. If the CI includes 1.0, the effect is not significant.
+- **AIC**: lower = better fit, penalized for complexity. Compare models with different predictor sets.
+
+:::
+
+- **Quit** (OR = `r round(odds_ratios["Quit"], 3)`): essentially zero odds of success---quitting is the primary failure pathway, consistent with the chi-squared results in Section 4.5.
+- **Clue_to_Clue** (OR = `r round(odds_ratios["Clue_to_Clue"], 2)`): about `r round(odds_ratios["Clue_to_Clue"], 1)`× the odds of succeeding. Repeated hint-seeking signals engagement, matching the repeated-pattern findings in Section 4.3.
+- **Question_to_Guide** (OR = `r round(odds_ratios["Question_to_Guide"], 2)`): reduces the odds---students who ask a question and then receive guidance are less likely to solve the problem.
+- **Instruct** and **Instruct_to_Instruct**: not significant (p > 0.05). Common but not outcome-differentiating once the other predictors are in the model.
+
+## Frequency-based predictors. Here we take into account the counts, we don't only count presence but also how frequent. Are more clues useful?
+
+Setting `freq = TRUE` uses within-sequence pattern counts instead of 0/1:
+
+```{r}
+#| label: model-freq
+model_freq <- analyze_outcome(
+  codyna_data,
+  outcome = "last_obs",
+  reference = "Wrong",
+  n = 10,
+  freq = TRUE,
+  priority = "chisq",
+  type = "ngram",
+  len = 1:2,
+  mixed = FALSE
+)
+summary(model_freq)
+```
+
+AIC = `r round(AIC(model_freq), 1)` vs. `r round(AIC(model_binary), 1)` for the binary model---a `r round(AIC(model_binary) - AIC(model_freq), 1)`-point improvement. Repetition count adds predictive value. Guide→Guide (`r round(coef(model_freq)["Guide_to_Guide"], 2)`) is positive and significant---each additional consecutive guidance step raises the odds, consistent with the repeated-pattern findings in Section 4.3.
+
+## Gapped pattern predictors
+
+```{r}
+#| label: model-gapped
+model_gapped <- analyze_outcome(
+  codyna_data,
+  outcome = "last_obs",
+  reference = "Wrong",
+  n = 5,
+  freq = FALSE,
+  priority = "chisq",
+  type = "gapped",
+  gap = 1,
+  len = 2,
+  mixed = FALSE
+)
+summary(model_gapped)
+```
+
+AIC = `r round(AIC(model_gapped), 1)`, the lowest of the three. Clue→\*→Correct captures the delayed hint effect; Guide→\*→Guide captures returning to guidance after a detour.
+
+## Priority selection
+
+The `priority` parameter controls which patterns enter the regression:
+
+```{r}
+#| label: priority-comparison
+model_lift <- analyze_outcome(
+  codyna_data,
+  outcome = "last_obs", reference = "Wrong",
+  n = 5, freq = FALSE, priority = "lift",
+  type = "ngram", len = 1:2, mixed = FALSE
+)
+model_support <- analyze_outcome(
+  codyna_data,
+  outcome = "last_obs", reference = "Wrong",
+  n = 5, freq = FALSE, priority = "support",
+  type = "ngram", len = 1:2, mixed = FALSE
+)
+```
+
+| Priority | Selects for | AIC | Use when |
+|---|---|---|---|
+| `"chisq"` | Maximum group differentiation | `r round(AIC(model_binary), 1)` | Outcome prediction is the goal |
+| `"lift"` | Over-representation relative to marginals | `r round(AIC(model_lift), 1)` | Seeking structurally surprising patterns |
+| `"support"` | Most common patterns overall | `r round(AIC(model_support), 1)` | Describing typical behavior |
+
+: Priority selection guide {#tbl-priority}
+
+## Mixed-effects models
+
+When students solve multiple problems or are nested within classrooms, observations are not independent. `mixed = TRUE` adds a random intercept per group. This is very useful when you have multiple sessions from the same student, or multiple sequences and so on. Codyna has an advanced mixed effect model that takes this into account.
+
+```{r}
+#| label: model-mixed
+model_mixed <- analyze_outcome(
+  raw_data, cols = T1:T10,
+  group = student_id,
+  outcome = "last_obs",
+  reference = "Wrong",
+  n = 5,
+  freq = FALSE,
+  priority = "chisq",
+  type = "ngram",
+  len = 1:2,
+  mixed = TRUE
+)
+summary(model_mixed)
+```
+
+- **Random intercept variance** (`r round(as.data.frame(lme4::VarCorr(model_mixed))$vcov, 3)`): captures student-level differences in baseline success probability. A standard deviation of `r round(as.data.frame(lme4::VarCorr(model_mixed))$sdcor, 2)` means students differ substantially in their baseline ability.
+- **Fixed effects**: same interpretation as standard logistic regression, but adjusted for nesting.
+
+```{r}
+#| label: mixed-comparison
+cat("AIC (fixed, no nesting):", round(AIC(model_binary), 1), "\n")
+cat("AIC (mixed, student nesting):", round(AIC(model_mixed), 1), "\n")
+```
+
+Lower AIC confirms that nesting matters. Use `mixed = TRUE` whenever data has a natural grouping structure.
+
+::: {.callout-note collapse="true" title="When to use mixed-effects models"}
+
+Standard logistic regression assumes independence. In educational data, this is often violated: the same student solves multiple problems, or students are nested within classrooms. Ignoring nesting inflates the effective sample size, producing artificially small standard errors.
+
+A mixed-effects model (via `lme4::glmer()`) adds a random intercept per group---capturing group-level baselines so that the fixed effects represent *within-group* pattern effects. Use it when:
+
+- The same participant appears in multiple sequences
+- Students are nested within classrooms, schools, or conditions
+- The random intercept variance is non-trivial
+
+:::
+
+
+# Sequence Indices
+Sequence indices in codyna are designed for educational contexts and build on complex dynamic system theory. Patterns identify *which* pathways students follow. Indices characterize *how* each trajectory unfolds---its diversity, stability, dynamism, and complexity---without reference to any specific pattern. We switch to the built-in `engagement` dataset (1,000 students, 3 states, 25 time points) for richer distributions. As with every dataset in this tutorial, we visualize first.
+
+```{r}
+#| label: load-engagement
+data("engagement")
+
+```
+
+
+The distribution plot reveals a slight cohort-level drift toward disengagement over the 25 weeks. These visual patterns will connect directly to the stability, initial conditions, and emergence indices below.
+
+
+```{r}
+#| label: fig-engagement-distribution
+#| fig-cap: "State distribution over 25 weeks. Active declines slightly over time; Disengaged increases---a gradual drift toward disengagement across the cohort."
+#| fig-height: 5
+plot_sequences(engagement, type = "distribution", scale = "proportion")
+```
+
+
+```{r}
+#| label: compute-indices
+#| fig-cap: "Summary statistics for all numeric sequence indices"
+indices <- sequence_indices(engagement, favorable = "Active")
+numeric_indices <- indices[, sapply(indices, is.numeric)]
+summary_df <- data.frame(
+  Index = names(numeric_indices),
+  Min = round(sapply(numeric_indices, min, na.rm = TRUE), 3),
+  Median = round(sapply(numeric_indices, median, na.rm = TRUE), 3),
+  Mean = round(sapply(numeric_indices, mean, na.rm = TRUE), 3),
+  Max = round(sapply(numeric_indices, max, na.rm = TRUE), 3),
+  row.names = NULL
+)
+summary_df
+```
+
+`favorable = "Active"` designates Active as the target for directional indices like `integrative_potential` (convergence toward the favorable state) and `emergent_state_proportion`.
+
+## Index families
+
+The 24 indices group into 10 families:
+
+| Family | Indices | Question |
+|---|---|---|
+| Coverage | `valid_n`, `valid_proportion` | How complete is the sequence? |
+| Diversity | `unique_states`, `longitudinal_entropy`, `simpson_diversity` | How spread is time across states? |
+| Stability | `self_loop_tendency`, `mean_spell_duration`, `max_spell_duration` | How persistent are state episodes? |
+| Dynamism | `transition_rate`, `transition_complexity` | How frequent and diverse are transitions? |
+| Initial conditions | `initial_state_persistence`, `initial_state_proportion`, `initial_state_influence_decay` | How influential is the starting state? |
+| Cyclicity | `cyclic_feedback_strength` | Return patterns? |
+| Dominance | `dominant_state`, `dominant_proportion`, `dominant_max_spell` | Which state dominates? |
+| First/Last | `first_state`, `last_state` | Boundary conditions |
+| Emergence | `emergent_state`, `emergent_state_persistence`, `emergent_state_proportion` | Late-appearing dominant state? |
+| Integrative | `integrative_potential`, `complexity_index` | Convergence and complexity |
+
+: Index families and their research questions {#tbl-families}
+
+::: {.callout-note collapse="true" title="Detailed index definitions"}
+
+**Coverage**: `valid_n` = non-missing time points; `valid_proportion` = fraction of complete observations.
+
+**Diversity**: `unique_states` = distinct states visited. `longitudinal_entropy` = $-\sum p_i \log p_i$; maximized when all states equally visited. `simpson_diversity` = $1 - \sum p_i^2$; gives less weight to rare states.
+
+**Stability**: `self_loop_tendency` = proportion of consecutive pairs where state does not change. `mean_spell_duration` = average run length. `max_spell_duration` = longest run.
+
+**Dynamism**: `transition_rate` = 1 − self\_loop\_tendency. `transition_complexity` = entropy of the transition distribution; distinguishes toggling between two states (low) from cycling through many (high).
+
+**Initial conditions**: `initial_state_persistence` = consecutive time points in first state. `initial_state_proportion` = fraction of sequence in first state. `initial_state_influence_decay` = exponential decay rate of first state's autocorrelation.
+
+**Cyclicity**: `cyclic_feedback_strength` = tendency to revisit previously visited states.
+
+**Dominance**: `dominant_state` = most prevalent state. `dominant_proportion` = its share. `dominant_max_spell` = its longest run.
+
+**Emergence**: `emergent_state` = state dominating the second half. When different from the first-half dominant, a phase transition occurred. `emergent_state_persistence` and `emergent_state_proportion` quantify its hold.
+
+**Integrative**: `integrative_potential` = convergence toward the `favorable` state over time. `complexity_index` = composite of entropy and transition complexity.
+
+:::
+
+
+
+# Decision Workflow
+
+1. **Visualize** --- `plot_sequences()` and `plot_frequencies()` for raw data exploration.
+2. **Discover patterns** --- `discover_patterns()` with n-grams, gapped, and repeated types; use `start`, `end`, `contain` to focus.
+3. **Compare across outcomes** --- add `outcome = ...` to identify group-differentiating patterns.
+4. **Model outcomes** --- `analyze_outcome()` for logistic regression; `mixed = TRUE` for nested data.
+5. **Compute indices** --- `sequence_indices()` for per-sequence structural summaries.
+6. **Interpret together** --- a coefficient is more trustworthy when the pattern is both statistically significant (chi-squared) and structurally meaningful (lift > 1, high support), and the index profile is consistent.
+
+
+# References {.unnumbered}
+
+## LA Methods Chapters {.unnumbered}
+
+### Sequence Analysis and Temporal Methods {.unnumbered}
+
+- Saqr, M., López-Pernas, S., Helske, S., Durand, M., Murphy, K., Studer, M., & Ritschard, G. (2024). Sequence analysis in education: Principles, technique, and tutorial with R. In M. Saqr & S. López-Pernas (Eds.), *Learning analytics methods and tutorials: A practical guide using R* (pp. 267--298). Springer. <https://lamethods.org/book1/chapters/ch10-sequence-analysis/ch10-seq.html>
+- Helske, J., Helske, S., Saqr, M., López-Pernas, S., & Murphy, K. (2024). A modern approach to transition analysis and process mining with Markov models in education. In M. Saqr & S. López-Pernas (Eds.), *Learning analytics methods and tutorials: A practical guide using R* (pp. 331--362). Springer. <https://lamethods.org/book1/chapters/ch12-markov/ch12-markov.html>
+- López-Pernas, S., Saqr, M., Helske, S., & Murphy, K. (2024). Multi-channel sequence analysis in educational research: An introduction and tutorial with R. In M. Saqr & S. López-Pernas (Eds.), *Learning analytics methods and tutorials: A practical guide using R* (pp. 363--400). Springer. <https://lamethods.org/book1/chapters/ch13-multichannel/ch13-multi.html>
+
+### Transition Network Analysis {.unnumbered}
+
+- Saqr, M., López-Pernas, S., & Tikka, S. (2025). Mapping relational dynamics with transition network analysis: A primer and tutorial. In M. Saqr & S. López-Pernas (Eds.), *Advanced learning analytics methods*. Springer. <https://lamethods.org/book2/chapters/ch15-tna/ch15-tna.html>
+- Saqr, M., López-Pernas, S., & Tikka, S. (2025). Capturing the breadth and dynamics of the temporal processes with frequency transition network analysis: A primer and tutorial. In M. Saqr & S. López-Pernas (Eds.), *Advanced learning analytics methods*. Springer. <https://lamethods.org/book2/chapters/ch16-ftna/ch16-ftna.html>
+- López-Pernas, S., Tikka, S., & Saqr, M. (2025). Mining patterns and clusters with transition network analysis: A heterogeneity approach. In M. Saqr & S. López-Pernas (Eds.), *Advanced learning analytics methods*. Springer. <https://lamethods.org/book2/chapters/ch17-tna-clusters/ch17-tna-clusters.html>
+
+### Complex Dynamic Systems {.unnumbered}
+
+- Saqr, M., Dever, D., López-Pernas, S., Gernigon, C., Marchand, G., & Kaplan, A. (2025). Complex dynamic systems in education: Beyond the static, the linear and the causal reductionism. In M. Saqr & S. López-Pernas (Eds.), *Advanced learning analytics methods*. Springer. <https://lamethods.org/book2/chapters/ch12-cds/ch12-cds.html>
+- Saqr, M., Schreuder, M. J., & López-Pernas, S. (2024). Why educational research needs a complex system revolution that embraces individual differences, heterogeneity, and uncertainty. In M. Saqr & S. López-Pernas (Eds.), *Learning analytics methods and tutorials: A practical guide using R*. Springer. <https://lamethods.org/book1/chapters/ch22-conclusion/ch22-conclusion.html>
+
+## Package References {.unnumbered}
+
+- Tikka, S., López-Pernas, S., & Saqr, M. (2025). tna: An R package for Transition Network Analysis. *Applied Psychological Measurement*. <https://doi.org/10.1177/01466216251348840>
+- Saqr, M., López-Pernas, S., Törmänen, T., Kaliisa, R., Misiejuk, K., & Tikka, S. (2025d). Transition Network Analysis: A novel framework for modeling, visualizing, and identifying the temporal patterns of learners and learning processes. In *LAK '25* (pp. 351--361). ACM. <https://doi.org/10.1145/3706468.3706513>
+
+## Methodological References {.unnumbered}
+
+- Abbott, A. (1995). Sequence analysis: New methods for old ideas. *Annual Review of Sociology*, 21(1), 93--113. <https://doi.org/10.1146/annurev.so.21.080195.000521>
+- Agrawal, R., Imielinski, T., & Swami, A. (1993). Mining association rules between sets of items in large databases. In *SIGMOD '93* (pp. 207--216). ACM. <https://doi.org/10.1145/170036.170072>
+- Bates, D., Mächler, M., Bolker, B., & Walker, S. (2015). Fitting linear mixed-effects models using lme4. *Journal of Statistical Software*, 67(1), 1--48. <https://doi.org/10.18637/jss.v067.i01>
+- Cohen, J. (1988). *Statistical power analysis for the behavioral sciences* (2nd ed.). Lawrence Erlbaum.
+
