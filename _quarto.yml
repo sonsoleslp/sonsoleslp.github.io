@@ -42,3 +42,4 @@ format:
     highlight-style: tango
 resources:
   - CNAME
+  - extra
