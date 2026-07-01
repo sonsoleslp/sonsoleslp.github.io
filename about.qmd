@@ -307,9 +307,10 @@ htmltools::tags$ul(editorialtags)
 
 
 
+
+```{r,echo=F, eval = F}
 ## Diversity, Equity, and Inclusion Activities
 
-```{r,echo=F}
 editorial = rio::import("cv.xlsx", sheet = "DEI")
 editorialtags = htmltools::tagList()
 
