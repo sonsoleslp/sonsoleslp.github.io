@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.8.25">
+<meta name="generator" content="quarto-1.9.38">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -12,6 +12,9 @@
 
 <title>The VaSSTra method – sonsoleslp</title>
 <style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
 div.columns{display: flex; gap: min(4vw, 1.5em);}
@@ -27,7 +30,6 @@ ul.task-list li input[type="checkbox"] {
 div.csl-bib-body { }
 div.csl-entry {
   clear: both;
-  margin-bottom: 0em;
 }
 .hanging-indent div.csl-entry {
   margin-left:2em;
@@ -56,15 +58,14 @@ div.csl-indent {
 <link href="../../favicon.png" rel="icon" type="image/png">
 <script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="../../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-e41caad1b6b9b62eb3087831f3b4c651.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-4bd490e9cd57f2396cbd188312c0541c.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-64340255afb22ac1b60a7c93e5c6aa2f.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-3ed78525a53c65cf3e3a7d87596937cf.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -129,8 +130,6 @@ gtag('config', 'G-251HR7GW52', { 'anonymize_ip': true});
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a href="../../index.html" class="navbar-brand navbar-brand-logo">
-    </a>
     <a class="navbar-brand" href="../../index.html">
     <span class="navbar-title">sonsoleslp</span>
     </a>
@@ -229,8 +228,8 @@ gtag('config', 'G-251HR7GW52', { 'anonymize_ip': true});
 <p>The <strong>VaSSTra</strong> (Variables-States-Sequences-Trajectories) began as a simple yet ambitious idea that later evolved into a groundbreaking method in learning analytics. Most sequence analysis studies in this field focus on representing sequences of clicks or other events within a learning management system (LMS) or similar online platforms. These sequences often depict momentary actions or events.</p>
 <p>However, in 2021, my colleague <a href="https://saqr.me">Mohammed Saqr</a> and I took a different approach. In our article <span class="citation" data-cites="saqr2021">(<a href="#ref-saqr2021" role="doc-biblioref">Saqr and López-Pernas 2021</a>)</span>, we applied sequence analysis more in line with its origins—tracking life events and longitudinal trajectories. Instead of mapping each block in a sequence to a single momentary action or event, we used each block to represent a state over the duration of an entire course, whereby the entire sequence represented a complete study program. These states were derived by clustering students’ engagement indicators from LMS logs using latent class analysis (LCA).</p>
 <p>We quickly realized the novelty of this approach in the context of learning analytics. It provided a way to examine how students’ behaviors and engagement evolved over a whole study period. This kickstarted a series of applications. We extended the method to other constructs, such as learning strategies <span class="citation" data-cites="saqr2023">(<a href="#ref-saqr2023" role="doc-biblioref">Saqr, López-Pernas, Jovanović, et al. 2023</a>)</span>, and collaborative roles in computer-supported collaborative learning (CSCL).</p>
-<p>We presented the method on its own in a conference paper in 2022 <span class="citation" data-cites="lópez-pernas2023">(<a href="#ref-lópez-pernas2023" role="doc-biblioref">López-Pernas and Saqr 2023</a>)</span> and we presented a tutorial on how to implement it with R <span class="citation" data-cites="lópez-pernas2024a">(<a href="#ref-lópez-pernas2024a" role="doc-biblioref">López-Pernas and Saqr 2024a</a>)</span> in our book “Learning Analytics Methods and Tutorials”.</p>
-<p>We then began experimenting with extensions of the method, exploring multi-channel sequence analysis to examine multiple simultaneous dimensions <span class="citation" data-cites="saqr2023a">(<a href="#ref-saqr2023a" role="doc-biblioref">Saqr, López-Pernas, Helske, et al. 2023</a>)</span>. We also adopted theoretical frameworks like complex systems theory, which provided fresh perspectives on how these patterns of behavior could be understood <span class="citation" data-cites="lópez-pernas2024">(<a href="#ref-lópez-pernas2024" role="doc-biblioref">López-Pernas and Saqr 2024b</a>)</span>.</p>
+<p>We presented the method on its own in a conference paper in 2022 <span class="citation" data-cites="lópez-pernas2023">(<a href="#ref-lópez-pernas2023" role="doc-biblioref">López-Pernas and Saqr 2023</a>)</span> and we presented a tutorial on how to implement it with R <span class="citation" data-cites="lópez-pernas2024a">(<a href="#ref-lópez-pernas2024a" role="doc-biblioref">López-Pernas and Saqr 2024b</a>)</span> in our book “Learning Analytics Methods and Tutorials”.</p>
+<p>We then began experimenting with extensions of the method, exploring multi-channel sequence analysis to examine multiple simultaneous dimensions <span class="citation" data-cites="saqr2023a">(<a href="#ref-saqr2023a" role="doc-biblioref">Saqr, López-Pernas, Helske, et al. 2023</a>)</span>. We also adopted theoretical frameworks like complex systems theory, which provided fresh perspectives on how these patterns of behavior could be understood <span class="citation" data-cites="lópez-pernas2024">(<a href="#ref-lópez-pernas2024" role="doc-biblioref">López-Pernas and Saqr 2024a</a>)</span>.</p>
 <p><strong>VaSSTra</strong> utilizes a combination of person-based methods (to capture the latent states) along with life events methods to model the longitudinal process. In doing so, <strong>VaSSTra</strong> effectively leverages the benefits of both families of methods in mapping the patterns of longitudinal temporal dynamics. The method has three main steps that can be summarized as (1) identifying latent <strong>S</strong>tates from <strong>Va</strong>riables, (2) modeling states as <strong>S</strong>equences, and (3) identifying <strong>Tra</strong>jectories within sequences. The three steps are depicted in the figure and described in detail below:</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -249,15 +248,15 @@ gtag('config', 'G-251HR7GW52', { 'anonymize_ip': true});
 
 
 
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" role="list">
 <div id="ref-lópez-pernas2023" class="csl-entry" role="listitem">
-López-Pernas, Sonsoles, and Mohammed Saqr. 2023. <span>“From Variables to States to Trajectories (VaSSTra): A Method for Modelling the Longitudinal Dynamics of Learning and Behaviour.”</span> In, 1169–78. Springer Nature Singapore. <a href="https://doi.org/10.1007/978-981-99-0942-1_123">https://doi.org/10.1007/978-981-99-0942-1_123</a>.
-</div>
-<div id="ref-lópez-pernas2024a" class="csl-entry" role="listitem">
-———. 2024a. <span>“Modeling the Dynamics of Longitudinal Processes in Education. A Tutorial with R for the VaSSTra Method.”</span> In, 355–79. Springer Nature Switzerland. <a href="https://doi.org/10.1007/978-3-031-54464-4_11">https://doi.org/10.1007/978-3-031-54464-4_11</a>.
+López-Pernas, Sonsoles, and Mohammed Saqr. 2023. <em>From Variables to States to Trajectories (VaSSTra): A Method for Modelling the Longitudinal Dynamics of Learning and Behaviour</em>. Springer Nature Singapore. <a href="https://doi.org/10.1007/978-981-99-0942-1_123">https://doi.org/10.1007/978-981-99-0942-1_123</a>.
 </div>
 <div id="ref-lópez-pernas2024" class="csl-entry" role="listitem">
-———. 2024b. <span>“How the Dynamics of Engagement Explain the Momentum of Achievement and the Inertia of Disengagement: A Complex Systems Theory Approach.”</span> <em>Computers in Human Behavior</em> 153 (April): 108126. <a href="https://doi.org/10.1016/j.chb.2023.108126">https://doi.org/10.1016/j.chb.2023.108126</a>.
+López-Pernas, Sonsoles, and Mohammed Saqr. 2024a. <span>“How the Dynamics of Engagement Explain the Momentum of Achievement and the Inertia of Disengagement: A Complex Systems Theory Approach.”</span> <em>Computers in Human Behavior</em> 153 (April): 108126. <a href="https://doi.org/10.1016/j.chb.2023.108126">https://doi.org/10.1016/j.chb.2023.108126</a>.
+</div>
+<div id="ref-lópez-pernas2024a" class="csl-entry" role="listitem">
+López-Pernas, Sonsoles, and Mohammed Saqr. 2024b. <em>Modeling the Dynamics of Longitudinal Processes in Education. A Tutorial with r for the VaSSTra Method</em>. Springer Nature Switzerland. <a href="https://doi.org/10.1007/978-3-031-54464-4_11">https://doi.org/10.1007/978-3-031-54464-4_11</a>.
 </div>
 <div id="ref-saqr2021" class="csl-entry" role="listitem">
 Saqr, Mohammed, and Sonsoles López-Pernas. 2021. <span>“The Longitudinal Trajectories of Online Engagement over a Full Program.”</span> <em>Computers &amp; Education</em> 175 (December): 104325. <a href="https://doi.org/10.1016/j.compedu.2021.104325">https://doi.org/10.1016/j.compedu.2021.104325</a>.
@@ -276,7 +275,8 @@ Saqr, Mohammed, Sonsoles López-Pernas, Jelena Jovanović, and Dragan Gašević.
   langid = {en}
 }
 </code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-lópez-pernas2024" class="csl-entry quarto-appendix-citeas" role="listitem">
-López-Pernas, Sonsoles. 2024. <span>“The VaSSTra Method.”</span> <a href="https://sonsoleslp.github.io/posts/vasstra/">https://sonsoleslp.github.io/posts/vasstra/</a>.
+López-Pernas, Sonsoles. 2024. <span>“The VaSSTra Method.”</span>
+Preprint, August 17. <a href="https://sonsoleslp.github.io/posts/vasstra/">https://sonsoleslp.github.io/posts/vasstra/</a>.
 </div></div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
