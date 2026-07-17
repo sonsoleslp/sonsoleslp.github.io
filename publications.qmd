@@ -160,7 +160,10 @@ Publications %>%  rowwise %>%
 ```{r, echo=F, warning = F}
 outcomes <- Publications %>%  janitor::tabyl(`Document Type`) %>% data.frame %>% pull(n,`Document.Type`) 
 outcomes_with_types <- Publications %>% dplyr::mutate(field = ifelse(is.na(JCR),`Document Type`,JCR)) %>% janitor::tabyl(field) %>% data.frame %>% pull(n,field) 
-only_types <- Publications %>% janitor::tabyl(JCR) %>% data.frame %>% filter(!is.na(JCR)) %>% arrange(JCR) %>% pull(n,JCR) 
+only_types <- Publications %>% janitor::tabyl(JCR) %>% data.frame %>% filter(!is.na(JCR)) %>% arrange(JCR) %>% pull(n,JCR)
+
+npubs = nrow(Publications) - nrow(Publications |> filter(`Document Type` == "Thesis"))
+
 output = paste0("My ", nrow(Publications), " research publications include ")
 types_pub = rev(names(outcomes))
 for (i in 1:length(types_pub)) {
@@ -182,12 +185,13 @@ for (i in 1:length(types_pub)) {
       jcrs <- paste0(jcrs,")")
     } 
   }
-  
-  output = paste0( output, ifelse(lastt, "and ",""), 
-                   numberr, " ",  stringr::str_to_lower(pubb), 
-                   ifelse(numberr > 1,"s",""),
-                   jcrs,
-                   ifelse( lastt,".",", "))
+  if (pubb != "Thesis") {
+    output = paste0( output, ifelse(lastt, "and ",""), 
+                     numberr, " ",  stringr::str_to_lower(pubb), 
+                     ifelse(numberr > 1,"s",""),
+                     jcrs,
+                     ifelse( lastt,".",", "))
+    }
   }
 }
 htmltools::tags$p(output)
@@ -235,9 +239,10 @@ for (p in 1:length(pub_types)) {
       )
     )
   }
-  
+  theh2 <- ifelse(pub_types[p] == "Thesis", "Theses", paste0(pub_types[p],"s"))
   pub_tags[[p]] <- htmltools::tagList(
-      htmltools::tags$h2(paste0(pub_types[p],"s")),
+    
+      htmltools::tags$h2(theh2),
         year_tags
     )
 }
